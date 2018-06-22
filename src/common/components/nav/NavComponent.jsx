@@ -1,43 +1,58 @@
-import React, { Component } from "react";
-
+import React from "react";
 import styled from "styled-components";
-import fullLogo from "../../assets/img/Industry_fullLogo.svg";
+import fullLogo from "../../assets/img/Industry_fullLogo_sm.svg";
 
-export default class NavComponent extends Component {
-  // Todo: use state management and move to container
+const NavComponent = props => (
+  <NavWrapper>
+    <LogoImg src={fullLogo} />
+    <NavButton
+      className={
+        props.isActive ? "isActive fa fa-bars fa-2x" : "fa fa-bars fa-2x"
+      }
+      onClick={() => props.burgerToggle()}
+    />
+  </NavWrapper>
+);
 
-  render() {
-    return (
-      <NavWrapper>
-        <LogoImg />
-      </NavWrapper>
-    );
-  }
-}
+export default NavComponent;
 
 // STYLED COMPONENTS
 // Todo: change bottom-border color
 const NavWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #252525;
-  height: 75px;
+  height: 90px;
   overflow: hidden;
   width: 100%;
   z-index: 100;
   position: absolute;
-  border-bottom: 2px solid yellow;
   @media (min-width: 763px) {
   }
 `;
 
-const LogoImg = styled.div`
-  display: block;
-  position: relative;
-  background-image: url(${fullLogo});
-  background-repeat: no-repeat;
-  margin: auto;
+const LogoImg = styled.img`
+  display: flex;
+
+  margin: auto 24px;
   float: left;
-  height: 100%;
-  width: 100%;
+  max-width: 100%;
+  height: 65px;
+`;
+
+const NavButton = styled.i`
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: yellow;
+  padding: 24px;
+  z-index: 101;
+  transition: 0.5s;
+  @media (min-width: 736px) {
+    display: none;
+    visibility: hidden;
+  }
+  &.isActive {
+    color: black;
+    transform: rotate(90deg);
+  }
 `;
