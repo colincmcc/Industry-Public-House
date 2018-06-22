@@ -3,10 +3,7 @@ import MenuComponent from './MenuComponent'
 
 export default class MenuContainer extends Component {
   render() {
-    return (
-      <div>
-        <MenuComponent />
-      </div>
-    )
+    return <MenuComponent />
+
   }
 }

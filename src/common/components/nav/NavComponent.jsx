@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import fullLogo from "../../assets/img/Industry_fullLogo_sm.svg";
+import fullLogo from "../../assets/img/Industry_fullLogo_sm_wht.svg";
 import grungeBanner from "../../assets/img/Grunge_Header.svg";
 
 const NavComponent = props => {
@@ -41,6 +41,7 @@ const NavBackground = styled.div`
   background-image: url(${grungeBanner});
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   transition: 1s;
   z-index: -2;
   opacity: ${props => props.opacity};

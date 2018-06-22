@@ -19,10 +19,9 @@ export default class NavContainer extends Component {
   componentDidMount () {
     window.onscroll =()=>{
       const newScrollHeight = Math.ceil(window.scrollY / 50) *50;
-      const maxScrollHeight = Math.ceil(window.screenY.valueOf)
-      console.log(maxScrollHeight)
-      console.log(newScrollHeight)
-
+      var maxScrollHeight = Math.ceil(window.innerHeight);
+      const currentOpacity = Math.min( (this.state.currentScrollHeight/maxScrollHeight) , 1);
+      if (currentOpacity === 1){null}
       if (this.state.currentScrollHeight !== newScrollHeight){
           this.setState({currentScrollHeight: newScrollHeight})
       }
@@ -37,9 +36,14 @@ export default class NavContainer extends Component {
       this.setState({ isActive: true });
     }
   }
+
+  // backgroundOpacity sets the background for the nav based on the scroll position/viewheight in pixels in 50px increments.  Should stop if opacity=1
+  // the transition is faded with css in the component to allow smoother ui.
   render() {
     const { isActive } = this.state;
-    const backgroundOpacity = Math.min( this.state.currentScrollHeight , 1)
+    var maxScrollHeight = Math.ceil(window.innerHeight-200);
+    const backgroundOpacity = Math.min( (this.state.currentScrollHeight/maxScrollHeight) , 1) || 0
+
     console.log("backgroundOpacity is "+ backgroundOpacity);
 
     return (
