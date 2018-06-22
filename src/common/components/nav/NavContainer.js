@@ -11,10 +11,23 @@ export default class NavContainer extends Component {
     super(props);
     this.state = {
       isActive: false,
-      burgerOpen: false
+      burgerOpen: false,
+      backgroundOpacity: 0
     };
     this.burgerToggle = this.burgerToggle.bind(this);
   }
+  componentDidMount () {
+    window.onscroll =()=>{
+      const newScrollHeight = Math.ceil(window.scrollY / 50) *50;
+      const maxScrollHeight = Math.ceil(window.screenY.valueOf)
+      console.log(maxScrollHeight)
+      console.log(newScrollHeight)
+
+      if (this.state.currentScrollHeight !== newScrollHeight){
+          this.setState({currentScrollHeight: newScrollHeight})
+      }
+    }
+ }
 
   burgerToggle() {
     const { isActive } = this.state;
@@ -26,6 +39,9 @@ export default class NavContainer extends Component {
   }
   render() {
     const { isActive } = this.state;
+    const backgroundOpacity = Math.min( this.state.currentScrollHeight , 1)
+    console.log("backgroundOpacity is "+ backgroundOpacity);
+
     return (
       <Query query={NAV_QUERY}>
         {
@@ -35,7 +51,7 @@ export default class NavContainer extends Component {
             console.log(data.HeaderPage)
             return (
             <div>
-              <NavComponent burgerToggle={this.burgerToggle} isActive={isActive} />
+              <NavComponent burgerToggle={this.burgerToggle} isActive={isActive} backgroundOpacity={backgroundOpacity} />
               <MobileNavMenu isActive={isActive} />
             </div>
             )

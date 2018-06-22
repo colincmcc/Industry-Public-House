@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import HeaderComponent from "./components/header/HeaderComponent";
 import Food from "./components/food/FoodContainer";
+import MenuContainer from "./components/menu/MenuContainer";
 
 const HomeComponent = props => {
   const headerBackground = props.wpData.HeaderPage.backgroundImageField.value;
@@ -10,6 +11,7 @@ const HomeComponent = props => {
   return (
     <HomeWrapper>
       <HeaderComponent bgImg={headerBackground} />
+      <MenuContainer />
       <Food />
     </HomeWrapper>
   );
@@ -20,6 +22,6 @@ export default HomeComponent;
 const HomeWrapper = styled.div`
   display: grid;
 
-  @media (min-width: 763) {
+  @media (min-width: 763px) {
   }
 `;

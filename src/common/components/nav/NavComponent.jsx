@@ -1,33 +1,54 @@
 import React from "react";
 import styled from "styled-components";
 import fullLogo from "../../assets/img/Industry_fullLogo_sm.svg";
+import grungeBanner from "../../assets/img/Grunge_Header.svg";
 
-const NavComponent = props => (
-  <NavWrapper>
-    <LogoImg src={fullLogo} />
-    <NavButton
-      className={
-        props.isActive ? "isActive fa fa-bars fa-2x" : "fa fa-bars fa-2x"
-      }
-      onClick={() => props.burgerToggle()}
-    />
-  </NavWrapper>
-);
+const NavComponent = props => {
+  return (
+    <NavWrapper className={props.isActive ? "isActive" : ""}>
+      <NavBackground opacity={props.backgroundOpacity} />
+      <NavMenu>
+        <LogoImg src={fullLogo} />
+        <NavButton
+          className={
+            props.isActive ? "isActive fa fa-bars fa-2x" : "fa fa-bars fa-2x"
+          }
+          onClick={() => props.burgerToggle()}
+        />
+      </NavMenu>
+    </NavWrapper>
+  );
+};
 
 export default NavComponent;
 
 // STYLED COMPONENTS
-// Todo: change bottom-border color
 const NavWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 90px;
+  height: 200px;
   overflow: hidden;
   width: 100%;
   z-index: 100;
-  position: absolute;
+  position: fixed;
+
   @media (min-width: 763px) {
   }
+`;
+const NavBackground = styled.div`
+  height: 200px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  background-image: url(${grungeBanner});
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 1s;
+  z-index: -2;
+  opacity: ${props => props.opacity};
+`;
+const NavMenu = styled.div`
+  height: 90px;
+  display: flex;
+  flex-direction: row;
 `;
 
 const LogoImg = styled.img`
@@ -52,7 +73,6 @@ const NavButton = styled.i`
     visibility: hidden;
   }
   &.isActive {
-    color: black;
     transform: rotate(90deg);
   }
 `;

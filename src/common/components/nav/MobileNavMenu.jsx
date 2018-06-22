@@ -51,7 +51,7 @@ const NavMenuNarrow = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #252525;
+  background-color: black;
   width: 100vw;
   height: 100vh;
   margin: auto;
@@ -77,8 +77,8 @@ const SkewedBlock = styled.div`
   transform: skewY(-11.5deg);
   display: block;
   width: 100%;
-  border-bottom: 1px solid black;
-  padding: 1em;
+  border-bottom: 1px solid white;
+  padding: 1em 0;
   text-align: center;
 `;
 const NavNarrowButton = styled.a`

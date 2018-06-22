@@ -4,7 +4,6 @@ import styled from "styled-components";
 const HeaderComponent = props => {
   const HeaderWrapper = styled.section`
     display: block;
-    position: fixed;
     bottom: 0;
     top: auto;
     background-image: url(${props.bgImg});
