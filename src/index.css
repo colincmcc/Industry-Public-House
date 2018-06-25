@@ -5,3 +5,12 @@ body {
   box-sizing: border-box;
   background-color: #252525;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: yellow;
+}

@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import {ApolloProvider} from 'react-apollo'
 import ApolloClient from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { withClientState } from 'apollo-link-state'
+import { BrowserRouter } from 'react-router-dom'
 
 import App from './App';
 import { resolvers, defaults } from './resolvers';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import './common/assets/css/font-awesome.min.css'
-import { withClientState } from 'apollo-link-state';
+;
 
 
 const cache = new InMemoryCache();
@@ -39,10 +41,12 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-<ApolloProvider client={client} >
-  <div>
-    <App />
-  </div>
-</ApolloProvider>
+  <BrowserRouter>
+    <ApolloProvider client={client} >
+      <div>
+        <App />
+      </div>
+    </ApolloProvider>
+  </BrowserRouter>
 , document.getElementById('root'));
 registerServiceWorker();

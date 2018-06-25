@@ -1,61 +1,47 @@
 import React from "react";
 import styled from "styled-components";
+import { HashLink as Link } from "react-router-hash-link";
+import { withRouter } from "react-router";
 
 const MobileNavMenu = props => {
   return (
     // TODO: Fix menu items alignment, make pretty, link to pages
     <NavMenuNarrow className={props.isActive ? "isActive" : ""} id="navNarrow">
       <MenuList>
-        <li width="100%">
-          <SkewedBlock>
-            <NavNarrowButton href="#about">ABOUT</NavNarrowButton>
-          </SkewedBlock>
-        </li>
-        <li width="100%">
-          <SkewedBlock>
-            <NavNarrowButton href="#tickets">TICKETS</NavNarrowButton>
-          </SkewedBlock>
-        </li>
-        <li width="100%">
-          <SkewedBlock>
-            <NavNarrowButton href="#bands">BANDS</NavNarrowButton>
-          </SkewedBlock>
-        </li>
-        <li width="100%">
-          <SkewedBlock>
-            <NavNarrowButton href="#brews">BREWS</NavNarrowButton>
-          </SkewedBlock>
-        </li>
+        <SkewedBlock onClick={() => props.burgerToggle()}>
+          <NavNarrowButton to="/Home#About">ABOUT</NavNarrowButton>
+        </SkewedBlock>
 
-        <li width="100%">
-          <SkewedBlock>
-            <NavNarrowButton href="#vendors">VENDORS</NavNarrowButton>
-          </SkewedBlock>
-        </li>
-        <li width="100%">
-          <SkewedBlock>
-            <NavNarrowButton href="#info">INFO</NavNarrowButton>
-          </SkewedBlock>
-        </li>
+        <SkewedBlock onClick={() => props.burgerToggle()}>
+          <NavNarrowButton to="/Menu">MENU</NavNarrowButton>
+        </SkewedBlock>
+
+        <SkewedBlock onClick={() => props.burgerToggle()}>
+          <NavNarrowButton to="/Home#About">EVENTS</NavNarrowButton>
+        </SkewedBlock>
+
+        <SkewedBlock onClick={() => props.burgerToggle()}>
+          <NavNarrowButton to="/Home#About">DRINKS</NavNarrowButton>
+        </SkewedBlock>
       </MenuList>
     </NavMenuNarrow>
   );
 };
 
-export default MobileNavMenu;
+export default withRouter(MobileNavMenu);
 
 // STYLED COMPONENTS
 
 const NavMenuNarrow = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: black;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   margin: auto;
-  padding: 2em;
+  padding: 200px 0 0 0;
   transition: 0.5s;
   transform: scale(0, 0);
   transform-origin: top right;
@@ -67,8 +53,9 @@ const NavMenuNarrow = styled.div`
     opacity: 1;
   }
 `;
-const MenuList = styled.ul`
-  list-style-type: none;
+const MenuList = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 0;
   width: 100%;
 `;
@@ -81,10 +68,11 @@ const SkewedBlock = styled.div`
   padding: 1em 0;
   text-align: center;
 `;
-const NavNarrowButton = styled.a`
+const NavNarrowButton = styled(Link)`
   display: block;
   text-decoration: none;
   color: white;
   width: 100%;
+  height: 100%;
   padding: 1em;
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const HeaderComponent = props => {
   return (
-    <HeaderWrapper bgImg={props.bgImg} id="header">
+    <HeaderWrapper id="Header" bgImg={props.bgImg}>
       <div />
     </HeaderWrapper>
   );

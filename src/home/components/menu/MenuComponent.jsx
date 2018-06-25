@@ -7,7 +7,7 @@ const MenuComponent = () => {
   return (
     <MenuWrapper id="menu">
       <MenuItem> Menus </MenuItem>
-      <MenuItem> Menus </MenuItem>
+      <MenuItem> Events </MenuItem>
       <MenuItem> Menus </MenuItem>
       <MenuItem> Menus </MenuItem>
     </MenuWrapper>

@@ -5,6 +5,8 @@ import gql from "graphql-tag";
 import NavComponent from './NavComponent'
 import MobileNavMenu from './MobileNavMenu'
 
+// This container controls mobile menu (MobileNavMenu) visibility and nav state (NavComponent)
+// Todo: load menu items from Wordpress
 
 export default class NavContainer extends Component {
   constructor(props) {
@@ -56,7 +58,7 @@ export default class NavContainer extends Component {
             return (
             <div>
               <NavComponent burgerToggle={this.burgerToggle} isActive={isActive} backgroundOpacity={backgroundOpacity} />
-              <MobileNavMenu isActive={isActive} />
+              <MobileNavMenu burgerToggle={this.burgerToggle} isActive={isActive} />
             </div>
             )
 

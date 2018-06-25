@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import HeaderComponent from "./components/header/HeaderComponent";
+import AboutContainer from "./components/about/AboutContainer";
 import Food from "./components/food/FoodContainer";
 import MenuContainer from "./components/menu/MenuContainer";
 
@@ -12,6 +13,7 @@ const HomeComponent = props => {
     <HomeWrapper>
       <HeaderComponent bgImg={headerBackground} />
       <MenuContainer />
+      <AboutContainer />
       <Food />
     </HomeWrapper>
   );

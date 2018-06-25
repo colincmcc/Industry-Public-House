@@ -9,6 +9,8 @@ Component {
   render() {
     return (
 
+      // * Header query is located here to make sure header is loaded before page is displayed.  Probably could move data logic to HeaderContainer for same result
+
       <Query query={WP_QUERY}>
         {
           ({ loading, error, data }) => {
