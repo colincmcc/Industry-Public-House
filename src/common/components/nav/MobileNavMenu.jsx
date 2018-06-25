@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 
 const MobileNavMenu = props => {
   return (
-    // TODO: Fix menu items alignment, make pretty, link to pages
+    // TODO: Fix menu items alignment, make pretty
     <NavMenuNarrow className={props.isActive ? "isActive" : ""} id="navNarrow">
       <MenuList>
         <SkewedBlock onClick={() => props.burgerToggle()}>

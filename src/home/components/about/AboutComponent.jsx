@@ -20,6 +20,7 @@ const AboutWrapper = styled.section`
   width: 100%;
   height: 100%;
   text-align: center;
+  padding-top: 100px;
 `;
 
 const AboutHeader = styled.h2`
