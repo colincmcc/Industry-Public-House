@@ -11,12 +11,13 @@ Component {
 
       // * Header query is located here to make sure header is loaded before page is displayed.  Probably could move data logic to HeaderContainer for same result
 
+      // TODO: combine food & drink features by using router & props since data structure is the same
+
       <Query query={WP_QUERY}>
         {
           ({ loading, error, data }) => {
             if(loading) return <LoadingComponent />
             if(error) return <p>Error</p>
-            console.log(data.HeaderPage)
             return <HomeComponent wpData={data} />
 
           }

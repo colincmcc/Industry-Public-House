@@ -1,22 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-
+import { HashLink as Link } from "react-router-hash-link";
+import { withRouter } from "react-router";
+import shortid from "shortid";
 import grungeBanner from "../../../common/assets/img/Grunge_Header.svg";
 import lightBg from "../../../common/assets/img/gerrie-van-der-walt-469060-unsplash.jpg";
 import menuBg from "../../../common/assets/img/Gallery-Background.jpg";
+import lightbulb from "../../../common/assets/img/lightbulb_frame.svg";
+import lightbulbLit from "../../../common/assets/img/lightbulb_frame_light.svg";
 
 const MenuComponent = props => {
+  const quickNavItems = [
+    { title: "Menus", link: "/Headers#About" },
+    { title: "Events", link: "/Events" },
+    { title: "Shop", link: "/Shop" },
+    { title: "Book Now", link: "/Book" }
+  ];
   return (
     <MenuWrapper id="menu">
-      <MenuItem> Menus </MenuItem>
-      <MenuItem> Events </MenuItem>
-      <MenuItem> Shop </MenuItem>
-      <MenuItem> Book Now </MenuItem>
+      <BackgroundFix />
+      {quickNavItems.map(navItem => (
+        <MenuItem key={shortid.generate()}>{navItem.title}</MenuItem>
+      ))}
     </MenuWrapper>
   );
 };
 
-export default MenuComponent;
+export default withRouter(MenuComponent);
 
 // STYLED COMPONENTS
 const MenuWrapper = styled.section`
@@ -49,23 +59,36 @@ const MenuWrapper = styled.section`
   }
   &:after {
     content: "";
-    grid-column: 1 / 3;
-    grid-row: 1 / 3;
     position: absolute;
     width: 100%;
     height: 100%;
     background: linear-gradient(black, rgba(0, 0, 0, 0), black);
   }
 `;
+const BackgroundFix = styled.div`
+  grid-column: 1/3;
+  grid-row: 1/2;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  @media (min-width: 740px) {
+    grid-column: 1 / 5;
+    grid-row: 1 / 2;
+  }
+`;
 const MenuItem = styled.div`
   display: grid;
-  width: 45vmin;
+  width: 100%;
   height: 45vmin;
   padding: 1em 0;
   z-index: 1;
-  font-size: 1.25em;
+  font-size: 1.5em;
   align-content: center;
   margin: auto;
   color: white;
-  background-image: url(${props => props.bgImg});
+  background-color: rgb(0, 0, 0, 0.4);
+  cursor: default;
+  &:hover {
+    background: radial-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 0.4));
+  }
 `;

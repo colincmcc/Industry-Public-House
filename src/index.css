@@ -17,3 +17,6 @@ a {
 a:hover {
   color: yellow;
 }
+.active {
+  color: yellow;
+}

@@ -45,16 +45,12 @@ export default class NavContainer extends Component {
     const { isActive } = this.state;
     var maxScrollHeight = Math.ceil(window.innerHeight-200);
     const backgroundOpacity = Math.min( (this.state.currentScrollHeight/maxScrollHeight) , 1) || 0
-
-    console.log("backgroundOpacity is "+ backgroundOpacity);
-
     return (
       <Query query={NAV_QUERY}>
         {
           ({ loading, error, data }) => {
             if(loading) return <p>Loading...</p>
             if(error) return <p>Error</p>
-            console.log(data.HeaderPage)
             return (
             <div>
               <NavComponent burgerToggle={this.burgerToggle} isActive={isActive} backgroundOpacity={backgroundOpacity} />

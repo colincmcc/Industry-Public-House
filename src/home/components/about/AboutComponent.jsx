@@ -20,7 +20,15 @@ const AboutWrapper = styled.section`
   width: 100%;
   height: 100%;
   text-align: center;
-  padding-top: 100px;
+  &:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(black, rgba(0, 0, 0, 0));
+    z-index: -1;
+  }
+  }
 `;
 
 const AboutHeader = styled.h2`
@@ -31,6 +39,11 @@ const AboutHeader = styled.h2`
 const AboutContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 3em;
   color: white;
+  width: 75%;
+  margin: auto;
+  @media (min-width: 740px) {
+    width: 50%;
+  }
 `;

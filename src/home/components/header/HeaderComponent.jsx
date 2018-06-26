@@ -10,12 +10,12 @@ const HeaderComponent = props => {
     <HeaderWrapper id="Header">
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={100}
+        naturalSlideHeight={200}
         totalSlides={props.headers.length}
       >
         <Slider>
           {props.headers.map((header, index) => (
-            <Slide key={shortid.generate} index={index}>
+            <Slide key={shortid.generate()} index={index}>
               <HeaderContainer
                 className="headerContainer"
                 key={shortid.generate()}

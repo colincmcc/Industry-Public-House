@@ -2,8 +2,11 @@ import React from 'react'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 
-import FoodComponent from './FoodComponent'
 
+import FoodNavComponent from "./FoodNavComponent";
+import FoodMenuComponent from './FoodMenuComponent'
+
+// * Highest level Food Menu component
 export default () => {
   return (
     <Query query={WP_FOODS}>
@@ -11,7 +14,12 @@ export default () => {
         ({ loading, error, data }) => {
           if(loading) return <p>Loading...</p>
           if(error) return <p>Error</p>
-          return <FoodComponent foods={data.foods.edges} />
+          return (
+          <div>
+            <FoodNavComponent />
+            <FoodMenuComponent foods={data.foods.edges} />
+          </div>
+        )
 
         }
       }
@@ -23,15 +31,19 @@ export default () => {
 const WP_FOODS = gql`
   {
     foods{
-      edges{
-        node{
-          content
-          title
-          priceField{
-            value
-          }
+    edges{
+      node{
+        id
+        title
+        content
+        priceField {
+          value
+        }
+        foodTypeField{
+          value
         }
       }
     }
+  }
   }
 `

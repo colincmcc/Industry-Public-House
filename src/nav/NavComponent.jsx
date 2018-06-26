@@ -2,8 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { HashLink as Link } from "react-router-hash-link";
 import { withRouter } from "react-router";
-import fullLogo from "../../assets/img/Industry_fullLogo_sm_wht.svg";
-import grungeBanner from "../../assets/img/Grunge_Header.svg";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+
+import fullLogo from "../common/assets/img/Industry_fullLogo_sm_wht.svg";
+import grungeBanner from "../common/assets/img/Grunge_Header.svg";
 
 // Using react-router-hash-link in components for semi-future proof link solution until react-router supports it out of the box.
 
@@ -15,9 +19,10 @@ const NavComponent = props => {
     <NavWrapper className={props.isActive ? "isActive" : ""}>
       <NavBackground opacity={props.backgroundOpacity} />
       <NavMenu>
+        <PhoneButton className="fas fa-phone" />
         <LogoImg src={fullLogo} />
 
-        {/** Desktop Nav **/}
+        {/** Desktop Nav
         <WideNav id="WideNav">
           <NavLink>
             <Link smooth to="/Home#Header">
@@ -33,6 +38,7 @@ const NavComponent = props => {
             <Link to="/Menu">Menu</Link>
           </NavLink>
         </WideNav>
+        **/}
 
         {/** Mobile Nav **/}
         <NavButton
@@ -80,9 +86,7 @@ const NavMenu = styled.div`
 
 const LogoImg = styled.img`
   display: flex;
-
-  margin: auto 24px;
-  float: left;
+  margin: auto;
   max-width: 100%;
   height: 65px;
 `;
@@ -104,7 +108,7 @@ const NavLink = styled.div`
   width: 100%;
 `;
 
-const NavButton = styled.i`
+const NavButton = styled.div`
   position: absolute;
   right: 0;
   top: 0;
@@ -118,5 +122,19 @@ const NavButton = styled.i`
   }
   &.isActive {
     transform: rotate(90deg);
+  }
+`;
+
+const PhoneButton = styled.i`
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: yellow;
+  padding: 24px;
+  z-index: 101;
+  transition: 0.5s;
+  @media (min-width: 736px) {
+    display: none;
+    visibility: hidden;
   }
 `;
