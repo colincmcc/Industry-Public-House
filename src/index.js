@@ -5,15 +5,36 @@ import ApolloClient from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { withClientState } from 'apollo-link-state'
 import { BrowserRouter } from 'react-router-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 
 import App from './App';
+
+import reducer from './reducers'
 import { resolvers, defaults } from './resolvers';
 import registerServiceWorker from './registerServiceWorker';
+
 import './index.css';
 import './common/assets/css/font-awesome.min.css'
 ;
 
 // * PWA List at bottom of page
+
+// Originally used Apollo to manage state, switched to redux
+// TODO (eventually): figure out how to query redux with graphql
+
+const middleware = [ thunk ]
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger())
+}
+
+const store = createStore(
+  reducer,
+  applyMiddleware(...middleware)
+)
+
 
 const cache = new InMemoryCache();
 
@@ -44,9 +65,11 @@ const client = new ApolloClient({
 ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client} >
+      <Provider store={store}>
       <div>
         <App />
       </div>
+      </Provider>
     </ApolloProvider>
   </BrowserRouter>
 , document.getElementById('root'));

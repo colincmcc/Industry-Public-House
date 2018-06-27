@@ -3,9 +3,6 @@ import styled from "styled-components";
 import { HashLink as Link } from "react-router-hash-link";
 import { withRouter } from "react-router";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-
 import fullLogo from "../common/assets/img/Industry_fullLogo_sm_wht.svg";
 import grungeBanner from "../common/assets/img/Grunge_Header.svg";
 
