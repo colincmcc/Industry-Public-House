@@ -6,11 +6,8 @@ import HomeComponent from './HomeComponent'
 
 export class HomeContainer extends
 Component {
-  constructor(props) {
-    super(props)
-  }
+
   render() {
-    const data = this.props.data
 
     if(!data) {
       return <LoadingComponent />
@@ -27,22 +24,4 @@ Component {
   }
 }
 
-const mapQueriesToProps = ({ ownProps, state }) => {
-  return {
-    data: {
-      query: gql`
-        query {
-          pageBy(uri: "header"){
-            uri
-            backgroundImageField{
-              value
-            }
-          }
-        }
-      `
-    }
-  }
-}
-export default connect({
-  mapQueriesToProps
-})(HomeContainer)
+export default HomeContainer

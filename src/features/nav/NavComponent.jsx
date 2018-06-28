@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { HashLink as Link } from "react-router-hash-link";
 import { withRouter } from "react-router";
 
-import fullLogo from "../common/assets/img/Industry_fullLogo_sm_wht.svg";
-import grungeBanner from "../common/assets/img/Grunge_Header.svg";
+import fullLogo from "../../common/assets/img/Industry_fullLogo_sm_wht.svg";
+import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
 
 // Using react-router-hash-link in components for semi-future proof link solution until react-router supports it out of the box.
 

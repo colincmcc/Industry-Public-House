@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {ApolloProvider} from 'react-apollo'
 import ApolloClient from 'apollo-boost'
 import { BrowserRouter } from 'react-router-dom'
-import createStore from './store/createStore'
 
 
 import App from './App';
@@ -15,13 +14,8 @@ import './common/assets/css/font-awesome.min.css'
 
 // * PWA List at bottom of page
 
-// Originally used Apollo to manage state, switched to redux
-// TODO (eventually): figure out how to query redux with graphql
-
-
 // Store Initialization
 // ------------------------------------
-const store = createStore(window.__INITIAL_STATE__)
 
 // client Initialization
 // ------------------------------------
