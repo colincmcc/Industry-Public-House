@@ -13,8 +13,6 @@ const foodTypes = (state = [], action) => {
         price: action.price,
 
       }]
-    case LOAD_FOODTYPE:
-      return
     default:
       return state
   }

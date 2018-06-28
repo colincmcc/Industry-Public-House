@@ -2,18 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {ApolloProvider} from 'react-apollo'
 import ApolloClient from 'apollo-boost'
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { withClientState } from 'apollo-link-state'
 import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
+import createStore from './store/createStore'
+
 
 import App from './App';
-
-import reducer from './reducers'
-import { resolvers, defaults } from './resolvers';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
@@ -25,51 +18,23 @@ import './common/assets/css/font-awesome.min.css'
 // Originally used Apollo to manage state, switched to redux
 // TODO (eventually): figure out how to query redux with graphql
 
-const middleware = [ thunk ]
-if (process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger())
-}
 
-const store = createStore(
-  reducer,
-  applyMiddleware(...middleware)
-)
+// Store Initialization
+// ------------------------------------
+const store = createStore(window.__INITIAL_STATE__)
 
-
-const cache = new InMemoryCache();
-
-const typeDefs = `
-  type Todo {
-    id: Int!
-    text: String!
-    completed: Boolean!
-  }
-
-  type Mutation {
-    addTodo(text: String!): Todo
-    toggleTodo(id: Int!): Todo
-  }
-
-  type Query {
-    visibilityFilter: String
-    todos: [Todo]
-  }
-`
-
+// client Initialization
+// ------------------------------------
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",
-  cache,
-  link: withClientState({ resolvers, defaults, cache, typeDefs})
-})
+  uri: "http://localhost:8080/graphql",})
+const routes = require('./routes/index').default(store)
 
 ReactDOM.render(
   <BrowserRouter>
-    <ApolloProvider client={client} >
-      <Provider store={store}>
+    <ApolloProvider store={store} client={client} >
       <div>
-        <App />
+        <App store={store} routes={routes} />
       </div>
-      </Provider>
     </ApolloProvider>
   </BrowserRouter>
 , document.getElementById('root'));

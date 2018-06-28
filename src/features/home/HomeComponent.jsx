@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 import HeaderContainer from "./components/header/HeaderContainer";
 import AboutContainer from "./components/about/AboutContainer";
-import Food from "./components/food/FoodContainer";
 import MenuContainer from "./components/menu/MenuContainer";
-import mainBg from "../common/assets/img/Drinks-Background.jpg";
+import mainBg from "../../common/assets/img/Drinks-Background.jpg";
 
 const HomeComponent = props => {
   const headerBackground = props.wpData.HeaderPage.backgroundImageField.value;
@@ -15,7 +14,6 @@ const HomeComponent = props => {
       <MenuContainer />
       <MainContent>
         <AboutContainer />
-        <Food />
       </MainContent>
       <MenuContent />
     </HomeWrapper>

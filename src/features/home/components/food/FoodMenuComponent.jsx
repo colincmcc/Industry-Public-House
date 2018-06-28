@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
-import FoodDrinkComponent from "../common/FoodDrinkComponent";
+import FoodDrinkComponent from "../../common/FoodDrinkComponent";
 
 const FoodMenuComponent = props => {
   const starters = props.foods.filter(

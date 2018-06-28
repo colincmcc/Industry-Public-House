@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
-import { selectFoodType, invalidateFoodType, requestFoods} from '../../../actions/index.js'
 
 import MenuNavComponent from "../common/MenuNavComponent";
 import FoodMenuComponent from './FoodMenuComponent'
@@ -10,12 +9,7 @@ import FoodMenuComponent from './FoodMenuComponent'
 // * Highest level Food Menu component
 
 class FoodContainer extends Component {
-  componentDidMount(){
-    const { dispatch, selectedFoodType} = this.props
-  }
-  handleChange = nextFoodType => {
-    this.props.dispatch(selectFoodType(nextFoodType));
-  }
+
 
   render() {
     const navItems = [
@@ -49,21 +43,8 @@ class FoodContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const {selectedFoodType, foodsByFoodType} = state
-  const {
-    items: foods
-  } = foodsByFoodType[selectedFoodType] || {
-    items: []
-  }
 
-  return {
-    selectedFoodType,
-    foods
-  }
-}
-
-export default connect(mapStateToProps)(FoodContainer)
+export default FoodContainer
 
 const WP_FOODS = gql`
   {
