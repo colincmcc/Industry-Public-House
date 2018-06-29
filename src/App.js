@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
-import HomeContainer from './home/HomeContainer'
-import NavContainer from './nav/NavContainer'
+import HomeContainer from './features/home/HomeContainer'
+import NavContainer from './features/nav/NavContainer'
 import './App.css';
 
 // Using HashLink in components for semi-future proof link solution until react-router supports it out of the box.

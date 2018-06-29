@@ -5,7 +5,7 @@ import styled from "styled-components";
 const FoodDrinkComponent = props => {
   return (
     <FoodMenuWrapper>
-      {props.food.map((foodItem, index) => (
+      {props.foods.map((foodItem, index) => (
         <FoodListing key={shortid.generate()}>
           <FoodHeader>
             <FoodTitle

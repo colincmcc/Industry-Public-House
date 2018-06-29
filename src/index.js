@@ -21,13 +21,12 @@ import './common/assets/css/font-awesome.min.css'
 // ------------------------------------
 const client = new ApolloClient({
   uri: "http://localhost:8080/graphql",})
-const routes = require('./routes/index').default(store)
 
 ReactDOM.render(
   <BrowserRouter>
-    <ApolloProvider store={store} client={client} >
+    <ApolloProvider client={client} >
       <div>
-        <App store={store} routes={routes} />
+        <App />
       </div>
     </ApolloProvider>
   </BrowserRouter>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import HeaderContainer from "./components/header/HeaderContainer";
 import AboutContainer from "./components/about/AboutContainer";
 import MenuContainer from "./components/menu/MenuContainer";
+import FoodContainer from "./components/food/FoodContainer";
 import mainBg from "../../common/assets/img/Drinks-Background.jpg";
 
 const HomeComponent = props => {
@@ -14,6 +15,7 @@ const HomeComponent = props => {
       <MenuContainer />
       <MainContent>
         <AboutContainer />
+        <FoodContainer />
       </MainContent>
       <MenuContent />
     </HomeWrapper>

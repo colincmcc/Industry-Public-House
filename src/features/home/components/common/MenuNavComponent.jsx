@@ -6,9 +6,9 @@ import styled from "styled-components";
 const MenuNavComponent = props => {
   return (
     <MenuNavWrapper>
-      {props.options.map((navItem, index) => (
+      {props.navItems.map((navItem, index) => (
         <MenuNavItem
-          onClick={() => props.onChange(navItem.slug)}
+          onClick={() => props.foodMenuToggle(navItem.slug)}
           key={shortid.generate()}
         >
           {navItem.label}

@@ -4,11 +4,23 @@ import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 
 import MenuNavComponent from "../common/MenuNavComponent";
-import FoodMenuComponent from './FoodMenuComponent'
+import FoodDrinkComponent from '../common/FoodDrinkComponent'
 
 // * Highest level Food Menu component
 
 class FoodContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedFoodType: "brunch"
+    };
+    this.foodMenuToggle = this.foodMenuToggle.bind(this);
+  }
+  componentDidMount () {
+
+ }
+
+ foodMenuToggle = selectedFoodType => this.setState(() => ({selectedFoodType}))
 
 
   render() {
@@ -20,19 +32,19 @@ class FoodContainer extends Component {
       { label: "Burghers", link: "/Home/Food/Burghers", slug: "burghers" },
       { label: "Sustenance", link: "/Home/Food/Sustenance", slug: "sustenance" }
     ];
-    const { selectedFoodType, foods } = this.props
+    const { selectedFoodType } = this.state
 
 
     return (
-      <Query query={WP_FOODS}>
+      <Query query={WP_FOODS} variables={{selectedFoodType}}>
       {
         ({ loading, error, data }) => {
           if(loading) return <p>Loading...</p>
           if(error) return <p>Error</p>
           return (
           <div>
-            <MenuNavComponent value={selectedFoodType} options={navItems} onChange={this.handleChange} />
-            <FoodMenuComponent foods={data.foods.edges} />
+            <MenuNavComponent selectedFoodType={selectedFoodType} navItems={navItems} foodMenuToggle={this.foodMenuToggle} />
+            <FoodDrinkComponent foods={data.foods.edges} />
           </div>
         )
 
@@ -47,21 +59,22 @@ class FoodContainer extends Component {
 export default FoodContainer
 
 const WP_FOODS = gql`
-  {
-    foods{
-    edges{
-      node{
-        id
-        title
-        content
-        priceField {
-          value
-        }
-        foodTypeField{
-          value
+  query Foods($selectedFoodType: String!){
+    foods(where: {search: $selectedFoodType}) {
+      edges {
+        node {
+          termSlugs
+          id
+          title
+          content
+          priceField {
+            value
+          }
+          foodTypeField {
+            value
+          }
         }
       }
     }
-  }
   }
 `

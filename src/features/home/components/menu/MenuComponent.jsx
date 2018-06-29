@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { HashLink as Link } from "react-router-hash-link";
 import { withRouter } from "react-router";
 import shortid from "shortid";
-import grungeBanner from "../../../common/assets/img/Grunge_Header.svg";
-import lightBg from "../../../common/assets/img/gerrie-van-der-walt-469060-unsplash.jpg";
-import menuBg from "../../../common/assets/img/Gallery-Background.jpg";
-import lightbulb from "../../../common/assets/img/lightbulb_frame.svg";
-import lightbulbLit from "../../../common/assets/img/lightbulb_frame_light.svg";
+import grungeBanner from "../../../../common/assets/img/Grunge_Header.svg";
+import lightBg from "../../../../common/assets/img/gerrie-van-der-walt-469060-unsplash.jpg";
+import menuBg from "../../../../common/assets/img/Gallery-Background.jpg";
+import lightbulb from "../../../../common/assets/img/lightbulb_frame.svg";
+import lightbulbLit from "../../../../common/assets/img/lightbulb_frame_light.svg";
 
 const MenuComponent = props => {
   const quickNavItems = [
