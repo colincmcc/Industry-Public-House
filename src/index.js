@@ -6,13 +6,19 @@ import { BrowserRouter } from 'react-router-dom'
 
 
 import App from './App';
+import { defaults, resolvers, typeDefs } from "./stateResolvers";
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 import './common/assets/css/font-awesome.min.css'
 ;
 
-// * PWA List at bottom of page
+/*
+* PWA List at bottom of page
+* GraphQL server is in the src/data folder.  Uses express-graphql and graphql-compose to construct server/schema
+* Redux still will control state.  Using graphql to control data fetching. Need to query redux state with graphql as well.
+*/
+// TODO Design: update colors to include subtle theme color (blacks have tint of yellow)
 
 // Store Initialization
 // ------------------------------------
@@ -20,7 +26,13 @@ import './common/assets/css/font-awesome.min.css'
 // client Initialization
 // ------------------------------------
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",})
+  uri: "http://localhost:4000/",
+  clientState: {
+    defaults,
+    resolvers,
+    typeDefs
+  }
+})
 
 ReactDOM.render(
   <BrowserRouter>

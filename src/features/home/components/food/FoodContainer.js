@@ -8,6 +8,7 @@ import FoodDrinkComponent from '../common/FoodDrinkComponent'
 
 // * Highest level Food Menu component
 
+
 class FoodContainer extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +17,6 @@ class FoodContainer extends Component {
     };
     this.foodMenuToggle = this.foodMenuToggle.bind(this);
   }
-  componentDidMount () {
-
- }
 
  foodMenuToggle = selectedFoodType => this.setState(() => ({selectedFoodType}))
 
