@@ -33,18 +33,25 @@ class FoodContainer extends Component {
       { label: "Sustenance", link: "/Home/Food/Sustenance", slug: "sustenance" }
     ];
     const { selectedFoodType } = this.state
-
-
     return (
       <Query query={WP_FOODS} variables={{selectedFoodType}}>
       {
         ({ loading, error, data }) => {
           if(loading) return <p>Loading...</p>
           if(error) return <p>Error</p>
+
+          const allFoods = data.foodsBy.map( food => ({
+            id: food.id,
+            price: food.acf.price,
+            type: food.acf.type,
+            name: food.acf.name,
+            description: food.acf.description
+          }))
+          console.log(allFoods)
           return (
           <div>
             <MenuNavComponent selectedFoodType={selectedFoodType} navItems={navItems} foodMenuToggle={this.foodMenuToggle} />
-            <FoodDrinkComponent foods={data.foods.edges} />
+            <FoodDrinkComponent foods={allFoods} />
           </div>
         )
 
@@ -60,20 +67,13 @@ export default FoodContainer
 
 const WP_FOODS = gql`
   query Foods($selectedFoodType: String!){
-    foods(where: {search: $selectedFoodType}) {
-      edges {
-        node {
-          termSlugs
-          id
-          title
-          content
-          priceField {
-            value
-          }
-          foodTypeField {
-            value
-          }
-        }
+    foodsBy(foodType: $selectedFoodType){
+      id
+      acf{
+        price
+        food_type
+        name
+        description
       }
     }
   }

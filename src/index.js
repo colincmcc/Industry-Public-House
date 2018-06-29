@@ -20,7 +20,7 @@ import './common/assets/css/font-awesome.min.css'
 // client Initialization
 // ------------------------------------
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",})
+  uri: "http://localhost:4000/",})
 
 ReactDOM.render(
   <BrowserRouter>

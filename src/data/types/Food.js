@@ -12,5 +12,7 @@ const restApiResponse = {
 }
 
 export const FoodTC = composeWithJson('Food', restApiResponse)
+
+
 export const FoodGraphQLType = FoodTC.getType()
 

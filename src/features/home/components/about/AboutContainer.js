@@ -11,7 +11,14 @@ export default class AboutContainer extends Component {
           ({ loading, error, data }) => {
             if(loading) return <p>Loading...</p>
             if(error) return <p>Error</p>
-            return <AboutComponent aboutPage={data} />
+            const aboutData = {
+              title: data.pageBy[0].title.rendered,
+              content: data.pageBy[0].content.rendered,
+              bgImg: data.pageBy[0].acf.background_image
+            }
+            return (
+            <AboutComponent {...aboutData} />
+          )
 
 
           }
@@ -23,11 +30,15 @@ export default class AboutContainer extends Component {
 
 const ABOUT_PAGE = gql`
 {
-  AboutPage: pageBy(uri: "about"){
-    uri
-    content
-    backgroundImageField{
-      value
+  pageBy(slug: "about"){
+    title{
+      rendered
+    }
+    content{
+      rendered
+    }
+    acf{
+      background_image
     }
   }
 }

@@ -67,12 +67,8 @@ export default class NavContainer extends Component {
 
 const NAV_QUERY = gql`
 {
-  posts{
-    edges{
-      node{
-        id
-      }
-    }
-  }
+ allHeaders{
+   id
+ }
 }
 `

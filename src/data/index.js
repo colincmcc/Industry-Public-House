@@ -3,9 +3,11 @@ import graphqlHTTP from 'express-graphql';
 import fetch from 'node-fetch';
 import Dataloader from 'dataloader';
 import schema from './schema';
+import cors from 'cors'
 
 const port = process.env.PORT || 4000;
 const graphQlServer = express();
+
 
 async function loadData(url) {
   const res = await fetch(url);
@@ -15,6 +17,8 @@ async function loadData(url) {
   }
   return data;
 }
+graphQlServer.options('*', cors())
+graphQlServer.use(cors())
 
 graphQlServer.use(
   '/',
@@ -28,10 +32,11 @@ graphQlServer.use(
         loader,
       },
     };
-  })
+  }),
 );
 
+// * CONSOLE LOG
 graphQlServer.listen(port, () => {
-  console.log(`GraphQL Server running on port ${port}`);
+  console.log(`GraphQL Server (with cors) running on port ${port}`);
   console.log(`Visit http://localhost:${port}`);
 });

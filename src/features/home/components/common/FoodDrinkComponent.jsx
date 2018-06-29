@@ -5,20 +5,18 @@ import styled from "styled-components";
 const FoodDrinkComponent = props => {
   return (
     <FoodMenuWrapper>
-      {props.foods.map((foodItem, index) => (
+      {props.foods.map(foodItem => (
         <FoodListing key={shortid.generate()}>
           <FoodHeader>
-            <FoodTitle
-              dangerouslySetInnerHTML={{ __html: foodItem.node.title }}
-            />
+            <FoodTitle dangerouslySetInnerHTML={{ __html: foodItem.name }} />
             <FoodPrice
               dangerouslySetInnerHTML={{
-                __html: foodItem.node.priceField.value
+                __html: foodItem.price
               }}
             />
           </FoodHeader>
           <FoodDescription
-            dangerouslySetInnerHTML={{ __html: foodItem.node.content }}
+            dangerouslySetInnerHTML={{ __html: foodItem.description }}
           />
         </FoodListing>
       ))}

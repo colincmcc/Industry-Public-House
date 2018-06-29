@@ -17,7 +17,6 @@ Component {
         ({ loading, error, data }) => {
           if(loading) return <LoadingComponent />
           if(error) return <p>Error</p>
-          console.log(data.HeaderPage)
           return <HomeComponent wpData={data} />
 
         }
@@ -29,11 +28,8 @@ Component {
 
 const WP_QUERY = gql`
 {
-  HeaderPage: pageBy(uri: "header"){
-    uri
-    backgroundImageField{
-      value
-    }
+  allHeaders{
+    id
   }
 
 }

@@ -11,7 +11,15 @@ export default class HeaderContainer extends Component {
           ({loading, error, data}) =>{
             if(loading) return <p>Loading...</p>
             if(error) return <p>Error</p>
-            return <HeaderComponent headers={data.headers.edges} />
+
+            const allHeaders = data.allHeaders.map( (header) => ({
+              id: header.id,
+              title: header.title.rendered,
+              content: header.content.rendered,
+              link: header.link,
+              background: header.acf.background_image
+            }))
+            return <HeaderComponent headers={allHeaders} />
           }
         }
       </Query>
@@ -21,16 +29,17 @@ export default class HeaderContainer extends Component {
 
 const HEADER_PAGES = gql`
 {
-  headers{
-    edges{
-      node{
-        uri
-        title
-        content
-        backgroundImageField{
-          value
-        }
-      }
+  allHeaders{
+    id
+    title{
+      rendered
+    }
+    content{
+      rendered
+    }
+    link
+    acf{
+      background_image
     }
   }
 }

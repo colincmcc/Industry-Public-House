@@ -8,7 +8,6 @@ import FoodContainer from "./components/food/FoodContainer";
 import mainBg from "../../common/assets/img/Drinks-Background.jpg";
 
 const HomeComponent = props => {
-  const headerBackground = props.wpData.HeaderPage.backgroundImageField.value;
   return (
     <HomeWrapper>
       <HeaderContainer />

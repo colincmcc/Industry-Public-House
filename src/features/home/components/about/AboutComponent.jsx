@@ -4,10 +4,8 @@ import styled from "styled-components";
 const AboutComponent = props => {
   return (
     <AboutWrapper id="About">
-      <AboutHeader> About </AboutHeader>
-      <AboutContent
-        dangerouslySetInnerHTML={{ __html: props.aboutPage.AboutPage.content }}
-      />
+      <AboutHeader> {props.title} </AboutHeader>
+      <AboutContent dangerouslySetInnerHTML={{ __html: props.content }} />
     </AboutWrapper>
   );
 };

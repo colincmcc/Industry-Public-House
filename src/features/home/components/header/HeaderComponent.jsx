@@ -19,16 +19,14 @@ const HeaderComponent = props => {
               <HeaderContainer
                 className="headerContainer"
                 key={shortid.generate()}
-                bgImg={header.node.backgroundImageField.value}
+                bgImg={header.background}
               >
                 <HeaderText
                   dangerouslySetInnerHTML={{
-                    __html: header.node.content || "<br />"
+                    __html: header.content || "<br />"
                   }}
                 />
-                <HeaderLink
-                  dangerouslySetInnerHTML={{ __html: header.node.title }}
-                />
+                <HeaderLink> {header.title} </HeaderLink>
               </HeaderContainer>
             </Slide>
           ))}
