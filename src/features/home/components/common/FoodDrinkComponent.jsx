@@ -31,6 +31,8 @@ const FoodMenuWrapper = styled.div`
   grid: auto-flow / 1fr 1fr;
   width: 100%;
   height: 100%;
+  color: white;
+  text-align: left;
 `;
 
 const FoodListing = styled.div`
@@ -50,6 +52,7 @@ const FoodTitle = styled.h2`
 `;
 const FoodPrice = styled.h2`
   display: flex;
+  padding: 0 1em;
   font-size: 1.25em;
 `;
 const FoodDescription = styled.p``;

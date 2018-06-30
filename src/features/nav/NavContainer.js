@@ -4,6 +4,8 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import NavComponent from './NavComponent'
 import MobileNavMenu from './MobileNavMenu'
+import { WP_FOODS } from '../home/components/food/FoodContainer'
+
 
 // This container controls mobile menu (MobileNavMenu) state and nav state (NavComponent)
 // Todo: load menu items from Wordpress gql
@@ -67,8 +69,8 @@ export default class NavContainer extends Component {
 
 const NAV_QUERY = gql`
 {
- allHeaders{
-   id
- }
+  allHeaders{
+    id
+  }
 }
 `

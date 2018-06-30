@@ -4,8 +4,15 @@ import {FoodTC} from './types/Food'
 import { HeaderTC } from './types/Header'
 
 
-const baseUrl = 'http://localhost:8080/wp-json'
+// * Tried to write this to make it as expandable as possible
 
+const baseUrl = 'http://localhost:8080/wp-json'
+const digitalPourUrl = 'https://server.digitalpour.com/DashboardServer/api/v3/MenuItems/54640e97b3b6f60d0887afaa'
+const digitalPourKey = '54948fb0b3b6f60a54b37b16'
+const locations = {
+  iphLV: 1,
+  iphNF: 2
+}
 // Todo: move individual resolvers into type declarations
 
 GQC.rootQuery().addFields({
