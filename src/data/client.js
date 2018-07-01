@@ -6,13 +6,26 @@ import { withClientState } from 'apollo-link-state';
 import { ApolloLink, Observable } from 'apollo-link';
 import merge from 'lodash.merge'
 
-import { typeDefs} from './stateResolvers'
 import homeResolvers from './resolvers/homeResolvers'
 import appResolvers from './resolvers/appResolvers'
 
 
 const cache = new InMemoryCache();
 
+const typeDefs = `
+  type NetworkStatus {
+    isConnected: Boolean!
+  }
+
+
+  type Mutation {
+  }
+
+  type Query {
+
+  }
+
+`;
 
 // TODO Advanced: set network/graphql error response
 const client = new ApolloClient({
