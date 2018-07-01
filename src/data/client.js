@@ -4,8 +4,11 @@ import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
 import { ApolloLink, Observable } from 'apollo-link';
+import merge from 'lodash.merge'
 
-import { defaults, typeDefs, resolvers} from './stateResolvers'
+import { typeDefs} from './stateResolvers'
+import homeResolvers from './resolvers/homeResolvers'
+import appResolvers from './resolvers/appResolvers'
 
 
 const cache = new InMemoryCache();
@@ -24,8 +27,7 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     withClientState({
-      defaults,
-      resolvers,
+      ...merge(appResolvers, homeResolvers),
       typeDefs,
       cache
     }),

@@ -1,12 +1,15 @@
 import React from "react";
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import shortid from "shortid";
 import styled from "styled-components";
-import { WP_FOODS } from "../food/FoodContainer";
+import { WP_FOODS } from "./FoodContainer";
 
 // * Prefetches food items on mouse hover for faster loading
 
-const MenuNavComponent = props => {
+
+const FoodNavComponent = props => {
   return (
     <MenuNavWrapper>
       {props.navItems.map((navItem, index) => (
@@ -27,7 +30,7 @@ const MenuNavComponent = props => {
   );
 };
 
-export default MenuNavComponent;
+export default FoodNavComponent;
 
 const MenuNavWrapper = styled.div`
   display: inline-flex;

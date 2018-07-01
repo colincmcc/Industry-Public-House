@@ -2,6 +2,7 @@ import { GQC } from 'graphql-compose';
 import fetch from 'node-fetch';
 import {FoodTC} from './types/Food'
 import { HeaderTC } from './types/Header'
+import { TapListTC } from './types/TapList'
 
 
 // * Tried to write this to make it as expandable as possible
@@ -69,6 +70,14 @@ GQC.rootQuery().addFields({
     resolve: () =>
       fetch(`${baseUrl}/wp/v2/pages/`).then(r => r.json()),
   },
+  allTaps: {
+    type: [TapListTC],
+    args: {
+      location: `Int!`,
+    },
+    resolve: (_, args) =>
+      fetch(`${digitalPourUrl}/${args.location}/Tap?apiKey=${digitalPourKey}`).then(r => r.json()),
+  }
 })
 
 const schema = GQC.buildSchema(); // returns GraphQLSchema

@@ -12,12 +12,12 @@ Component {
     return (
 
       // TODO: combine food & drink features by using router & props since data structure is the same
-      <Query query={WP_QUERY}>
+      <Query query={CACHED_STATE}>
       {
         ({ loading, error, data }) => {
           if(loading) return <LoadingComponent />
           if(error) return <p>Error</p>
-          return <HomeComponent wpData={data} />
+          return <HomeComponent cachedState={data} />
 
         }
       }
@@ -26,11 +26,11 @@ Component {
 }
 }
 
-const WP_QUERY = gql`
+const CACHED_STATE = gql`
 {
-  allHeaders{
-    id
-  }
+  selectedFoodType @client
+  selectedDrinkType @client
+  currentLocation @client
 
 }
 `

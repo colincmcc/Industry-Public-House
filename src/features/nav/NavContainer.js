@@ -4,7 +4,6 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import NavComponent from './NavComponent'
 import MobileNavMenu from './MobileNavMenu'
-import { WP_FOODS } from '../home/components/food/FoodContainer'
 
 
 // This container controls mobile menu (MobileNavMenu) state and nav state (NavComponent)

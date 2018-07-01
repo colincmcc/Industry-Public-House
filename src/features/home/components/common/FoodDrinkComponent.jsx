@@ -33,6 +33,7 @@ const FoodMenuWrapper = styled.div`
   height: 100%;
   color: white;
   text-align: left;
+  min-height: 10vh;
 `;
 
 const FoodListing = styled.div`

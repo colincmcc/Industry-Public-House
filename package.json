@@ -29,6 +29,7 @@
     "graphql-yoga": "^1.14.10",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.10",
+    "lodash.merge": "^4.6.1",
     "node-fetch": "^2.1.2",
     "pure-react-carousel": "^1.13.2",
     "react": "^16.4.1",

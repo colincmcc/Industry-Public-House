@@ -5,6 +5,7 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import AboutContainer from "./components/about/AboutContainer";
 import MenuContainer from "./components/menu/MenuContainer";
 import FoodContainer from "./components/food/FoodContainer";
+import DrinkContainer from "./components/drinks/DrinkContainer";
 import mainBg from "../../common/assets/img/Drinks-Background.jpg";
 
 const HomeComponent = props => {
@@ -14,7 +15,8 @@ const HomeComponent = props => {
       <MenuContainer />
       <MainContent>
         <AboutContainer />
-        <FoodContainer />
+        <FoodContainer selectedFoodType={props.cachedState.selectedFoodType} />
+        <DrinkContainer cachedState={props.cachedState} />
       </MainContent>
       <MenuContent />
     </HomeWrapper>
