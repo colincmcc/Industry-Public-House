@@ -14,11 +14,11 @@ const DrinkContainer = (props) => {
 
 
     const drinkNavItems = [
-      {label: "Cocktails", slug: "cocktails", component: "CocktailContainer"},
-      {label: "Taps", slug: "taps", component: "CocktailContainer"},
-      {label: "Bottles", slug: "bottles", component: "CocktailContainer"},
-      {label: "Wine", slug: "wine", component: "CocktailContainer"},
-      {label: "Premium", slug: "premium", component: "CocktailContainer"},
+      {label: "Cocktails", slug: "cocktails", component: "CocktailContainer", showLocation: false},
+      {label: "Taps", slug: "taps", component: "CocktailContainer", showLocation: true},
+      {label: "Bottles", slug: "bottles", component: "CocktailContainer", showLocation: true},
+      {label: "Wine", slug: "wine", component: "CocktailContainer", showLocation: false},
+      {label: "Premium", slug: "premium", component: "CocktailContainer", showLocation: true},
     ]
 
     const locations = [
@@ -31,11 +31,10 @@ const DrinkContainer = (props) => {
         ({loading, error, data, client}) =>{
           if(loading) return <p>Loading...</p>
           if(error) return <p>Error</p>
-
           return(
 
           <div>
-            <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems}  />
+            <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
             <DrinkMenuContainer data={data} drinkMenu={selectedDrinkType} />
           </div>
         )

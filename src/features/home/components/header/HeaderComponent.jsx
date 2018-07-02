@@ -4,6 +4,8 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import styled from "styled-components";
 import shortid from "shortid";
 
+import moduleName from "../";
+
 const HeaderComponent = props => {
   return (
     // TODO: add translucent black overlay on images to make text pop
