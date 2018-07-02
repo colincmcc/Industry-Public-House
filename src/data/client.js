@@ -10,7 +10,9 @@ import homeResolvers from './resolvers/homeResolvers'
 import appResolvers from './resolvers/appResolvers'
 
 
+
 const cache = new InMemoryCache();
+
 
 const typeDefs = `
   type NetworkStatus {

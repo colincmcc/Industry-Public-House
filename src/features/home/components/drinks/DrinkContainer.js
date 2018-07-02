@@ -5,16 +5,8 @@ import gql from 'graphql-tag'
 
 import DrinkNavComponent from './DrinkNavComponent'
 import DrinkMenuContainer from './DrinkMenuContainer'
-const TOGGLE_DRINKTYPE = gql`
-  mutation selectDrinkType($selectedDrinkType: String!) {
-    selectDrinkType(selectedDrinkType: $selectedDrinkType) @client
-  }
-`
-const TOGGLE_LOCATION = gql`
-  mutation selectLocation($selectedFoodType: String!) {
-    selectFoodType(selectedFoodType: $selectedFoodType) @client
-  }
-`
+
+// TODO: get drinkNavItems and locations from Wordpress
 
 const DrinkContainer = (props) => {
   const selectedDrinkType = props.cachedState.selectedDrinkType
@@ -30,8 +22,8 @@ const DrinkContainer = (props) => {
     ]
 
     const locations = [
-      {id: 1, location: "Lawrenceville"},
-      {id: 2, location: "North Fayette"}
+      {id: 1, label: "Lawrenceville", location: "lv"},
+      {id: 2, label: "North Fayette", location: "nf"}
     ]
     return(
       <Query query={ DP_TAPS } variables={{location: currentLocation}}>
@@ -44,7 +36,6 @@ const DrinkContainer = (props) => {
 
           <div>
             <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems}  />
-
             <DrinkMenuContainer data={data} drinkMenu={selectedDrinkType} />
           </div>
         )
@@ -75,6 +66,10 @@ export const DP_TAPS = gql`
           }
           Meadery {
             MeaderyName
+            Location
+          }
+          CoffeeProducer {
+            CoffeeProducerName
             Location
           }
           Abv

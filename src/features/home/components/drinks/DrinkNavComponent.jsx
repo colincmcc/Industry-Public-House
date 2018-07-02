@@ -1,42 +1,60 @@
 import React from "react";
 import shortid from "shortid";
 import styled from "styled-components";
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 import { DP_TAPS } from "./DrinkContainer";
 
 // * Prefetches drink items on mouse hover for faster loading
 
+const TOGGLE_DRINKTYPE = gql`
+  mutation selectDrinkType($selectedDrinkType: String!) {
+    selectDrinkType(selectedDrinkType: $selectedDrinkType) @client
+  }
+`;
+const TOGGLE_LOCATION = gql`
+  mutation selectLocation($currentLocation: Int!) {
+    selectLocation(currentLocation: $currentLocation) @client
+  }
+`;
 
 const DrinkNavComponent = props => {
-  console.log(props);
   return (
     <DrinkNavWrapper>
-      {props.navItems.map((navItem, index) => (
-       <Mutation>
-
-          <DrinkNavItem
-            onClick={() => props.drinkMenuToggle(navItem.slug)}
-            key={shortid.generate()}
-          >
-            {navItem.label}
-          </DrinkNavItem>
+      {props.navItems.map(navItem => (
+        <Mutation key={shortid.generate()} mutation={TOGGLE_DRINKTYPE}>
+          {selectDrinkType => (
+            <DrinkNavItem
+              onClick={() =>
+                selectDrinkType({
+                  variables: { selectedDrinkType: navItem.slug }
+                })
+              }
+            >
+              {navItem.label}
+            </DrinkNavItem>
+          )}
         </Mutation>
       ))}
       <br />
       {props.locations.map(location => (
-        <DrinkNavItem
-          onClick={() => props.locationToggle(location.slug)}
-          key={shortid.generate()}
-          onMouseOver={() =>
-            props.client.query({
-              query: DP_TAPS,
-              variables: { location: location.id }
-            })
-          }
-        >
-          {location.label}
-        </DrinkNavItem>
+        <Mutation key={shortid.generate()} mutation={TOGGLE_LOCATION}>
+          {selectLocation => (
+            <DrinkNavItem
+              onClick={() =>
+                selectLocation({ variables: { currentLocation: location.id } })
+              }
+              onMouseOver={() =>
+                props.client.query({
+                  query: DP_TAPS,
+                  variables: { location: location.id }
+                })
+              }
+            >
+              {location.label}
+            </DrinkNavItem>
+          )}
+        </Mutation>
       ))}
     </DrinkNavWrapper>
   );

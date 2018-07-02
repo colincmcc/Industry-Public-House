@@ -42,15 +42,26 @@ const TapList = props => {
             };
             return <TapItem key={shortid.generate()} tap={bevListing} />;
           }
-          default: {
+          case "Coffee": {
             const bevListing = {
               breweryName:
-                tap.MenuItemProductDetail.Beverage.Meadery.MeaderyName,
+                tap.MenuItemProductDetail.Beverage.CoffeeProducer
+                  .CoffeeProducerName,
               bevName: tap.MenuItemProductDetail.BeverageNameWithVintage,
-              bevStyle: "Mead",
+              bevStyle: "Coffee",
               breweryLocation:
-                tap.MenuItemProductDetail.Beverage.Meadery.Location,
-              bevAbv: tap.MenuItemProductDetail.Beverage.Abv
+                tap.MenuItemProductDetail.Beverage.CoffeeProducer.Location,
+              bevAbv: 0
+            };
+            return <TapItem key={shortid.generate()} tap={bevListing} />;
+          }
+          default: {
+            const bevListing = {
+              breweryName: "Industry Public House",
+              bevName: "",
+              bevStyle: "",
+              breweryLocation: "Pittsburgh, PA",
+              bevAbv: 0
             };
             return <TapItem key={shortid.generate()} tap={bevListing} />;
           }

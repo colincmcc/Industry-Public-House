@@ -1,6 +1,6 @@
 import React from "react";
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 import shortid from "shortid";
 import styled from "styled-components";
@@ -12,34 +12,33 @@ const TOGGLE_FOODTYPE = gql`
   mutation selectFoodType($selectedFoodType: String!) {
     selectFoodType(selectedFoodType: $selectedFoodType) @client
   }
-`
+`;
 
 const FoodNavComponent = props => {
   return (
-      <MenuNavWrapper>
-        {props.navItems.map((navItem, index) => (
-          <Mutation mutation={TOGGLE_FOODTYPE}>
-
-            {(selectFoodType, {data}) => (
-              <MenuNavItem
-                onClick={() => selectFoodType({ variables: { selectedFoodType: navItem.slug}
-                })}
-                key={shortid.generate()}
-                onMouseOver={() =>
-                  props.client.query({
-                    query: WP_FOODS,
-                    variables: { selectedFoodType: navItem.slug }
-                  })
-                }
-              >
-                {navItem.label}
-              </MenuNavItem>
-            )}
-
-          </Mutation>
-
-        ))}
-      </MenuNavWrapper>
+    <MenuNavWrapper>
+      {props.navItems.map((navItem, index) => (
+        <Mutation key={shortid.generate()} mutation={TOGGLE_FOODTYPE}>
+          {selectFoodType => (
+            <MenuNavItem
+              onClick={() =>
+                selectFoodType({
+                  variables: { selectedFoodType: navItem.slug }
+                })
+              }
+              onMouseOver={() =>
+                props.client.query({
+                  query: WP_FOODS,
+                  variables: { selectedFoodType: navItem.slug }
+                })
+              }
+            >
+              {navItem.label}
+            </MenuNavItem>
+          )}
+        </Mutation>
+      ))}
+    </MenuNavWrapper>
   );
 };
 

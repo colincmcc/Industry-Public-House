@@ -61,6 +61,20 @@ const restApiResponse = {
         LogoImageUrl: "https://s3.amazonaws.com/digitalpourproducerlogos/546d5a57b3b6f60264e24293.png",
         TwitterName: "@HopFarmBeer"
       },
+      CoffeeProducer: {
+        CoffeeProducerName: "Hop Farm",
+        CoffeeProducerUrl: "null",
+        Certifications: "null",
+        ProducerName: "Hop Farm",
+        SimplifiedProducerName: "hop farm",
+        CultureAwareLocation: "Pittsburgh, PA",
+        Id: "546d5a57b3b6f60264e24293",
+        FullProducerName: "null",
+        Location: "Pittsburgh, PA",
+        ProducersUrl: "null",
+        LogoImageUrl: "https://s3.amazonaws.com/digitalpourproducerlogos/546d5a57b3b6f60264e24293.png",
+        TwitterName: "@HopFarmBeer"
+      },
       BeerName: "IPA",
       BeerStyle: {
         Id: "4ff4ce739294c31fec22a35e",

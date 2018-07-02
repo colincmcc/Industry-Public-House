@@ -21,8 +21,8 @@ const homeResolvers = {
         cache.writeData({ data: { selectedDrinkType: selectedDrinkType } });
         return null;
       },
-      selectLocation: (_, { location }, { cache }) => {
-        cache.writeData({ data: { currentLocation: location } });
+      selectLocation: (_, { currentLocation }, { cache }) => {
+        cache.writeData({ data: { currentLocation: currentLocation } });
         return null;
       },
     }

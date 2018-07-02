@@ -8,7 +8,7 @@ import FoodDrinkComponent from '../common/FoodDrinkComponent'
 // * Highest level Food Menu component
 
 // ! Currently usine a Query in HomeContainer local state as a variable here.  Eventually will move to @export to contain queries.
-//See here https://github.com/apollographql/apollo-link-state/issues/168
+// See here https://github.com/apollographql/apollo-link-state/issues/168
 
 
 const FoodContainer = (props) => {
