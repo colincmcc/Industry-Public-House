@@ -46,16 +46,18 @@ export default FoodNavComponent;
 
 const MenuNavWrapper = styled.div`
   display: grid;
-  grid: auto-flow / 1fr 1fr;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   padding: 0 2em;
+  text-align: center;
   ${props => props.theme.media.tablet_landscape_up`
     grid: auto-flow / repeat(6, 1fr);
   `};
 `;
 const MenuNavItem = styled.div`
   display: flex;
-  padding: 1em;
   font-size: 1.25em;
+  padding: 1em 0;
   color: ${props => props.theme.colors.whiteTheme};
   cursor: pointer;
   &:hover {

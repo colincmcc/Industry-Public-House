@@ -6,8 +6,7 @@ import AboutContainer from "./components/about/AboutContainer";
 import MenuContainer from "./components/menu/MenuContainer";
 import FoodContainer from "./components/food/FoodContainer";
 import DrinkContainer from "./components/drinks/DrinkContainer";
-import theme from "../../common/styled/theme";
-
+import FooterContainer from "./components/footer/FooterContainer";
 const HomeComponent = props => {
   return (
     <HomeWrapper>
@@ -15,6 +14,7 @@ const HomeComponent = props => {
       <AboutContainer />
       <FoodContainer selectedFoodType={props.cachedState.selectedFoodType} />
       <DrinkContainer cachedState={props.cachedState} />
+      <FooterContainer />
     </HomeWrapper>
   );
 };

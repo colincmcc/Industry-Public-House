@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import {Query, Mutation} from 'react-apollo'
+import React from 'react'
+import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 
-import FoodNavComponent from "../food/FoodNavComponent";
+import FoodNavComponent from "./FoodNavComponent";
 import FoodDrinkComponent from '../common/FoodDrinkComponent'
+import FoodComponent from './FoodComponent'
 
 // * Highest level Food Menu component
 
@@ -37,13 +38,12 @@ const FoodContainer = (props) => {
           name: food.acf.name,
           description: food.acf.description
         }))
-        return (
-        <div>
-          <FoodNavComponent client={client} selectedFoodType={selectedFoodType} navItems={navItems} />
-          <FoodDrinkComponent foods={selectedFoods} />
-        </div>
-      )
-
+        const ownProps = {
+          client,
+          selectedFoodType,
+          selectedFoods
+        }
+        return <FoodComponent {...ownProps} />
       }
     }
     </Query>
