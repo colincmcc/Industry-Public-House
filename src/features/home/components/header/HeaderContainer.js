@@ -5,6 +5,8 @@ import gql from 'graphql-tag'
 import HeaderComponent from './HeaderComponent'
 export default class HeaderContainer extends Component {
   render() {
+    console.log('windows orientation' + window.orientation)
+
     return (
       <Query query={HEADER_PAGES}>
         {

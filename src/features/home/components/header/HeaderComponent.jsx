@@ -9,14 +9,14 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import styled from "styled-components";
 import shortid from "shortid";
-
 const HeaderComponent = props => {
   return (
     // TODO: add translucent black overlay on images to make text pop
+    // TODO: better method to track orientation and naturalSlideHeight
     <HeaderWrapper id="Header">
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={200}
+        naturalSlideHeight={window.orientation == 0 ? 200 : 125}
         totalSlides={props.headers.length}
       >
         <Slider>

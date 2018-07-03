@@ -21,6 +21,9 @@ const FoodNavComponent = props => {
         <Mutation key={shortid.generate()} mutation={TOGGLE_FOODTYPE}>
           {selectFoodType => (
             <MenuNavItem
+              className={
+                navItem.slug === props.selectedFoodType ? "active" : ""
+              }
               onClick={() =>
                 selectFoodType({
                   variables: { selectedFoodType: navItem.slug }
@@ -47,17 +50,19 @@ export default FoodNavComponent;
 const MenuNavWrapper = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  padding: 0 2em;
+  grid-template-columns: 1fr 1fr;
   text-align: center;
-  ${props => props.theme.media.tablet_landscape_up`
-    grid: auto-flow / repeat(6, 1fr);
-  `};
+  ${props => props.theme.media.tablet_portrait_up`
+grid: auto-flow / repeat(auto-fill, minmax(100px, 1fr));
+
+`};
 `;
 const MenuNavItem = styled.div`
   display: flex;
-  font-size: 1.25em;
-  padding: 1em 0;
+  font-size: ${props => props.theme.fontSizes.medium.size};
+  padding: 1em;
+  margin: auto;
+  text-transform: uppercase;
   color: ${props => props.theme.colors.whiteTheme};
   cursor: pointer;
   &:hover {

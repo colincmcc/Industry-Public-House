@@ -29,6 +29,5 @@ export default FoodComponent;
 const FoodWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  margin: auto;
-  padding: 0 2em;
+  width: 100vw;
 `;

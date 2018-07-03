@@ -27,7 +27,6 @@ const DrinkNavComponent = props => {
   if (locationNav.includes(props.selectedDrinkType)) {
     showNav = true;
   }
-  console.log(showNav);
 
   return (
     <DrinkNavWrapper>
@@ -95,28 +94,26 @@ const DrinkNavWrapper = styled.div`
 `;
 const DrinkNavItem = styled.div`
   display: flex;
+  margin: auto;
   padding: 1em;
-  font-size: 1.25em;
+  font-size: ${props => props.theme.fontSizes.medium.size};
   color: white;
   cursor: pointer;
+  text-transform: uppercase;
   &:hover {
-    color: yellow;
-  }
-  &.active {
-    color: yellow;
+    color: ${props => props.theme.colors.lightTheme};
   }
 `;
 const DrinkTypesNav = styled.div`
-  display: inline-flex;
-  flex-direction: row;
+  display: grid;
+  grid: auto-flow / repeat(aut;
   width: 100%;
 `;
 const LocationsNav = styled.div`
   display: none;
 
   &.showNav {
-    display: inline-flex;
-    flex-direction: row;
+    display: grid;
     width: 100%;
   }
 `;

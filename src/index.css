@@ -13,8 +13,8 @@ a {
 }
 
 a:hover {
-  color: yellow;
+  color: #f6c120;
 }
 .active {
-  color: yellow;
+  color: #f6c120;
 }

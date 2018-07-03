@@ -14,14 +14,6 @@ import FoodComponent from './FoodComponent'
 
 const FoodContainer = (props) => {
 
-  const navItems = [
-    { label: "Brunch", link: "/Home/Food/Brunch", slug: "brunch" },
-    { label: "Starters", link: "/Home/Food/Starters", slug: "starters" },
-    { label: "Greens", link: "/Home/Food/Greens", slug: "greens" },
-    { label: "Handhelds", link: "/Home/Food/Handhelds", slug: "handhelds" },
-    { label: "Burghers", link: "/Home/Food/Burghers", slug: "burghers" },
-    { label: "Sustenance", link: "/Home/Food/Sustenance", slug: "sustenance" }
-  ];
   const selectedFoodType = props.selectedFoodType
 
   return (

@@ -45,15 +45,13 @@ const FoodListing = styled.div`
 const FoodHeader = styled.div`
   display: flex;
   flex-direction: row;
-  font-size: 1.25em;
+  font-size: ${props => props.theme.fontSizes.medium.size};
 `;
-const FoodTitle = styled.h2`
+const FoodTitle = styled.div`
   display: flex;
-  font-size: 1.25em;
 `;
-const FoodPrice = styled.h2`
+const FoodPrice = styled.div`
   display: flex;
   padding: 0 1em;
-  font-size: 1.25em;
 `;
 const FoodDescription = styled.p``;
