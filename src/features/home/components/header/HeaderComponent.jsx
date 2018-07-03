@@ -1,10 +1,14 @@
 import React from "react";
-import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonNext,
+  ButtonBack
+} from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import styled from "styled-components";
 import shortid from "shortid";
-
-import moduleName from "../";
 
 const HeaderComponent = props => {
   return (
@@ -23,12 +27,14 @@ const HeaderComponent = props => {
                 key={shortid.generate()}
                 bgImg={header.background}
               >
-                <HeaderText
-                  dangerouslySetInnerHTML={{
-                    __html: header.content || "<br />"
-                  }}
-                />
-                <HeaderLink> {header.title} </HeaderLink>
+                <HeaderContent>
+                  <HeaderText
+                    dangerouslySetInnerHTML={{
+                      __html: header.content || "<br />"
+                    }}
+                  />
+                  <HeaderLink> {header.title} </HeaderLink>
+                </HeaderContent>
               </HeaderContainer>
             </Slide>
           ))}
@@ -42,30 +48,42 @@ export default HeaderComponent;
 
 const HeaderWrapper = styled.section`
   height: 95vh;
+  width: 100vw;
+  color: ${props => props.theme.colors.whiteTheme};
 `;
 
 const HeaderContainer = styled.div`
-  display: block;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
   background-image: url(${props => props.bgImg});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 95vh;
+  width: 100%;
 `;
-const HeaderText = styled.h3`
+
+const HeaderContent = styled.div`
+  width: 100%;
   margin: auto;
-  color: white;
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-
-const HeaderLink = styled.h2`
+const HeaderText = styled.div`
   margin: auto;
-  color: white;
   position: relative;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  font-size: ${props => props.theme.fontSizes.heading.size};
+  padding: 0 1em;
+`;
+
+const HeaderLink = styled.div`
+  margin: auto;
+  position: relative;
+  margin-top: 3em;
+  font-size: ${props => props.theme.fontSizes.subHeading.size};
 `;

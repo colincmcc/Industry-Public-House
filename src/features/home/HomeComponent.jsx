@@ -6,25 +6,16 @@ import AboutContainer from "./components/about/AboutContainer";
 import MenuContainer from "./components/menu/MenuContainer";
 import FoodContainer from "./components/food/FoodContainer";
 import DrinkContainer from "./components/drinks/DrinkContainer";
-import mainBg from "../../common/assets/img/Drinks-Background.jpg";
 import theme from "../../common/styled/theme";
 
 const HomeComponent = props => {
   return (
-    <ThemeProvider theme={theme}>
-      <HomeWrapper>
-        <HeaderContainer />
-        <MenuContainer />
-        <MainContent>
-          <AboutContainer />
-          <FoodContainer
-            selectedFoodType={props.cachedState.selectedFoodType}
-          />
-          <DrinkContainer cachedState={props.cachedState} />
-        </MainContent>
-        <MenuContent />
-      </HomeWrapper>
-    </ThemeProvider>
+    <HomeWrapper>
+      <HeaderContainer />
+      <AboutContainer />
+      <FoodContainer selectedFoodType={props.cachedState.selectedFoodType} />
+      <DrinkContainer cachedState={props.cachedState} />
+    </HomeWrapper>
   );
 };
 
@@ -32,17 +23,6 @@ export default HomeComponent;
 
 const HomeWrapper = styled.div`
   display: grid;
-
-  @media (min-width: 763px) {
-  }
-`;
-
-const MainContent = styled.div`
-  display: grid;
-  background-image: url(${mainBg});
-  background-position: bottom;
-  background-size: cover;
-  z-index: 2;
 `;
 
 const MenuContent = styled.div`

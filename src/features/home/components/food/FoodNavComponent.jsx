@@ -45,16 +45,20 @@ const FoodNavComponent = props => {
 export default FoodNavComponent;
 
 const MenuNavWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: row;
+  display: grid;
+  grid: auto-flow / 1fr 1fr;
+  padding: 0 2em;
+  ${props => props.theme.media.tablet_landscape_up`
+    grid: auto-flow / repeat(6, 1fr);
+  `};
 `;
 const MenuNavItem = styled.div`
   display: flex;
   padding: 1em;
   font-size: 1.25em;
-  color: white;
+  color: ${props => props.theme.colors.whiteTheme};
   cursor: pointer;
   &:hover {
-    color: yellow;
+    color: ${props => props.theme.colors.lightTheme};
   }
 `;

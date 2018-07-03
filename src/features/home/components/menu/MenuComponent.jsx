@@ -36,10 +36,12 @@ const MenuWrapper = styled.section`
   background-image: url(${menuBg});
   background-size: cover;
   background-repeat: no-repeat;
+  ${props => props.theme.media.tablet_landscape_up`
 
-  @media (min-width: 740px) {
     grid: auto-flow / repeat(4, 1fr);
-  }
+
+  `};
+
   &:before {
     content: "";
     display: block;
@@ -78,9 +80,7 @@ const BackgroundFix = styled.div`
 `;
 const MenuItem = styled.div`
   display: grid;
-  width: 100%;
-  height: 45vmin;
-  padding: 1em 0;
+  padding: 1em 1em;
   z-index: 1;
   font-size: 1.5em;
   align-content: center;

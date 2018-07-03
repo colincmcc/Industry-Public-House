@@ -16,7 +16,7 @@ const NavComponent = props => {
     <NavWrapper className={props.isActive ? "isActive" : ""}>
       <NavBackground opacity={props.backgroundOpacity} />
       <NavMenu>
-        <PhoneButton className="fas fa-phone" />
+        <PhoneButton className="fa-2x fa-phone alt" />
         <LogoImg src={fullLogo} />
 
         {/** Desktop Nav
@@ -53,21 +53,20 @@ export default withRouter(NavComponent);
 
 // STYLED COMPONENTS
 const NavWrapper = styled.div`
-  height: 200px;
+  height: 100px;
   overflow: hidden;
-  width: 100%;
+  width: 100vw;
   z-index: 100;
   position: fixed;
-
-  @media (min-width: 763px) {
-  }
+  color: ${props => props.theme.colors.theme};
 `;
 const NavBackground = styled.div`
-  height: 200px;
+  height: 100px;
   width: 100%;
   position: fixed;
   left: 0;
-  background-image: url(${grungeBanner});
+  background-color: ${props => props.theme.colors.blackTheme};
+  border-bottom: 2px solid ${props => props.theme.colors.theme};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -105,33 +104,31 @@ const NavLink = styled.div`
   width: 100%;
 `;
 
-const NavButton = styled.div`
+const NavButton = styled.i`
   position: absolute;
   right: 0;
   top: 0;
-  color: yellow;
   padding: 24px;
   z-index: 101;
   transition: 0.5s;
-  @media (min-width: 736px) {
-    display: none;
-    visibility: hidden;
-  }
   &.isActive {
     transform: rotate(90deg);
   }
+
+  ${props => props.theme.media.tablet_landscape_up`
+    display: none;
+    visibility: hidden;
+  `};
 `;
 
 const PhoneButton = styled.i`
   position: absolute;
   left: 0;
   top: 0;
-  color: yellow;
   padding: 24px;
   z-index: 101;
-  transition: 0.5s;
-  @media (min-width: 736px) {
+  ${props => props.theme.media.tablet_landscape_up`
     display: none;
     visibility: hidden;
-  }
+  `};
 `;
