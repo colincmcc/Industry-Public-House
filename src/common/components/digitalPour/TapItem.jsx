@@ -36,14 +36,16 @@ const TapItem = props => {
   return (
     <TapWrapper>
       <BeerLevel img={placeholder} />
-      <TapHeader>
-        <BreweryName> {props.tap.breweryName} - </BreweryName>
-        <BeerName> {props.tap.bevName} </BeerName>
-      </TapHeader>
-      <TapDescription>
-        {props.tap.bevStyle} - {props.tap.breweryLocation} <br />
-        ABV: {props.tap.bevAbv}%
-      </TapDescription>
+      <TapContent>
+        <TapHeader>
+          <BreweryName> {props.tap.breweryName} </BreweryName>
+          <BeerName> {props.tap.bevName} </BeerName>
+        </TapHeader>
+        <TapDescription>
+          {props.tap.bevStyle} - {props.tap.breweryLocation} <br />
+          ABV: {props.tap.bevAbv}%
+        </TapDescription>
+      </TapContent>
     </TapWrapper>
   );
 };
@@ -51,29 +53,37 @@ const TapItem = props => {
 export default TapItem;
 
 const TapWrapper = styled.div`
-  display: grid;
-  grid: repeat(3, 1fr) / 1fr 3fr;
+  display: flex;
+  flex-direction: row;
   text-align: left;
-  height: 150px;
+  height: 125px;
   color: white;
+  padding: 1em 1.6em;
 `;
 const TapHeader = styled.div`
   display: flex;
   flex-direction: row;
-  grid-column: 2/3;
-  grid-row: 1/2;
 `;
-const BreweryName = styled.h3``;
-const BeerName = styled.h3``;
+const TapContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+`;
+const BreweryName = styled.span`
+  ${props => props.theme.fontStyles.medium};
+
+  padding-right: 1.25em;
+`;
+const BeerName = styled.span`
+  ${props => props.theme.fontStyles.medium};
+  font-style: italic;
+  font-weight: normal;
+`;
 const TapDescription = styled.p`
-  grid-column: 2/3;
-  grid-row: 2/4;
-  font-size: 1em;
+  ${props => props.theme.fontStyles.text};
 `;
 const BeerLevel = styled.img`
-  grid-column: 1 /2;
-  grid-row: 1/4;
-  height: 100px;
-  width: 100px;
-  margin: auto;
+  height: 125px;
+  width: 75px;
+  padding-right: 1em;
 `;

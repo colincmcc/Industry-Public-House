@@ -1,4 +1,5 @@
-import { css } from 'styled-components'
+import styled, { css } from 'styled-components'
+
 
 const sizes = {
   large_up: 1800,
@@ -35,7 +36,7 @@ const fontSizes = {
   medium: {
     size: "19px",
     lineHeight: "28px",
-    weight: "500px"
+    weight: 500
   },
   text: {
     size: "17px",
@@ -43,6 +44,41 @@ const fontSizes = {
     weight: 400,
 
   }
+}
+const fontStyles = {
+  heading: css`
+  font-size: 40px;
+  line-height: 50px;
+  font-weight: 400;
+  `,
+  subHeading: css`
+  font-size: 22px;
+  line-height: 33px;
+  font-weight: 600;
+  letter-spacing: .025em;
+  `,
+  medium: css`
+  font-size: 19px;
+  line-height: 28px;
+  font-weight: 500;
+  `,
+  text: css`
+  font-size: 17px;
+  line-height: 28px;
+  font-weight: 400;
+  `,
+  smallHeading: css`
+  font-size: 14px;
+  line-height: 30px;
+  font-weight: 500;
+  letter-spacing: .025em;
+
+  `,
+  small: css`
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 500;
+  `,
 }
 
  const media = Object.keys(sizes).reduce((acc, label) => {
@@ -62,10 +98,33 @@ const fontSizes = {
   return acc
 }, {})
 
+const styledComponents = {
+  heading: css`
+  ${fontStyles.heading}
+  margin: auto;
+  color: ${colors.theme};
+  `,
+  subHeading: css`
+    ${fontStyles.subHeading}
+  margin: auto;
+  color: ${colors.lightTheme};
+
+  `,
+  smallHeading: css`
+    ${fontStyles.smallHeading}
+  margin: auto;
+  color: ${colors.lightTheme};
+
+  `
+
+}
+
 const theme = {
   media: media,
   colors: colors,
-  fontSizes: fontSizes
+  fontSizes: fontSizes,
+  fontStyles: fontStyles,
+  components: styledComponents
 }
 
 export default theme

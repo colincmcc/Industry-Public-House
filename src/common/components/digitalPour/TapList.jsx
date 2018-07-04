@@ -75,7 +75,10 @@ export default TapList;
 
 const TapListWrapper = styled.div`
   display: grid;
-  grid: repeat(${props => props.columnSize}, 1fr) / auto-flow;
   margin: auto;
+  width: 100%;
+  ${props => props.theme.media.tablet_landscape_up`
+  grid: repeat(${props => props.columnSize}, 1fr) / auto-flow;
+  `};
 `;
 const TapListHeader = styled.div``;

@@ -30,6 +30,7 @@ const DrinkNavComponent = props => {
 
   return (
     <DrinkNavWrapper>
+      <DrinkHeader> Drinks </DrinkHeader>
       {/** Drink Type Nav **/}
       <DrinkTypesNav>
         {props.navItems.map(navItem => (
@@ -91,13 +92,17 @@ const DrinkNavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  width: 100vw;
+`;
+const DrinkHeader = styled.div`
+  ${props => props.theme.components.heading};
 `;
 const DrinkNavItem = styled.div`
   display: flex;
   margin: auto;
   padding: 1em;
   font-size: ${props => props.theme.fontSizes.medium.size};
-  color: white;
+  color: ${props => props.theme.colors.whiteTheme};
   cursor: pointer;
   text-transform: uppercase;
   &:hover {
@@ -105,15 +110,18 @@ const DrinkNavItem = styled.div`
   }
 `;
 const DrinkTypesNav = styled.div`
-  display: grid;
-  grid: auto-flow / repeat(aut;
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  ${props => props.theme.fontStyles.subheading};
 `;
 const LocationsNav = styled.div`
   display: none;
-
   &.showNav {
-    display: grid;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    ${props => props.theme.fontStyles.subheading};
+    font-style: italic;
+    margin: auto;
   }
 `;

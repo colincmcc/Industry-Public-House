@@ -32,12 +32,9 @@ const AboutWrapper = styled.section`
   }
 `;
 
-const AboutHeader = styled.h2`
-  display: block;
-  color: ${props => props.theme.colors.lightTheme};
-  margin: auto;
-  padding-top: 3em;
-  font-size: ${props => props.theme.fontSizes.subHeading.size};
+const AboutHeader = styled.div`
+  ${props => props.theme.components.heading};
+  padding-top: 2em;
 `;
 
 const AboutContent = styled.div`

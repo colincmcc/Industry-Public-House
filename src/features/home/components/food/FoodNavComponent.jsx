@@ -17,6 +17,7 @@ const TOGGLE_FOODTYPE = gql`
 const FoodNavComponent = props => {
   return (
     <MenuNavWrapper>
+      <FoodHeader> Food </FoodHeader>
       {props.navItems.map((navItem, index) => (
         <Mutation key={shortid.generate()} mutation={TOGGLE_FOODTYPE}>
           {selectFoodType => (
@@ -48,14 +49,15 @@ const FoodNavComponent = props => {
 export default FoodNavComponent;
 
 const MenuNavWrapper = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   text-align: center;
-  ${props => props.theme.media.tablet_portrait_up`
-grid: auto-flow / repeat(auto-fill, minmax(100px, 1fr));
+  padding: 1em 2em;
+`;
 
-`};
+const FoodHeader = styled.div`
+  ${props => props.theme.components.heading};
+  width: 100%;
 `;
 const MenuNavItem = styled.div`
   display: flex;

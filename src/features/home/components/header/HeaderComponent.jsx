@@ -16,7 +16,7 @@ const HeaderComponent = props => {
     <HeaderWrapper id="Header">
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={window.orientation == 0 ? 200 : 125}
+        naturalSlideHeight={window.orientation == 0 ? 175 : 125}
         totalSlides={props.headers.length}
       >
         <Slider>

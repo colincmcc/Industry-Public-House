@@ -27,13 +27,13 @@ const FoodDrinkComponent = props => {
 export default FoodDrinkComponent;
 
 const FoodMenuWrapper = styled.div`
-  display: grid;
-  grid: auto-flow / 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  color: white;
+  color: ${props => props.theme.colors.whiteTheme};
   text-align: left;
-  min-height: 10vh;
+  padding: 0 2em;
 `;
 
 const FoodListing = styled.div`

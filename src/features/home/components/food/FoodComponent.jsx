@@ -30,4 +30,5 @@ const FoodWrapper = styled.section`
   display: flex;
   flex-direction: column;
   width: 100vw;
+  padding: 2em 0;
 `;
