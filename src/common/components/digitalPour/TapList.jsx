@@ -77,6 +77,7 @@ const TapListWrapper = styled.div`
   display: grid;
   margin: auto;
   width: 100%;
+  padding-bottom: 100px;
   ${props => props.theme.media.tablet_landscape_up`
   grid: repeat(${props => props.columnSize}, 1fr) / auto-flow;
   `};

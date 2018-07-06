@@ -47,6 +47,7 @@ const ContactInfo = styled.div`
   flex-direction: column;
   width: 50%;
   float: left;
+  ${props => props.theme.components.small};
 `;
 
 const FooterHeader = styled.div`
@@ -58,4 +59,5 @@ const MiscInfo = styled.div`
   flex-direction: column;
   width: 50%;
   float: right;
+  ${props => props.theme.components.small};
 `;

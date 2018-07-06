@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { HashLink as Link } from "react-router-hash-link";
+import { Link } from "react-router-dom";
+
 import { withRouter } from "react-router";
 
 const MobileNavMenu = props => {
   return (
     // TODO: Fix menu items alignment, make pretty
-    <NavMenuNarrow className={props.isActive ? "isActive" : ""} id="navNarrow">
+    <NavMenuNarrow
+      className={props.menuIsShown ? "isActive" : ""}
+      id="navNarrow"
+    >
       <MenuList>
         <SkewedBlock onClick={() => props.burgerToggle()}>
           <NavNarrowButton to="/Home#About">ABOUT</NavNarrowButton>

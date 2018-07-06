@@ -1,17 +1,16 @@
 import React from "react";
 import shortid from "shortid";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+
+import { Link } from "react-router-dom";
+
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { DP_TAPS } from "./DrinkContainer";
 
-// * Prefetches drink items on mouse hover for faster loading
+// * Prefetches drink items on mouse hover for faster loading. Desktop only
 
-const TOGGLE_DRINKTYPE = gql`
-  mutation selectDrinkType($selectedDrinkType: String!) {
-    selectDrinkType(selectedDrinkType: $selectedDrinkType) @client
-  }
-`;
 const TOGGLE_LOCATION = gql`
   mutation selectLocation($currentLocation: Int!) {
     selectLocation(currentLocation: $currentLocation) @client
@@ -22,9 +21,8 @@ const TOGGLE_LOCATION = gql`
 
 const DrinkNavComponent = props => {
   let showNav = false;
-  console.log(props.selectedDrinkType);
-  const locationNav = ["taps", "premium", "bottles"];
-  if (locationNav.includes(props.selectedDrinkType)) {
+  const locationNav = ["/Drink/Taps", "/Drink/Premium", "/Drink/Cans"];
+  if (locationNav.includes(props.location.pathname)) {
     showNav = true;
   }
 
@@ -34,22 +32,9 @@ const DrinkNavComponent = props => {
       {/** Drink Type Nav **/}
       <DrinkTypesNav>
         {props.navItems.map(navItem => (
-          <Mutation key={shortid.generate()} mutation={TOGGLE_DRINKTYPE}>
-            {selectDrinkType => (
-              <DrinkNavItem
-                className={
-                  navItem.slug === props.selectedDrinkType ? "active" : ""
-                }
-                onClick={() =>
-                  selectDrinkType({
-                    variables: { selectedDrinkType: navItem.slug }
-                  })
-                }
-              >
-                {navItem.label}
-              </DrinkNavItem>
-            )}
-          </Mutation>
+          <Link to={"/Drink/" + navItem.slug}>
+            <DrinkNavItem>{navItem.label}</DrinkNavItem>
+          </Link>
         ))}
       </DrinkTypesNav>
 
@@ -86,7 +71,7 @@ const DrinkNavComponent = props => {
   );
 };
 
-export default DrinkNavComponent;
+export default withRouter(DrinkNavComponent);
 
 const DrinkNavWrapper = styled.div`
   display: flex;

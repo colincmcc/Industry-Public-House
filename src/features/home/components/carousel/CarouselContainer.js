@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import HeaderComponent from './HeaderComponent'
-export default class HeaderContainer extends Component {
+import CarouselComponent from './CarouselComponent'
+export default class CarouselContainer extends Component {
   render() {
     console.log('windows orientation' + window.orientation)
 
@@ -21,7 +21,7 @@ export default class HeaderContainer extends Component {
               link: header.link,
               background: header.acf.background_image
             }))
-            return <HeaderComponent headers={allHeaders} />
+            return <CarouselComponent headers={allHeaders} />
           }
         }
       </Query>

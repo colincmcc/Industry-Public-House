@@ -114,8 +114,13 @@ const styledComponents = {
     ${fontStyles.smallHeading}
   margin: auto;
   color: ${colors.lightTheme};
-
-  `
+  text-transform: uppercase;
+  `,
+  small: css`
+  ${fontStyles.small}
+margin: auto;
+color: ${colors.whiteTheme};
+`
 
 }
 

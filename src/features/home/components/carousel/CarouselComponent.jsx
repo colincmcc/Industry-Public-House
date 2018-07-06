@@ -9,11 +9,14 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import styled from "styled-components";
 import shortid from "shortid";
-const HeaderComponent = props => {
+import fullLogo from "../../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
+
+const CarouselComponent = props => {
   return (
     // TODO: add translucent black overlay on images to make text pop
     // TODO: better method to track orientation and naturalSlideHeight
-    <HeaderWrapper id="Header">
+    <CarouselWrapper id="Carousel">
+      <LogoImg src={fullLogo} />
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={window.orientation == 0 ? 175 : 125}
@@ -22,7 +25,7 @@ const HeaderComponent = props => {
         <Slider>
           {props.headers.map((header, index) => (
             <Slide key={shortid.generate()} index={index}>
-              <HeaderContainer
+              <CarouselContain
                 className="headerContainer"
                 key={shortid.generate()}
                 bgImg={header.background}
@@ -35,24 +38,33 @@ const HeaderComponent = props => {
                   />
                   <HeaderLink> {header.title} </HeaderLink>
                 </HeaderContent>
-              </HeaderContainer>
+              </CarouselContain>
             </Slide>
           ))}
         </Slider>
       </CarouselProvider>
-    </HeaderWrapper>
+    </CarouselWrapper>
   );
 };
 
-export default HeaderComponent;
+export default CarouselComponent;
 
-const HeaderWrapper = styled.section`
+const CarouselWrapper = styled.section`
   height: 95vh;
   width: 100vw;
   color: ${props => props.theme.colors.whiteTheme};
 `;
-
-const HeaderContainer = styled.div`
+const LogoImg = styled.img`
+  display: block;
+  position: absolute;
+  margin: 50px 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 80px;
+  z-index: 5;
+`;
+const CarouselContain = styled.div`
   display: flex;
   position: absolute;
   top: 0;

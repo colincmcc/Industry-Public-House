@@ -1,20 +1,14 @@
 import React from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 
-import HeaderContainer from "./components/header/HeaderContainer";
+import CarouselContainer from "./components/carousel/CarouselContainer";
 import AboutContainer from "./components/about/AboutContainer";
-import MenuContainer from "./components/menu/MenuContainer";
-import FoodContainer from "./components/food/FoodContainer";
-import DrinkContainer from "./components/drinks/DrinkContainer";
-import FooterContainer from "./components/footer/FooterContainer";
+
 const HomeComponent = props => {
   return (
     <HomeWrapper>
-      <HeaderContainer />
+      <CarouselContainer />
       <AboutContainer />
-      <FoodContainer selectedFoodType={props.cachedState.selectedFoodType} />
-      <DrinkContainer cachedState={props.cachedState} />
-      <FooterContainer />
     </HomeWrapper>
   );
 };
