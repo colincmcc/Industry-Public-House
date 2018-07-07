@@ -6,6 +6,7 @@ import shortid from "shortid";
 
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import { withStyles } from "@material-ui/core/styles";
 import { Menu, Food, Email } from "mdi-material-ui";
 import SvgIcon from "@material-ui/core/SvgIcon";
@@ -33,7 +34,7 @@ class MobileNavComponent extends Component {
     };
   }
 
-  handleChange = (event, value) => {
+  handleChange = value => {
     this.setState({ value });
   };
 
@@ -57,30 +58,24 @@ class MobileNavComponent extends Component {
 
     return (
       <NavWrapper className={this.props.navIsShown ? "" : "hide"}>
-        <BottomNavigation
-          value={value}
-          onChange={this.handleChange}
-          className={classes.root}
-        >
-
-        <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-          {/* bottomNavItems.map(navItem => (
-            <Link to={navItem.link}>
-              <MobileButton
+        {bottomNavItems.map(navItem => (
+          <Link style={{ width: "20%" }} to={navItem.link}>
+            <ButtonBase>
+              <MobileItem
+                className={value === navItem.slug ? "selected" : ""}
                 onClick={() => this.handleChange(navItem.slug)}
-                classes={{
-                  root: "classes-state-root",
-                  selected: "selected"
-                }}
-                value={value}
-                label={navItem.text}
-                icon={navItem.icon}
-              />
+              >
+                <MobileSVG>{navItem.icon} </MobileSVG>
+                <MobileValue
+                  className={value === navItem.slug ? "selected" : ""}
+                >
+                  {navItem.text}{" "}
+                </MobileValue>
+              </MobileItem>
               {/* <ReactSVG svgStyle={svgStyle} path={navItem.icon} /> */}
-            </Link>
-          ))
-        */}
-        </BottomNav>
+            </ButtonBase>
+          </Link>
+        ))}
       </NavWrapper>
     );
   }
@@ -125,27 +120,42 @@ const MobileButton = styled(BottomNavigationAction)`
   }
 `;
 
-const MobileItem = styled.button`
+const MobileItem = styled.div`
   min-width: 80px;
   max-width: 168px;
   line-height: 0;
-  padding-top: 8px;
+  padding-top: 16px;
   padding-bottom: 10px;
   padding-left: 12px;
   padding-right: 12px;
   position: relative;
   display: inline-flex;
+  flex-direction: column;
   background-color: transparent;
   border: none;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  &.isActive {
+  color: ${props => props.theme.colors.whiteTheme};
+
+  &.selected {
     padding-top: 6px;
-    color: blue;
+    color: ${props => props.theme.colors.lightAccent};
   }
   &.iconOnly {
     opacity: 0;
     transition-delay: 0s;
+  }
+`;
+
+const MobileSVG = styled.span``;
+const MobileValue = styled.span`
+  font-size: 0.875rem;
+  opacity: 0;
+
+  &.selected {
+    opacity: 1;
+    transition-delay: 0.1s;
+    padding-top: 10px;
   }
 `;
 
