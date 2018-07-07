@@ -17,7 +17,6 @@ import contactSVG from "../../common/assets/icons/envelope-regular.svg";
 import foodSVG from "../../common/assets/icons/utensils-solid.svg";
 import LightbulbLogo from "../../common/components/lightbulb";
 
-import "./nav.css";
 import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
 
 const styles = {

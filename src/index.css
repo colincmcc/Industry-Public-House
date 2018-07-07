@@ -6,15 +6,3 @@ body {
   background-color: #252525;
   text-align: center;
 }
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-a:hover {
-  color: #f6c120;
-}
-.active {
-  color: #f6c120;
-}
