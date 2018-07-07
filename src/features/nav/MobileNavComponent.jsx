@@ -33,7 +33,9 @@ class MobileNavComponent extends Component {
       value: "home"
     };
   }
-
+  componentDidMount() {
+    console.log(this.props);
+  }
   handleChange = value => {
     this.setState({ value });
   };

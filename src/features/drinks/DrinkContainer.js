@@ -3,6 +3,9 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from "react-router-dom";
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import TapList from "../../common/components/digitalPour/TapList";
 
@@ -29,7 +32,7 @@ const DrinkContainer = (props) => {
 
           const drinkNavItems = [
             {label: "Cocktails", slug: "Cocktails", component: "CocktailContainer", showLocation: false},
-            {label: "Taps", slug: "Taps", component: "<TapList taps={data.allTaps} />", showLocation: true, props: ""},
+            {label: "Taps", slug: "Taps", component: <TapList taps={data.allTaps} />, showLocation: true, props: ""},
             {label: "Cans", slug: "Cans", component: "CocktailContainer", showLocation: true},
             {label: "Wine", slug: "Wine", component: "CocktailContainer", showLocation: false},
             {label: "Premium", slug: "Premium", component: "CocktailContainer", showLocation: true},
@@ -41,11 +44,10 @@ const DrinkContainer = (props) => {
             <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
 
             <Switch>
-              <Route exact to="/Drink/Cocktails" render={() => <TapList taps={data.allTaps} />} />
-              <Route exact to="/Drink/Taps" render={() => <TapList taps={data.allTaps} />} />
-              <Route exact to="/Drink/Cocktails" render={() => <LoadingComponent />} />
-              <Route exact to="/Drink/Cocktails" render={() => <LoadingComponent />} />
-              <Route exact to="/Drink/Cocktails" render={() => <LoadingComponent />} />
+              {drinkNavItems.map((navItem) => (
+                <Route exact path={'/Drink/' + navItem.slug} render={() => navItem.component} />
+              ))}
+
             </Switch>
 
           </div>
