@@ -3,6 +3,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from "react-router-dom";
+import shortid from 'shortid'
 
 
 import TapList from "../../common/components/digitalPour/TapList";
@@ -16,6 +17,7 @@ const DrinkContainer = (props) => {
   const selectedDrinkType = props.selectedDrinkType
   const currentLocation = props.currentLocation
 
+    // ! Location id's are set through Digital Pour. Not a good index reference, since they don't start with 0
     const locations = [
       {id: 1, label: "Lawrenceville", location: "lv"},
       {id: 2, label: "North Fayette", location: "nf"}
@@ -42,7 +44,7 @@ const DrinkContainer = (props) => {
 
             <Switch>
               {drinkNavItems.map((navItem) => (
-                <Route exact path={'/Drink/' + navItem.slug} render={() => navItem.component} />
+                <Route key={shortid.generate()} exact path={'/Drink/' + navItem.slug} render={() => navItem.component} />
               ))}
 
             </Switch>

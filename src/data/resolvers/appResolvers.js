@@ -1,5 +1,3 @@
-import gql from 'graphql-tag'
-
 const appResolvers =  {
   defaults: {
     networkStatus: {

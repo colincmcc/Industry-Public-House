@@ -11,6 +11,8 @@ import NavContainer from './features/nav/NavContainer'
 import FooterContainer from './features/footer/FooterContainer'
 import FoodContainer from './features/food/FoodContainer'
 import DrinkContainer from './features/drinks/DrinkContainer'
+import HeaderContainer from './features/header/HeaderContainer'
+
 
 
 // Using HashLink in components for semi-future proof link solution until react-router supports it out of the box.
@@ -21,6 +23,7 @@ class App extends Component {
       <ThemeProvider theme={theme} >
 
         <AppWrapper>
+          <HeaderContainer />
           <NavContainer />
           <Query query={CACHED_STATE}>
           {

@@ -1,6 +1,16 @@
 import styled, { css } from 'styled-components'
 
-
+const material = {
+  root: {
+    color: "#F4EDDC"
+  },
+  tabRoot: {
+    color: "#F4EDDC"
+  },
+  indicator: {
+    backgroundColor: "#F69C20"
+  }
+}
 const sizes = {
   large_up: 1800,
   desktop_up: 1200,
@@ -129,7 +139,8 @@ const theme = {
   colors: colors,
   fontSizes: fontSizes,
   fontStyles: fontStyles,
-  components: styledComponents
+  components: styledComponents,
+  materialUI: material
 }
 
 export default theme

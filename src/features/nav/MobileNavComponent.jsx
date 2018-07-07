@@ -1,29 +1,16 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import { Link } from "react-router-dom";
-import ReactSVG from "react-svg";
 import shortid from "shortid";
 
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import { withStyles } from "@material-ui/core/styles";
 import { Menu, Food, Email } from "mdi-material-ui";
-import SvgIcon from "@material-ui/core/SvgIcon";
-
-import barsSVG from "../../common/assets/icons/bars-solid.svg";
-import beerSVG from "../../common/assets/icons/beer-solid.svg";
-import contactSVG from "../../common/assets/icons/envelope-regular.svg";
-import foodSVG from "../../common/assets/icons/utensils-solid.svg";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import LightbulbLogo from "../../common/components/lightbulb";
+import BeerGlass from "../../common/components/beerglass";
 
 import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
-
-const styles = {
-  root: {
-    width: "100%"
-  }
-};
+import theme from "../../common/styled/theme"
 
 class MobileNavComponent extends Component {
   constructor(props) {
@@ -32,25 +19,30 @@ class MobileNavComponent extends Component {
       value: "home"
     };
   }
-  componentDidMount() {
-    console.log(this.props);
-  }
   handleChange = value => {
     this.setState({ value });
   };
 
   render() {
-    const { classes } = this.props;
     const { value } = this.state;
 
-    console.log(value);
     const bottomNavItems = [
-      { link: "/Home", text: "Home", slug: "home", icon: <LightbulbLogo /> },
+      {
+        link: "/Home",
+        text: "Home",
+        slug: "home",
+        icon: (
+          <LightbulbLogo
+            primaryColor={value === "home" ? theme.colors.theme : ""}
+            secondaryColor={value === "home" ? theme.colors.lightAccent : ""}
+          />
+        )
+      },
       {
         link: "/drink",
         text: "Drinks",
         slug: "drinks",
-        icon: <LightbulbLogo />
+        icon: <BeerGlass />
       },
       { link: "/food", text: "Food", slug: "food", icon: <Food /> },
       { link: "/", text: "Contact", slug: "contact", icon: <Email /> },
@@ -60,8 +52,12 @@ class MobileNavComponent extends Component {
     return (
       <NavWrapper className={this.props.navIsShown ? "" : "hide"}>
         {bottomNavItems.map(navItem => (
-          <Link style={{ width: "20%" }} to={navItem.link}>
-            <ButtonBase>
+          <Link
+            key={shortid.generate()}
+            style={{ width: "20%" }}
+            to={navItem.link}
+          >
+            <ButtonBase >
               <MobileItem
                 className={value === navItem.slug ? "selected" : ""}
                 onClick={() => this.handleChange(navItem.slug)}
@@ -82,7 +78,7 @@ class MobileNavComponent extends Component {
   }
 }
 
-export default withStyles(styles)(MobileNavComponent);
+export default withTheme(MobileNavComponent);
 
 // STYLED COMPONENTS
 const NavWrapper = styled.div`
@@ -106,19 +102,6 @@ const NavWrapper = styled.div`
     display: none;
     visibility: hidden;
   `};
-`;
-
-const BottomNav = styled(BottomNavigation)`
-  && {
-    width: 100%;
-    background-color: ${props => props.theme.colors.blackTheme};
-  }
-`;
-
-const MobileButton = styled(BottomNavigationAction)`
-  && {
-    color: ${props => props.theme.colors.whiteTheme};
-  }
 `;
 
 const MobileItem = styled.div`
@@ -158,28 +141,4 @@ const MobileValue = styled.span`
     transition-delay: 0.1s;
     padding-top: 10px;
   }
-`;
-
-const BurgerButton = styled.i`
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 24px;
-  z-index: 101;
-  transition: 0.5s;
-  &.isActive {
-    transform: rotate(90deg);
-  }
-`;
-
-const PhoneButton = styled.i`
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 24px;
-  z-index: 101;
-  ${props => props.theme.media.tablet_landscape_up`
-    display: none;
-    visibility: hidden;
-  `};
 `;

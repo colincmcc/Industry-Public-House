@@ -1,6 +1,3 @@
-import gql from 'graphql-tag';
-
-
 const homeResolvers = {
   defaults: {
     selectedFoodType: "brunch",

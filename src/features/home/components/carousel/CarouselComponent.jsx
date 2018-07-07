@@ -16,7 +16,6 @@ const CarouselComponent = props => {
     // TODO: add translucent black overlay on images to make text pop
     // TODO: better method to track orientation and naturalSlideHeight
     <CarouselWrapper id="Carousel">
-      <LogoImg src={fullLogo} />
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={window.orientation == 0 ? 175 : 125}
@@ -54,16 +53,7 @@ const CarouselWrapper = styled.section`
   width: 100vw;
   color: ${props => props.theme.colors.whiteTheme};
 `;
-const LogoImg = styled.img`
-  display: block;
-  position: absolute;
-  margin: 50px 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 80px;
-  z-index: 5;
-`;
+
 const CarouselContain = styled.div`
   display: flex;
   position: absolute;

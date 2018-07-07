@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import MobileNavComponent from './MobileNavComponent'
 import MobileNavMenu from './MobileNavMenu'
+import './nav.css'
 
 
 // This container controls mobile menu (MobileNavMenu) state and nav state (NavComponent)
@@ -42,10 +43,7 @@ export default class NavContainer extends Component {
     const toggleBottomBar = (scrollPos) => {
       var prevScrollPos = this.state.lastScrollPos
       var navIsShown = this.state.navIsShown
-      console.log("navisshown" + navIsShown)
-      console.log("scrollPos is " + scrollPos)
-      console.log("prevScrollPos is " + prevScrollPos)
-      console.log(this.state.scrollDirection)
+
       this.setState({lastScrollPos: last_known_scroll_position})
       if (navIsShown) {
         if(scrollPos > prevScrollPos){

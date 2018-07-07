@@ -4,48 +4,36 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
-import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Link } from "react-router-dom";
-
+import theme from "../../common/styled/theme";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { DP_TAPS } from "./DrinkContainer";
-import { renderComponent } from "recompose";
 
 // * Prefetches drink items on mouse hover for faster loading. Desktop only
+// TODO figure out a better method for organizing theme between styled components and material ui
+// Note: you cannot pass a Styled Component theme prop as the MaterialUI's classes object (e.g. classes:{{root: props.theme.materialUI.root}}), when using the withTheme higher component
+// TODO: work out how the withStyles higher component uses the object passed to it and write a function to use the Styled Component theme instead
 
 const TOGGLE_LOCATION = gql`
   mutation selectLocation($currentLocation: Int!) {
     selectLocation(currentLocation: $currentLocation) @client
   }
 `;
-const styles = {
-  root: {
-    color: "#F4EDDC"
-  },
-  tabsRoot: {
-    color: "#F4EDDC"
-  },
-  tabRoot: {
-    color: "#F4EDDC"
-  },
-  indicator: {
-    backgroundColor: "#F69C20"
-  }
-};
 
 class DrinkNavComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      typeValue: 0
     };
   }
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  // event is needed for MaterialUI function
+  handleTypeChange = (event, typeValue) => {
+    this.setState({ typeValue });
   };
 
   render() {
@@ -55,7 +43,6 @@ class DrinkNavComponent extends Component {
     if (locationNav.includes(this.props.location.pathname)) {
       showNav = true;
     }
-    console.log(this.state.value);
     return (
       <DrinkNavWrapper>
         <DrinkHeader> Drinks </DrinkHeader>
@@ -63,8 +50,8 @@ class DrinkNavComponent extends Component {
         <DrinkTypesNav>
           <Tabs
             fullWidth
-            onChange={this.handleChange}
-            value={this.state.value}
+            onChange={this.handleTypeChange}
+            value={this.state.typeValue}
             classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
           >
             >
@@ -81,41 +68,49 @@ class DrinkNavComponent extends Component {
           </Tabs>
         </DrinkTypesNav>
 
-        {/** Restaurant Location Nav
-         * Shown based on above logic for showNav boolean
-         **/}
+        {/** Restaurant Location Nav - Shown based on above logic for showNav boolean
+         * * value is -1 because Digital Pour starts indexing at 1 instead of 0
+         * * and MaterialUI wasn't handling it well
+         **/
+        }
         <LocationsNav className={showNav ? "showNav" : null}>
-          {this.props.locations.map(location => (
-            <Mutation key={shortid.generate()} mutation={TOGGLE_LOCATION}>
-              {selectLocation => (
-                <DrinkNavItem
-                  onClick={() =>
-                    selectLocation({
-                      variables: { currentLocation: location.id }
-                    })
-                  }
-                  onMouseOver={() =>
-                    this.props.client.query({
-                      query: DP_TAPS,
-                      variables: { location: location.id }
-                    })
-                  }
-                  className={
-                    location.id === this.props.currentLocation ? "active" : ""
-                  }
-                >
-                  {location.label}
-                </DrinkNavItem>
-              )}
-            </Mutation>
-          ))}
+          <Tabs
+            fullWidth
+            value={this.props.currentLocation-1}
+            classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+          >
+            {this.props.locations.map(location => (
+              <Mutation key={shortid.generate()} mutation={TOGGLE_LOCATION}>
+                {selectLocation => (
+                  <Tab
+                    value={location.id-1}
+                    label={location.label}
+                    onClick={() =>
+                      selectLocation({
+                        variables: { currentLocation: location.id }
+                      })
+                    }
+                    classes={{ root: classes.tabRoot }}
+                    onMouseOver={() =>
+                      this.props.client.query({
+                        query: DP_TAPS,
+                        variables: { location: location.id }
+                      })
+                    }
+                  />
+
+                )}
+
+              </Mutation>
+            ))}
+          </Tabs>
         </LocationsNav>
       </DrinkNavWrapper>
     );
   }
 }
 
-export default withStyles(styles)(withRouter(DrinkNavComponent));
+export default withStyles(theme.materialUI)(withRouter(DrinkNavComponent));
 
 const DrinkNavWrapper = styled.div`
   display: flex;
