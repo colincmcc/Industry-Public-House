@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import MobileNavComponent from './MobileNavComponent'
 import MobileNavMenu from './MobileNavMenu'
-import './nav.css'
+import HeaderContainer from './header/HeaderContainer'
 
 
 // This container controls mobile menu (MobileNavMenu) state and nav state (NavComponent)
@@ -101,6 +101,7 @@ export default class NavContainer extends Component {
             if(error) return <p>Error</p>
             return (
             <div>
+              <HeaderContainer />
               <MobileNavComponent navIsShown={navIsShown} burgerToggle={this.burgerToggle} menuIsShown={menuIsShown} />
               <MobileNavMenu burgerToggle={this.burgerToggle} menuIsShown={menuIsShown} />
             </div>

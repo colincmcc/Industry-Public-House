@@ -71,19 +71,18 @@ class DrinkNavComponent extends Component {
         {/** Restaurant Location Nav - Shown based on above logic for showNav boolean
          * * value is -1 because Digital Pour starts indexing at 1 instead of 0
          * * and MaterialUI wasn't handling it well
-         **/
-        }
+         **/}
         <LocationsNav className={showNav ? "showNav" : null}>
           <Tabs
             fullWidth
-            value={this.props.currentLocation-1}
+            value={this.props.currentLocation - 1}
             classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
           >
             {this.props.locations.map(location => (
               <Mutation key={shortid.generate()} mutation={TOGGLE_LOCATION}>
                 {selectLocation => (
                   <Tab
-                    value={location.id-1}
+                    value={location.id - 1}
                     label={location.label}
                     onClick={() =>
                       selectLocation({
@@ -98,9 +97,7 @@ class DrinkNavComponent extends Component {
                       })
                     }
                   />
-
                 )}
-
               </Mutation>
             ))}
           </Tabs>
@@ -117,9 +114,11 @@ const DrinkNavWrapper = styled.div`
   flex-direction: column;
   text-align: center;
   width: 100vw;
+  padding-top: 56px;
 `;
 const DrinkHeader = styled.div`
   ${props => props.theme.components.heading};
+  padding-top: 2em;
 `;
 const DrinkNavItem = styled.div`
   display: flex;

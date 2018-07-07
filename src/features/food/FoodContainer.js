@@ -30,12 +30,40 @@ const FoodContainer = (props) => {
           name: food.acf.name,
           description: food.acf.description
         }))
+
         const ownProps = {
           client,
           selectedFoodType,
           selectedFoods
         }
-        return <FoodComponent {...ownProps} />
+        const navItems = [
+          { id: 0, label: "Brunch", link: "/Home/Food/Brunch", slug: "brunch" },
+          { id: 1, label: "Starters", link: "/Home/Food/Starters", slug: "starters" },
+          { id: 2, label: "Greens", link: "/Home/Food/Greens", slug: "greens" },
+          {
+            id: 3,
+            label: "Handhelds",
+            link: "/Home/Food/Handhelds",
+            slug: "handhelds"
+          },
+          { id: 4, label: "Burghers", link: "/Home/Food/Burghers", slug: "burghers" },
+          {
+            id: 5,
+            label: "Sustenance",
+            link: "/Home/Food/Sustenance",
+            slug: "sustenance"
+          }
+        ];
+        return (
+        <div>
+          <FoodNavComponent
+          client={client}
+          navItems={navItems}
+          />
+          <FoodDrinkComponent foods={selectedFoods} />
+
+        </div>
+      )
       }
     }
     </Query>
@@ -45,6 +73,15 @@ const FoodContainer = (props) => {
 export default FoodContainer
 export const WP_FOODS = gql`
   query Foods($selectedFoodType: String!){
+    allFoods{
+      id
+      acf{
+        price
+        food_type
+        name
+        description
+      }
+    }
     foodsBy(foodType: $selectedFoodType){
       id
       acf{
