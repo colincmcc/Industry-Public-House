@@ -19,7 +19,11 @@ import './common/assets/css/font-awesome.min.css'
 * GraphQL server is in the src/graphql folder.  Uses express-graphql and graphql-compose to construct server/schema
 * Redux still will control state.  Using graphql to control data fetching. Need to query redux state with graphql as well.
 */
-// TODO Design: update colors to include subtle theme color (blacks have tint of yellow)
+// TODO: PWA list
+// Lazy Loading
+// Code Splitting - probably via Webpack
+// Configure Service Worker
+//
 
 
 

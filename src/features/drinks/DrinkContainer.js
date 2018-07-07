@@ -16,7 +16,6 @@ const DrinkContainer = (props) => {
   const selectedDrinkType = props.selectedDrinkType
   const currentLocation = props.currentLocation
 
-  console.log(currentLocation)
     const locations = [
       {id: 1, label: "Lawrenceville", location: "lv"},
       {id: 2, label: "North Fayette", location: "nf"}

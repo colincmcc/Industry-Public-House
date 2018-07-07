@@ -1,0 +1,10 @@
+.classes-state-root {
+  /* ... */
+}
+.classes-state-root.disabled {
+  color: white;
+}
+
+.classes-state-root.selected {
+  color: #f6c120;
+}
