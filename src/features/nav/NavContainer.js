@@ -9,6 +9,7 @@ import HeaderContainer from './header/HeaderContainer'
 
 // This container controls mobile menu (MobileNavMenu) state and nav state (NavComponent)
 // Todo: load menu items from Wordpress gql
+// TODO: move scroll logic higher up
 
 export default class NavContainer extends Component {
   constructor(props) {

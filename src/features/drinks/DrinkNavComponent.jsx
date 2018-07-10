@@ -31,7 +31,33 @@ class DrinkNavComponent extends Component {
     };
   }
 
-  // event is needed for MaterialUI function
+  // Couldn't get Material-UI to use something outside of the index to update active tab
+  // had to manually assign active tab here in case there is a direct link to one of the routes
+  componentDidMount() {
+    const currentPath = this.props.location.pathname;
+    let currentTypeValue;
+    switch (currentPath) {
+      case "/Drink/Taps":
+        currentTypeValue = 1;
+        break;
+      case "/Drink/Cans":
+        currentTypeValue = 2;
+        break;
+      case "/Drink/Wine":
+        currentTypeValue = 3;
+        break;
+      case "/Drink/Premium":
+        currentTypeValue = 4;
+        break;
+      default:
+        break;
+    }
+    this.setState({
+      typeValue: currentTypeValue
+    });
+  }
+
+  // ? event may be needed for MaterialUI function
   handleTypeChange = (event, typeValue) => {
     this.setState({ typeValue });
   };
@@ -39,17 +65,20 @@ class DrinkNavComponent extends Component {
   render() {
     const { classes } = this.props;
     let showNav = false;
+
     const locationNav = ["/Drink/Taps", "/Drink/Premium", "/Drink/Cans"];
+
     if (locationNav.includes(this.props.location.pathname)) {
       showNav = true;
     }
+
     return (
       <DrinkNavWrapper>
-        <DrinkHeader> Drinks </DrinkHeader>
         {/** Drink Type Nav **/}
         <DrinkTypesNav>
           <Tabs
-            fullWidth
+            scrollable
+            scrollButtons="auto"
             onChange={this.handleTypeChange}
             value={this.state.typeValue}
             classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
@@ -113,29 +142,11 @@ const DrinkNavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 100vw;
+  width: 100%;
   padding-top: 56px;
-`;
-const DrinkHeader = styled.div`
-  ${props => props.theme.components.heading};
-  padding-top: 2em;
-`;
-const DrinkNavItem = styled.div`
-  display: flex;
-  margin: auto;
-  padding: 1em;
-  font-size: ${props => props.theme.fontSizes.medium.size};
-  color: ${props => props.theme.colors.whiteTheme};
-  cursor: pointer;
-  text-transform: uppercase;
-  &:hover {
-    color: ${props => props.theme.colors.lightTheme};
-  }
 `;
 const DrinkTypesNav = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  margin: auto;
   ${props => props.theme.fontStyles.subheading};
 `;
 const LocationsNav = styled.div`

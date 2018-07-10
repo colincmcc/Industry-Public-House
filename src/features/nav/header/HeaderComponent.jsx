@@ -16,7 +16,7 @@ export default HeaderComponent;
 const TopWrapper = styled.div`
   width: 100%;
   display: inline-flex;
-  position: fixed;
+  position: absolute;
   flex-wrap: wrap;
   height: 56px;
   padding: 0.625rem 0;

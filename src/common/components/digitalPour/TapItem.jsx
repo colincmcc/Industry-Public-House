@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import placeholder from "../../assets/img/Industry_fullLogo_sm_wht.svg";
 
+// ! Old - replaced with TapItemComponent
+
 /**
  * * Example GraphQL JSON response
 

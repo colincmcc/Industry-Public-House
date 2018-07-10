@@ -3,6 +3,7 @@ import shortid from "shortid";
 import styled from "styled-components";
 import TapItem from "./TapItem";
 
+// ! Old - replaced with TapListComponent
 // * Requires json tap list as props
 
 /**

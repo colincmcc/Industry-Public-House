@@ -27,20 +27,47 @@ class FoodNavComponent extends Component {
       foodValue: 0
     };
   }
-
+  componentDidMount() {
+    const selectedFoodType = this.props.selectedFoodType;
+    let currentFoodValue;
+    switch (selectedFoodType) {
+      case "starters":
+      currentFoodValue = 1;
+        break;
+      case "greens":
+      currentFoodValue = 2;
+        break;
+      case "handhelds":
+      currentFoodValue = 3;
+        break;
+      case "burghers":
+      currentFoodValue = 4;
+        break;
+      case "sustenance":
+      currentFoodValue = 5;
+      break;
+      case "brunch":
+      currentFoodValue = 0;
+      break;
+      default:
+        break;
+    }
+    console.log(selectedFoodType)
+    console.log(currentFoodValue)
+    this.setState({
+      foodValue: currentFoodValue
+    });
+  }
   // event is needed for MaterialUI function
   handleTypeChange = foodValue => {
     this.setState({ foodValue });
-    console.log("function foodvalue=" + foodValue);
   };
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.foodValue);
     return (
       <MenuNavWrapper>
         <Tabs
-          fullWidth
           scrollable
           scrollButtons="auto"
           onChange={this.handleTypeChange}

@@ -4,13 +4,29 @@ import gql from 'graphql-tag'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 import shortid from 'shortid'
+import { withStyles } from '@material-ui/core/styles';
 
-
-import TapList from "../../common/components/digitalPour/TapList";
+import Paper from '@material-ui/core/Paper';
 
 import LoadingComponent from '../../common/components/loading/LoadingComponent'
+import PageHeaderComponent from '../../common/components/page/PageHeaderComponent'
 import DrinkNavComponent from './DrinkNavComponent'
+import TapLIstComponent from '../../common/components/digitalPour/TapLIstComponent';
+import bgImg from '../../common/assets/img/drinks_banner.jpg';
 
+
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    margin: "2em",
+    backgroundColor: "#F4EDDC",
+    color: "#110C02"
+
+  },
+});
 // TODO: get drinkNavItems and locations from Wordpress
 
 const DrinkContainer = (props) => {
@@ -22,6 +38,8 @@ const DrinkContainer = (props) => {
       {id: 1, label: "Lawrenceville", location: "lv"},
       {id: 2, label: "North Fayette", location: "nf"}
     ]
+    const { classes } = props;
+
     return(
       <Query query={ DP_TAPS } variables={{location: currentLocation}}>
       {
@@ -31,7 +49,7 @@ const DrinkContainer = (props) => {
 
           const drinkNavItems = [
             {label: "Cocktails", slug: "Cocktails", component: "CocktailContainer", showLocation: false},
-            {label: "Taps", slug: "Taps", component: <TapList taps={data.allTaps} />, showLocation: true, props: ""},
+            {label: "Taps", slug: "Taps", component: <TapLIstComponent taps={data.allTaps} />, showLocation: true, props: ""},
             {label: "Cans", slug: "Cans", component: "CocktailContainer", showLocation: true},
             {label: "Wine", slug: "Wine", component: "CocktailContainer", showLocation: false},
             {label: "Premium", slug: "Premium", component: "CocktailContainer", showLocation: true},
@@ -40,15 +58,18 @@ const DrinkContainer = (props) => {
           return(
 
           <div>
+            <PageHeaderComponent bgImg={bgImg} heading="Drinks" subHeading="Featuring a rotating selection of American craft beer and modern cocktails crafted with seasonal ingredients." />
+
             <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
 
+            <Paper className={classes.root} elevation={2}>
             <Switch>
               {drinkNavItems.map((navItem) => (
                 <Route key={shortid.generate()} exact path={'/Drink/' + navItem.slug} render={() => navItem.component} />
               ))}
 
             </Switch>
-
+            </Paper>
           </div>
         )
         }
@@ -57,7 +78,7 @@ const DrinkContainer = (props) => {
     )
 }
 
-export default withRouter(DrinkContainer)
+export default withStyles(styles)(withRouter(DrinkContainer))
 
 export const DP_TAPS = gql`
   query Taps($location: Int!) {

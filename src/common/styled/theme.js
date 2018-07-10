@@ -1,16 +1,6 @@
 import styled, { css } from 'styled-components'
 
-const material = {
-  root: {
-    color: "#F4EDDC"
-  },
-  tabRoot: {
-    color: "#F4EDDC"
-  },
-  indicator: {
-    backgroundColor: "#F69C20"
-  }
-}
+
 const sizes = {
   large_up: 1800,
   desktop_up: 1200,
@@ -132,6 +122,23 @@ margin: auto;
 color: ${colors.whiteTheme};
 `
 
+}
+
+const material = {
+  root: {
+    color: "#F4EDDC"
+  },
+  tabRoot: {
+    color: "#F4EDDC"
+  },
+  tabsRoot: {
+    flexGrow: 1,
+    width: '100%',
+
+  },
+  indicator: {
+    backgroundColor: colors.lightAccent,
+  }
 }
 
 const theme = {

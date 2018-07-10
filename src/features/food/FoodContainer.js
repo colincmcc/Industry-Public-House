@@ -1,19 +1,35 @@
 import React from 'react'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
-
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 import FoodNavComponent from "./FoodNavComponent";
 import FoodDrinkComponent from '../common/FoodDrinkComponent'
 import FoodComponent from './FoodComponent'
+
+
+import LoadingComponent from '../../common/components/loading/LoadingComponent'
+import PageHeaderComponent from '../../common/components/page/PageHeaderComponent'
 
 // * Highest level Food Menu component
 
 // ! Currently usine a Query in HomeContainer local state as a variable here.  Eventually will move to @export to contain queries.
 // See here https://github.com/apollographql/apollo-link-state/issues/168
 
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    margin: "2em",
+    backgroundColor: "#F4EDDC",
+    color: "#110C02"
+
+  },
+});
 
 const FoodContainer = (props) => {
-
+  const { classes } = props;
   const selectedFoodType = props.selectedFoodType
 
   return (
@@ -31,11 +47,6 @@ const FoodContainer = (props) => {
           description: food.acf.description
         }))
 
-        const ownProps = {
-          client,
-          selectedFoodType,
-          selectedFoods
-        }
         const navItems = [
           { id: 0, label: "Brunch", link: "/Home/Food/Brunch", slug: "brunch" },
           { id: 1, label: "Starters", link: "/Home/Food/Starters", slug: "starters" },
@@ -55,12 +66,15 @@ const FoodContainer = (props) => {
           }
         ];
         return (
-        <div>
+        <div >
           <FoodNavComponent
           client={client}
           navItems={navItems}
+          selectedFoodType={selectedFoodType}
           />
-          <FoodDrinkComponent foods={selectedFoods} />
+          <Paper classes={{root: classes.root}}>
+            <FoodDrinkComponent foods={selectedFoods} />
+          </Paper>
 
         </div>
       )
@@ -70,7 +84,8 @@ const FoodContainer = (props) => {
   )
 
 }
-export default FoodContainer
+export default withStyles(styles)(FoodContainer)
+
 export const WP_FOODS = gql`
   query Foods($selectedFoodType: String!){
     allFoods{

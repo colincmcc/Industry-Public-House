@@ -33,6 +33,7 @@
     "lodash.merge": "^4.6.1",
     "mdi-material-ui": "^5.1.1",
     "node-fetch": "^2.1.2",
+    "prop-types": "^15.6.2",
     "pure-react-carousel": "^1.13.2",
     "react": "^16.4.1",
     "react-apollo": "^2.1.5",
