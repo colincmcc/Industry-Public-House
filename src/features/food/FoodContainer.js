@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import FoodNavComponent from "./FoodNavComponent";
 import FoodDrinkComponent from '../common/FoodDrinkComponent'
-import FoodComponent from './FoodComponent'
+import bgImg from '../../common/assets/img/burgher.jpg'
 
 
 import LoadingComponent from '../../common/components/loading/LoadingComponent'
@@ -67,6 +67,7 @@ const FoodContainer = (props) => {
         ];
         return (
         <div >
+          <PageHeaderComponent heading="Food" subHeading="" bgImg={bgImg} />
           <FoodNavComponent
           client={client}
           navItems={navItems}

@@ -150,6 +150,24 @@ const material = {
   },
   listItemPrimary:{
     fontSize: fontSizes.medium.size,
+  },
+  bottomNavRoot:{
+    width: "100%",
+    backgroundColor: colors.blackTheme
+  },
+  bottomActionRoot:{
+    color: colors.whiteTheme,
+
+    minWidth: "56px"
+
+  },
+  bottomActionSelected:{
+    color: colors.lightAccent + "!important"
+
+  },
+  buttonRoot: {
+    color: colors.lightAccent,
+    minWidth: "32px"
   }
 }
 

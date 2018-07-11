@@ -1,96 +1,106 @@
 import React, { Component } from "react";
-import styled, { withTheme } from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { withRouter, Link } from "react-router-dom";
 import shortid from "shortid";
-
-import { withStyles } from "@material-ui/core/styles";
 import { Menu, Food, Email } from "mdi-material-ui";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import { withStyles } from "@material-ui/core/styles";
 import LightbulbLogo from "../../common/components/lightbulb";
 import BeerGlass from "../../common/components/beerglass";
 
 import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
-import theme from "../../common/styled/theme"
+import theme from "../../common/styled/theme";
 
 class MobileNavComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "home"
+      value: 0
     };
   }
-  handleChange = value => {
-    this.setState({ value });
+  /** TODO: bottom nav needs to select the correct navItem when directly linked to a page
+  componentDidMount() {
+    var currentPath = this.props.location.toString().toLowerCase();
+    let currentLoc;
+    if (currentPath.startsWith("/drink")) {
+      currentLoc = 1;
+    } else if (currentPath.startsWith("/food")) {
+      currentLoc = 2;
+    } else if (currentPath.startsWith("/contact")) {
+      currentLoc = 3;
+    } else if (currentPath.startsWith("/menu")) {
+      currentLoc = 4;
+    }
+
+    this.setState({
+      value: currentLoc
+    });
+  }
+   */
+  handleChange = (event, value) => {
+    this.setState({ value: value });
   };
 
   render() {
     const { value } = this.state;
+    const { classes } = this.props;
 
     const bottomNavItems = [
       {
         link: "/Home",
         text: "Home",
         slug: "home",
-        icon: (
-          <LightbulbLogo
-            primaryColor={value === "home" ? theme.colors.theme : ""}
-            secondaryColor={value === "home" ? theme.colors.lightAccent : ""}
-          />
-        )
+        icon: <LightbulbLogo />
       },
       {
-        link: "/drink",
+        link: "/Drink",
         text: "Drinks",
         slug: "drinks",
         icon: <BeerGlass />
       },
-      { link: "/food", text: "Food", slug: "food", icon: <Food /> },
-      { link: "/", text: "Contact", slug: "contact", icon: <Email /> },
+      { link: "/Food", text: "Food", slug: "food", icon: <Food /> },
+      { link: "/Contact", text: "Contact", slug: "contact", icon: <Email /> },
       { link: "/", text: "Menu", slug: "menu", icon: <Menu /> }
     ];
-
     return (
       <NavWrapper className={this.props.navIsShown ? "" : "hide"}>
-        {bottomNavItems.map(navItem => (
-          <Link
-            key={shortid.generate()}
-            style={{ width: "20%" }}
-            to={navItem.link}
-          >
-            <ButtonBase >
-              <MobileItem
-                className={value === navItem.slug ? "selected" : ""}
-                onClick={() => this.handleChange(navItem.slug)}
-              >
-                <MobileSVG>{navItem.icon} </MobileSVG>
-                <MobileValue
-                  className={value === navItem.slug ? "selected" : ""}
-                >
-                  {navItem.text}{" "}
-                </MobileValue>
-              </MobileItem>
-              {/* <ReactSVG svgStyle={svgStyle} path={navItem.icon} /> */}
-            </ButtonBase>
-          </Link>
-        ))}
+        <BottomNavigation
+          value={value}
+          onChange={this.handleChange}
+          classes={{ root: classes.bottomNavRoot }}
+        >
+          {bottomNavItems.map((navItem, index) => (
+            <BottomNavigationAction
+              key={shortid.generate()}
+              label={navItem.text}
+              icon={navItem.icon}
+              component={Link}
+              to={navItem.link}
+              classes={{
+                root: classes.bottomActionRoot,
+                selected: classes.bottomActionSelected
+              }}
+            />
+          ))}
+        </BottomNavigation>
       </NavWrapper>
     );
   }
 }
 
-export default withTheme(MobileNavComponent);
+export default withStyles(theme.materialUI)(MobileNavComponent);
 
 // STYLED COMPONENTS
 const NavWrapper = styled.div`
   display: flex;
-  height: 56px;
   width: 100%;
+  height: 56px;
   z-index: 100;
   position: fixed;
   left: 0;
   bottom: 0;
   justify-content: center;
-  color: ${props => props.theme.colors.whiteTheme};
   background-color: ${props => props.theme.colors.blackTheme};
   border-top: 2px solid ${props => props.theme.colors.theme};
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);

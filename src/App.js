@@ -11,6 +11,7 @@ import NavContainer from './features/nav/NavContainer'
 import FooterContainer from './features/footer/FooterContainer'
 import FoodContainer from './features/food/FoodContainer'
 import DrinkContainer from './features/drinks/DrinkContainer'
+import ContactContainer from './features/contact/ContactContainer'
 
 
 
@@ -33,7 +34,8 @@ class App extends Component {
                   <Route exact path="/" component={HomeContainer} />
                   <Route path="/Home" component={HomeContainer} />
                   <Route  path="/Food" render={() => <FoodContainer selectedFoodType={data.selectedFoodType} />} />
-                  <Route  render={() => < DrinkContainer selectedDrinkType={data.selectedDrinkType} path="/Drink" currentLocation={data.currentLocation} />} />
+                  <Route path="/Drink"  render={() => < DrinkContainer selectedDrinkType={data.selectedDrinkType}  currentLocation={data.currentLocation} />} />
+                  <Route path="/Contact"  render={() => < ContactContainer currentLocation={data.currentLocation} />} />
               </Switch>
               )
             }
