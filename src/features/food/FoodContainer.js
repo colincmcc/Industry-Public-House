@@ -72,7 +72,7 @@ const FoodContainer = (props) => {
           navItems={navItems}
           selectedFoodType={selectedFoodType}
           />
-          <Paper classes={{root: classes.root}}>
+          <Paper elevation={2} classes={{root: classes.root}}>
             <FoodDrinkComponent foods={selectedFoods} />
           </Paper>
 

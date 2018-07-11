@@ -138,6 +138,18 @@ const material = {
   },
   indicator: {
     backgroundColor: colors.lightAccent,
+  },
+  listRoot: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: colors.whiteTheme,
+    color: colors.blackTheme
+  },
+  listSecondaryRoot: {
+    color: colors.blackTheme
+  },
+  listItemPrimary:{
+    fontSize: fontSizes.medium.size,
   }
 }
 

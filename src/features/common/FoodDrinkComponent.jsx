@@ -1,39 +1,58 @@
 import React from "react";
 import shortid from "shortid";
 import styled from "styled-components";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+
+import List from "@material-ui/core/List";
+import theme from "../../common/styled/theme";
+import { withStyles } from "@material-ui/core";
 
 const FoodDrinkComponent = props => {
+  const classes = props;
+  console.log(classes);
   return (
-    <FoodMenuWrapper>
-      {props.foods.map(foodItem => (
-        <FoodListing key={shortid.generate()}>
-          <FoodHeader>
-            <FoodTitle dangerouslySetInnerHTML={{ __html: foodItem.name }} />
-            <FoodPrice
-              dangerouslySetInnerHTML={{
-                __html: foodItem.price
-              }}
-            />
-          </FoodHeader>
-          <FoodDescription
-            dangerouslySetInnerHTML={{ __html: foodItem.description }}
-          />
-        </FoodListing>
-      ))}
+    <FoodMenuWrapper className={classes.paperRoot}>
+      <List>
+        {props.foods.map(foodItem => {
+          const primary = <FoodHeader>{foodItem.name}</FoodHeader>;
+          const secondary = (
+            <FoodDescription>{foodItem.description}</FoodDescription>
+          );
+          return (
+            <ListItem
+              classes={{ secondaryAction: classes.listSecondaryRoot }}
+              key={shortid.generate()}
+            >
+              <ListItemText
+                disableTypography={false}
+                primary={primary}
+                secondary={secondary}
+              />
+              <ListItemSecondaryAction
+                classes={{ root: classes.listSecondaryRoot }}
+              >
+                {"$" + foodItem.price}
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
+      </List>
     </FoodMenuWrapper>
   );
 };
 
-export default FoodDrinkComponent;
+export default withStyles(theme.materialUI)(FoodDrinkComponent);
 
 const FoodMenuWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  color: ${props => props.theme.colors.whiteTheme};
+  color: ${props => props.theme.colors.blackTheme};
   text-align: left;
-  padding: 0 2em;
+  font-size: ${props => props.theme.fontSizes.medium.size};
 `;
 
 const FoodListing = styled.div`
@@ -54,4 +73,7 @@ const FoodPrice = styled.div`
   display: flex;
   padding: 0 1em;
 `;
-const FoodDescription = styled.p``;
+const FoodDescription = styled.div`
+  opacity: 0.83;
+  flex-wrap: wrap;
+`;
