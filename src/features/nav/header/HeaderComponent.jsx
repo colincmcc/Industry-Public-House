@@ -80,4 +80,8 @@ const LogoImg = styled.img`
   padding: 3px;
 
   z-index: 5;
+  ${props => props.theme.media.tablet_portrait_up`
+    height: 60px;
+    max-width: 100%;
+  `};
 `;

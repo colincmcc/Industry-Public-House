@@ -32,28 +32,28 @@ class FoodNavComponent extends Component {
     let currentFoodValue;
     switch (selectedFoodType) {
       case "starters":
-      currentFoodValue = 1;
+        currentFoodValue = 1;
         break;
       case "greens":
-      currentFoodValue = 2;
+        currentFoodValue = 2;
         break;
       case "handhelds":
-      currentFoodValue = 3;
+        currentFoodValue = 3;
         break;
       case "burghers":
-      currentFoodValue = 4;
+        currentFoodValue = 4;
         break;
       case "sustenance":
-      currentFoodValue = 5;
-      break;
+        currentFoodValue = 5;
+        break;
       case "brunch":
-      currentFoodValue = 0;
-      break;
+        currentFoodValue = 0;
+        break;
       default:
         break;
     }
-    console.log(selectedFoodType)
-    console.log(currentFoodValue)
+    console.log(selectedFoodType);
+    console.log(currentFoodValue);
     this.setState({
       foodValue: currentFoodValue
     });
@@ -65,10 +65,13 @@ class FoodNavComponent extends Component {
 
   render() {
     const { classes } = this.props;
+    let scrollMenu = true;
+    window.innerWidth < 760 ? (scrollMenu = true) : (scrollMenu = false);
     return (
       <MenuNavWrapper>
         <Tabs
-          scrollable
+          centered
+          scrollable={scrollMenu ? true : false}
           scrollButtons="auto"
           onChange={this.handleTypeChange}
           value={this.state.foodValue}

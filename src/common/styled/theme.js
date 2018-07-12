@@ -131,9 +131,11 @@ const material = {
   tabRoot: {
     color: "#F4EDDC"
   },
+  tabSelected: {
+    color: colors.whiteTheme
+  },
   tabsRoot: {
     flexGrow: 1,
-    width: '100%',
 
   },
   indicator: {

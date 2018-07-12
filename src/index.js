@@ -20,6 +20,7 @@ import './common/assets/css/font-awesome.min.css'
 * Redux still will control state.  Using graphql to control data fetching. Need to query redux state with graphql as well.
 */
 // TODO: PWA list
+// * Move scroll logic higher up from Food & Drink Navs
 // Lazy Loading
 // Code Splitting - probably via Webpack
 // Configure Service Worker

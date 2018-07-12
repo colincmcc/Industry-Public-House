@@ -50,8 +50,10 @@ class DrinkNavComponent extends Component {
         currentTypeValue = 4;
         break;
       default:
+        currentTypeValue = 0;
         break;
     }
+    console.log(currentTypeValue);
     this.setState({
       typeValue: currentTypeValue
     });
@@ -65,19 +67,20 @@ class DrinkNavComponent extends Component {
   render() {
     const { classes } = this.props;
     let showNav = false;
-
+    let scrollMenu = true;
     const locationNav = ["/Drink/Taps", "/Drink/Premium", "/Drink/Cans"];
 
     if (locationNav.includes(this.props.location.pathname)) {
       showNav = true;
     }
-
+    window.innerwidth < 500 ? (scrollMenu = true) : (scrollMenu = false);
     return (
       <DrinkNavWrapper>
         {/** Drink Type Nav **/}
         <DrinkTypesNav>
           <Tabs
-            scrollable
+            centered
+            scrollable={scrollMenu ? true : false}
             scrollButtons="auto"
             onChange={this.handleTypeChange}
             value={this.state.typeValue}
@@ -91,7 +94,10 @@ class DrinkNavComponent extends Component {
                 label={navItem.label}
                 component={Link}
                 to={"/Drink/" + navItem.slug}
-                classes={{ root: classes.tabRoot }}
+                classes={{
+                  root: classes.tabRoot,
+                  selected: classes.tabSelected
+                }}
               />
             ))}
           </Tabs>

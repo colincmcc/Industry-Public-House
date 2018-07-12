@@ -7,7 +7,7 @@ import FoodNavComponent from "./FoodNavComponent";
 import FoodDrinkComponent from '../common/FoodDrinkComponent'
 import bgImg from '../../common/assets/img/burgher.jpg'
 
-
+import menu_bg from '../../common/assets/img/menu_background.jpg'
 import LoadingComponent from '../../common/components/loading/LoadingComponent'
 import PageHeaderComponent from '../../common/components/page/PageHeaderComponent'
 
@@ -23,6 +23,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: "2em",
     backgroundColor: "#F4EDDC",
+    backgroundImage: `url(${menu_bg})`,
     color: "#110C02"
 
   },
