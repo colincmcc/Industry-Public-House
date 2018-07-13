@@ -33,19 +33,37 @@ export const LocationTC = composeWithJson('Location', restApiResponse)
 export const LocationGraphQLType = LocationTC.getType()
 
 export function getLocationResolvers(baseUrl) {
-  return {
-    locationBy: {
-      type: LocationTC,
+
+  LocationTC.addResolver({
+    name: 'findOne',
+    type: LocationTC,
       args: {
         id: `Int!`
       },
-      resolve: (_, args) =>
-        fetch(`${baseUrl}/wp/v2/location/${args.id}`).then(r => r.json()),
+      resolve: async rp =>
+        fetch(`${baseUrl}/wp/v2/location/${rp.args.id}`).then(r => r.json()),
+  })
+
+  LocationTC.addResolver({
+    name: 'findMany',
+    type: [LocationTC],
+    args: {
+      ids: `[Int]`
     },
-    allLocations: {
-      type: [LocationTC],
-      resolve: () =>
-        fetch(`${baseUrl}/wp/v2/location/`).then(r => r.json()),
-    }
+    resolve: async (rp) => {
+      if(rp.args.ids != null){
+        const locationsList = []
+        rp.args.ids.forEach(id => {
+          const loc = fetch(`http://localhost:8080/wp-json/acf/v3/location/${id}`).then(r => r.json())
+          locationsList.push(loc)
+         });
+         return locationsList
+      }
+      return fetch(`${baseUrl}/wp/v2/location/`).then(r => r.json())},
+  })
+
+  return {
+    locationBy: LocationTC.getResolver('findOne'),
+    allLocations: LocationTC.getResolver('findMany')
   }
 }

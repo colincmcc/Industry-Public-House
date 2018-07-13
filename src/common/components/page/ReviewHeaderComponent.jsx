@@ -1,9 +1,12 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import theme from "../../styled/theme";
 
 const ReviewHeaderComponent = props => {
+  const { classes } = props;
+
   return (
     <PageHeaderWrapper bgImg={props.bgImg}>
       <BGOverlay />
@@ -22,8 +25,7 @@ const ReviewHeaderComponent = props => {
 
           <Button
             onClick={() => window.open(props.review.acf.source_link, "_blank")}
-            variant="outlined"
-            style={{ color: theme.colors.lightAccent }}
+            classes={{ root: classes.buttonRoot }}
           >
             Read Review
           </Button>
@@ -33,7 +35,7 @@ const ReviewHeaderComponent = props => {
   );
 };
 
-export default ReviewHeaderComponent;
+export default withStyles(theme.materialUI)(ReviewHeaderComponent);
 
 const PageHeaderWrapper = styled.section`
   display: flex;

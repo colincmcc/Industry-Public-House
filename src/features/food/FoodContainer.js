@@ -50,7 +50,6 @@ const FoodContainer = (props) => {
       slug: "sustenance"
     }
   ];
-
   return (
 
     <div >
@@ -60,7 +59,11 @@ const FoodContainer = (props) => {
           />
           <Paper elevation={2} classes={{root: classes.root}}>
           <Switch>
-
+          <Route
+            exact
+            path="/Food"
+            render={() => <FoodMenuComponent selectedFoodType="brunch" />}
+          />
             {navItems.map(navItem => (
               <Route key={shortid.generate()} exact path={navItem.link} render={() => <FoodMenuComponent selectedFoodType={navItem.slug} /> } />
             ))}

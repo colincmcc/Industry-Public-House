@@ -19,26 +19,31 @@ export const FoodGraphQLType = FoodTC.getType()
 
 export function getFoodResolvers(baseUrl){
 
-  return {
-    allFoods: {
-      type: [FoodTC],
-      resolve: () =>
-      fetch(`${baseUrl}/acf/v3/foods/`).then(r => r.json()),
+  FoodTC.addResolver({
+    name: 'findById',
+    type: FoodTC,
+    args: {
+      id: `Int!`
     },
-    foodsBy: {
-      type: [FoodTC],
-      args: {
-        foodType: `String`,
-        id: `Int`
-      },
-      resolve: (_, args) => {
-        if(args.foodType != null){
-          return fetch(`${baseUrl}/acf/v3/foods?food_type=${args.foodType}`).then(r => r.json())
-        }
-        if(args.id != null){
-          return fetch(`${baseUrl}/acf/v3/foods/${args.id}`).then(r => [r.json()])
-        }
-      }
+    resolve: async rp => fetch(`${baseUrl}/acf/v3/foods/${rp.args.id}`).then(r => r.json())
+  })
+
+  FoodTC.addResolver({
+    name: 'findMany',
+    type: [FoodTC],
+    args: {
+      foodType: `String`
+    },
+    resolve: async rp => {
+      if(rp.args.foodType != null) return fetch(`${baseUrl}/acf/v3/foods?food_type=${rp.args.foodType}`).then(r => r.json())
+
+      return fetch(`${baseUrl}/acf/v3/foods/`).then(r => r.json())
+
     }
+  })
+
+  return {
+    foodById: FoodTC.getResolver('findById'),
+    allFoods: FoodTC.getResolver('findMany')
   }
 }

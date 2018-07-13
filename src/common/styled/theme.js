@@ -173,7 +173,6 @@ const material = {
   },
   buttonColorPrimary: {
     color: colors.lightAccent,
-
   }
 }
 

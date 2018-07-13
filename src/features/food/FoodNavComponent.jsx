@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Mutation } from "react-apollo";
-import gql from "graphql-tag";
 import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
@@ -74,6 +72,7 @@ class FoodNavComponent extends Component {
         >
           {this.props.navItems.map((navItem, index) => (
             <Tab
+              key={shortid.generate()}
               label={navItem.label}
               value={index}
               classes={{

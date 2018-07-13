@@ -25,9 +25,7 @@ const PageHeaderContainer = (props) => {
         } else {
           relevantReviews = data.allReviews
         }
-        console.log(relevantReviews)
         const randomReview = relevantReviews[Math.floor(Math.random()*relevantReviews.length)]
-        console.log(randomReview)
         return <ReviewHeaderComponent {...props} review={randomReview} />
       }}
   </Query>

@@ -6,6 +6,7 @@ import { TapListTC } from './types/TapList'
 import { getCocktailResolvers } from './types/Cocktail'
 import { getLocationResolvers } from './types/Location'
 import { getReviewResolvers } from './types/Review'
+import { getCanResolvers } from './types/Cans'
 // * Individual type files have resolver definitions
 
 const baseUrl = 'http://localhost:8080/wp-json'
@@ -17,6 +18,7 @@ const foodResolvers = getFoodResolvers(baseUrl)
 const headerResolvers = getHeaderResolvers(baseUrl)
 const locationResolvers = getLocationResolvers(baseUrl)
 const reviewResolvers = getReviewResolvers(baseUrl)
+const canResolvers = getCanResolvers(baseUrl)
 
 GQC.rootQuery().addFields({
   ...cocktailResolvers,
@@ -24,6 +26,7 @@ GQC.rootQuery().addFields({
   ...headerResolvers,
   ...locationResolvers,
   ...reviewResolvers,
+  ...canResolvers,
   pageBy: {
     type: [HeaderTC],
     args: {

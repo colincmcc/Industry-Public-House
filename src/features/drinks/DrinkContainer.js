@@ -77,6 +77,38 @@ const DrinkContainer = (props) => {
 
 export default withStyles(styles)(withRouter(DrinkContainer))
 
+const WP_COCKTAILS = gql`
+{
+  allCocktails{
+    id
+  }
+}
+`
+
+const WP_CANS = gql`
+query Cans($location: Int!) {
+  allCans(location: $location){
+    id
+  }
+}
+`
+
+const WP_WINE= gql`
+{
+  allWine{
+    id
+  }
+}
+`
+
+const WP_PREMIUM = gql`
+query Premium($location: Int!) {
+  allCans(location: $location){
+    id
+  }
+}
+`
+
 export const DP_TAPS = gql`
   query Taps($location: Int!) {
     allTaps(location: $location) {

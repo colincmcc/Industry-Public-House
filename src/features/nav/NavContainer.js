@@ -69,7 +69,6 @@ export default class NavContainer extends Component {
       if (!ticking) {
 
         window.requestAnimationFrame(function() {
-          console.log(last_known_scroll_position)
           toggleBottomBar(last_known_scroll_position);
           ticking = false;
         });

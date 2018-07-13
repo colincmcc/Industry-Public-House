@@ -2,7 +2,6 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import FoodDrinkComponent from "../common/FoodDrinkComponent";
-import { select } from "async";
 
 const FoodMenuComponent = props => {
   const { selectedFoodType } = props;
@@ -10,8 +9,6 @@ const FoodMenuComponent = props => {
   return (
     <Query query={WP_FOODS} variables={{ selectedFoodType }}>
       {({ loading, error, data, client }) => {
-        console.log(data);
-
         if (loading)
           return (
             <FoodDrinkComponent
@@ -37,7 +34,6 @@ const FoodMenuComponent = props => {
           name: food.acf.name,
           description: food.acf.description
         }));
-        console.log(selectedFoods);
         return (
           <FoodDrinkComponent
             menuItems={selectedFoods}
