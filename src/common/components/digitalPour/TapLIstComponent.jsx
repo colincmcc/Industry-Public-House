@@ -4,7 +4,7 @@ import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
 import TapItemComponent from "./TapItemComponent";
 
-// TODO : must be a better way to handle this logic
+// TODO : must be a better way to handle the json response based on type of product (mead, beer, cider)
 
 /**
  * * Example GraphQL JSON response

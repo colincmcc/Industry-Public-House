@@ -3,7 +3,6 @@ import shortid from "shortid";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { Link } from "react-router-dom";
@@ -55,7 +54,6 @@ class DrinkNavComponent extends Component {
         currentTypeValue = 0;
         break;
     }
-    console.log(currentTypeValue);
     this.setState({
       typeValue: currentTypeValue
     });
@@ -77,12 +75,16 @@ class DrinkNavComponent extends Component {
     const { classes } = this.props;
     let showNav = false;
     let scrollMenu = true;
-    const locationNav = ["/Drink/Taps", "/Drink/Premium", "/Drink/Cans"];
 
+    // If at one of these locations, show location nav
+    const locationNav = ["/Drink/Taps", "/Drink/Premium", "/Drink/Cans"];
     if (locationNav.includes(this.props.location.pathname)) {
       showNav = true;
     }
+
+    // If screen is smaller than this, start scrolling nav
     window.innerwidth < 500 ? (scrollMenu = true) : (scrollMenu = false);
+
     return (
       <DrinkNavWrapper>
         {/** Drink Type Nav **/}
@@ -98,7 +100,7 @@ class DrinkNavComponent extends Component {
             >
             {this.props.navItems.map((navItem, index) => (
               <Tab
-                key={navItem.slug}
+                key={shortid.generate()}
                 value={index}
                 label={navItem.label}
                 component={Link}
@@ -133,7 +135,10 @@ class DrinkNavComponent extends Component {
                         variables: { currentLocation: location.id }
                       })
                     }
-                    classes={{ root: classes.tabRoot }}
+                    classes={{
+                      root: classes.tabRoot,
+                      selected: classes.tabSelected
+                    }}
                     onMouseOver={() =>
                       this.props.client.query({
                         query: DP_TAPS,

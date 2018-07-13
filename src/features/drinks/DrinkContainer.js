@@ -8,12 +8,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 
-import LoadingComponent from '../../common/components/loading/LoadingComponent'
 import PageHeaderContainer from '../../common/components/page/PageHeaderContainer'
 import DrinkNavComponent from './DrinkNavComponent'
 import TapLIstComponent from '../../common/components/digitalPour/TapLIstComponent';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
-
+import FoodDrinkComponent from '../common/FoodDrinkComponent'
 
 
 const styles = theme => ({
@@ -44,15 +43,13 @@ const DrinkContainer = (props) => {
       <Query query={ DP_TAPS } variables={{location: currentLocation}}>
       {
         ({loading, error, data, client}) =>{
-          if(loading) return <p>Loading...</p>
-          if(error) return <p>Error</p>
 
           const drinkNavItems = [
-            {label: "Cocktails", slug: "Cocktails", component: "CocktailContainer", showLocation: false},
-            {label: "Taps", slug: "Taps", component: <TapLIstComponent taps={data.allTaps} />, showLocation: true, props: ""},
-            {label: "Cans", slug: "Cans", component: "CocktailContainer", showLocation: true},
-            {label: "Wine", slug: "Wine", component: "CocktailContainer", showLocation: false},
-            {label: "Premium", slug: "Premium", component: "CocktailContainer", showLocation: true},
+            {label: "Cocktails", slug: "Cocktails", component: <FoodDrinkComponent menuItems={[]} loading={loading} error={error} />, showLocation: false},
+            {label: "Taps", slug: "Taps", component: <TapLIstComponent taps={data.allTaps} loading={loading} error={error} />, showLocation: true, props: ""},
+            {label: "Cans", slug: "Cans", component: <FoodDrinkComponent menuItems={[]}  loading={loading} error={error} />, showLocation: true},
+            {label: "Wine", slug: "Wine", component: <FoodDrinkComponent menuItems={[]}  loading={loading} error={error} />, showLocation: false},
+            {label: "Premium", slug: "Premium", component: <FoodDrinkComponent menuItems={[]}  loading={loading} error={error} />, showLocation: true},
           ]
 
           return(

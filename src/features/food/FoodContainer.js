@@ -2,16 +2,17 @@ import React from 'react'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import Paper from '@material-ui/core/Paper';
+import { Switch, Route } from 'react-router-dom'
+import shortid from 'shortid'
 import { withStyles } from '@material-ui/core/styles';
 import FoodNavComponent from "./FoodNavComponent";
 import FoodDrinkComponent from '../common/FoodDrinkComponent'
 import bgImg from '../../common/assets/img/burgher.jpg'
 
-import menu_bg from '../../common/assets/img/menu_background.jpg'
-import LoadingComponent from '../../common/components/loading/LoadingComponent'
+import foodBG from '../../common/assets/img/menu_background.jpg'
 import PageHeaderContainer from '../../common/components/page/PageHeaderContainer'
+import FoodMenuComponent from './FoodMenuComponent';
 
-// * Highest level Food Menu component
 
 // ! Currently usine a Query in HomeContainer local state as a variable here.  Eventually will move to @export to contain queries.
 // See here https://github.com/apollographql/apollo-link-state/issues/168
@@ -23,90 +24,54 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: "2em",
     backgroundColor: "#F4EDDC",
-    backgroundImage: `url(${menu_bg})`,
+    backgroundImage: `url(${foodBG})`,
     color: "#110C02"
 
   },
 });
 
 const FoodContainer = (props) => {
-  const { classes } = props;
-  const selectedFoodType = props.selectedFoodType
+  const { classes, selectedFoodType } = props;
+  const navItems = [
+    { id: 0, label: "Brunch", link: "/Food/Brunch", slug: "brunch" },
+    { id: 1, label: "Starters", link: "/Food/Starters", slug: "starters" },
+    { id: 2, label: "Greens", link: "/Food/Greens", slug: "greens" },
+    {
+      id: 3,
+      label: "Handhelds",
+      link: "/Food/Handhelds",
+      slug: "handhelds"
+    },
+    { id: 4, label: "Burghers", link: "/Food/Burghers", slug: "burghers" },
+    {
+      id: 5,
+      label: "Sustenance",
+      link: "/Food/Sustenance",
+      slug: "sustenance"
+    }
+  ];
 
   return (
-    <Query query={WP_FOODS} variables={{selectedFoodType}}>
-    {
-      ({ loading, error, data, client }) => {
-        if(loading) return <p>Loading...</p>
-        if(error) return <p>Error</p>
 
-        const selectedFoods = data.foodsBy.map( food => ({
-          id: food.id,
-          price: food.acf.price,
-          type: food.acf.type,
-          name: food.acf.name,
-          description: food.acf.description
-        }))
-
-        const navItems = [
-          { id: 0, label: "Brunch", link: "/Home/Food/Brunch", slug: "brunch" },
-          { id: 1, label: "Starters", link: "/Home/Food/Starters", slug: "starters" },
-          { id: 2, label: "Greens", link: "/Home/Food/Greens", slug: "greens" },
-          {
-            id: 3,
-            label: "Handhelds",
-            link: "/Home/Food/Handhelds",
-            slug: "handhelds"
-          },
-          { id: 4, label: "Burghers", link: "/Home/Food/Burghers", slug: "burghers" },
-          {
-            id: 5,
-            label: "Sustenance",
-            link: "/Home/Food/Sustenance",
-            slug: "sustenance"
-          }
-        ];
-        return (
-        <div >
+    <div >
           <PageHeaderContainer heading="Food" bgImg={bgImg} review={true} />
           <FoodNavComponent
-          client={client}
           navItems={navItems}
-          selectedFoodType={selectedFoodType}
           />
           <Paper elevation={2} classes={{root: classes.root}}>
-            <FoodDrinkComponent foods={selectedFoods} />
+          <Switch>
+
+            {navItems.map(navItem => (
+              <Route key={shortid.generate()} exact path={navItem.link} render={() => <FoodMenuComponent selectedFoodType={navItem.slug} /> } />
+            ))}
+
+
+          </Switch>
           </Paper>
 
         </div>
-      )
-      }
-    }
-    </Query>
+
   )
 
 }
 export default withStyles(styles)(FoodContainer)
-
-export const WP_FOODS = gql`
-  query Foods($selectedFoodType: String!){
-    allFoods{
-      id
-      acf{
-        price
-        food_type
-        name
-        description
-      }
-    }
-    foodsBy(foodType: $selectedFoodType){
-      id
-      acf{
-        price
-        food_type
-        name
-        description
-      }
-    }
-  }
-`

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {ApolloProvider} from 'react-apollo'
-import client from './data/client'
+import { CachePersistor } from 'apollo-cache-persist';
 import { Switch, Route } from 'react-router-dom'
 import styled, {ThemeProvider} from 'styled-components'
 import { Query } from "react-apollo";
 import gql from 'graphql-tag'
 import theme from './common/styled/theme'
+import {persistor, apolloClient, cacheStorage} from './data/client'
 
 import LoadingComponent from './common/components/loading/LoadingComponent'
 import HomeContainer from './features/home/HomeContainer'
@@ -16,6 +17,8 @@ import DrinkContainer from './features/drinks/DrinkContainer'
 import ContactContainer from './features/contact/ContactContainer'
 
 
+const SCHEMA_VERSION = '1';
+const SCHEMA_VERSION_KEY = 'apollo-schema-version'
 
 class App extends Component {
 
@@ -26,21 +29,26 @@ class App extends Component {
       loaded: false
     };
   }
-  componentDidMount(){
-    this.getClientStatus()
+  async componentDidMount(){
+    const currentVersion = await cacheStorage.getItem(SCHEMA_VERSION_KEY);
+    if (currentVersion === SCHEMA_VERSION) {
+      // If the current version matches the latest version,
+      // we're good to go and can restore the cache.
+      await persistor.purge();
+    } else {
+      // Otherwise, we'll want to purge the outdated persisted cache
+      // and mark ourselves as having updated to the latest version.
+      await persistor.purge();
+      await cacheStorage.setItem(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
+    }
+
+    this.setState({
+      client: apolloClient,
+      loaded: true,
+    });
   }
 
-  getClientStatus(){
-    try {
-      const client = await getClient
-     } catch (error) {
-       console.error('Error restoring Apollo cache', error);
-     }
-     this.setState({
-       client,
-       loaded: true
-     })
-  }
+
   render() {
     const {client, loaded} = this.state
 

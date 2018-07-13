@@ -132,7 +132,7 @@ const material = {
     color: "#F4EDDC"
   },
   tabSelected: {
-    color: colors.whiteTheme
+    color: colors.lightAccent
   },
   tabsRoot: {
     flexGrow: 1,
@@ -144,7 +144,6 @@ const material = {
   listRoot: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: colors.whiteTheme,
     color: colors.blackTheme
   },
   listSecondaryRoot: {

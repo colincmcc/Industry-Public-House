@@ -8,8 +8,8 @@ const TapContainer = () => {
   return (
     <Query query={DP_TAPS} variables={{ location: 1 }}>
       {({ loading, error, data, client }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error</p>;
+        if (loading) return <TapList taps={[]} loading />;
+        if (error) return <TapList taps={[]} error />;
 
         return <TapList taps={data.allTaps} />;
       }}

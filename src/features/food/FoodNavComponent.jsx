@@ -3,9 +3,11 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import { WP_FOODS } from "./FoodContainer";
+import { WP_FOODS } from "./FoodMenuComponent";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -14,59 +16,52 @@ import theme from "../../common/styled/theme";
 
 // * Prefetches food items on mouse hover for faster loading
 
-const TOGGLE_FOODTYPE = gql`
-  mutation selectFoodType($selectedFoodType: String!) {
-    selectFoodType(selectedFoodType: $selectedFoodType) @client
-  }
-`;
-
 class FoodNavComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      foodValue: 0
+      typeValue: 0
     };
   }
   componentDidMount() {
-    const selectedFoodType = this.props.selectedFoodType;
-    let currentFoodValue;
-    switch (selectedFoodType) {
-      case "starters":
-        currentFoodValue = 1;
+    const currentPath = this.props.location.pathname;
+    let currentTypeValue;
+    switch (currentPath) {
+      case "/Food/Starters":
+        currentTypeValue = 1;
         break;
-      case "greens":
-        currentFoodValue = 2;
+      case "/Food/Greens":
+        currentTypeValue = 2;
         break;
-      case "handhelds":
-        currentFoodValue = 3;
+      case "/Food/Handheldsh":
+        currentTypeValue = 3;
         break;
-      case "burghers":
-        currentFoodValue = 4;
+      case "/Food/Burghers":
+        currentTypeValue = 4;
         break;
-      case "sustenance":
-        currentFoodValue = 5;
-        break;
-      case "brunch":
-        currentFoodValue = 0;
+      case "/Food/Sustenance":
+        currentTypeValue = 5;
         break;
       default:
+        currentTypeValue = 0;
         break;
     }
-    console.log(selectedFoodType);
-    console.log(currentFoodValue);
+
     this.setState({
-      foodValue: currentFoodValue
+      typeValue: currentTypeValue
     });
   }
-  // event is needed for MaterialUI function
-  handleTypeChange = foodValue => {
-    this.setState({ foodValue });
+
+  // ? event may be needed for MaterialUI function
+  handleTypeChange = (event, typeValue) => {
+    this.setState({ typeValue });
   };
 
   render() {
     const { classes } = this.props;
     let scrollMenu = true;
     window.innerWidth < 760 ? (scrollMenu = true) : (scrollMenu = false);
+
     return (
       <MenuNavWrapper>
         <Tabs
@@ -74,32 +69,20 @@ class FoodNavComponent extends Component {
           scrollable={scrollMenu ? true : false}
           scrollButtons="auto"
           onChange={this.handleTypeChange}
-          value={this.state.foodValue}
+          value={this.state.typeValue}
           classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
         >
           {this.props.navItems.map((navItem, index) => (
-            <Mutation key={shortid.generate()} mutation={TOGGLE_FOODTYPE}>
-              {selectFoodType => (
-                <Tab
-                  label={navItem.label}
-                  value={index}
-                  onClick={() => {
-                    selectFoodType({
-                      variables: { selectedFoodType: navItem.slug }
-                    });
-                    this.handleTypeChange(index);
-                    console.log("inner index = " + index);
-                  }}
-                  classes={{ root: classes.tabRoot }}
-                  onMouseOver={() =>
-                    this.props.client.query({
-                      query: WP_FOODS,
-                      variables: { selectedFoodType: navItem.slug }
-                    })
-                  }
-                />
-              )}
-            </Mutation>
+            <Tab
+              label={navItem.label}
+              value={index}
+              classes={{
+                root: classes.tabRoot,
+                selected: classes.tabSelected
+              }}
+              component={Link}
+              to={navItem.link}
+            />
           ))}
         </Tabs>
       </MenuNavWrapper>
@@ -107,7 +90,7 @@ class FoodNavComponent extends Component {
   }
 }
 
-export default withStyles(theme.materialUI)(FoodNavComponent);
+export default withStyles(theme.materialUI)(withRouter(FoodNavComponent));
 
 const MenuNavWrapper = styled.div`
   display: flex;

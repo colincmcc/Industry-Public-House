@@ -8,17 +8,19 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import List from "@material-ui/core/List";
 import theme from "../../common/styled/theme";
 import { withStyles } from "@material-ui/core";
+import LoadingComponent from "../../common/components/loading/LoadingComponent";
 
 const FoodDrinkComponent = props => {
-  const classes = props;
-  console.log(classes);
-  return (
-    <FoodMenuWrapper className={classes.paperRoot}>
-      <List>
-        {props.foods.map(foodItem => {
-          // * Need to map them into styled components in order to apply styles correctly.  Material-UI still difficult to override styles
-          // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
+  const { classes } = props;
 
+  if (props.loading) return <LoadingComponent />;
+  if (props.error) return <LoadingComponent />;
+
+  return (
+    <FoodMenuWrapper>
+      <List className={classes.listRoot}>
+        {props.menuItems.map(foodItem => {
+          // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
           const primary = <FoodHeader>{foodItem.name}</FoodHeader>;
           const secondary = (
             <FoodDescription
@@ -27,11 +29,7 @@ const FoodDrinkComponent = props => {
           );
           return (
             <ListItem divider key={shortid.generate()}>
-              <ListItemText
-                disableTypography={false}
-                primary={primary}
-                secondary={secondary}
-              />
+              <ListItemText primary={primary} secondary={secondary} />
               <ListItemSecondaryAction
                 classes={{ root: classes.listSecondaryRoot }}
               >

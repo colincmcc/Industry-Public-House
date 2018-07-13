@@ -14,23 +14,20 @@ import merge from 'lodash.merge'
 import homeResolvers from './resolvers/homeResolvers'
 import appResolvers from './resolvers/appResolvers'
 
-// TODO Advanced: set network/graphql error response
+// TODO: set network/graphql error response
 // TODO: complete typeDefs
 
 
 
-const SCHEMA_VERSION = '1';
-const SCHEMA_VERSION_KEY = 'apollo-schema-version'
-const cacheStorage = window.localStorage
+export const cacheStorage = window.localStorage
 
-const getClient = async () => {
 
   /**
  * * Cache and persistence setup
  * * persisted data is cleared if there is a new Schema version
 */
   const cache = new InMemoryCache({
-    cacheResolvers: {
+    cacheRedirects: {
       Query: {
         foodsBy: (_, { id }) => toIdValue(cache.config.dataIdFromObject({ __typename: 'Food', id })),
       },
@@ -40,23 +37,11 @@ const getClient = async () => {
   });
 
 
-  const persistor = new CachePersistor({
+  export const persistor = new CachePersistor({
     cache,
     storage: cacheStorage,
   });
 
-  const currentVersion = await cacheStorage.getItem(SCHEMA_VERSION_KEY);
-
-  if (currentVersion === SCHEMA_VERSION) {
-    // If the current version matches the latest version,
-    // we're good to go and can restore the cache.
-    await persistor.restore();
-  } else {
-    // Otherwise, we'll want to purge the outdated persisted cache
-    // and mark ourselves as having updated to the latest version.
-    await persistor.purge();
-    await cacheStorage.setItem(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
-  }
 
   /**
    * * Client setup
@@ -78,7 +63,7 @@ const getClient = async () => {
 
   `;
 
-  const client = new ApolloClient({
+  export const apolloClient = new ApolloClient({
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
@@ -101,7 +86,5 @@ const getClient = async () => {
     cache
   });
 
-  return client
-}
 
-export default getClient
+

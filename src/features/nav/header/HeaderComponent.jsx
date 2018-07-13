@@ -10,7 +10,6 @@ import TripAdvisor from "../../../common/components/tripadvisor";
 
 const HeaderComponent = props => {
   const classes = props;
-  console.log(classes.buttonColorPrimary);
   return (
     <TopWrapper>
       <TopNav>
