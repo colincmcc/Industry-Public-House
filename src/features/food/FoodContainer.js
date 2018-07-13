@@ -9,7 +9,7 @@ import bgImg from '../../common/assets/img/burgher.jpg'
 
 
 import LoadingComponent from '../../common/components/loading/LoadingComponent'
-import PageHeaderComponent from '../../common/components/page/PageHeaderComponent'
+import PageHeaderContainer from '../../common/components/page/PageHeaderContainer'
 
 // * Highest level Food Menu component
 
@@ -67,7 +67,7 @@ const FoodContainer = (props) => {
         ];
         return (
         <div >
-          <PageHeaderComponent heading="Food" subHeading="" bgImg={bgImg} />
+          <PageHeaderContainer heading="Food" bgImg={bgImg} review={true} />
           <FoodNavComponent
           client={client}
           navItems={navItems}

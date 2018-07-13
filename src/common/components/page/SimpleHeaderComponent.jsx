@@ -1,19 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-const PageHeaderComponent = props => {
+import Button from "@material-ui/core/Button";
+import theme from "../../styled/theme";
+
+const SimpleHeaderComponent = props => {
   return (
     <PageHeaderWrapper bgImg={props.bgImg}>
       <BGOverlay />
       <PageHeadContent>
         <PageHeading>{props.heading} </PageHeading>
-        <PageSubHeading>{props.subHeading} </PageSubHeading>
+
+        <PageSubHeading>{props.subHeading}</PageSubHeading>
       </PageHeadContent>
     </PageHeaderWrapper>
   );
 };
 
-export default PageHeaderComponent;
+export default SimpleHeaderComponent;
 
 const PageHeaderWrapper = styled.section`
   display: flex;
@@ -46,7 +50,7 @@ const PageHeading = styled.div`
 const PageSubHeading = styled.div`
   ${props => props.theme.components.subheading};
   color: ${props => props.theme.colors.whiteTheme};
-
+  cursor: pointer;
   padding: 3em;
   max-width: 500px;
 `;

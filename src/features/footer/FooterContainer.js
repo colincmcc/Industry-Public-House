@@ -6,18 +6,21 @@ import FooterComponent from './FooterComponent'
 
 const WP_FOOTER = gql`
 {
-  headers{
-    id
-  }
+ allLocations{
+   id
+ }
 }
 `
 const FooterContainer = () => {
   return (
     <Query query={WP_FOOTER}>
-      {(loading, error, data) => (
-        <FooterComponent />
+      {({loading, error, data}) => {
 
-      )}
+        console.log(data)
+        return <FooterComponent />
+
+
+      }}
 
     </Query>
   )

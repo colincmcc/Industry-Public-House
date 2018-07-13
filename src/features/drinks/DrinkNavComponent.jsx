@@ -13,8 +13,9 @@ import gql from "graphql-tag";
 import { DP_TAPS } from "./DrinkContainer";
 
 // * Prefetches drink items on mouse hover for faster loading. Desktop only
-// TODO figure out a better method for organizing theme between styled components and material ui
+
 // Note: you cannot pass a Styled Component theme prop as the MaterialUI's classes object (e.g. classes:{{root: props.theme.materialUI.root}}), when using the withTheme higher component
+
 // TODO: work out how the withStyles higher component uses the object passed to it and write a function to use the Styled Component theme instead
 
 const TOGGLE_LOCATION = gql`
@@ -29,6 +30,7 @@ class DrinkNavComponent extends Component {
     this.state = {
       typeValue: 0
     };
+    this.fetchTreeData = this.fetchTreeData.bind(this);
   }
 
   // Couldn't get Material-UI to use something outside of the index to update active tab
@@ -54,6 +56,13 @@ class DrinkNavComponent extends Component {
     }
     this.setState({
       typeValue: currentTypeValue
+    });
+    this.fetchTreeData();
+  }
+  fetchTreeData() {
+    this.props.client.query({
+      query: DP_TAPS,
+      variables: { location: 2 }
     });
   }
 
