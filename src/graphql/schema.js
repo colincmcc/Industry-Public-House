@@ -1,55 +1,29 @@
 import { GQC } from 'graphql-compose';
 import fetch from 'node-fetch';
-import {FoodTC} from './types/Food'
-import { HeaderTC } from './types/Header'
+import {getFoodResolvers} from './types/Food'
+import { getHeaderResolvers, HeaderTC } from './types/Header'
 import { TapListTC } from './types/TapList'
-
-
-// * Tried to write this to make it as expandable as possible
+import { getCocktailResolvers } from './types/Cocktail'
+import { getLocationResolvers } from './types/Location'
+import { getReviewResolvers } from './types/Review'
+// * Individual type files have resolver definitions
 
 const baseUrl = 'http://localhost:8080/wp-json'
 const digitalPourUrl = 'https://server.digitalpour.com/DashboardServer/api/v3/MenuItems/54640e97b3b6f60d0887afaa'
 const digitalPourKey = '54948fb0b3b6f60a54b37b16'
-const locations = {
-  iphLV: 1,
-  iphNF: 2
-}
-// Todo: move individual resolvers into type declarations
+
+const cocktailResolvers = getCocktailResolvers(baseUrl)
+const foodResolvers = getFoodResolvers(baseUrl)
+const headerResolvers = getHeaderResolvers(baseUrl)
+const locationResolvers = getLocationResolvers(baseUrl)
+const reviewResolvers = getReviewResolvers(baseUrl)
 
 GQC.rootQuery().addFields({
-  allFoods: {
-    type: [FoodTC],
-    resolve: () =>
-    fetch(`${baseUrl}/acf/v3/foods/`).then(r => r.json()),
-  },
-  foodsBy: {
-    type: [FoodTC],
-    args: {
-      foodType: `String`,
-      id: `Int`
-    },
-    resolve: (_, args) => {
-      if(args.foodType != null){
-        return fetch(`${baseUrl}/acf/v3/foods?food_type=${args.foodType}`).then(r => r.json())
-      }
-      if(args.id != null){
-        return fetch(`${baseUrl}/acf/v3/foods/${args.id}`).then(r => [r.json()])
-      }
-    }
-  },
-  headerBy: {
-    type: HeaderTC,
-    args: {
-      id: `Int!`
-    },
-    resolve: (_, args) =>
-      fetch(`${baseUrl}/wp/v2/headers/${args.id}`).then(r => r.json()),
-  },
-  allHeaders: {
-    type: [HeaderTC],
-    resolve: () =>
-      fetch(`${baseUrl}/wp/v2/headers/`).then(r => r.json()),
-  },
+  ...cocktailResolvers,
+  ...foodResolvers,
+  ...headerResolvers,
+  ...locationResolvers,
+  ...reviewResolvers,
   pageBy: {
     type: [HeaderTC],
     args: {

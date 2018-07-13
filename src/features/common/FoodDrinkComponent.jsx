@@ -16,15 +16,17 @@ const FoodDrinkComponent = props => {
     <FoodMenuWrapper className={classes.paperRoot}>
       <List>
         {props.foods.map(foodItem => {
+          // * Need to map them into styled components in order to apply styles correctly.  Material-UI still difficult to override styles
+          // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
+
           const primary = <FoodHeader>{foodItem.name}</FoodHeader>;
           const secondary = (
-            <FoodDescription>{foodItem.description}</FoodDescription>
+            <FoodDescription
+              dangerouslySetInnerHTML={{ __html: foodItem.description }}
+            />
           );
           return (
-            <ListItem
-              classes={{ secondaryAction: classes.listSecondaryRoot }}
-              key={shortid.generate()}
-            >
+            <ListItem divider key={shortid.generate()}>
               <ListItemText
                 disableTypography={false}
                 primary={primary}
@@ -73,7 +75,7 @@ const FoodPrice = styled.div`
   display: flex;
   padding: 0 1em;
 `;
-const FoodDescription = styled.div`
+const FoodDescription = styled.span`
   opacity: 0.83;
   flex-wrap: wrap;
 `;

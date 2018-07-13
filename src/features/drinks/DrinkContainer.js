@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
 import LoadingComponent from '../../common/components/loading/LoadingComponent'
-import PageHeaderComponent from '../../common/components/page/PageHeaderComponent'
+import PageHeaderContainer from '../../common/components/page/PageHeaderContainer'
 import DrinkNavComponent from './DrinkNavComponent'
 import TapLIstComponent from '../../common/components/digitalPour/TapLIstComponent';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
@@ -58,7 +58,7 @@ const DrinkContainer = (props) => {
           return(
 
           <div>
-            <PageHeaderComponent bgImg={bgImg} heading="Drinks" subHeading="Featuring a rotating selection of American craft beer and modern cocktails crafted with seasonal ingredients." />
+            <PageHeaderContainer bgImg={bgImg} heading="Drinks" review={true} />
 
             <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
 

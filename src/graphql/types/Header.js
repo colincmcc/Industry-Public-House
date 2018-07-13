@@ -1,4 +1,5 @@
 import composeWithJson from 'graphql-compose-json'
+import fetch from 'node-fetch';
 
 
 const restApiResponse = {
@@ -24,3 +25,20 @@ const restApiResponse = {
 export const HeaderTC = composeWithJson('Header', restApiResponse)
 export const HeaderGraphQLType = HeaderTC.getType()
 
+export function getHeaderResolvers(baseUrl){
+    return {
+        headerBy: {
+            type: HeaderTC,
+            args: {
+              id: `Int!`
+            },
+            resolve: (_, args) =>
+              fetch(`${baseUrl}/wp/v2/headers/${args.id}`).then(r => r.json()),
+          },
+          allHeaders: {
+            type: [HeaderTC],
+            resolve: () =>
+              fetch(`${baseUrl}/wp/v2/headers/`).then(r => r.json()),
+          }
+    }
+}

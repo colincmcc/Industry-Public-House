@@ -2,33 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import fullLogo from "../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
 import PhoneButton from "../../../common/components/phone";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import IconButton from "@material-ui/core/IconButton";
 import theme from "../../../common/styled/theme";
 import { withStyles } from "@material-ui/core";
-import { Phone } from "mdi-material-ui";
+import { Phone, Facebook, Twitter, Instagram } from "mdi-material-ui";
 import TripAdvisor from "../../../common/components/tripadvisor";
+
 const HeaderComponent = props => {
   const classes = props;
+  console.log(classes.buttonColorPrimary);
   return (
     <TopWrapper>
       <TopNav>
         <LogoImg src={fullLogo} />
         <TopMobileButtons>
-          <ButtonBase classes={{ root: classes.buttonRoot }}>
-            <ActionIcon>
-              <TripAdvisor style={{ color: theme.colors.lightAccent }} />
-            </ActionIcon>
-          </ButtonBase>
-          <ButtonBase classes={{ root: classes.buttonRoot }}>
-            <ActionIcon>
-              <Phone style={{ color: theme.colors.lightAccent }} />
-            </ActionIcon>
-          </ButtonBase>
-          <ButtonBase classes={{ root: classes.buttonRoot }}>
-            <ActionIcon>
-              <Phone style={{ color: theme.colors.lightAccent }} />
-            </ActionIcon>
-          </ButtonBase>
+          <IconButton style={{ color: theme.colors.lightAccent }}>
+            <TripAdvisor />
+          </IconButton>
+          <IconButton style={{ color: theme.colors.lightAccent }}>
+            <Facebook />
+          </IconButton>
+          <IconButton style={{ color: theme.colors.lightAccent }}>
+            <Twitter />
+          </IconButton>
+          <IconButton style={{ color: theme.colors.lightAccent }}>
+            <Phone />
+          </IconButton>
         </TopMobileButtons>
       </TopNav>
     </TopWrapper>

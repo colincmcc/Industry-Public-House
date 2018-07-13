@@ -1,12 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {ApolloProvider} from 'react-apollo'
 import { BrowserRouter } from 'react-router-dom'
-import client from './data/client'
-
-
-
-
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -28,14 +22,11 @@ import './common/assets/css/font-awesome.min.css'
 
 
 
-
 ReactDOM.render(
   <BrowserRouter>
-    <ApolloProvider client={client} >
       <div>
         <App />
       </div>
-    </ApolloProvider>
   </BrowserRouter>
 , document.getElementById('root'));
 registerServiceWorker();

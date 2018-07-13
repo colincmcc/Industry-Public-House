@@ -148,7 +148,9 @@ const material = {
     color: colors.blackTheme
   },
   listSecondaryRoot: {
-    color: colors.blackTheme
+    color: colors.blackTheme,
+    top: '12px',
+    transform: 'translateY(0)'
   },
   listItemPrimary:{
     fontSize: fontSizes.medium.size,
@@ -168,8 +170,11 @@ const material = {
 
   },
   buttonRoot: {
+    color: colors.lightAccent + "!important",
+  },
+  buttonColorPrimary: {
     color: colors.lightAccent,
-    minWidth: "32px"
+
   }
 }
 
