@@ -1,6 +1,10 @@
 import composeWithJson from 'graphql-compose-json'
-import fetch from 'node-fetch';
-
+import {
+  createFindByIdResolver,
+  createFindByUrlListResolver,
+  createFindAllResolver,
+  createFindByIdListResolver
+} from '../utils';
 
 const restApiResponse = {
   id: 48,
@@ -26,44 +30,29 @@ const restApiResponse = {
 
   }
 }
+const LocationTC = composeWithJson('Location', restApiResponse)
 
-export const LocationTC = composeWithJson('Location', restApiResponse)
-
+createFindByIdResolver(LocationTC, 'location')
+createFindByUrlListResolver(LocationTC)
+createFindAllResolver(LocationTC, 'location')
+createFindByIdListResolver(LocationTC, 'location')
 
 export const LocationGraphQLType = LocationTC.getType()
 
-export function getLocationResolvers(baseUrl) {
 
-  LocationTC.addResolver({
-    name: 'findOne',
-    type: LocationTC,
-      args: {
-        id: `Int!`
-      },
-      resolve: async rp =>
-        fetch(`${baseUrl}/wp/v2/location/${rp.args.id}`).then(r => r.json()),
-  })
 
-  LocationTC.addResolver({
-    name: 'findMany',
-    type: [LocationTC],
-    args: {
-      ids: `[Int]`
-    },
-    resolve: async (rp) => {
-      if(rp.args.ids != null){
-        const locationsList = []
-        rp.args.ids.forEach(id => {
-          const loc = fetch(`http://localhost:8080/wp-json/acf/v3/location/${id}`).then(r => r.json())
-          locationsList.push(loc)
-         });
-         return locationsList
-      }
-      return fetch(`${baseUrl}/wp/v2/location/`).then(r => r.json())},
-  })
+LocationTC.addRelation('cans', {
+  resolver: () => LocationTC.getResolver('findByIdList'),
+  prepareArgs: {
+    ids: source => source.acf.locations
+  }
+})
+
+export function getLocationResolvers() {
 
   return {
-    locationBy: LocationTC.getResolver('findOne'),
-    allLocations: LocationTC.getResolver('findMany')
+    locationById: LocationTC.getResolver('findById'),
+    allLocations: LocationTC.getResolver('findAll'),
   }
 }
+export default LocationTC

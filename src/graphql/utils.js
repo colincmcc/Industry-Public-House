@@ -1,8 +1,11 @@
-import type { TypeComposer } from 'graphql-compose';
+import { TypeComposer } from 'graphql-compose';
+import fetch from 'node-fetch';
 
-const baseUrl = 'http://localhost:8080/wp-json'
+const baseUrl = 'http://localhost:8080/wp-json/wp/v2/'
 
-export function createFindByIdResolver(tc: TypeComposer, urlAddr: string): void {
+
+// * Find one by ID
+export function createFindByIdResolver(tc, urlAddr) {
   tc.addResolver({
     name: 'findById',
     type: tc,
@@ -15,25 +18,50 @@ export function createFindByIdResolver(tc: TypeComposer, urlAddr: string): void 
   });
 }
 
-export function createFindListByPageNumberResolver(tc: TypeComposer, urlAddr: string): void {
-  tc.addResolver({
-    name: 'findListByPageNumber',
-    type: [tc],
-    args: {
-      page: { type: 'Int', defaultValue: 1 },
-    },
-    resolve: async rp => {
-      return rp.context.loader.load(`https://swapi.co/api/${urlAddr}/?page=${rp.args.page}`);
-    },
-  });
-}
-
-export function createFindByUrlListResolver(tc: TypeComposer): void {
+// * Resolve a list of urls
+export function createFindByUrlListResolver(tc){
   tc.addResolver({
     name: 'findByUrlList',
     type: [tc],
     resolve: rp => {
       return rp.context.loader.loadMany(rp.args.urls);
+    },
+  });
+}
+
+// * Resolve a list of IDs
+export function createFindByIdListResolver(tc, urlAddr){
+  tc.addResolver({
+    name: 'findByIdList',
+    type: [tc],
+    resolve: rp => {
+     const urlList = rp.args.ids.map(id => [`${baseUrl}/${urlAddr}/${id}`])
+      return rp.context.loader.loadMany(urlList);
+    },
+  });
+}
+
+// * Find all of a post type
+export function createFindAllResolver(tc, urlAddr){
+  tc.addResolver({
+    name: 'findAll',
+    type: [tc],
+    resolve: rp => {
+      return rp.context.loader.load(`${baseUrl}/${urlAddr}/`);
+    },
+  });
+}
+
+// * Find all of a post type with a given meta value
+export function createFindByMetaResolver(tc, urlAddr, metaType){
+  tc.addResolver({
+    name: 'findByMeta',
+    type: [tc],
+    args: {
+      [metaType]: 'String!',
+    },
+    resolve: rp => {
+      return rp.context.loader.load(`${baseUrl}/${urlAddr}?${metaType}=${rp.args[[metaType]]}`)
     },
   });
 }

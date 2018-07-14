@@ -1,5 +1,9 @@
 import composeWithJson from 'graphql-compose-json'
-import fetch from 'node-fetch';
+import {
+  createFindByIdResolver,
+  createFindByUrlListResolver,
+  createFindAllResolver,
+} from '../utils';
 
 
 
@@ -12,27 +16,18 @@ const restApiResponse = {
   }
 }
 
-export const CocktailTC = composeWithJson('Cocktail', restApiResponse)
-
-
+const CocktailTC = composeWithJson('Cocktail', restApiResponse)
 export const CocktailGraphQLType = CocktailTC.getType()
 
-export function getCocktailResolvers(baseUrl) {
+createFindByIdResolver(CocktailTC, 'drinks')
+createFindByUrlListResolver(CocktailTC)
+createFindAllResolver(CocktailTC, 'drinks')
+
+export function getCocktailResolvers() {
   return {
-    allDrinks: {
-      type: [CocktailTC],
-      resolve: () =>
-      fetch(`${baseUrl}/acf/v3/drinks/`).then(r => r.json()),
-    },
-    drinksBy: {
-      type: [CocktailTC],
-      args: {
-        id: `Int`
-      },
-      resolve: (_, args) => {
-          return fetch(`${baseUrl}/acf/v3/drinks/${args.id}`).then(r => [r.json()])
-      },
-    }
+    allCocktails: CocktailTC.getResolver('findAll'),
+    cocktailsById: CocktailTC.getResolver('findById'),
   }
 }
 
+export default CocktailTC

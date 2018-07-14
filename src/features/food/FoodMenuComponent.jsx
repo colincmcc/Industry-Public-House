@@ -9,34 +9,9 @@ const FoodMenuComponent = props => {
   return (
     <Query query={WP_FOODS} variables={{ selectedFoodType }}>
       {({ loading, error, data, client }) => {
-        if (loading)
-          return (
-            <FoodDrinkComponent
-              menuItems={[]}
-              loading={loading}
-              error={error}
-            />
-          );
-
-        if (error)
-          return (
-            <FoodDrinkComponent
-              menuItems={[]}
-              loading={loading}
-              error={error}
-            />
-          );
-
-        const selectedFoods = data.foodsBy.map(food => ({
-          id: food.id,
-          price: food.acf.price,
-          type: food.acf.type,
-          name: food.acf.name,
-          description: food.acf.description
-        }));
         return (
           <FoodDrinkComponent
-            menuItems={selectedFoods}
+            menuItems={data.foodsByMeta}
             loading={loading}
             error={error}
           />
@@ -59,7 +34,7 @@ export const WP_FOODS = gql`
         description
       }
     }
-    foodsBy(foodType: $selectedFoodType) {
+    foodsByMeta(food_type: $selectedFoodType) {
       id
       acf {
         price

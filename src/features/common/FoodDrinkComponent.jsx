@@ -12,19 +12,19 @@ import LoadingComponent from "../../common/components/loading/LoadingComponent";
 
 const FoodDrinkComponent = props => {
   const { classes } = props;
-
+  console.log(props);
   if (props.loading) return <LoadingComponent />;
   if (props.error) return <LoadingComponent />;
 
   return (
     <FoodMenuWrapper>
       <List className={classes.listRoot}>
-        {props.menuItems.map(foodItem => {
+        {props.menuItems.map(menuItem => {
           // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
-          const primary = <FoodHeader>{foodItem.name}</FoodHeader>;
+          const primary = <FoodHeader>{menuItem.acf.name}</FoodHeader>;
           const secondary = (
             <FoodDescription
-              dangerouslySetInnerHTML={{ __html: foodItem.description }}
+              dangerouslySetInnerHTML={{ __html: menuItem.acf.description }}
             />
           );
           return (
@@ -33,7 +33,7 @@ const FoodDrinkComponent = props => {
               <ListItemSecondaryAction
                 classes={{ root: classes.listSecondaryRoot }}
               >
-                {"$" + foodItem.price}
+                {menuItem.acf.price ? "$" + menuItem.acf.price : null}
               </ListItemSecondaryAction>
             </ListItem>
           );

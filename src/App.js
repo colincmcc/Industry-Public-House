@@ -17,7 +17,7 @@ import DrinkContainer from './features/drinks/DrinkContainer'
 import ContactContainer from './features/contact/ContactContainer'
 
 
-const SCHEMA_VERSION = '1';
+const SCHEMA_VERSION = '2';
 const SCHEMA_VERSION_KEY = 'apollo-schema-version'
 
 class App extends Component {

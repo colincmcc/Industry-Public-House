@@ -1,6 +1,10 @@
 import composeWithJson from 'graphql-compose-json'
-import fetch from 'node-fetch';
-
+import {
+  createFindByIdResolver,
+  createFindByUrlListResolver,
+  createFindAllResolver,
+  createFindByMetaResolver
+} from '../utils';
 
 const restApiResponse = {
   id: 48,
@@ -12,38 +16,22 @@ const restApiResponse = {
   }
 }
 
-export const FoodTC = composeWithJson('Food', restApiResponse)
+const FoodTC = composeWithJson('Food', restApiResponse)
 
 
 export const FoodGraphQLType = FoodTC.getType()
 
-export function getFoodResolvers(baseUrl){
+createFindByIdResolver(FoodTC, 'foods')
+createFindByUrlListResolver(FoodTC)
+createFindAllResolver(FoodTC, 'foods')
+createFindByMetaResolver(FoodTC, 'foods', 'food_type')
 
-  FoodTC.addResolver({
-    name: 'findById',
-    type: FoodTC,
-    args: {
-      id: `Int!`
-    },
-    resolve: async rp => fetch(`${baseUrl}/acf/v3/foods/${rp.args.id}`).then(r => r.json())
-  })
-
-  FoodTC.addResolver({
-    name: 'findMany',
-    type: [FoodTC],
-    args: {
-      foodType: `String`
-    },
-    resolve: async rp => {
-      if(rp.args.foodType != null) return fetch(`${baseUrl}/acf/v3/foods?food_type=${rp.args.foodType}`).then(r => r.json())
-
-      return fetch(`${baseUrl}/acf/v3/foods/`).then(r => r.json())
-
-    }
-  })
-
+export function getFoodResolvers(){
   return {
     foodById: FoodTC.getResolver('findById'),
-    allFoods: FoodTC.getResolver('findMany')
+    allFoods: FoodTC.getResolver('findAll'),
+    foodsByMeta: FoodTC.getResolver('findByMeta')
   }
 }
+
+export default FoodTC

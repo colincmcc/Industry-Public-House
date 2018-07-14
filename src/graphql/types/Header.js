@@ -1,6 +1,11 @@
 import composeWithJson from 'graphql-compose-json'
-import fetch from 'node-fetch';
-
+import {
+    createFindByIdResolver,
+    createFindByUrlListResolver,
+    createFindAllResolver,
+    createFindByIdListResolver,
+    createFindByMetaResolver
+  } from '../utils';
 
 const restApiResponse = {
 
@@ -22,23 +27,19 @@ const restApiResponse = {
     },
 }
 
-export const HeaderTC = composeWithJson('Header', restApiResponse)
+const HeaderTC = composeWithJson('Header', restApiResponse)
 export const HeaderGraphQLType = HeaderTC.getType()
 
-export function getHeaderResolvers(baseUrl){
+createFindByIdResolver(HeaderTC, 'headers')
+createFindByUrlListResolver(HeaderTC)
+createFindAllResolver(HeaderTC, 'headers')
+createFindByIdListResolver(HeaderTC, 'headers')
+
+export function getHeaderResolvers(){
     return {
-        headerBy: {
-            type: HeaderTC,
-            args: {
-              id: `Int!`
-            },
-            resolve: (_, args) =>
-              fetch(`${baseUrl}/wp/v2/headers/${args.id}`).then(r => r.json()),
-          },
-          allHeaders: {
-            type: [HeaderTC],
-            resolve: () =>
-              fetch(`${baseUrl}/wp/v2/headers/`).then(r => r.json()),
-          }
+        headerById: HeaderTC.getResolver('findById'),
+        allHeaders: HeaderTC.getResolver('findAll'),
     }
 }
+
+export default HeaderTC

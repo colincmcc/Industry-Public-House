@@ -1,5 +1,11 @@
 import composeWithJson from 'graphql-compose-json'
-import fetch from 'node-fetch';
+import {
+  createFindByIdResolver,
+  createFindByUrlListResolver,
+  createFindAllResolver,
+  createFindByIdListResolver,
+  createFindByMetaResolver
+} from '../utils';
 
 
 const restApiResponse = {
@@ -20,31 +26,21 @@ const restApiResponse = {
   },
 }
 
-export const ReviewTC = composeWithJson('Review', restApiResponse)
+const ReviewTC = composeWithJson('Review', restApiResponse)
 export const ReviewGraphQLType = ReviewTC.getType()
 
-export function getReviewResolvers(baseUrl){
-    return {
-      reviewsBy: {
-        type: [ReviewTC],
-        args: {
-          review_source: `String`,
-          id: `Int`,
-        },
-        resolve: (_, args) => {
-          if(args.review_source != null){
-            return fetch(`${baseUrl}/acf/v3/review?review_source=${args.review_source}`).then(r => r.json())
-          }
-          if(args.id != null){
-            return fetch(`${baseUrl}/acf/v3/review/${args.id}`).then(r => [r.json()])
-          }
-        }
-      },
-          allReviews: {
-            type: [ReviewTC],
-            resolve: () =>
-              fetch(`${baseUrl}/wp/v2/review/`).then(r => r.json()),
-          }
-    }
 
+createFindByIdResolver(ReviewTC, 'review')
+createFindByUrlListResolver(ReviewTC)
+createFindAllResolver(ReviewTC, 'review')
+createFindByIdListResolver(ReviewTC, 'review')
+createFindByMetaResolver(ReviewTC, 'review', 'review_source')
+
+export function getReviewResolvers(){
+    return {
+      reviewsById: ReviewTC.getResolver('findById'),
+      allReviews: ReviewTC.getResolver('findAll'),
+      reviewsByMeta: ReviewTC.getResolver('findByMeta'),
+    }
 }
+export default ReviewTC

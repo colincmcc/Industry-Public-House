@@ -5,66 +5,32 @@ import FoodDrinkComponent from "../common/FoodDrinkComponent";
 import TapLIstComponent from "../../common/components/digitalPour/TapLIstComponent";
 
 const DrinkMenuComponent = props => {
-  const { drinkType } = props;
-  const query = WP_COCKTAILS;
+  const { drinkType, query } = props;
   return (
     <Query query={query}>
       {({ loading, error, data, client }) => {
-        switch (drinkType) {
-          case "cocktails":
-            return null;
-          case "taps":
-            return (
-              <TapLIstComponent
-                taps={data.allTaps}
-                loading={loading}
-                error={error}
-              />
-            );
-          case "cocktails":
-            return null;
-          case "cocktails":
-            return null;
-          case "cocktails":
-            return null;
-          default:
-            return null;
-        }
+        if (loading) return <div> Loading ... </div>;
+        if (error) return <div> error </div>;
+
+        if (drinkType === "taps")
+          return (
+            <TapLIstComponent
+              taps={data.allTaps}
+              loading={loading}
+              error={error}
+            />
+          );
+        console.log(data.menuItems);
+        return (
+          <FoodDrinkComponent
+            menuItems={data.menuItems}
+            loading={loading}
+            error={error}
+          />
+        );
       }}
     </Query>
   );
 };
 
 export default DrinkMenuComponent;
-
-const WP_COCKTAILS = gql`
-  {
-    allCocktails {
-      id
-    }
-  }
-`;
-
-const WP_CANS = gql`
-  {
-    allCans {
-      id
-    }
-  }
-`;
-
-const WP_WINE = gql`
-  {
-    allWine {
-      id
-    }
-  }
-`;
-
-const WP_PREMIUM = gql`
-  {
-    allPremium {
-      id
-    }
-  }
-`;
