@@ -19,6 +19,8 @@ const restApiResponse = {
       lat: "40.4709302",
       lng: "-79.96044130000001"
     },
+    open_hours: "text",
+    happy_hour: "text",
     phone_number: "412-683-1100",
     email: "reservations@industrypgh.com",
     number_of_taps: "43",

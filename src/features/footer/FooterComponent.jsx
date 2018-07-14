@@ -1,24 +1,39 @@
 import React from "react";
 import styled from "styled-components";
+import shortid from "shortid";
+import { withStyles } from "@material-ui/core/styles";
+
+import Button from "@material-ui/core/Button";
+import theme from "../../common/styled/theme";
 
 const FooterComponent = props => {
+  const { data, error, loading, classes } = props;
+
+  if (loading) return <div> Loading... </div>;
+  if (error) return <div> Error... </div>;
+
   return (
     <FooterWrapper>
       <FooterContent>
         <ContactInfo>
           <FooterHeader> Contact Us </FooterHeader>
-          <p>
-            Lawrenceville
-            <br />4305 Butler St. Pittsburgh, PA 15201
-            <br />412-683-1100
-            <br />reservations@industrypgh.com
-          </p>
-          <p>
-            <br />North Fayette
-            <br />140 Andrew Drive, Pittsburgh, PA 15275
-            <br />412-490-9080
-            <br />reservationswest@industrypgh.com
-          </p>
+
+          {data.allLocations.map(location => (
+            <p key={shortid.generate()}>
+              {location.title.rendered}
+              <br />
+              {location.acf.address.address.slice(0, -1)}
+              <br />
+              {location.acf.phone_number}
+              <br />
+              <Button
+                classes={{ root: classes.buttonRoot }}
+                href={`mailto:${location.acf.email}`}
+              >
+                EMAIL
+              </Button>
+            </p>
+          ))}
         </ContactInfo>
         <MiscInfo>
           <FooterHeader> Find Us </FooterHeader>
@@ -30,7 +45,7 @@ const FooterComponent = props => {
   );
 };
 
-export default FooterComponent;
+export default withStyles(theme.materialUI)(FooterComponent);
 
 const FooterWrapper = styled.section`
   box-shadow: inset 0 0 29px 0px #000;

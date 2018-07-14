@@ -4,21 +4,12 @@ import { Query } from 'react-apollo'
 
 import FooterComponent from './FooterComponent'
 
-const WP_FOOTER = gql`
-{
- allLocations{
-   id
- }
-}
-`
 const FooterContainer = () => {
   return (
     <Query query={WP_FOOTER}>
       {({loading, error, data}) => {
 
-        console.log(data)
-        return <FooterComponent />
-
+        return <FooterComponent loading={loading} error={error} data={data} />
 
       }}
 
@@ -28,3 +19,24 @@ const FooterContainer = () => {
 
 export default FooterContainer
 
+const WP_FOOTER = gql`
+{
+ allLocations{
+   id
+   title{
+     rendered
+   }
+   acf{
+     loc_symbol
+     loc_num
+     address{
+       address
+     }
+    open_hours
+    happy_hour
+    phone_number
+    email
+   }
+ }
+}
+`

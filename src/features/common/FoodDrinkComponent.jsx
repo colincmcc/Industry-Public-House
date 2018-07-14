@@ -12,7 +12,6 @@ import LoadingComponent from "../../common/components/loading/LoadingComponent";
 
 const FoodDrinkComponent = props => {
   const { classes } = props;
-  console.log(props);
   if (props.loading) return <LoadingComponent />;
   if (props.error) return <LoadingComponent />;
 

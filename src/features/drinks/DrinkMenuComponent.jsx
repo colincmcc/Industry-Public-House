@@ -20,7 +20,6 @@ const DrinkMenuComponent = props => {
               error={error}
             />
           );
-        console.log(data.menuItems);
         return (
           <FoodDrinkComponent
             menuItems={data.menuItems}
