@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import mainBg from "../../../../common/assets/img/Drinks-Background.jpg";
+import nfPatio from "../../../../common/assets/img/nf_patio.jpg";
 
 const AboutComponent = props => {
   return (

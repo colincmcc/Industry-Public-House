@@ -11,13 +11,12 @@ Component {
 
     return (
 
-      // TODO: combine food & drink features by using router & props since data structure is the same
-      <Query query={CACHED_STATE}>
+      <Query query={HOME_PAGE}>
       {
         ({ loading, error, data }) => {
           if(loading) return <LoadingComponent />
           if(error) return <p>Error</p>
-          return <HomeComponent cachedState={data} />
+          return <HomeComponent {...data} />
 
         }
       }
@@ -26,11 +25,26 @@ Component {
 }
 }
 
-const CACHED_STATE = gql`
+const HOME_PAGE = gql`
 {
-  selectedFoodType @client
-  selectedDrinkType @client
-  currentLocation @client
+  allHeaders{
+    id
+    title{
+      rendered
+    }
+    content{
+      rendered
+    }
+    link
+    acf{
+      background_image
+      isFeatured
+      customLink
+      headerLink
+      subHeading
+      buttonText
+    }
+  }
 
 }
 `

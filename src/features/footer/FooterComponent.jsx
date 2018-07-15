@@ -4,6 +4,10 @@ import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
 
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import { Facebook, Twitter, Instagram } from "mdi-material-ui";
+import TripAdvisor from "../../common/components/tripadvisor";
+
 import theme from "../../common/styled/theme";
 
 const FooterComponent = props => {
@@ -19,20 +23,35 @@ const FooterComponent = props => {
           <FooterHeader> Contact Us </FooterHeader>
 
           {data.allLocations.map(location => (
-            <p key={shortid.generate()}>
-              {location.title.rendered}
-              <br />
-              {location.acf.address.address.slice(0, -1)}
-              <br />
-              {location.acf.phone_number}
-              <br />
-              <Button
-                classes={{ root: classes.buttonRoot }}
-                href={`mailto:${location.acf.email}`}
-              >
-                EMAIL
-              </Button>
-            </p>
+            <div key={shortid.generate()}>
+              <p>
+                {location.title.rendered}
+                <br />
+                {location.acf.address.address.slice(0, -5)}
+                <br />
+                {location.acf.phone_number}
+                <br />
+                <Button
+                  classes={{ root: classes.buttonRoot }}
+                  href={`mailto:${location.acf.email}`}
+                >
+                  EMAIL
+                </Button>
+              </p>
+              <SocialButtons>
+                <IconButton classes={{ root: classes.buttonRoot }}>
+                  <Facebook />
+                </IconButton>
+
+                <IconButton classes={{ root: classes.buttonRoot }}>
+                  <Twitter />
+                </IconButton>
+
+                <IconButton classes={{ root: classes.buttonRoot }}>
+                  <TripAdvisor />
+                </IconButton>
+              </SocialButtons>
+            </div>
           ))}
         </ContactInfo>
         <MiscInfo>
@@ -53,9 +72,12 @@ const FooterWrapper = styled.section`
 `;
 const FooterContent = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   ${props => props.theme.fontStyles.text};
   padding: 2em;
+  ${props => props.theme.media.tablet_landscape_up`
+  flex-direction: row;
+  `};
 `;
 const ContactInfo = styled.div`
   display: flex;
@@ -75,4 +97,8 @@ const MiscInfo = styled.div`
   width: 50%;
   float: right;
   ${props => props.theme.components.small};
+`;
+
+const SocialButtons = styled.div`
+  flex-direction: row;
 `;

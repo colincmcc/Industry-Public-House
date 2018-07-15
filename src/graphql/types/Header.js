@@ -23,7 +23,12 @@ const restApiResponse = {
 
     acf: {
         background_image: "http://localhost:8080/wp-content/uploads/2018/06/burgher.jpg",
-        hero_image: "heroimg"
+        hero_image: "heroimg",
+        isFeatured: "true",
+        headerLink: "custom",
+        customLink: "http://CraftCarnivalPGH.com",
+        subHeading: "info less than 120 characters",
+        buttonText: "View More"
     },
 }
 
