@@ -1,7 +1,7 @@
 import { TypeComposer } from 'graphql-compose';
 import fetch from 'node-fetch';
 
-const baseUrl = 'http://localhost:8080/wp-json/wp/v2/'
+const baseUrl = 'http://localhost:8080/wp-json/wp/v2'
 
 
 // * Find one by ID

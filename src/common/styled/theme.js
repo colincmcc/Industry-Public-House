@@ -107,13 +107,13 @@ const styledComponents = {
   subHeading: css`
     ${fontStyles.subHeading}
   margin: auto;
-  color: ${colors.lightTheme};
+  color: ${colors.theme};
 
   `,
   smallHeading: css`
     ${fontStyles.smallHeading}
   margin: auto;
-  color: ${colors.lightTheme};
+  color: ${colors.theme};
   text-transform: uppercase;
   `,
   small: css`
@@ -143,8 +143,12 @@ const material = {
   },
   listRoot: {
     width: "100%",
-    maxWidth: 360,
-    color: colors.blackTheme
+    minWidth: "50%",
+    width: "100%",
+    color: colors.blackTheme,
+    '@media(min-width: 700px)': {
+      columns: 2,
+    }
   },
   listSecondaryRoot: {
     color: colors.blackTheme,
@@ -153,6 +157,13 @@ const material = {
   },
   listItemPrimary:{
     fontSize: fontSizes.medium.size,
+    breakInside: "avoid"
+  },
+  listItemRoot:{
+    breakInside: "avoid",
+  },
+  listItemContainer: {
+    maxWidth: 360
   },
   bottomNavRoot:{
     width: "100%",
@@ -161,7 +172,7 @@ const material = {
   bottomActionRoot:{
     color: colors.whiteTheme,
 
-    minWidth: "56px"
+    minWidth: "35px"
 
   },
   bottomActionSelected:{
@@ -173,6 +184,11 @@ const material = {
   },
   buttonColorPrimary: {
     color: colors.lightAccent,
+  },
+  paperRoot: {
+    color: colors.blackTheme,
+    width: "100%",
+    minHeight: "100px"
   }
 }
 

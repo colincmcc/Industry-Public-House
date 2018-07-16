@@ -14,7 +14,7 @@ const FoodDrinkComponent = props => {
   const { classes } = props;
   if (props.loading) return <LoadingComponent />;
   if (props.error) return <LoadingComponent />;
-
+  const moreColumns = window.innerWidth > 700;
   return (
     <FoodMenuWrapper>
       <List className={classes.listRoot}>
@@ -27,7 +27,14 @@ const FoodDrinkComponent = props => {
             />
           );
           return (
-            <ListItem divider key={shortid.generate()}>
+            <ListItem
+              divider
+              classes={{
+                root: classes.listItemRoot,
+                container: classes.listItemContainer
+              }}
+              key={shortid.generate()}
+            >
               <ListItemText primary={primary} secondary={secondary} />
               <ListItemSecondaryAction
                 classes={{ root: classes.listSecondaryRoot }}
@@ -54,16 +61,14 @@ const FoodMenuWrapper = styled.div`
   font-size: ${props => props.theme.fontSizes.medium.size};
 `;
 
-const FoodListing = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-`;
-
 const FoodHeader = styled.div`
   display: flex;
   flex-direction: row;
   font-size: ${props => props.theme.fontSizes.medium.size};
+
+  ${props => props.theme.media.tablet_portrait_up`
+   ${theme.fontStyles.text}
+  `};
 `;
 const FoodTitle = styled.div`
   display: flex;

@@ -14,80 +14,39 @@ import theme from "../../common/styled/theme";
 
 // * Prefetches food items on mouse hover for faster loading
 
-class FoodNavComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      typeValue: 0
-    };
-  }
-  componentDidMount() {
-    const currentPath = this.props.location.pathname;
-    let currentTypeValue;
-    switch (currentPath) {
-      case "/Food/Starters":
-        currentTypeValue = 1;
-        break;
-      case "/Food/Greens":
-        currentTypeValue = 2;
-        break;
-      case "/Food/Handheldsh":
-        currentTypeValue = 3;
-        break;
-      case "/Food/Burghers":
-        currentTypeValue = 4;
-        break;
-      case "/Food/Sustenance":
-        currentTypeValue = 5;
-        break;
-      default:
-        currentTypeValue = 0;
-        break;
-    }
-
-    this.setState({
-      typeValue: currentTypeValue
-    });
-  }
-
-  // ? event may be needed for MaterialUI function
-  handleTypeChange = (event, typeValue) => {
-    this.setState({ typeValue });
-  };
-
-  render() {
-    const { classes } = this.props;
-    let scrollMenu = true;
-    window.innerWidth < 760 ? (scrollMenu = true) : (scrollMenu = false);
-
-    return (
-      <MenuNavWrapper>
-        <Tabs
-          centered
-          scrollable={scrollMenu ? true : false}
-          scrollButtons="auto"
-          onChange={this.handleTypeChange}
-          value={this.state.typeValue}
-          classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
-        >
-          {this.props.navItems.map((navItem, index) => (
-            <Tab
-              key={shortid.generate()}
-              label={navItem.label}
-              value={index}
-              classes={{
-                root: classes.tabRoot,
-                selected: classes.tabSelected
-              }}
-              component={Link}
-              to={navItem.link}
-            />
-          ))}
-        </Tabs>
-      </MenuNavWrapper>
-    );
-  }
-}
+const FoodNavComponent = props => {
+  const { classes } = props;
+  const currentPath = props.location.pathname;
+  console.log(props);
+  let scrollMenu = true;
+  window.innerWidth < 760 ? (scrollMenu = true) : (scrollMenu = false);
+  console.log(currentPath.substr(0, 4));
+  return (
+    <MenuNavWrapper>
+      <Tabs
+        centered={scrollMenu ? false : true}
+        scrollable={scrollMenu ? true : false}
+        scrollButtons="auto"
+        value={currentPath}
+        classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+      >
+        {props.navItems.map((navItem, index) => (
+          <Tab
+            key={shortid.generate()}
+            label={navItem.label}
+            value={navItem.link}
+            classes={{
+              root: classes.tabRoot,
+              selected: classes.tabSelected
+            }}
+            component={Link}
+            to={navItem.link}
+          />
+        ))}
+      </Tabs>
+    </MenuNavWrapper>
+  );
+};
 
 export default withStyles(theme.materialUI)(withRouter(FoodNavComponent));
 

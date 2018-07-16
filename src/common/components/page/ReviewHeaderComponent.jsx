@@ -41,7 +41,6 @@ const PageHeaderWrapper = styled.section`
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  z-index: -2;
 `;
 const BGOverlay = styled.div`
   width: 100%;
@@ -80,7 +79,12 @@ const PageHeadContent = styled.div`
 
 const PageHeading = styled.div`
   ${props => props.theme.components.heading};
+  color: ${props => props.theme.colors.whiteTheme};
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0 2em;
 `;
+
 const PageSubHeading = styled.div`
   ${props => props.theme.components.subheading};
   color: ${props => props.theme.colors.whiteTheme};

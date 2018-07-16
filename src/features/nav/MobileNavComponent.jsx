@@ -12,84 +12,61 @@ import BeerGlass from "../../common/components/beerglass";
 import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
 import theme from "../../common/styled/theme";
 
-class MobileNavComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0
-    };
-  }
-  /** TODO: bottom nav needs to select the correct navItem when directly linked to a page
-  componentDidMount() {
-    var currentPath = this.props.location.toString().toLowerCase();
-    let currentLoc;
-    if (currentPath.startsWith("/drink")) {
-      currentLoc = 1;
-    } else if (currentPath.startsWith("/food")) {
-      currentLoc = 2;
-    } else if (currentPath.startsWith("/contact")) {
-      currentLoc = 3;
-    } else if (currentPath.startsWith("/menu")) {
-      currentLoc = 4;
+const MobileNavComponent = props => {
+  const { classes, location } = props;
+  const currentPath = props.location.pathname;
+
+  const bottomNavItems = [
+    {
+      link: "/",
+      text: "Home",
+      slug: "home",
+      icon: <LightbulbLogo />
+    },
+    {
+      link: "/Drink",
+      text: "Drinks",
+      slug: "drinks",
+      icon: <BeerGlass />
+    },
+    { link: "/Food", text: "Food", slug: "food", icon: <Food /> },
+    { link: "/Contact", text: "Contact", slug: "contact", icon: <Email /> },
+    {
+      link: { pathname: "#Menu", state: { modal: true } },
+      text: "Menu",
+      slug: "menu",
+      icon: <Menu />
     }
+  ];
 
-    this.setState({
-      value: currentLoc
-    });
-  }
-   */
-  handleChange = (event, value) => {
-    this.setState({ value: value });
-  };
+  return (
+    <NavWrapper className={props.navIsShown ? "" : "hide"}>
+      <BottomNavigation
+        value={currentPath.substr(0, 4)}
+        classes={{ root: classes.bottomNavRoot }}
+      >
+        {bottomNavItems.map(navItem => (
+          <BottomNavigationAction
+            key={shortid.generate()}
+            value={
+              navItem.slug != "menu" ? navItem.link.substr(0, 4) : navItem.slug
+            }
+            label={navItem.text}
+            icon={navItem.icon}
+            component={Link}
+            to={navItem.link}
+            classes={{
+              root: classes.bottomActionRoot,
+              selected: classes.bottomActionSelected
+            }}
+          />
+        ))}
+      </BottomNavigation>
+    </NavWrapper>
+  );
+};
 
-  render() {
-    const { value } = this.state;
-    const { classes } = this.props;
-
-    const bottomNavItems = [
-      {
-        link: "/Home",
-        text: "Home",
-        slug: "home",
-        icon: <LightbulbLogo />
-      },
-      {
-        link: "/Drink",
-        text: "Drinks",
-        slug: "drinks",
-        icon: <BeerGlass />
-      },
-      { link: "/Food", text: "Food", slug: "food", icon: <Food /> },
-      { link: "/Contact", text: "Contact", slug: "contact", icon: <Email /> },
-      { link: "/", text: "Menu", slug: "menu", icon: <Menu /> }
-    ];
-    return (
-      <NavWrapper className={this.props.navIsShown ? "" : "hide"}>
-        <BottomNavigation
-          value={value}
-          onChange={this.handleChange}
-          classes={{ root: classes.bottomNavRoot }}
-        >
-          {bottomNavItems.map((navItem, index) => (
-            <BottomNavigationAction
-              key={shortid.generate()}
-              label={navItem.text}
-              icon={navItem.icon}
-              component={Link}
-              to={navItem.link}
-              classes={{
-                root: classes.bottomActionRoot,
-                selected: classes.bottomActionSelected
-              }}
-            />
-          ))}
-        </BottomNavigation>
-      </NavWrapper>
-    );
-  }
-}
-
-export default withStyles(theme.materialUI)(MobileNavComponent);
+export default withStyles(theme.materialUI)(withRouter(MobileNavComponent));
 
 // STYLED COMPONENTS
 const NavWrapper = styled.div`
@@ -112,43 +89,4 @@ const NavWrapper = styled.div`
     display: none;
     visibility: hidden;
   `};
-`;
-
-const MobileItem = styled.div`
-  min-width: 80px;
-  max-width: 168px;
-  line-height: 0;
-  padding-top: 16px;
-  padding-bottom: 10px;
-  padding-left: 12px;
-  padding-right: 12px;
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  background-color: transparent;
-  border: none;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    padding-top 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  color: ${props => props.theme.colors.whiteTheme};
-
-  &.selected {
-    padding-top: 6px;
-    color: ${props => props.theme.colors.lightAccent};
-  }
-  &.iconOnly {
-    opacity: 0;
-    transition-delay: 0s;
-  }
-`;
-
-const MobileSVG = styled.span``;
-const MobileValue = styled.span`
-  font-size: 0.875rem;
-  opacity: 0;
-
-  &.selected {
-    opacity: 1;
-    transition-delay: 0.1s;
-    padding-top: 10px;
-  }
 `;

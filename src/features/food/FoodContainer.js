@@ -1,12 +1,11 @@
 import React from 'react'
-import {Query} from 'react-apollo'
-import gql from 'graphql-tag'
+
 import Paper from '@material-ui/core/Paper';
 import { Switch, Route } from 'react-router-dom'
 import shortid from 'shortid'
 import { withStyles } from '@material-ui/core/styles';
 import FoodNavComponent from "./FoodNavComponent";
-import FoodDrinkComponent from '../common/FoodDrinkComponent'
+
 import bgImg from '../../common/assets/img/burgher.jpg'
 
 import foodBG from '../../common/assets/img/menu_background.jpg'
@@ -25,13 +24,13 @@ const styles = theme => ({
     margin: "2em",
     backgroundColor: "#F4EDDC",
     backgroundImage: `url(${foodBG})`,
-    color: "#110C02"
+    color: "#110C02",
 
   },
 });
 
 const FoodContainer = (props) => {
-  const { classes, selectedFoodType } = props;
+  const { classes } = props;
   const navItems = [
     { id: 0, label: "Brunch", link: "/Food/Brunch", slug: "brunch" },
     { id: 1, label: "Starters", link: "/Food/Starters", slug: "starters" },

@@ -6,9 +6,10 @@ import nfPatio from "../../../../common/assets/img/nf_patio.jpg";
 
 const AboutComponent = props => {
   return (
-    <AboutWrapper id="About">
+    <AboutWrapper bgImg={props.bgImg} id="About">
       <AboutHeader> {props.title} </AboutHeader>
       <AboutContent dangerouslySetInnerHTML={{ __html: props.content }} />
+      <HeroImg heroImg={props.heroImg} />
     </AboutWrapper>
   );
 };
@@ -21,21 +22,27 @@ const AboutWrapper = styled.section`
   width: 100vw;
   height: 100%;
   text-align: center;
-  &:before{
+  background-image: url(${props => props.bgImg});
+  background-position: center bottom;
+  background-size: cover;
+  z-index: 1;
+  &:before {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(${props => props.theme.colors.blackTheme}
-    , rgba(0, 0, 0, 0));
+    background: linear-gradient(
+      ${props => props.theme.colors.blackTheme + "80"},
+      rgba(0, 0, 0, 0)
+    );
     z-index: -1;
-  }
   }
 `;
 
 const AboutHeader = styled.div`
   ${props => props.theme.components.heading};
   padding-top: 2em;
+  text-transform: uppercase;
 `;
 
 const AboutContent = styled.div`
@@ -45,9 +52,19 @@ const AboutContent = styled.div`
   color: ${props => props.theme.colors.whiteTheme};
   width: 75%;
   margin: auto;
-  font-size: ${props => props.theme.fontSizes.text.size};
+  ${props => props.theme.fontStyles.text};
 
   ${props => props.theme.media.tablet_landscape_up`
     width: 50%;
+    ${props => props.theme.fontStyles.medium};
+
   `};
+`;
+const HeroImg = styled.div`
+  background: url(${props => props.heroImg});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200px;
 `;

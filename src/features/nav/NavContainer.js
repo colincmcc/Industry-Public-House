@@ -11,6 +11,19 @@ import HeaderContainer from './header/HeaderContainer'
 // Todo: load menu items from Wordpress gql
 // TODO: move scroll logic higher up
 
+export const mobileNavItems = [
+  {label: "Home", link: "/"},
+  {label: "Food", link: "/Food"},
+  {label: "Drinks", link: "/Drink"},
+  {label: "Contact", link: "/Contact"},
+  {label: "Gallery", link: "/Gallery"},
+  {label: "Apply", link: "/Apply"},
+  {label: "Events", link: "/Calendar"},
+  {label: "Shop", link: "/Shop"},
+
+]
+
+
 export default class NavContainer extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +45,6 @@ export default class NavContainer extends Component {
 
   // If navbar is visible (navIsShown is true), then check to see if current scroll position is greater than the last scroll position.  If true, then set state of scrollDirection to "DOWN".
   //Else, or if navbar is not visible, check to see if current scroll position is less than the last scroll position.  If true, set state of scrollDirection to "UP".
-
-
-
-
 
   handleScroll = () => {
     var last_known_scroll_position = 0;
@@ -89,10 +98,9 @@ export default class NavContainer extends Component {
     }
   }
 
-  // backgroundOpacity sets the background for the nav based on the scroll position/viewheight in pixels in 50px increments.  Should stop if opacity=1
-  // the transition is faded with css in the component to allow smoother ui.
   render() {
     const { menuIsShown, navIsShown } = this.state;
+
     return (
       <Query query={NAV_QUERY}>
         {

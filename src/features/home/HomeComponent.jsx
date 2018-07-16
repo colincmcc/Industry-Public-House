@@ -22,21 +22,28 @@ const HomeComponent = props => {
     return randomHeader;
   }
   const choosenHeader = chooseHeader();
-  let isCustomLink = choosenHeader.acf.headerLink != "custom";
-
+  let isCustomLink = choosenHeader.acf.headerLink === "custom";
+  console.log(isCustomLink);
   const subHeading = (
     <HomeSubHeading>
       <Description>{choosenHeader.acf.subHeading}</Description>
 
-      <Button
-        classes={{ root: classes.buttonRoot }}
-        {if(isCustomLink) return "component={ Link }"}
-
-        to={isCustomLink ? choosenHeader.acf.headerLink : ""}
-        href={choosenHeader.acf.customLink}
-      >
-        {choosenHeader.acf.buttonText}
-      </Button>
+      {isCustomLink ? (
+        <Button
+          classes={{ root: classes.buttonRoot }}
+          href={choosenHeader.acf.customLink}
+        >
+          {choosenHeader.acf.buttonText}
+        </Button>
+      ) : (
+        <Button
+          classes={{ root: classes.buttonRoot }}
+          component={Link}
+          to={choosenHeader.acf.headerLink}
+        >
+          {choosenHeader.acf.buttonText}
+        </Button>
+      )}
     </HomeSubHeading>
   );
 
@@ -60,13 +67,7 @@ const HomeWrapper = styled.div`
   display: grid;
 `;
 
-const HomeSubHeading = styled.div`
-  ${props => props.theme.components.subheading};
-  color: ${props => props.theme.colors.whiteTheme};
-  cursor: pointer;
-  padding: 3em;
-  max-width: 500px;
-`;
+const HomeSubHeading = styled.div``;
 const Description = styled.p`
   font-style: italic;
 `;

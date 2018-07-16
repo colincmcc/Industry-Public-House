@@ -14,7 +14,8 @@ export default class AboutContainer extends Component {
             const aboutData = {
               title: data.pageBy[0].title.rendered,
               content: data.pageBy[0].content.rendered,
-              bgImg: data.pageBy[0].acf.background_image
+              bgImg: data.pageBy[0].acf.background_image,
+              heroImg: data.pageBy[0].acf.hero_image
             }
             return (
             <AboutComponent {...aboutData} />
@@ -39,6 +40,7 @@ const ABOUT_PAGE = gql`
     }
     acf{
       background_image
+      hero_image
     }
   }
 }

@@ -19,12 +19,12 @@ const FooterComponent = props => {
   return (
     <FooterWrapper>
       <FooterContent>
-        <ContactInfo>
-          <FooterHeader> Contact Us </FooterHeader>
+        <FooterHeader> Contact Us </FooterHeader>
 
+        <ContactInfo>
           {data.allLocations.map(location => (
-            <div key={shortid.generate()}>
-              <p>
+            <LocationListing key={shortid.generate()}>
+              <LocationContent>
                 {location.title.rendered}
                 <br />
                 {location.acf.address.address.slice(0, -5)}
@@ -37,7 +37,7 @@ const FooterComponent = props => {
                 >
                   EMAIL
                 </Button>
-              </p>
+              </LocationContent>
               <SocialButtons>
                 <IconButton classes={{ root: classes.buttonRoot }}>
                   <Facebook />
@@ -51,14 +51,9 @@ const FooterComponent = props => {
                   <TripAdvisor />
                 </IconButton>
               </SocialButtons>
-            </div>
+            </LocationListing>
           ))}
         </ContactInfo>
-        <MiscInfo>
-          <FooterHeader> Find Us </FooterHeader>
-
-          <div />
-        </MiscInfo>
       </FooterContent>
     </FooterWrapper>
   );
@@ -75,9 +70,6 @@ const FooterContent = styled.div`
   flex-direction: column;
   ${props => props.theme.fontStyles.text};
   padding: 2em;
-  ${props => props.theme.media.tablet_landscape_up`
-  flex-direction: row;
-  `};
 `;
 const ContactInfo = styled.div`
   display: flex;
@@ -85,12 +77,31 @@ const ContactInfo = styled.div`
   width: 50%;
   float: left;
   ${props => props.theme.components.small};
+  ${props => props.theme.media.tablet_landscape_up`
+  flex-direction: row;
+  justify-content: space-between;
+  width: 75%;
+
+  `};
 `;
 
 const FooterHeader = styled.div`
   ${props => props.theme.components.smallHeading};
+  ${props => props.theme.media.tablet_landscape_up`
+    font-size: 40px;
+  line-height: 50px;
+  font-weight: 400;
+  padding-bottom: 1em;
+  `};
 `;
-
+const LocationListing = styled.div`
+  border-bottom: 2px solid ${props => props.theme.colors.whiteTheme};
+  max-width: 360px;
+  margin: auto;
+`;
+const LocationContent = styled.p`
+  ${props => props.theme.fontStyles.text};
+`;
 const MiscInfo = styled.div`
   display: flex;
   flex-direction: column;

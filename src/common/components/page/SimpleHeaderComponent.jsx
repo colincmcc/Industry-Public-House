@@ -25,9 +25,6 @@ export default SimpleHeaderComponent;
 const PageHeaderWrapper = styled.section`
   display: flex;
   align-items: center;
-  background-image: url(${props => props.bgImg});
-  background-position: center;
-  background-size: cover;
   height: 100vh;
   width: 100%;
   overflow: hidden;
@@ -42,6 +39,7 @@ const BGOverlay = styled.div`
   background-position: center;
   background-size: cover;
   transition: all 2s;
+  box-shadow: inset 0 0 29px 0px ${props => props.theme.colors.blackTheme};
 
   &:after {
     content: "";
@@ -69,11 +67,15 @@ const PageHeadContent = styled.div`
 
 const PageHeading = styled.div`
   ${props => props.theme.components.heading};
+  color: ${props => props.theme.colors.whiteTheme};
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 0 2em;
 `;
 const PageSubHeading = styled.div`
   ${props => props.theme.components.subheading};
   color: ${props => props.theme.colors.whiteTheme};
-  cursor: pointer;
   padding: 3em;
   max-width: 500px;
+  margin: auto;
 `;
