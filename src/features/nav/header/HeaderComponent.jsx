@@ -9,21 +9,12 @@ import { Phone, Facebook, Twitter, Instagram } from "mdi-material-ui";
 import TripAdvisor from "../../../common/components/tripadvisor";
 
 const HeaderComponent = props => {
-  const classes = props;
+  const { classes, headerLogo } = props;
   return (
     <TopWrapper>
       <TopNav>
-        <LogoImg src={fullLogo} />
+        <LogoImg src={headerLogo} />
         <TopMobileButtons>
-          <IconButton style={{ color: theme.colors.lightAccent }}>
-            <TripAdvisor />
-          </IconButton>
-          <IconButton style={{ color: theme.colors.lightAccent }}>
-            <Facebook />
-          </IconButton>
-          <IconButton style={{ color: theme.colors.lightAccent }}>
-            <Twitter />
-          </IconButton>
           <IconButton style={{ color: theme.colors.lightAccent }}>
             <Phone />
           </IconButton>

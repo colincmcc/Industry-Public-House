@@ -17,6 +17,7 @@ const colors = {
   blackTheme: "#110C02",
   whiteTheme: "#F4EDDC",
   darkGray: "#252525",
+  yellowGray: "#7B776C"
 }
 
 const fontSizes = {
@@ -189,6 +190,14 @@ const material = {
     color: colors.blackTheme,
     width: "100%",
     minHeight: "100px"
+  },
+  swipeableMenuRoot: {
+    color: colors.blackTheme,
+    width: "250px",
+    backgroundColor: colors.whiteTheme
+  },
+  swipeableMenuList: {
+    height: "100%"
   }
 }
 

@@ -101,6 +101,7 @@ export default class NavContainer extends Component {
   render() {
     const { menuIsShown, navIsShown } = this.state;
 
+    // ! pageBy query returns an array, despite having only 1 valid value.
     return (
       <Query query={NAV_QUERY}>
         {
@@ -109,7 +110,7 @@ export default class NavContainer extends Component {
             if(error) return <p>Error</p>
             return (
             <div>
-              <HeaderContainer />
+              <HeaderContainer headerLogo={data.pageBy[0].acf.hero_image} />
               <MobileNavComponent navIsShown={navIsShown} burgerToggle={this.burgerToggle} menuIsShown={menuIsShown} />
               <MobileNavMenu burgerToggle={this.burgerToggle} menuIsShown={menuIsShown} />
             </div>
@@ -124,8 +125,10 @@ export default class NavContainer extends Component {
 
 const NAV_QUERY = gql`
 {
-  allHeaders{
-    id
+  pageBy(slug: "home"){
+    acf{
+      hero_image
+    }
   }
 }
 `

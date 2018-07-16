@@ -2,10 +2,10 @@ import React from 'react'
 import HeaderComponent from './HeaderComponent';
 
 
-const HeaderContainer = () => {
+const HeaderContainer = (props) => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent {...props} />
     </div>
   )
 }

@@ -15,6 +15,7 @@ import './common/assets/css/font-awesome.min.css'
 */
 // TODO: PWA list
 // * Move scroll logic higher up from Food & Drink Navs
+// Stop background components from updating on menu modal loading
 // Lazy Loading
 // Code Splitting - probably via Webpack
 // Configure Service Worker

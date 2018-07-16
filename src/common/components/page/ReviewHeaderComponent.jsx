@@ -96,7 +96,6 @@ const Review = styled.p`
   font-style: italic;
 `;
 const Author = styled.div`
-  padding: 6px;
   ${props => props.theme.fontStyles.small};
 `;
 const ReviewLink = styled.div``;
