@@ -212,6 +212,20 @@ const material = {
     width: 60,
     height: 60,
     margin: 10
+  },
+  eventCard: {
+    width: 345,
+    color: colors.blackTheme,
+    marginLeft: 16
+  },
+  eventMedia: {
+    height: 0,
+    paddingTop: '56.25%'
+  },
+  eventList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
   }
 }
 

@@ -6,4 +6,5 @@ body {
   background-color: #252525;
   text-align: center;
   overflow-x: hidden;
+  min-width: 320px;
 }

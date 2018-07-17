@@ -125,7 +125,6 @@ export default withRouter(App);
 
 const AppWrapper = styled.div`
 overflow: hidden;
-box-sizing: border-box;
 `
 
 const CACHED_STATE = gql`

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import AboutContainer from "./components/about/AboutContainer";
 import PageHeaderContainer from "../../common/components/page/PageHeaderContainer";
+import EventContainer from "../events/EventContainer";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import theme from "../../common/styled/theme";
@@ -55,6 +56,7 @@ const HomeComponent = props => {
     <HomeWrapper>
       <PageHeaderContainer {...header} />
       <AboutContainer />
+      <EventContainer />
     </HomeWrapper>
   );
 };

@@ -15,12 +15,15 @@ const restApiResponse = {
     rendered: "Craft Carnival"
   },
   acf: {
+    event_url: "http://localhost:8080/wp-content/uploads/2018/07/Craft-Carnival-2018-ad1.jpg",
+    event_description: "event description",
     event_start_day: "06/16/2018",
     event_start_time: "2:00 pm",
     event_end_day: "06/16/2018",
     event_end_time: "8:00 pm",
     event_background: "http://localhost:8080/wp-content/uploads/2018/07/Craft-Carnival-2018-ad1.jpg",
     event_page_hero: "http://localhost:8080/wp-content/uploads/2018/07/Craft-Carnival-2018-ad1.jpg",
+    event_type: "event type",
     locations: [
         103
     ]
