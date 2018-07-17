@@ -2,7 +2,6 @@ const homeResolvers = {
   defaults: {
     selectedFoodType: "brunch",
     selectedDrinkType: "cocktails",
-    currentLocation: 1,
     lvTaps: [],
     nfTaps: [],
     foodItems: [],
@@ -18,10 +17,7 @@ const homeResolvers = {
         cache.writeData({ data: { selectedDrinkType: selectedDrinkType } });
         return null;
       },
-      selectLocation: (_, { currentLocation }, { cache }) => {
-        cache.writeData({ data: { currentLocation: currentLocation } });
-        return null;
-      },
+
     }
   }
 }

@@ -44,20 +44,9 @@ const TopNav = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 0 15px;
+  padding: 16px 32px;
 `;
-const ActionIcon = styled.div`
-  display: flex;
-  padding: 12px;
-  min-width: 32px;
-  max-width: 168px;
-  margin: auto;
-  justify-content: center;
-`;
-const TopSVG = styled.svg``;
-const BrandInfo = styled.div`
-  padding: 0.625rem 0;
-`;
+
 const TopMobileButtons = styled.div`
   display: inline-flex;
   float: right;

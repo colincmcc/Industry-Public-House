@@ -23,7 +23,6 @@ const HomeComponent = props => {
   }
   const choosenHeader = chooseHeader();
   let isCustomLink = choosenHeader.acf.headerLink === "custom";
-  console.log(isCustomLink);
   const subHeading = (
     <HomeSubHeading>
       <Description>{choosenHeader.acf.subHeading}</Description>
@@ -52,7 +51,6 @@ const HomeComponent = props => {
     heading: choosenHeader.title.rendered,
     subHeading: subHeading
   };
-  console.log(header);
   return (
     <HomeWrapper>
       <PageHeaderContainer {...header} />

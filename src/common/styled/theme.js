@@ -191,13 +191,27 @@ const material = {
     width: "100%",
     minHeight: "100px"
   },
-  swipeableMenuRoot: {
+  swipeableBottomMenuRoot: {
     color: colors.blackTheme,
-    width: "250px",
-    backgroundColor: colors.whiteTheme
+    backgroundColor: colors.whiteTheme,
+    '@media(orientation: landscape)': {
+      height: "100vh"
+    }
+  },
+  swipeableSideMenuRoot: {
+    color: colors.blackTheme,
+    height: "100vh",
+    backgroundColor: colors.whiteTheme,
+    width: "320px"
   },
   swipeableMenuList: {
-    height: "100%"
+    height: "100%",
+    backgroundColor: colors.whiteTheme
+  },
+  avatarLarge: {
+    width: 60,
+    height: 60,
+    margin: 10
   }
 }
 

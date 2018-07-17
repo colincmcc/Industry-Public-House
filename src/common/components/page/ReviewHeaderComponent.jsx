@@ -10,7 +10,12 @@ const ReviewHeaderComponent = props => {
 
   return (
     <PageHeaderWrapper>
-      <CSSTransition in={true} classNames="fade" appear={true} timeout={1000}>
+      <CSSTransition
+        in={true}
+        classNames="header-fade"
+        appear={true}
+        timeout={1000}
+      >
         <BGOverlay bgImg={props.bgImg} />
       </CSSTransition>
       <PageHeadContent>
@@ -62,11 +67,11 @@ const BGOverlay = styled.div`
     left: 0;
     background-color: rgb(17, 12, 2, 0.6);
   }
-  &.fade-appear {
+  &.header-fade-appear {
     opacity: 0;
     transform: scale(0.94);
   }
-  &.fade-appear-done {
+  &.header-fade-appear-done {
     opacity: 1;
     transform: scale(1);
   }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Query } from "react-apollo";
-
+import {withRouter} from 'react-router-dom'
 import gql from "graphql-tag";
 import MobileNavComponent from './MobileNavComponent'
-import MobileNavMenu from './MobileNavMenu'
 import HeaderContainer from './header/HeaderContainer'
 
 
@@ -16,15 +15,13 @@ export const mobileNavItems = [
   {label: "Food", link: "/Food"},
   {label: "Drinks", link: "/Drink"},
   {label: "Contact", link: "/Contact"},
-  {label: "Gallery", link: "/Gallery"},
   {label: "Apply", link: "/Apply"},
   {label: "Events", link: "/Calendar"},
   {label: "Shop", link: "/Shop"},
 
 ]
 
-
-export default class NavContainer extends Component {
+class NavContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,15 +31,13 @@ export default class NavContainer extends Component {
       lastScrollPos: 0
 
     };
-    this.handleScroll = this.handleScroll.bind(this);
-    this.burgerToggle = this.burgerToggle.bind(this);
+
 
   }
 
   componentDidMount () {
     this.handleScroll();
   }
-
   // If navbar is visible (navIsShown is true), then check to see if current scroll position is greater than the last scroll position.  If true, then set state of scrollDirection to "DOWN".
   //Else, or if navbar is not visible, check to see if current scroll position is less than the last scroll position.  If true, set state of scrollDirection to "UP".
 
@@ -89,17 +84,10 @@ export default class NavContainer extends Component {
     });
   }
 
-  burgerToggle() {
-    const { menuIsShown } = this.state;
-    if (menuIsShown) {
-      this.setState({ menuIsShown: false });
-    } else {
-      this.setState({ menuIsShown: true });
-    }
-  }
 
   render() {
-    const { menuIsShown, navIsShown } = this.state;
+    const { navIsShown } = this.state;
+
 
     // ! pageBy query returns an array, despite having only 1 valid value.
     return (
@@ -108,11 +96,11 @@ export default class NavContainer extends Component {
           ({ loading, error, data }) => {
             if(loading) return <p>Loading...</p>
             if(error) return <p>Error</p>
+
             return (
             <div>
               <HeaderContainer headerLogo={data.pageBy[0].acf.hero_image} />
-              <MobileNavComponent navIsShown={navIsShown} burgerToggle={this.burgerToggle} menuIsShown={menuIsShown} />
-              <MobileNavMenu burgerToggle={this.burgerToggle} menuIsShown={menuIsShown} />
+              <MobileNavComponent navIsShown={navIsShown} menuIsShown={data.mobileMenuOpen} />
             </div>
             )
 
@@ -123,6 +111,7 @@ export default class NavContainer extends Component {
   }
 }
 
+export default withRouter(NavContainer)
 const NAV_QUERY = gql`
 {
   pageBy(slug: "home"){
@@ -130,5 +119,6 @@ const NAV_QUERY = gql`
       hero_image
     }
   }
+  mobileMenuOpen @client
 }
 `

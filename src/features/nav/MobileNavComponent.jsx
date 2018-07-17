@@ -13,7 +13,7 @@ import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
 import theme from "../../common/styled/theme";
 
 const MobileNavComponent = props => {
-  const { classes, location } = props;
+  const { classes, menuIsShown, navIsShown } = props;
   const currentPath = props.location.pathname;
 
   const bottomNavItems = [
@@ -29,8 +29,13 @@ const MobileNavComponent = props => {
       slug: "drinks",
       icon: <BeerGlass />
     },
-    { link: "/Food", text: "Food", slug: "food", icon: <Food /> },
-    { link: "/Contact", text: "Contact", slug: "contact", icon: <Email /> },
+    { link: "/Food", text: "Food", slug: "food", icon: <Food />, onClick: {} },
+    {
+      link: "/Contact",
+      text: "Contact",
+      slug: "contact",
+      icon: <Email />
+    },
     {
       link: { pathname: "#Menu", state: { modal: true } },
       text: "Menu",
@@ -40,7 +45,7 @@ const MobileNavComponent = props => {
   ];
 
   return (
-    <NavWrapper className={props.navIsShown ? "" : "hide"}>
+    <NavWrapper className={navIsShown ? " " : "hide "}>
       <BottomNavigation
         value={currentPath.substr(0, 4)}
         classes={{ root: classes.bottomNavRoot }}
@@ -83,6 +88,10 @@ const NavWrapper = styled.div`
   transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
   &.hide {
     transform: translate3d(0, 100%, 0);
+  }
+  &.slide {
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   }
 
   ${props => props.theme.media.tablet_landscape_up`

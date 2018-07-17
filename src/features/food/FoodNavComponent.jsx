@@ -17,10 +17,8 @@ import theme from "../../common/styled/theme";
 const FoodNavComponent = props => {
   const { classes } = props;
   const currentPath = props.location.pathname;
-  console.log(props);
   let scrollMenu = true;
   window.innerWidth < 760 ? (scrollMenu = true) : (scrollMenu = false);
-  console.log(currentPath.substr(0, 4));
   return (
     <MenuNavWrapper>
       <Tabs

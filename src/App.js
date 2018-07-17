@@ -35,7 +35,7 @@ class App extends Component {
     if (currentVersion === SCHEMA_VERSION) {
       // If the current version matches the latest version,
       // we're good to go and can restore the cache.
-      await persistor.restore();
+      await persistor.purge();
     } else {
       // Otherwise, we'll want to purge the outdated persisted cache
       // and mark ourselves as having updated to the latest version.
@@ -73,8 +73,6 @@ class App extends Component {
       this.previousLocation !== location
     );
 
-    console.log(`isModal = ${isModal}`)
-    console.log(this.props)
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme} >
@@ -127,7 +125,7 @@ export default withRouter(App);
 
 const AppWrapper = styled.div`
 overflow: hidden;
-
+box-sizing: border-box;
 `
 
 const CACHED_STATE = gql`

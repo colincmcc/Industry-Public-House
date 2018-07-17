@@ -5,6 +5,9 @@ const appResolvers =  {
       isConnected: true,
     },
     isLoggedIn: false,
+    mobileMenuOpen: false,
+    currentLocation: 1,
+
   },
   resolvers: {
     Mutation: {
@@ -17,7 +20,15 @@ const appResolvers =  {
         };
         cache.writeData({ data });
         return null;
-      }
+      },
+      updateMobileMenuStatus: (_, { mobileMenuOpen }, { cache }) => {
+        cache.writeData({ data: { mobileMenuOpen: mobileMenuOpen } });
+        return null;
+      },
+      selectLocation: (_, { currentLocation }, { cache }) => {
+        cache.writeData({ data: { currentLocation: currentLocation } });
+        return null;
+      },
     }
   }
 }
