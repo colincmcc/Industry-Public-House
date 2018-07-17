@@ -216,7 +216,9 @@ const material = {
   eventCard: {
     width: 345,
     color: colors.blackTheme,
-    marginLeft: 16
+    marginLeft: 16,
+    display: 'inline-block'
+
   },
   eventMedia: {
     height: 0,

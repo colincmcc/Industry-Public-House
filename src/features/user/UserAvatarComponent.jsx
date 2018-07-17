@@ -14,17 +14,20 @@ const UserAvatarComponent = props => {
     userName: "Colin McCullough",
     userPoints: 0,
     userLevel: 0,
-    currentBonus: 0,
+    currentBonus: 0
   };
   return (
     <UserAvatarWrapper>
       <UserMeta>
-      <Avatar src={currentUser.avatar} classes={{ root: classes.avatarLarge }} />
-      <UserName>{currentUser.userName}</UserName>
+        <Avatar
+          src={currentUser.avatar}
+          classes={{ root: classes.avatarLarge }}
+        />
+        <UserName>{currentUser.userName}</UserName>
       </UserMeta>
       <PointsMeta>
         <UserPoints>{currentUser.userPoints}</UserPoints>
-        <UserLevel> {currentUser.userLevel}
+        <UserLevel> {currentUser.userLevel} </UserLevel>
       </PointsMeta>
     </UserAvatarWrapper>
   );
@@ -37,8 +40,8 @@ const UserAvatarWrapper = styled.div`
   width: 100%;
 `;
 const UserMeta = styled.div`
-flex-direction: row;
-`
+  flex-direction: row;
+`;
 const PointsMeta = styled.div`
   display: flex;
   flex-direction: row;
@@ -52,4 +55,4 @@ const UserPoints = styled.div`
   ${props => props.theme.fontStyles.heading};
   font-weight: 900;
 `;
-const UserLevel = styled.div``
+const UserLevel = styled.div``;

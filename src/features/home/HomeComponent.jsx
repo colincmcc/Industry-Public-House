@@ -63,9 +63,7 @@ const HomeComponent = props => {
 
 export default withStyles(theme.materialUI)(HomeComponent);
 
-const HomeWrapper = styled.div`
-  display: grid;
-`;
+const HomeWrapper = styled.div``;
 
 const HomeSubHeading = styled.div``;
 const Description = styled.p`

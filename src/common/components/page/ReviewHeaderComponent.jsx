@@ -41,7 +41,7 @@ const ReviewHeaderComponent = props => {
 export default withStyles(theme.materialUI)(ReviewHeaderComponent);
 
 const PageHeaderWrapper = styled.section`
-  display: flex;
+  display: block;
   align-items: center;
   height: 100vh;
   width: 100%;
