@@ -14,9 +14,9 @@ const ReviewHeaderComponent = props => {
         in={true}
         classNames="header-fade"
         appear={true}
-        timeout={1000}
+        timeout={300}
       >
-        <BGOverlay bgImg={props.bgImg} />
+        <BGOverlay className="header-fade-appear" bgImg={props.bgImg} />
       </CSSTransition>
       <PageHeadContent>
         <PageHeading>{props.heading} </PageHeading>
@@ -58,6 +58,7 @@ const BGOverlay = styled.div`
   background-size: cover;
   transition: all 2s;
   box-shadow: inset 0 0 29px 0px ${props => props.theme.colors.blackTheme};
+
   &:after {
     content: "";
     width: 100%;

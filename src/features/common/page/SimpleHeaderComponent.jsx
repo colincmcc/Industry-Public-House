@@ -6,7 +6,7 @@ const SimpleHeaderComponent = props => {
   return (
     <PageHeaderWrapper>
       <CSSTransition in={true} classNames="fade" appear={true} timeout={300}>
-        <BGOverlay bgImg={props.bgImg} />
+        <BGOverlay className="fade-appear" bgImg={props.bgImg} />
       </CSSTransition>
       <PageHeadContent>
         <PageHeading>{props.heading} </PageHeading>
