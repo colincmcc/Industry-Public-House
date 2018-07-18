@@ -15,6 +15,7 @@ const EventContainer = () => {
           const eventList = data.allEvents.map(event =>
             ({
               title: event.title.rendered,
+              locations: event.locations,
               eventUrl: event.acf.event_url,
               eventDescription: event.acf.event_description,
               eventStartDay: event.acf.event_start_day,
@@ -26,7 +27,7 @@ const EventContainer = () => {
               eventType: event.acf.event_type
             })
           )
-          return <EventListComponent eventList={eventList} />
+          return <EventListComponent pageTitle={data.pageBy[0].title.rendered} eventList={eventList} />
 
         }
       }
@@ -38,10 +39,21 @@ export default EventContainer
 
 const WP_EVENTS = gql`
 {
+  pageBy(slug: "events"){
+    title{
+      rendered
+    }
+  }
+
   allEvents{
     id
     title{
       rendered
+    }
+    locations {
+      title {
+        rendered
+      }
     }
     acf{
       event_url

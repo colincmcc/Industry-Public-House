@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 
-import Button from "@material-ui/core/Button";
-import theme from "../../styled/theme";
-
 const SimpleHeaderComponent = props => {
   return (
     <PageHeaderWrapper>
@@ -68,7 +65,6 @@ const PageHeadContent = styled.div`
 const PageHeading = styled.div`
   ${props => props.theme.components.heading};
   color: ${props => props.theme.colors.whiteTheme};
-  font-weight: 800;
   text-transform: uppercase;
   padding: 0 2em;
 `;

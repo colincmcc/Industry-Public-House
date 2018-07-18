@@ -8,7 +8,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import List from "@material-ui/core/List";
 import theme from "../../common/styled/theme";
 import { withStyles } from "@material-ui/core";
-import LoadingComponent from "../../common/components/loading/LoadingComponent";
+import LoadingComponent from "./loading/LoadingComponent";
 
 const FoodDrinkComponent = props => {
   const { classes } = props;

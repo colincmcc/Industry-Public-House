@@ -9,7 +9,7 @@ import FoodNavComponent from "./FoodNavComponent";
 import bgImg from '../../common/assets/img/burgher.jpg'
 
 import foodBG from '../../common/assets/img/menu_background.jpg'
-import PageHeaderContainer from '../../common/components/page/PageHeaderContainer'
+import PageHeaderContainer from '../common/page/PageHeaderContainer'
 import FoodMenuComponent from './FoodMenuComponent';
 
 

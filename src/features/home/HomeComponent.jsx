@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
-import AboutContainer from "./components/about/AboutContainer";
-import PageHeaderContainer from "../../common/components/page/PageHeaderContainer";
-import EventContainer from "../events/EventContainer";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import AboutContainer from "./components/about/AboutContainer";
+import PageHeaderContainer from "../common/page/PageHeaderContainer";
+import EventContainer from "../events/EventContainer";
+
 import theme from "../../common/styled/theme";
 
 const HomeComponent = props => {

@@ -27,10 +27,13 @@ const WP_FOOTER = gql`
      rendered
    }
    acf{
-     loc_symbol
-     loc_num
-     address{
-       address
+    facebook
+    trip_advisor
+    twitter
+    loc_symbol
+    loc_num
+    address{
+      address
      }
     open_hours
     happy_hour

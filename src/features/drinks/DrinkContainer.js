@@ -8,11 +8,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 
-import PageHeaderContainer from '../../common/components/page/PageHeaderContainer'
+import PageHeaderContainer from '../common/page/PageHeaderContainer'
 import DrinkNavComponent from './DrinkNavComponent'
-import TapLIstComponent from '../../common/components/digitalPour/TapLIstComponent';
+import TapLIstComponent from '../common//digitalPour/TapLIstComponent';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
-import FoodDrinkComponent from '../common/FoodDrinkComponent'
 import DrinkMenuComponent from './DrinkMenuComponent'
 
 

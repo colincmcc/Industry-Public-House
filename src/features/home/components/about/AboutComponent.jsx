@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-
+import Heading from "../../../common/Heading";
 import mainBg from "../../../../common/assets/img/Drinks-Background.jpg";
 import nfPatio from "../../../../common/assets/img/nf_patio.jpg";
 
 const AboutComponent = props => {
+  const { bgImg, title, content, heroImg } = props;
   return (
-    <AboutWrapper bgImg={props.bgImg} id="About">
-      <AboutHeader> {props.title} </AboutHeader>
-      <AboutContent dangerouslySetInnerHTML={{ __html: props.content }} />
-      <HeroImg heroImg={props.heroImg} />
+    <AboutWrapper bgImg={bgImg} id="About">
+      <Heading text={title} />
+      <AboutContent dangerouslySetInnerHTML={{ __html: content }} />
+      <HeroImg heroImg={heroImg || nfPatio} />
     </AboutWrapper>
   );
 };
@@ -25,7 +26,6 @@ const AboutWrapper = styled.section`
   background-image: url(${props => props.bgImg});
   background-position: center bottom;
   background-size: cover;
-  z-index: 1;
   &:before {
     content: "";
     position: absolute;
@@ -35,20 +35,13 @@ const AboutWrapper = styled.section`
       ${props => props.theme.colors.blackTheme + "80"},
       rgba(0, 0, 0, 0)
     );
-    z-index: -1;
   }
-`;
-
-const AboutHeader = styled.div`
-  ${props => props.theme.components.heading};
-  padding-top: 2em;
-  text-transform: uppercase;
 `;
 
 const AboutContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 3em;
+  padding: 0 2em 2em 2em;
   color: ${props => props.theme.colors.whiteTheme};
   width: 75%;
   margin: auto;
@@ -59,6 +52,7 @@ const AboutContent = styled.div`
     ${props => props.theme.fontStyles.medium};
 
   `};
+  z-index: 1;
 `;
 const HeroImg = styled.div`
   background: url(${props => props.heroImg});
@@ -67,4 +61,5 @@ const HeroImg = styled.div`
   background-repeat: no-repeat;
   width: 100%;
   height: 200px;
+  z-index: 1;
 `;

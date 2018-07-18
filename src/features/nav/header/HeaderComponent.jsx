@@ -1,19 +1,42 @@
 import React from "react";
+
+import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
-import fullLogo from "../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
-import PhoneButton from "../../../common/components/phone";
+import { withStyles } from "@material-ui/core/styles";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+
 import IconButton from "@material-ui/core/IconButton";
-import theme from "../../../common/styled/theme";
-import { withStyles } from "@material-ui/core";
 import { Phone, Facebook, Twitter, Instagram } from "mdi-material-ui";
-import TripAdvisor from "../../../common/components/tripadvisor";
+import theme from "../../../common/styled/theme";
+import mobileNavItems from "../NavContainer";
 
 const HeaderComponent = props => {
-  const { classes, headerLogo } = props;
+  const { classes, headerLogo, location } = props;
   return (
     <TopWrapper>
       <TopNav>
         <LogoImg src={headerLogo} />
+        <TopNav>
+          <Tabs
+            value={location.pathname}
+            classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+          >
+            {mobileNavItems.map(navItem => (
+              <Tab
+                centered
+                component={Link}
+                to={navItem.link}
+                value={navItem.link}
+                label={navItem.label}
+                classes={{
+                  root: classes.tabRoot,
+                  selected: classes.tabSelected
+                }}
+              />
+            ))}
+          </Tabs>
+        </TopNav>
         <TopMobileButtons>
           <IconButton style={{ color: theme.colors.lightAccent }}>
             <Phone />
@@ -24,7 +47,7 @@ const HeaderComponent = props => {
   );
 };
 
-export default withStyles(theme.materialUI)(HeaderComponent);
+export default withStyles(theme.materialUI)(withRouter(HeaderComponent));
 
 const TopWrapper = styled.div`
   width: 100vw;
@@ -47,9 +70,13 @@ const TopNav = styled.div`
   padding: 16px 32px;
 `;
 
+const NavItem = styled.div``;
 const TopMobileButtons = styled.div`
   display: inline-flex;
   float: right;
+  ${props => props.theme.media.tablet_portrait_up`
+  display: none;
+  `};
 `;
 const LogoImg = styled.img`
   display: flex;

@@ -22,6 +22,11 @@ const EventSummaryComponent = props => {
         title={event.title}
       />
       <CardContent>
+        {event.locations.map(location => (
+          <SingleLocation key={shortid.generate()}>
+            <strong>{location.title.rendered}</strong>
+          </SingleLocation>
+        ))}
         <EventTime>
           <strong>Day: </strong> {event.eventStartDay}
           <br />
@@ -44,3 +49,6 @@ const EventTime = styled.div`
   text-align: left;
 `;
 const EventDescription = styled.p``;
+const SingleLocation = styled.div`
+  text-align: left;
+`;

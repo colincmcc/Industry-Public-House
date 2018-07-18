@@ -1,8 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import theme from "../../styled/theme";
+import theme from "../../../common/styled/theme";
+import TextButton from "../TextButton";
 import { CSSTransition } from "react-transition-group";
 
 const ReviewHeaderComponent = props => {
@@ -26,12 +26,12 @@ const ReviewHeaderComponent = props => {
 
           <Author>{`- ${props.review.acf.review_author}`}</Author>
 
-          <Button
-            onClick={() => window.open(props.review.acf.source_link, "_blank")}
-            classes={{ root: classes.buttonRoot }}
-          >
-            Read Review
-          </Button>
+          <TextButton
+            clickFunction={() =>
+              window.open(props.review.acf.source_link, "_blank")
+            }
+            text="Read Review"
+          />
         </PageSubHeading>
       </PageHeadContent>
     </PageHeaderWrapper>
@@ -41,7 +41,7 @@ const ReviewHeaderComponent = props => {
 export default withStyles(theme.materialUI)(ReviewHeaderComponent);
 
 const PageHeaderWrapper = styled.section`
-  display: block;
+  display: flex;
   align-items: center;
   height: 100vh;
   width: 100%;

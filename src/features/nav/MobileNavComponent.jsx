@@ -6,10 +6,9 @@ import { Menu, Food, Email } from "mdi-material-ui";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { withStyles } from "@material-ui/core/styles";
-import LightbulbLogo from "../../common/components/lightbulb";
-import BeerGlass from "../../common/components/beerglass";
+import LightbulbLogo from "../common/svgIcons/lightbulb";
+import BeerGlass from "../common/svgIcons/beerglass";
 
-import grungeBanner from "../../common/assets/img/Grunge_Header.svg";
 import theme from "../../common/styled/theme";
 
 const MobileNavComponent = props => {

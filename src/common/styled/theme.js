@@ -24,7 +24,7 @@ const fontSizes = {
   heading: {
     size: "40px",
     lineHeight: "50px",
-    weight: 400
+    weight: 400,
 
   },
   subHeading: {
@@ -50,13 +50,16 @@ const fontStyles = {
   heading: css`
   font-size: 40px;
   line-height: 50px;
-  font-weight: 400;
+  font-weight: 800;
+  font-family: "ITC American Typewriter St";
   `,
   subHeading: css`
   font-size: 22px;
   line-height: 33px;
   font-weight: 600;
   letter-spacing: .025em;
+  font-family: "Eccentric Std";
+
   `,
   medium: css`
   font-size: 19px;
@@ -67,6 +70,8 @@ const fontStyles = {
   font-size: 17px;
   line-height: 28px;
   font-weight: 400;
+  font-family: "Source Sans Pro";
+
   `,
   smallHeading: css`
   font-size: 14px;
@@ -117,6 +122,11 @@ const styledComponents = {
   color: ${colors.theme};
   text-transform: uppercase;
   `,
+  text: css`
+  ${fontStyles.text}
+margin: auto;
+color: ${colors.whiteTheme};
+`,
   small: css`
   ${fontStyles.small}
 margin: auto;
@@ -127,10 +137,12 @@ color: ${colors.whiteTheme};
 
 const material = {
   root: {
-    color: "#F4EDDC"
+    color: "#F4EDDC",
+    ...fontStyles.text
   },
   tabRoot: {
-    color: "#F4EDDC"
+    color: "#F4EDDC",
+    ...fontStyles.text
   },
   tabSelected: {
     color: colors.lightAccent
@@ -147,6 +159,8 @@ const material = {
     minWidth: "50%",
     width: "100%",
     color: colors.blackTheme,
+    ...fontStyles.text,
+
     '@media(min-width: 700px)': {
       columns: 2,
     }
@@ -162,6 +176,8 @@ const material = {
   },
   listItemRoot:{
     breakInside: "avoid",
+    ...fontStyles.text
+
   },
   listItemContainer: {
     maxWidth: 360
@@ -182,6 +198,8 @@ const material = {
   },
   buttonRoot: {
     color: colors.lightAccent + "!important",
+    ...fontStyles.text
+
   },
   buttonColorPrimary: {
     color: colors.lightAccent,
@@ -194,6 +212,8 @@ const material = {
   swipeableBottomMenuRoot: {
     color: colors.blackTheme,
     backgroundColor: colors.whiteTheme,
+    ...fontStyles.text,
+
     '@media(orientation: landscape)': {
       height: "100vh"
     }
@@ -217,7 +237,8 @@ const material = {
     width: 345,
     color: colors.blackTheme,
     marginLeft: 16,
-    display: 'inline-block'
+    display: 'inline-block',
+    backgroundColor: colors.whiteTheme
 
   },
   eventMedia: {

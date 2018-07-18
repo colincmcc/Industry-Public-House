@@ -6,8 +6,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import { Facebook, Twitter, Instagram } from "mdi-material-ui";
-import TripAdvisor from "../../common/components/tripadvisor";
 
+import TripAdvisor from "../common/svgIcons/tripadvisor";
 import theme from "../../common/styled/theme";
 
 const FooterComponent = props => {
@@ -39,15 +39,24 @@ const FooterComponent = props => {
                 </Button>
               </LocationContent>
               <SocialButtons>
-                <IconButton classes={{ root: classes.buttonRoot }}>
+                <IconButton
+                  href={location.acf.facebook}
+                  classes={{ root: classes.buttonRoot }}
+                >
                   <Facebook />
                 </IconButton>
 
-                <IconButton classes={{ root: classes.buttonRoot }}>
+                <IconButton
+                  href={location.acf.twitter}
+                  classes={{ root: classes.buttonRoot }}
+                >
                   <Twitter />
                 </IconButton>
 
-                <IconButton classes={{ root: classes.buttonRoot }}>
+                <IconButton
+                  href={location.acf.trip_advisor}
+                  classes={{ root: classes.buttonRoot }}
+                >
                   <TripAdvisor />
                 </IconButton>
               </SocialButtons>
@@ -74,6 +83,7 @@ const FooterContent = styled.div`
 const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 2em;
   width: 50%;
   float: left;
   ${props => props.theme.components.small};
@@ -81,17 +91,14 @@ const ContactInfo = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 75%;
-
   `};
 `;
 
 const FooterHeader = styled.div`
   ${props => props.theme.components.smallHeading};
+
   ${props => props.theme.media.tablet_landscape_up`
-    font-size: 40px;
-  line-height: 50px;
-  font-weight: 400;
-  padding-bottom: 1em;
+    ${props => props.theme.components.heading};
   `};
 `;
 const LocationListing = styled.div`
@@ -101,6 +108,7 @@ const LocationListing = styled.div`
 `;
 const LocationContent = styled.p`
   ${props => props.theme.fontStyles.text};
+  margin-bottom: 0;
 `;
 const MiscInfo = styled.div`
   display: flex;

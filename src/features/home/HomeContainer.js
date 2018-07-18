@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query } from "react-apollo";
 import gql from 'graphql-tag'
-import LoadingComponent from '../../common/components/loading/LoadingComponent'
+import LoadingComponent from '../common/loading/LoadingComponent'
 import HomeComponent from './HomeComponent'
 
 export default class HomeContainer extends

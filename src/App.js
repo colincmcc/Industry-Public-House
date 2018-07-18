@@ -8,7 +8,7 @@ import gql from 'graphql-tag'
 import theme from './common/styled/theme'
 import {persistor, apolloClient, cacheStorage} from './data/client'
 
-import LoadingComponent from './common/components/loading/LoadingComponent'
+import LoadingComponent from './features/common/loading/LoadingComponent'
 import HomeContainer from './features/home/HomeContainer'
 import NavContainer from './features/nav/NavContainer'
 import FooterContainer from './features/footer/FooterContainer'
@@ -78,6 +78,7 @@ class App extends Component {
         <ThemeProvider theme={theme} >
           <AppWrapper>
             <NavContainer />
+            <MainContent>
             <Query query={CACHED_STATE}>
             {
             ({ loading, error, data }) => {
@@ -113,6 +114,7 @@ class App extends Component {
             }
 
             </Query>
+            </MainContent>
             <FooterContainer />
           </AppWrapper>
         </ThemeProvider>
@@ -125,6 +127,10 @@ export default withRouter(App);
 
 const AppWrapper = styled.div`
 overflow: hidden;
+`
+const MainContent = styled.div`
+
+
 `
 
 const CACHED_STATE = gql`
