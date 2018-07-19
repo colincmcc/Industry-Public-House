@@ -127,9 +127,10 @@ export default withRouter(App);
 
 const AppWrapper = styled.div`
 overflow: hidden;
+background-color: ${props => props.theme.colors.darkGray};
+
 `
 const MainContent = styled.div`
-
 
 `
 

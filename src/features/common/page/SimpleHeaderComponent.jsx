@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import shortid from "shortid";
 import { CSSTransition } from "react-transition-group";
 
 const SimpleHeaderComponent = props => {
   return (
-    <PageHeaderWrapper>
+    <PageHeaderWrapper key={shortid.generate()}>
       <CSSTransition in={true} classNames="fade" appear={true} timeout={300}>
         <BGOverlay className="fade-appear" bgImg={props.bgImg} />
       </CSSTransition>
@@ -21,17 +22,19 @@ export default SimpleHeaderComponent;
 
 const PageHeaderWrapper = styled.section`
   display: flex;
+  position: relative;
   align-items: center;
   height: 100vh;
   width: 100%;
   overflow: hidden;
 `;
 const BGOverlay = styled.div`
-  width: 100%;
-  height: 100vh;
   position: absolute;
+  height: 100vh;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   background-image: url(${props => props.bgImg});
   background-position: center;
   background-size: cover;
@@ -45,6 +48,8 @@ const BGOverlay = styled.div`
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     background-color: rgb(17, 12, 2, 0.6);
   }
   &.fade-appear {
@@ -59,7 +64,7 @@ const BGOverlay = styled.div`
 const PageHeadContent = styled.div`
   margin: auto;
   max-width: 720px;
-  z-index: 2;
+  transform: translatez(0);
 `;
 
 const PageHeading = styled.div`

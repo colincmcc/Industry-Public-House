@@ -3,7 +3,7 @@ import List from "@material-ui/core/List";
 import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
 import TapItemComponent from "./TapItemComponent";
-
+import theme from "../../../common/styled/theme";
 // TODO : must be a better way to handle the json response based on type of product (mead, beer, cider)
 
 /**
@@ -36,19 +36,11 @@ import TapItemComponent from "./TapItemComponent";
 
  */
 
-const styles = theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  }
-});
-
 const TapLIstComponent = props => {
   const classes = props;
   return (
     <div className={classes.root}>
-      <List>
+      <List className={classes.listRoot}>
         {props.taps.map(tap => {
           const bevType = tap.MenuItemProductDetail.BeverageType;
           switch (bevType) {
@@ -115,4 +107,4 @@ const TapLIstComponent = props => {
   );
 };
 
-export default withStyles(styles)(TapLIstComponent);
+export default withStyles(theme.materialUI)(TapLIstComponent);

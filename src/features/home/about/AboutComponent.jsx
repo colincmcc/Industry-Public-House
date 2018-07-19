@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import Heading from "../../../common/Heading";
-import mainBg from "../../../../common/assets/img/Drinks-Background.jpg";
-import nfPatio from "../../../../common/assets/img/nf_patio.jpg";
+import Heading from "../../common/Heading";
+import mainBg from "../../../common/assets/img/Drinks-Background.jpg";
+import nfPatio from "../../../common/assets/img/nf_patio.jpg";
+import PageWrapper from "../../common/page/PageWrapper";
 
 const AboutComponent = props => {
   const { bgImg, title, content, heroImg } = props;
-  return (
+
+  const aboutPage = (
     <AboutWrapper bgImg={bgImg} id="About">
       <Heading text={title} />
       <AboutContent dangerouslySetInnerHTML={{ __html: content }} />
       <HeroImg heroImg={heroImg || nfPatio} />
     </AboutWrapper>
   );
+  return aboutPage;
 };
 
 export default AboutComponent;
@@ -23,19 +26,11 @@ const AboutWrapper = styled.section`
   width: 100%;
   height: 100%;
   text-align: center;
-  background-image: url(${props => props.bgImg});
+  background-image: url(${mainBg});
   background-position: center bottom;
   background-size: cover;
-  &:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      ${props => props.theme.colors.blackTheme + "80"},
-      rgba(0, 0, 0, 0)
-    );
-  }
+  max-width: 1600px;
+  margin: auto;
 `;
 
 const AboutContent = styled.div`

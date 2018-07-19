@@ -13,6 +13,7 @@ import DrinkNavComponent from './DrinkNavComponent'
 import TapLIstComponent from '../common//digitalPour/TapLIstComponent';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
 import DrinkMenuComponent from './DrinkMenuComponent'
+import theme from "../../common/styled/theme";
 
 
 const styles = theme => ({
@@ -41,13 +42,13 @@ const DrinkContainer = (props) => {
     const { classes } = props;
 
     return(
-      <Query query={ DP_TAPS } variables={{location: currentLocation}}>
+      <Query query={ WP_COCKTAILS }>
       {
         ({loading, error, data, client}) =>{
 
           const drinkNavItems = [
             {label: "Cocktails", slug: "Cocktails", component: <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />, showLocation: false},
-            {label: "Taps", slug: "Taps", component: <TapLIstComponent taps={data.allTaps} loading={loading} error={error} />, showLocation: true, props: ""},
+            {label: "Taps", slug: "Taps", component: <DrinkMenuComponent query={DP_TAPS} queryVariables={{location: currentLocation}} drinkType="taps" />, showLocation: true, props: ""},
             {label: "Cans", slug: "Cans", component: <DrinkMenuComponent query={WP_CANS} drinkType="cans" />, showLocation: true},
             {label: "Wine", slug: "Wine", component: <DrinkMenuComponent query={WP_WINE} drinkType="wine" />, showLocation: false},
             {label: "Premium", slug: "Premium", component: <DrinkMenuComponent query={WP_PREMIUM} drinkType="premium" />, showLocation: true},
@@ -60,7 +61,7 @@ const DrinkContainer = (props) => {
 
             <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
 
-            <Paper className={classes.root} elevation={2}>
+            <Paper className={classes.paperRoot}  elevation={2}>
             <Switch>
             <Route
             exact
@@ -81,7 +82,7 @@ const DrinkContainer = (props) => {
     )
 }
 
-export default withStyles(styles)(withRouter(DrinkContainer))
+export default withStyles(theme.materialUI)(withRouter(DrinkContainer))
 const WP_COCKTAILS = gql`
   {
     menuItems: allCocktails {

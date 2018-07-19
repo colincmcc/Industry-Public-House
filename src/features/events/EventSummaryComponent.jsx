@@ -22,11 +22,13 @@ const EventSummaryComponent = props => {
         title={event.title}
       />
       <CardContent>
-        {event.locations.map(location => (
-          <SingleLocation key={shortid.generate()}>
-            <strong>{location.title.rendered}</strong>
-          </SingleLocation>
-        ))}
+        <LocationGrid>
+          {event.locations.map(location => (
+            <SingleLocation key={shortid.generate()}>
+              <strong>{location.title.rendered}</strong>
+            </SingleLocation>
+          ))}
+        </LocationGrid>
         <EventTime>
           <strong>Day: </strong> {event.eventStartDay}
           <br />
@@ -34,7 +36,7 @@ const EventSummaryComponent = props => {
         </EventTime>
         <EventDescription> {event.eventDescription} </EventDescription>
       </CardContent>
-      <CardActions>
+      <CardActions style={{ position: "absolute", bottom: 0 }}>
         <Button size="small" classes={{ root: classes.buttonRoot }}>
           Learn More
         </Button>
@@ -48,7 +50,14 @@ export default withStyles(theme.materialUI)(EventSummaryComponent);
 const EventTime = styled.div`
   text-align: left;
 `;
-const EventDescription = styled.p``;
+const EventDescription = styled.p`
+  word-break: break-word;
+  white-space: normal;
+`;
 const SingleLocation = styled.div`
   text-align: left;
+`;
+const LocationGrid = styled.div`
+  display: grid;
+  grid: repeat(2, 1fr) / auto-flow;
 `;

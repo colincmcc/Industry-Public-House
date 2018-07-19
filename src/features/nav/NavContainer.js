@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Query } from "react-apollo";
 import {withRouter} from 'react-router-dom'
 import gql from "graphql-tag";
-import MobileNavComponent from './MobileNavComponent'
-import HeaderContainer from './header/HeaderContainer'
+import MobileNavComponent from './mobileNav/MobileNavComponent'
+import WideNavContainer from './wideNav/WideNavContainer'
 
 
 // This container controls mobile menu (MobileNavMenu) state and nav state (NavComponent)
@@ -14,7 +14,7 @@ export const mobileNavItems = [
   {label: "Home", link: "/"},
   {label: "Food", link: "/Food"},
   {label: "Drinks", link: "/Drink"},
-  {label: "Contact", link: "/Contact"},
+  {label: "Connect", link: "/Contact"},
   {label: "Apply", link: "/Apply"},
   {label: "Events", link: "/Calendar"},
   {label: "Shop", link: "/Shop"},
@@ -99,7 +99,7 @@ class NavContainer extends Component {
 
             return (
             <div>
-              <HeaderContainer headerLogo={data.pageBy[0].acf.hero_image} />
+              <WideNavContainer headerLogo={data.pageBy[0].acf.hero_image} />
               <MobileNavComponent navIsShown={navIsShown} menuIsShown={data.mobileMenuOpen} />
             </div>
             )

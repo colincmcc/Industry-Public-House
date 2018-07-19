@@ -108,7 +108,7 @@ const styledComponents = {
   heading: css`
   ${fontStyles.heading}
   margin: auto;
-  color: ${colors.theme};
+  color: ${colors.whiteTheme};
   `,
   subHeading: css`
     ${fontStyles.subHeading}
@@ -144,11 +144,26 @@ const material = {
     color: "#F4EDDC",
     ...fontStyles.text
   },
+  navTabRoot: {
+    color: "#F4EDDC",
+    ...fontStyles.text,
+    minWidth: "100px",
+
+    '@media(min-width: 1800px)': {
+      minWidth: "160px",
+    }
+  },
   tabSelected: {
     color: colors.lightAccent
   },
+  navTabsRoot: {
+    flexGrow: 1,
+
+  },
   tabsRoot: {
     flexGrow: 1,
+    margin: "auto",
+    padding: "2em"
 
   },
   indicator: {
@@ -206,8 +221,12 @@ const material = {
   },
   paperRoot: {
     color: colors.blackTheme,
-    width: "100%",
-    minHeight: "100px"
+    minHeight: "100px",
+    maxWidth: "1280px",
+    margin: "auto",
+    backgroundColor: "#F4EDDC",
+    padding: "2em"
+
   },
   swipeableBottomMenuRoot: {
     color: colors.blackTheme,
@@ -238,7 +257,10 @@ const material = {
     color: colors.blackTheme,
     marginLeft: 16,
     display: 'inline-block',
-    backgroundColor: colors.whiteTheme
+    backgroundColor: colors.whiteTheme,
+    minHeight: 490,
+    position: "relative",
+
 
   },
   eventMedia: {

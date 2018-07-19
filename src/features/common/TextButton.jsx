@@ -4,7 +4,7 @@ import theme from "../../common/styled/theme";
 import { withStyles } from "@material-ui/core/styles";
 
 const TextButton = props => {
-  const { clickFunction, text, classes } = props;
+  const { clickFunction, text, classes, btnComponent, to } = props;
 
   return (
     <Button onClick={clickFunction} classes={{ root: classes.buttonRoot }}>

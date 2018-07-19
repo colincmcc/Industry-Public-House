@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import AboutContainer from "./components/about/AboutContainer";
+import AboutContainer from "./about/AboutContainer";
 import PageHeaderContainer from "../common/page/PageHeaderContainer";
 import EventContainer from "../events/EventContainer";
 
 import theme from "../../common/styled/theme";
+import homeBg from "../../common/assets/img/concrete-faded.jpg";
 
 const HomeComponent = props => {
   const { allHeaders, classes } = props;
@@ -23,8 +24,11 @@ const HomeComponent = props => {
 
     return randomHeader;
   }
+
   const choosenHeader = chooseHeader();
+
   let isCustomLink = choosenHeader.acf.headerLink === "custom";
+
   const subHeading = (
     <HomeSubHeading>
       <Description>{choosenHeader.acf.subHeading}</Description>
@@ -53,11 +57,14 @@ const HomeComponent = props => {
     heading: choosenHeader.title.rendered,
     subHeading: subHeading
   };
+
   return (
-    <HomeWrapper>
+    <HomeWrapper id="homePage">
       <PageHeaderContainer {...header} />
-      <AboutContainer />
-      <EventContainer />
+      <HomePageOverlay id="main">
+        <AboutContainer />
+        <EventContainer />
+      </HomePageOverlay>
     </HomeWrapper>
   );
 };
@@ -65,7 +72,12 @@ const HomeComponent = props => {
 export default withStyles(theme.materialUI)(HomeComponent);
 
 const HomeWrapper = styled.div``;
-
+const HomePageOverlay = styled.div`
+  position: relative;
+  background-image: url(${homeBg});
+  background-position: center;
+  background-size: cover;
+`;
 const HomeSubHeading = styled.div``;
 const Description = styled.p`
   font-style: italic;

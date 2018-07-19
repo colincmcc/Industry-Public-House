@@ -12,4 +12,5 @@ const HeaderText = styled.div`
   padding: 2em;
   text-transform: uppercase;
   z-index: 1;
+  max-width: 500px;
 `;

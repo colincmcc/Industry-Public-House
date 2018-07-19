@@ -11,9 +11,8 @@ import { Phone, Facebook, Twitter, Instagram } from "mdi-material-ui";
 import theme from "../../../common/styled/theme";
 import { mobileNavItems } from "../NavContainer";
 
-const HeaderComponent = props => {
+const WideNavComponent = props => {
   const { classes, headerLogo, location } = props;
-  console.log(mobileNavItems);
   return (
     <TopWrapper>
       <NavContents>
@@ -22,18 +21,22 @@ const HeaderComponent = props => {
           <TopNav>
             <Tabs
               value={location.pathname}
-              classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+              classes={{
+                indicator: classes.indicator,
+                root: classes.navTabsRoot
+              }}
             >
               {mobileNavItems.map(navItem => (
                 <Tab
                   key={shortid.generate()}
                   centered="true"
+                  fullWidth="true"
                   component={Link}
                   to={navItem.link}
                   value={navItem.link}
                   label={navItem.label}
                   classes={{
-                    root: classes.tabRoot,
+                    root: classes.navTabRoot,
                     selected: classes.tabSelected
                   }}
                 />
@@ -51,7 +54,7 @@ const HeaderComponent = props => {
   );
 };
 
-export default withStyles(theme.materialUI)(withRouter(HeaderComponent));
+export default withStyles(theme.materialUI)(withRouter(WideNavComponent));
 
 const TopWrapper = styled.div`
   width: 100%;
@@ -66,6 +69,10 @@ const TopWrapper = styled.div`
   background-color: transparent;
   z-index: 5;
   color: ${props => props.theme.colors.lightAccent};
+
+  ${props => props.theme.media.tablet_landscape_up`
+  height: 80px;
+  `};
 `;
 const NavContents = styled.div`
   display: inline-flex;
@@ -80,7 +87,7 @@ const TopNav = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-
+  padding: 16px;
 `};
 `;
 
@@ -88,7 +95,7 @@ const TopMobileButtons = styled.div`
   display: inline-flex;
   align-items: center;
   height: 60px;
-  ${props => props.theme.media.tablet_portrait_up`
+  ${props => props.theme.media.tablet_landscape_up`
   display: none;
   `};
 `;
@@ -98,7 +105,7 @@ const LogoImg = styled.img`
   max-width: 100px;
   height: 60px;
   z-index: 5;
-  ${props => props.theme.media.tablet_portrait_up`
+  ${props => props.theme.media.tablet_landscape_up`
     height: 80px;
     max-width: 100%;
   `};
