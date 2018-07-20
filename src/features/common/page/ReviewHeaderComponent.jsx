@@ -66,7 +66,7 @@ const BGOverlay = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(17, 12, 2, 0.6);
+    background-color: rgb(17, 12, 2, 0.4);
   }
   &.header-fade-appear {
     opacity: 0;

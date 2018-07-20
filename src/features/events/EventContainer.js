@@ -27,7 +27,13 @@ const EventContainer = () => {
               eventType: event.acf.event_type
             })
           )
-          return <EventListComponent pageTitle={data.pageBy[0].title.rendered} eventList={eventList} />
+          const eventData = {
+            title: data.pageBy[0].title.rendered,
+            content: data.pageBy[0].content.rendered,
+            bgImg: data.pageBy[0].acf.background_image,
+            heroImg: data.pageBy[0].acf.hero_image
+          }
+          return <EventListComponent {...eventData} eventList={eventList} />
 
         }
       }
@@ -42,6 +48,10 @@ const WP_EVENTS = gql`
   pageBy(slug: "events"){
     title{
       rendered
+    }
+    acf{
+      background_image
+      hero_image
     }
   }
 

@@ -12,6 +12,6 @@ const SectionWrapper = styled.div`
   ${props => props.theme.media.tablet_portrait_up`
   margin: auto;
   padding: 2em;
-  background-color: ${props => props.theme.colors.whiteTheme};
+  background-color: ${props => props.theme.colors.blackTheme};
   width: 100%;`};
 `;

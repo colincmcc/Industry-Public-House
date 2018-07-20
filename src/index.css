@@ -21,6 +21,11 @@
   font-weight: bold;
   font-style: normal;
 }
+@font-face {
+  font-family: "Gin-Rough";
+  src: local("Gin Rough"), url(./common/assets/fonts/Gin-Rough.otf) format(otf);
+  font-style: normal;
+}
 
 body {
   margin: 0;

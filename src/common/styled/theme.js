@@ -16,8 +16,9 @@ const colors = {
   darkAccent: "#463217",
   blackTheme: "#110C02",
   whiteTheme: "#F4EDDC",
-  darkGray: "#252525",
-  yellowGray: "#7B776C"
+  darkGray: "#1d1e22",
+  yellowGray: "#7B776C",
+  darkBlue: "#051b3e"
 }
 
 const fontSizes = {
@@ -51,7 +52,7 @@ const fontStyles = {
   font-size: 40px;
   line-height: 50px;
   font-weight: 800;
-  font-family: "ITC American Typewriter St";
+  font-family: "Gin Rough";
   `,
   subHeading: css`
   font-size: 22px;
@@ -214,6 +215,12 @@ const material = {
   buttonRoot: {
     color: colors.lightAccent + "!important",
     ...fontStyles.text
+
+  },
+  homeButton: {
+    ...fontStyles.medium,
+    color: colors.blackTheme + "!important",
+    backgroundColor: colors.lightAccent + "!important",
 
   },
   buttonColorPrimary: {

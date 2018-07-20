@@ -24,38 +24,42 @@ const HomeComponent = props => {
 
     return randomHeader;
   }
+  // * Return an external link button if the Wordpress link is a custom button, else return an react-router link button. Probably should make a component
 
   const choosenHeader = chooseHeader();
 
   let isCustomLink = choosenHeader.acf.headerLink === "custom";
+  const actionButton = isCustomLink ? (
+    <Button
+      variant="contained"
+      classes={{ root: classes.homeButton }}
+      href={choosenHeader.acf.customLink}
+    >
+      {choosenHeader.acf.buttonText}
+    </Button>
+  ) : (
+    <Button
+      variant="contained"
+      classes={{ root: classes.homeButton }}
+      component={Link}
+      to={choosenHeader.acf.headerLink}
+    >
+      {choosenHeader.acf.buttonText}
+    </Button>
+  );
 
   const subHeading = (
     <HomeSubHeading>
       <Description>{choosenHeader.acf.subHeading}</Description>
-
-      {isCustomLink ? (
-        <Button
-          classes={{ root: classes.buttonRoot }}
-          href={choosenHeader.acf.customLink}
-        >
-          {choosenHeader.acf.buttonText}
-        </Button>
-      ) : (
-        <Button
-          classes={{ root: classes.buttonRoot }}
-          component={Link}
-          to={choosenHeader.acf.headerLink}
-        >
-          {choosenHeader.acf.buttonText}
-        </Button>
-      )}
     </HomeSubHeading>
   );
 
   const header = {
     bgImg: choosenHeader.acf.background_image,
+    heroImg: choosenHeader.acf.hero_image,
     heading: choosenHeader.title.rendered,
-    subHeading: subHeading
+    subHeading: subHeading,
+    actionButton: actionButton
   };
 
   return (
@@ -63,7 +67,6 @@ const HomeComponent = props => {
       <PageHeaderContainer {...header} />
       <HomePageOverlay id="main">
         <AboutContainer />
-        <EventContainer />
       </HomePageOverlay>
     </HomeWrapper>
   );

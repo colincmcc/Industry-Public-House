@@ -38,6 +38,7 @@ const HOME_PAGE = gql`
     link
     acf{
       background_image
+      hero_image
       isFeatured
       customLink
       headerLink

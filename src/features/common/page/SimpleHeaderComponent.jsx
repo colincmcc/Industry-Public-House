@@ -4,16 +4,24 @@ import shortid from "shortid";
 import { CSSTransition } from "react-transition-group";
 
 const SimpleHeaderComponent = props => {
+  const { heading, subHeading, bgImg, heroImg, actionButton } = props;
   return (
     <PageHeaderWrapper key={shortid.generate()}>
       <CSSTransition in={true} classNames="fade" appear={true} timeout={300}>
-        <BGOverlay className="fade-appear" bgImg={props.bgImg} />
+        <BGOverlay className="fade-appear" bgImg={bgImg} />
       </CSSTransition>
       <PageHeadContent>
-        <PageHeading>{props.heading} </PageHeading>
+        {heroImg !== "false" ? (
+          <HeadingHero id="headingHero" src={heroImg} />
+        ) : null}
 
-        <PageSubHeading>{props.subHeading}</PageSubHeading>
+        <HeadingText>
+          <PageHeading>{heading} </PageHeading>
+
+          <PageSubHeading>{subHeading}</PageSubHeading>
+        </HeadingText>
       </PageHeadContent>
+      <ActionButton>{actionButton}</ActionButton>
     </PageHeaderWrapper>
   );
 };
@@ -50,7 +58,7 @@ const BGOverlay = styled.div`
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: rgb(17, 12, 2, 0.6);
+    background-color: rgb(17, 12, 2, 0.4);
   }
   &.fade-appear {
     opacity: 0;
@@ -62,11 +70,20 @@ const BGOverlay = styled.div`
   }
 `;
 const PageHeadContent = styled.div`
+  display: flex;
+  flex-direction: row;
   margin: auto;
-  max-width: 720px;
   transform: translatez(0);
 `;
 
+const HeadingText = styled.div``;
+const HeadingHero = styled.img`
+  display: none;
+  ${props => props.theme.media.tablet_portrait_up`
+display: block;
+width: 100%;
+`};
+`;
 const PageHeading = styled.div`
   ${props => props.theme.components.heading};
   color: ${props => props.theme.colors.whiteTheme};
@@ -76,7 +93,14 @@ const PageHeading = styled.div`
 const PageSubHeading = styled.div`
   ${props => props.theme.components.subheading};
   color: ${props => props.theme.colors.whiteTheme};
-  padding: 3em;
   max-width: 500px;
   margin: auto;
+`;
+
+const ActionButton = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 100px;
 `;
