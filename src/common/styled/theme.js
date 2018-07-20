@@ -52,7 +52,7 @@ const fontStyles = {
   font-size: 40px;
   line-height: 50px;
   font-weight: 800;
-  font-family: "Gin Rough";
+  font-family: 'Gin-Rough';
   `,
   subHeading: css`
   font-size: 22px;
