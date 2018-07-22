@@ -95,11 +95,7 @@ const ContactInfo = styled.div`
 `;
 
 const FooterHeader = styled.div`
-  ${props => props.theme.components.smallHeading};
-
-  ${props => props.theme.media.tablet_landscape_up`
-    ${props => props.theme.components.heading};
-  `};
+  ${props => props.theme.components.heading};
 `;
 const LocationListing = styled.div`
   border-bottom: 2px solid ${props => props.theme.colors.whiteTheme};
