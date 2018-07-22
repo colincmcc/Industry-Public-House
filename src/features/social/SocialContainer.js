@@ -6,12 +6,21 @@ import gql from 'graphql-tag';
 
 const SocialContainer = (props) => {
   return (
-    <Query query={LOCATIONS}>
+    <Query query={LOCATIONS} >
     {
       ({data, loading, error}) => {
         if(loading) return <div> Loading...</div>
         if(error) return <div> Error...</div>
-
+        const socialLocations = data.allLocations.map(location => [(
+          {
+            locName: location.title.rendered,
+            locId: location.acf.loc_num,
+            tripAdvisor: location.acf.trip_advisor,
+            facebook: location.acf.facebook,
+            twitter: location.acf.twitter
+          }
+        )])
+        console.log(socialLocations)
         return(
           <SocialBarComponent {...data} />
         )
@@ -22,6 +31,7 @@ const SocialContainer = (props) => {
 }
 
 export default SocialContainer
+
 const LOCATIONS = gql`
 {
   currentLocation @client
@@ -44,4 +54,5 @@ const LOCATIONS = gql`
      phone_number
      email
     }
-  }`
+  }
+}`

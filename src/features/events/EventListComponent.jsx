@@ -37,7 +37,7 @@ export default withStyles(theme.materialUI)(EventListComponent);
 const EventWrapper = styled.section`
   display: flex;
   box-shadow: inset 0 0 29px 0px ${props => props.theme.colors.blackTheme};
-  max-width: 1600px;
+  max-width: 1040px;
   margin: auto;
 `;
 
@@ -45,7 +45,6 @@ const EventLabelCard = styled.div`
   display: flex;
   position: absolute;
   justify-content: center;
-  height: 430px;
   z-index: -1;
   flex-direction: column;
   margin: auto;

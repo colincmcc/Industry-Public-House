@@ -57,9 +57,9 @@ const fontStyles = {
   subHeading: css`
   font-size: 22px;
   line-height: 33px;
-  font-weight: 600;
+  font-weight: 00;
   letter-spacing: .025em;
-  font-family: "Eccentric Std";
+  font-family: 'Gin-Rough';
 
   `,
   medium: css`

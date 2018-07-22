@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import AboutContainer from "./about/AboutContainer";
 import PageHeaderContainer from "../common/page/PageHeaderContainer";
 import EventContainer from "../events/EventContainer";
-
+import SocialContainer from "../social/SocialContainer";
 import theme from "../../common/styled/theme";
 import homeBg from "../../common/assets/img/concrete-faded.jpg";
+import mainBg from "../../common/assets/img/zig-zag.png";
 
 const HomeComponent = props => {
   const { allHeaders, classes } = props;
@@ -66,7 +67,9 @@ const HomeComponent = props => {
     <HomeWrapper id="homePage">
       <PageHeaderContainer {...header} />
       <HomePageOverlay id="main">
+        <MainBg />
         <AboutContainer />
+        <EventContainer />
       </HomePageOverlay>
     </HomeWrapper>
   );
@@ -74,14 +77,31 @@ const HomeComponent = props => {
 
 export default withStyles(theme.materialUI)(HomeComponent);
 
-const HomeWrapper = styled.div``;
+const HomeWrapper = styled.section``;
 const HomePageOverlay = styled.div`
   position: relative;
   background-image: url(${homeBg});
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-color: ${props => props.theme.colors.whiteTheme};
+  box-shadow: 0 0 29px 0px ${props => props.theme.colors.blackTheme};
+  max-width: 1160px;
+  margin: auto;
 `;
 const HomeSubHeading = styled.div``;
 const Description = styled.p`
   font-style: italic;
+`;
+
+const MainBg = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: ${props => props.theme.colors.blackTheme};
+  background: url(${mainBg});
+  background-repeat: repeat;
+  max-width: 1160px;
+  overflow: hidden;
 `;

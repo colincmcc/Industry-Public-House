@@ -1,27 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import Heading from "../../common/Heading";
-im;
+import grungeBorder from "../../common/assets/img/grunge_border_v3.svg";
+
 const SocialBarComponent = props => {
   return (
-    <div>
+    <SocialBarWrapper>
       <div />
-    </div>
+    </SocialBarWrapper>
   );
 };
 
 export default SocialBarComponent;
 
-const SocialBarWrapper = styled.div`
+const SocialBarWrapper = styled.section`
   position: relative;
   width: 100%;
-  background-color: ${props => props.theme.colors.darkGray};
+  min-height: 10vh;
+  background-image: linear-gradient(90deg, #110c02 80%, #110c02 0%);
   &:before {
     content: "";
     position: absolute;
     width: 100%;
     height: 125px;
-    top: -125px;
+    top: -65px;
+    left: 0;
     background-image: url(${grungeBorder});
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 `;

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from "graphql-tag";
-import EventSummaryComponent from './EventSummaryComponent'
-import EventListComponent from './EventListComponent'
+import EventComponent from './EventComponent'
 const EventContainer = () => {
   return (
     <Query query={WP_EVENTS}>
@@ -28,12 +27,11 @@ const EventContainer = () => {
             })
           )
           const eventData = {
-            title: data.pageBy[0].title.rendered,
-            content: data.pageBy[0].content.rendered,
+            pageTitle: data.pageBy[0].title.rendered,
             bgImg: data.pageBy[0].acf.background_image,
             heroImg: data.pageBy[0].acf.hero_image
           }
-          return <EventListComponent {...eventData} eventList={eventList} />
+          return <EventComponent {...eventData} eventList={eventList} />
 
         }
       }
