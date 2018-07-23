@@ -89,7 +89,7 @@ class ContactFormComponent extends Component {
 
   render() {
     var invalid = false;
-    const {activeStep} = this.state
+    const { activeStep } = this.state;
     const contactReasons = [
       {
         label: "Why are you reaching out?",
@@ -128,84 +128,102 @@ class ContactFormComponent extends Component {
         selected: false
       }
     ];
+    const formTextField = (id, placeholder, required) => {
+      return (
+        <TextField
+          fullWidth
+          id={id}
+          type="text"
+          placeholder={placeholder}
+          {...required}
+          style={{ flex: "68%" }}
+          className={invalid ? "invalid-missing" : ""}
+          onChange={this.handleChange({ id })}
+        />
+      );
+    };
+    const stepZeroForm = [{ component: "text" }];
 
-   if(activeStep === 0) return (
-      <Form onsSubmit={this.handleSubmit} method="post" noValidate>
-        <FormControl style={{ width: "100%" }}>
-          <fieldset style={{ border: "none", margin: 0, padding: 0 }}>
-            {/** FIRST NAME */}
-            <FormRow className="text form-item">
-              <Label for="firstname">Your First Name</Label>
+    if (activeStep === 0)
+      return (
+        <Form onsSubmit={this.handleSubmit} method="post" noValidate>
+          <FormControl style={{ width: "100%" }}>
+            <fieldset style={{ border: "none", margin: 0, padding: 0 }}>
+              {/** FIRST NAME */}
+              <FormRow className="text form-item">
+                <Label for="firstname">Your First Name</Label>
 
-              <TextField
-                fullWidth
-                id="firstname"
-                type="text"
-                placeholder="Nikola"
-                required
-                style={{ flex: "68%" }}
-                className={invalid ? "invalid-missing" : ""}
-                onChange={this.handleChange("firstname")}
-              />
-            </FormRow>
-
-            {/** LAST NAME */}
-            <FormRow className="text form-item">
-              <Label for="lastname"> Your Last Name </Label>
-              <TextField
-                fullWidth
-                id="lastname"
-                type="text"
-                placeholder="Tesla"
-                required
-                style={{ flex: "68%" }}
-                className={invalid ? "invalid-missing" : ""}
-                onChange={this.handleChange("lastname")}
-              />
-            </FormRow>
-
-            {/** EMAIL */}
-            <FormRow className="text form-item">
-              <Label for="email"> Your Email </Label>
-              <TextField
-                fullWidth
-                id="email"
-                type="email"
-                placeholder="nikola.tesla@example.com"
-                required
-                style={{
-                  flex: "68%"
-                }}
-                className={invalid ? "invalid-missing" : ""}
-                onChange={this.handleChange("email")}
-              />
-            </FormRow>
-
-            {/** REASON */}
-            <FormRow className="select form-item">
-              <Label for="reason">Contact Reason</Label>
-              <SelectWrapper>
-                <SelectComponent
-                  handleChange={this.handleChange}
-                  invalid={invalid}
-                  options={contactReasons}
-                  name="reason"
+                <TextField
+                  fullWidth
+                  id="firstname"
+                  type="text"
+                  placeholder="Nikola"
+                  required
+                  style={{ flex: "68%" }}
+                  className={invalid ? "invalid-missing" : ""}
+                  onChange={this.handleChange("firstname")}
                 />
-              </SelectWrapper>
-            </FormRow>
-          </fieldset>
-        </FormControl>
-      </Form>
-    );
-  }
-  if(activeStep === 1) {
-    const formData = {
+              </FormRow>
 
+              {/** LAST NAME */}
+              <FormRow className="text form-item">
+                <Label for="lastname"> Your Last Name </Label>
+                <TextField
+                  fullWidth
+                  id="lastname"
+                  type="text"
+                  placeholder="Tesla"
+                  required
+                  style={{ flex: "68%" }}
+                  className={invalid ? "invalid-missing" : ""}
+                  onChange={this.handleChange("lastname")}
+                />
+              </FormRow>
+
+              {/** EMAIL */}
+              <FormRow className="text form-item">
+                <Label for="email"> Your Email </Label>
+                <TextField
+                  fullWidth
+                  id="email"
+                  type="email"
+                  placeholder="nikola.tesla@example.com"
+                  required
+                  style={{
+                    flex: "68%"
+                  }}
+                  className={invalid ? "invalid-missing" : ""}
+                  onChange={this.handleChange("email")}
+                />
+              </FormRow>
+
+              {/** REASON */}
+              <FormRow className="select form-item">
+                <Label for="reason">Contact Reason</Label>
+                <SelectWrapper>
+                  <SelectComponent
+                    handleChange={this.handleChange}
+                    invalid={invalid}
+                    options={contactReasons}
+                    name="reason"
+                  />
+                </SelectWrapper>
+              </FormRow>
+            </fieldset>
+          </FormControl>
+        </Form>
+      );
+    if (activeStep === 1) {
+      const { firstname, lastname, email, reason } = this.state;
+      const formData = {
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        reason: reason
+      };
+      return <ContactDetailComponent {...formData} />;
     }
-    return <ContactDetailComponent formData={formData} />
   }
-
-
 }
 
 export default ContactFormComponent;
