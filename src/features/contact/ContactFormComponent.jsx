@@ -5,6 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 
 import SelectComponent from "../common/selectDropDown/SelectComponent";
+import ContactDetailComponent from "./ContactDetailComponent";
 class ContactFormComponent extends Component {
   constructor(props) {
     super(props);
@@ -66,8 +67,8 @@ class ContactFormComponent extends Component {
     return this.findParent(el.parentElement, matchParentCB);
   };
 
-  handleChange = event => {
-    this.setState({ value: event.target.value });
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
   };
   handleNext = () => {
     this.setState(state => ({
@@ -85,9 +86,10 @@ class ContactFormComponent extends Component {
     alert("A name was submitted: " + this.state.value);
     event.preventDefault();
   };
+
   render() {
     var invalid = false;
-
+    const {activeStep} = this.state
     const contactReasons = [
       {
         label: "Why are you reaching out?",
@@ -126,8 +128,8 @@ class ContactFormComponent extends Component {
         selected: false
       }
     ];
-    const
-    return (
+
+   if(activeStep === 0) return (
       <Form onsSubmit={this.handleSubmit} method="post" noValidate>
         <FormControl style={{ width: "100%" }}>
           <fieldset style={{ border: "none", margin: 0, padding: 0 }}>
@@ -143,6 +145,7 @@ class ContactFormComponent extends Component {
                 required
                 style={{ flex: "68%" }}
                 className={invalid ? "invalid-missing" : ""}
+                onChange={this.handleChange("firstname")}
               />
             </FormRow>
 
@@ -157,6 +160,7 @@ class ContactFormComponent extends Component {
                 required
                 style={{ flex: "68%" }}
                 className={invalid ? "invalid-missing" : ""}
+                onChange={this.handleChange("lastname")}
               />
             </FormRow>
 
@@ -169,8 +173,11 @@ class ContactFormComponent extends Component {
                 type="email"
                 placeholder="nikola.tesla@example.com"
                 required
-                style={{ flex: "68%" }}
+                style={{
+                  flex: "68%"
+                }}
                 className={invalid ? "invalid-missing" : ""}
+                onChange={this.handleChange("email")}
               />
             </FormRow>
 
@@ -178,7 +185,12 @@ class ContactFormComponent extends Component {
             <FormRow className="select form-item">
               <Label for="reason">Contact Reason</Label>
               <SelectWrapper>
-                <SelectComponent invalid={invalid} options={contactReasons} />
+                <SelectComponent
+                  handleChange={this.handleChange}
+                  invalid={invalid}
+                  options={contactReasons}
+                  name="reason"
+                />
               </SelectWrapper>
             </FormRow>
           </fieldset>
@@ -186,6 +198,14 @@ class ContactFormComponent extends Component {
       </Form>
     );
   }
+  if(activeStep === 1) {
+    const formData = {
+
+    }
+    return <ContactDetailComponent formData={formData} />
+  }
+
+
 }
 
 export default ContactFormComponent;

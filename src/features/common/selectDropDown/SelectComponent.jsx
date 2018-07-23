@@ -22,7 +22,7 @@ class SelectComponent extends Component {
     });
   };
   render() {
-    const { options, invalid } = this.props;
+    const { options, invalid, handleChange, name } = this.props;
     const { open, reason } = this.state;
     console.log(open);
 
@@ -34,12 +34,13 @@ class SelectComponent extends Component {
           id: "reason",
           required: true
         }}
-        onChange={this.handleChange}
+        onChange={handleChange({ name })}
         value={reason}
         className={invalid ? "invalid-missing" : ""}
       >
         {options.map(option => (
           <MenuItem
+            style={{ fontFamily: "Source Sans Pro" }}
             key={shortid.generate()}
             disabled={option.disabled}
             value={option.value}
@@ -60,10 +61,11 @@ const CustomSelect = styled(Select)`
   border: none;
   outline: none;
   border-radius: 4px;
-  padding: 5px 20px 8px 0;
+  padding: 5px 20px 0 0;
   overflow: visible !important;
-  ${props => props.theme.components.text};
 
+  ${props => props.theme.components.text};
+  font-family: "Source Sans Pro" !important;
   ${props => props.theme.media.tablet_portrait_up`
     background-color: ${props => props.theme.colors.whiteTheme};
   `};
