@@ -114,7 +114,7 @@ class ContactFormComponent extends Component {
         selected: false
       },
       {
-        label: "I'd like to make food selections for a scheduled group",
+        label: "I'd like to make food selections",
         disabled: false,
         value: "food",
         selected: false
@@ -126,6 +126,7 @@ class ContactFormComponent extends Component {
         selected: false
       }
     ];
+    const
     return (
       <Form onsSubmit={this.handleSubmit} method="post" noValidate>
         <FormControl style={{ width: "100%" }}>
