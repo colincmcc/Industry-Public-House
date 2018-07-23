@@ -228,27 +228,6 @@ const SelectWrapper = styled.div`
   cursor: pointer;
 `;
 
-const SelectOptions = styled.div``;
-
-const Submit = styled.button`
-  justify-content: flex-end;
-`;
-
-const TextArea = styled.textarea``;
-const TextInput = styled.input`
-  display: block;
-  background-color: transparent;
-  outline: none;
-  border: none;
-  width: 100%;
-  border-radius: 4px;
-  padding: 5px 20px 8px 0;
-  align-self: center;
-  ${props => props.theme.components.text};
-
-  color: ${props => props.theme.colors.blackTheme};
-  background-color: 0.1s ease-in, color 0.1s ease-in;
-`;
 const Label = styled.label`
   display: block;
   text-transform: uppercase;
@@ -261,9 +240,11 @@ const Label = styled.label`
   ${props => props.theme.media.tablet_portrait_up`
     ${props => props.theme.components.text};
     color: ${props => props.theme.colors.blackTheme};
+    font-weight: 500;
     flex: 32%;
     text-transform: none;
     align-self: center;
+    margin-right: 20px;
   `};
   &.with-summary {
     align-self: flex-start;
