@@ -40,7 +40,7 @@ const ContactContainer = () => {
         }
         return(
           <div>
-            <PageHeaderContainer heading="Contact" subHeading="" bgImg={bgImg} />
+            <PageHeaderContainer heading="Connect" subHeading="" bgImg={bgImg} />
             <ContactComponent />
           </div>
         )
