@@ -114,7 +114,7 @@ class ContactFormComponent extends Component {
         selected: false
       },
       {
-        label: "I'd like to make food selections for a scheduled group",
+        label: "I'd like to make food selections for my party",
         disabled: false,
         value: "food",
         selected: false
@@ -140,6 +140,7 @@ class ContactFormComponent extends Component {
                 type="text"
                 placeholder="Nikola"
                 required
+                style={{ flex: "68%" }}
                 className={invalid ? "invalid-missing" : ""}
               />
             </FormRow>
@@ -153,6 +154,7 @@ class ContactFormComponent extends Component {
                 type="text"
                 placeholder="Tesla"
                 required
+                style={{ flex: "68%" }}
                 className={invalid ? "invalid-missing" : ""}
               />
             </FormRow>
@@ -166,6 +168,7 @@ class ContactFormComponent extends Component {
                 type="email"
                 placeholder="nikola.tesla@example.com"
                 required
+                style={{ flex: "68%" }}
                 className={invalid ? "invalid-missing" : ""}
               />
             </FormRow>
@@ -245,6 +248,7 @@ const Label = styled.label`
     text-transform: none;
     align-self: center;
     margin-right: 20px;
+    text-align: left;
   `};
   &.with-summary {
     align-self: flex-start;
