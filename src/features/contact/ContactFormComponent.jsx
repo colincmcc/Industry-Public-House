@@ -126,6 +126,7 @@ class ContactFormComponent extends Component {
         selected: false
       }
     ];
+    const
     return (
       <Form onsSubmit={this.handleSubmit} method="post" noValidate>
         <FormControl style={{ width: "100%" }}>

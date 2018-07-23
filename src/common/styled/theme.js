@@ -164,8 +164,6 @@ const material = {
   tabsRoot: {
     flexGrow: 1,
     margin: "auto",
-    padding: "2em"
-
   },
   indicator: {
     backgroundColor: colors.lightAccent,

@@ -170,12 +170,17 @@ const DrinkTypesNav = styled.div`
   ${props => props.theme.fontStyles.subheading};
 `;
 const LocationsNav = styled.div`
-  display: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  padding-bottom: 20px;
   &.showNav {
     display: flex;
-    flex-wrap: wrap;
+    opacity: 1;
     ${props => props.theme.fontStyles.subheading};
     font-style: italic;
-    margin: auto;
   }
 `;
