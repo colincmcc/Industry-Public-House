@@ -10,14 +10,14 @@ const sizes = {
 }
 const colors = {
   theme: "#F6C120",
-  darkTheme: "#463A17",
+  darkTheme: "#5b470c",
   lightTheme: "#F6E420",
   lightAccent: "#F69C20",
   darkAccent: "#463217",
   blackTheme: "#110C02",
   whiteTheme: "#F4EDDC",
   darkGray: "#1d1e22",
-  yellowGray: "#7B776C",
+  yellowGray: "#d7d5cd",
   darkBlue: "#051b3e"
 }
 
@@ -230,7 +230,9 @@ const material = {
     maxWidth: "1280px",
     margin: "auto",
     backgroundColor: "#F4EDDC",
-    padding: "2em"
+    padding: "2rem",
+    margin: "0 2rem",
+    boxShadow: "0 50px 100px #5b470c1A, 0 15px 35px #5b470c26, 0 5px 15px rgba(0,0,0,0.1)"
 
   },
   swipeableBottomMenuRoot: {

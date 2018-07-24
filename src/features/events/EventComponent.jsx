@@ -16,8 +16,7 @@ const EventComponent = props => {
   const hasHero = heroImg !== "false";
   const eventBg = hasBg ? bgImg : null;
   const eventHero = hasHero ? heroImg : null;
-  const reducedList =
-    window.innerWidth < 599 ? eventList.slice(0, 2) : eventList;
+  const reducedList = eventList.slice(0, 2);
 
   return (
     <EventWrapper id="events">

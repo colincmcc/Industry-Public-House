@@ -3,6 +3,8 @@ import styled from "styled-components";
 import shortid from "shortid";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import { Input } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
 
 import menuDown from "../../../common/assets/icons/menu-down.svg";
 
@@ -22,33 +24,29 @@ class SelectComponent extends Component {
     });
   };
   render() {
-    const { options, invalid, handleChange, name } = this.props;
-    const { open, reason } = this.state;
-    console.log(open);
-
+    const { options, invalid, handleChange, name, currentReason } = this.props;
+    const { reason } = this.state;
     return (
-      <CustomSelect
-        fullWidth
-        inputProps={{
-          name: "reason",
-          id: "reason",
-          required: true
-        }}
-        onChange={handleChange({ name })}
-        value={reason}
-        className={invalid ? "invalid-missing" : ""}
-      >
-        {options.map(option => (
-          <MenuItem
-            style={{ fontFamily: "Source Sans Pro" }}
-            key={shortid.generate()}
-            disabled={option.disabled}
-            value={option.value}
-          >
-            {option.label}
-          </MenuItem>
-        ))}
-      </CustomSelect>
+      <FormControl required>
+        <CustomSelect
+          displayEmpty
+          fullWidth
+          onChange={handleChange("reason")}
+          value={currentReason}
+          className={invalid ? "invalid-missing" : ""}
+        >
+          {options.map(option => (
+            <MenuItem
+              style={{ fontFamily: "Source Sans Pro" }}
+              key={shortid.generate()}
+              disabled={option.disabled}
+              value={option.value}
+            >
+              {option.label}
+            </MenuItem>
+          ))}
+        </CustomSelect>
+      </FormControl>
     );
   }
 }

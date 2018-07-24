@@ -11,6 +11,7 @@ import bgImg from '../../common/assets/img/burgher.jpg'
 import foodBG from '../../common/assets/img/menu_background.jpg'
 import PageHeaderContainer from '../common/page/PageHeaderContainer'
 import FoodMenuComponent from './FoodMenuComponent';
+import theme from '../../common/styled/theme'
 
 
 // ! Currently usine a Query in HomeContainer local state as a variable here.  Eventually will move to @export to contain queries.
@@ -21,11 +22,8 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    margin: "2em",
     backgroundColor: "#F4EDDC",
     backgroundImage: `url(${foodBG})`,
-    color: "#110C02",
-
   },
 });
 
@@ -56,7 +54,7 @@ const FoodContainer = (props) => {
           <FoodNavComponent
           navItems={navItems}
           />
-          <Paper elevation={2} classes={{root: classes.root}}>
+          <Paper elevation={2} classes={{root: classes.paperRoot}}>
           <Switch>
           <Route
             exact
@@ -76,4 +74,4 @@ const FoodContainer = (props) => {
   )
 
 }
-export default withStyles(styles)(FoodContainer)
+export default withStyles(theme.materialUI)(FoodContainer)

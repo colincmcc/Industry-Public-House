@@ -1,29 +1,40 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import shortid from "shortid";
-import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
-
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 import SelectComponent from "../common/selectDropDown/SelectComponent";
-import ContactDetailComponent from "./ContactDetailComponent";
+import {
+  validateField,
+  validateForm,
+  findParent
+} from "../../common/utils/utils";
+import theme from "../../common/styled/theme";
+
+// TODO: Move logic and state into a container function
+
 class ContactFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: "",
-      lastname: "",
-      email: "",
-      reason: "",
-      numberOfGuests: 0,
-      day: "",
-      time: "",
-      needBar: false,
-      private: false,
-      activeStep: 0
+      firstname: {
+        value: "",
+        type: "text"
+      },
+      lastname: {
+        value: "",
+        type: "text"
+      },
+      email: {
+        value: "",
+        type: "email"
+      },
+      reason: {
+        value: "",
+        type: "text"
+      },
+      formIsValid: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.addFormListeners();
@@ -37,12 +48,17 @@ class ContactFormComponent extends Component {
   onFormFocusIn = ev => {
     this.setRowFocus();
   };
+
+  // * Validate takes a type and value and returns a boolean
   onFormFocusOut = ev => {
+    validateField(ev.target);
     this.setRowFocus();
   };
+
+  // findParent takes a callback to verify the type of parent, in this case it has to have the "form-item" class
   setRowFocus = () => {
     var activeEl = document.activeElement;
-    var activeElRow = this.findParent(activeEl, this.isFormRow);
+    var activeElRow = findParent(activeEl, this.isFormRow);
     var rows = [].slice.call(document.querySelectorAll(".form-item"));
 
     rows.forEach(function(row) {
@@ -58,22 +74,25 @@ class ContactFormComponent extends Component {
     return el.classList.contains("form-item");
   };
 
-  findParent = (el, matchParentCB) => {
-    var parent = el.parentElement;
-    if (document.body === el || el.parentElement === null) return null;
+  handleChange = name => ev => {
+    const { reason, firstname, lastname, email } = this.state;
+    var formIsValid = validateForm([reason, firstname, lastname, email]);
 
-    if (matchParentCB(el)) return el;
-
-    return this.findParent(el.parentElement, matchParentCB);
+    this.setState({
+      [ev.target.name]: {
+        value: ev.target.value
+      },
+      formIsValid: formIsValid
+    });
+    if (reason.value != "default") {
+      this.handleNext;
+    }
   };
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
   handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1
-    }));
+    this.setState({
+      activeStep: this.state.activeStep + 1
+    });
   };
 
   handleBack = () => {
@@ -82,19 +101,26 @@ class ContactFormComponent extends Component {
     }));
   };
 
-  handleSubmit = event => {
-    alert("A name was submitted: " + this.state.value);
-    event.preventDefault();
+  handleSubmit = ev => {
+    ev.preventDefault();
+    validateForm;
   };
 
   render() {
     var invalid = false;
-    const { activeStep } = this.state;
+    var isDisabled = false;
+    const { formIsValid } = this.state;
+    const firstName = this.state.firstname.value;
+    const lastName = this.state.lastname.value;
+    const email = this.state.email.value;
+    const reason = this.state.reason.value;
+    const { classes } = this.props;
+
     const contactReasons = [
       {
         label: "Why are you reaching out?",
         disabled: true,
-        value: "default",
+        value: "",
         selected: true
       },
       {
@@ -128,105 +154,88 @@ class ContactFormComponent extends Component {
         selected: false
       }
     ];
-    const formTextField = (id, placeholder, required) => {
-      return (
-        <TextField
-          fullWidth
-          id={id}
-          type="text"
-          placeholder={placeholder}
-          {...required}
-          style={{ flex: "68%" }}
-          className={invalid ? "invalid-missing" : ""}
-          onChange={this.handleChange({ id })}
-        />
-      );
-    };
-    const stepZeroForm = [{ component: "text" }];
 
-    if (activeStep === 0)
-      return (
-        <Form onsSubmit={this.handleSubmit} method="post" noValidate>
-          <FormControl style={{ width: "100%" }}>
-            <fieldset style={{ border: "none", margin: 0, padding: 0 }}>
-              {/** FIRST NAME */}
-              <FormRow className="text form-item">
-                <Label for="firstname">Your First Name</Label>
+    return (
+      <Form onsSubmit={this.handleSubmit} method="post" noValidate>
+        <fieldset style={{ border: "none", margin: 0, paddingBottom: 0 }}>
+          {/** FIRST NAME */}
+          <FormRow className="text form-item">
+            <Label for="firstname">Your First Name</Label>
 
-                <TextField
-                  fullWidth
-                  id="firstname"
-                  type="text"
-                  placeholder="Nikola"
-                  required
-                  style={{ flex: "68%" }}
-                  className={invalid ? "invalid-missing" : ""}
-                  onChange={this.handleChange("firstname")}
-                />
-              </FormRow>
+            <TextField
+              fullWidth
+              id="firstname"
+              name="firstname"
+              type="text"
+              placeholder="Nikola"
+              required
+              style={{ flex: "68%" }}
+              className={invalid ? "invalid-missing" : ""}
+              onChange={this.handleChange("firstname")}
+            />
+          </FormRow>
 
-              {/** LAST NAME */}
-              <FormRow className="text form-item">
-                <Label for="lastname"> Your Last Name </Label>
-                <TextField
-                  fullWidth
-                  id="lastname"
-                  type="text"
-                  placeholder="Tesla"
-                  required
-                  style={{ flex: "68%" }}
-                  className={invalid ? "invalid-missing" : ""}
-                  onChange={this.handleChange("lastname")}
-                />
-              </FormRow>
+          {/** LAST NAME */}
+          <FormRow className="text form-item">
+            <Label for="lastname"> Your Last Name </Label>
+            <TextField
+              fullWidth
+              id="lastname"
+              type="text"
+              placeholder="Tesla"
+              required
+              style={{ flex: "68%" }}
+              className={invalid ? "invalid-missing" : ""}
+              onChange={this.handleChange("lastname")}
+            />
+          </FormRow>
 
-              {/** EMAIL */}
-              <FormRow className="text form-item">
-                <Label for="email"> Your Email </Label>
-                <TextField
-                  fullWidth
-                  id="email"
-                  type="email"
-                  placeholder="nikola.tesla@example.com"
-                  required
-                  style={{
-                    flex: "68%"
-                  }}
-                  className={invalid ? "invalid-missing" : ""}
-                  onChange={this.handleChange("email")}
-                />
-              </FormRow>
+          {/** EMAIL */}
+          <FormRow className="text form-item">
+            <Label for="email"> Your Email </Label>
+            <TextField
+              fullWidth
+              id="email"
+              type="email"
+              placeholder="nikola.tesla@example.com"
+              required
+              style={{
+                flex: "68%"
+              }}
+              className={invalid ? "invalid-missing" : ""}
+              onChange={this.handleChange("email")}
+            />
+          </FormRow>
 
-              {/** REASON */}
-              <FormRow className="select form-item">
-                <Label for="reason">Contact Reason</Label>
-                <SelectWrapper>
-                  <SelectComponent
-                    handleChange={this.handleChange}
-                    invalid={invalid}
-                    options={contactReasons}
-                    name="reason"
-                  />
-                </SelectWrapper>
-              </FormRow>
-            </fieldset>
-          </FormControl>
-        </Form>
-      );
-    if (activeStep === 1) {
-      const { firstname, lastname, email, reason } = this.state;
-      const formData = {
-        firstName: firstname,
-        lastName: lastname,
-        email: email,
-        reason: reason
-      };
-      return <ContactDetailComponent {...formData} />;
-    }
+          {/** REASON */}
+          <FormRow className="select form-item">
+            <Label for="reason">Contact Reason</Label>
+            <SelectWrapper>
+              <SelectComponent
+                handleChange={this.handleChange}
+                invalid={invalid}
+                options={contactReasons}
+                currentReason={reason}
+                name="reason"
+                type="text"
+              />
+            </SelectWrapper>
+          </FormRow>
+        </fieldset>
+        <Button
+          disabled={!formIsValid}
+          onClick={this.handleSubmit}
+          variant="contained"
+          classes={{ root: classes.homeButton }}
+        >
+          Submit
+        </Button>
+      </Form>
+    );
   }
 }
 
-export default ContactFormComponent;
+export default withStyles(theme.materialUI)(ContactFormComponent);
 
 const Form = styled.form`
   padding: 10px 10px 13px 15px;
