@@ -16,23 +16,22 @@ export const findParent = (el, matchParentCB) => {
 
 export const validateField = (field) => {
   if(field.value){
-
-    field.classList.remove('invalid-missing')
+    field.setAttribute("aria-invalid", false)
   } else {
-    field.classList.add('invalid-missing')
+    field.setAttribute("aria-invalid", true)
+    console.log(field)
   }
 
   if (field.getAttribute('type') === 'email'){
     validateEmailField(field)
   }
-  console.log(field)
 }
 
 const validateEmailField = (emailField) => {
   if(!validateEmailValue(emailField.value)){
-    emailField.classList.add('invalid-value')
+    emailField.setAttribute("aria-invalid", false)
   } else {
-    emailField.classList.remove('invalid-value')
+    emailField.setAttribute("aria-invalid", true)
   }
 }
 const validateEmailValue = (emailValue) => {
@@ -49,17 +48,35 @@ if(emailValue[0] === '@' || emailValue[emailValue.length - 1] === '@') {
 return true
 
 }
+
+
 export const validateForm = (formValues) => {
   var form = document.querySelector('form')
   var requiredFields = [].slice.call(form.querySelectorAll('[required]'))
 
-  requiredFields.forEach( (field) => {
+  // * Material-UI will not let me pass the "required" prop to the input on a selector.  Here's a quick hack
+  var hiddenFields = [].slice.call(form.querySelectorAll('input[type="hidden"]'))
+
+  var fieldsToValidate = [...requiredFields, ...hiddenFields]
+
+  fieldsToValidate.forEach( (field) => {
     validateField(field)
   })
 
-  return requiredFields.every((field) => {
-    return field.className.indexOf('invalid') === -1;
+  return fieldsToValidate.every((field) => {
+    return field.getAttribute('aria-invalid') === "false";
   })
+}
+
+export const validateOnBlur = (ev) => {
+  console.log("validate on blur")
+  if (['SELECT', 'INPUT', 'TEXTAREA'].indexOf(ev.target.tagName) === -1) {
+    return;
+  }
+
+  if (ev.target.hasAttribute('required') || ev.target.getAttribute('type') === "hidden") {
+    validateField(ev.target);
+  }
 }
 
 

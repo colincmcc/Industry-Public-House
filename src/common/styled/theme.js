@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 
-
 const sizes = {
   large_up: 1800,
   desktop_up: 1200,
@@ -215,11 +214,20 @@ const material = {
     ...fontStyles.text
 
   },
+  buttonDisabled: {
+    backgroundColor: colors.yellowGray + "!important"
+  },
   homeButton: {
     ...fontStyles.medium,
     color: colors.blackTheme + "!important",
-    backgroundColor: colors.lightAccent + "!important",
-
+    backgroundColor: colors.lightAccent,
+    '&:hover': {
+      backgroundColor: colors.yellowGray,
+      // Reset on touch devices, it doesn't add specificity
+      '@media (hover: none)': {
+        backgroundColor: colors.yellowGray,
+      },
+    }
   },
   buttonColorPrimary: {
     color: colors.lightAccent,

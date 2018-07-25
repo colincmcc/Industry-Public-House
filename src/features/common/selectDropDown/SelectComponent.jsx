@@ -3,53 +3,45 @@ import styled from "styled-components";
 import shortid from "shortid";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Input } from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
+import { FormControl } from "@material-ui/core";
 
-import menuDown from "../../../common/assets/icons/menu-down.svg";
-
-class SelectComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      reason: "default",
-      highlightedIndex: 0
-    };
-  }
-
-  handleChange = ev => {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    });
-  };
-  render() {
-    const { options, invalid, handleChange, name, currentReason } = this.props;
-    const { reason } = this.state;
-    return (
-      <FormControl required>
-        <CustomSelect
-          displayEmpty
-          fullWidth
-          onChange={handleChange("reason")}
-          value={currentReason}
-          className={invalid ? "invalid-missing" : ""}
+const SelectComponent = props => {
+  const {
+    options,
+    handleChange,
+    currentReason,
+    onOpen,
+    onClose,
+    modalOpen
+  } = props;
+  return (
+    <CustomSelect
+      displayEmpty
+      fullWidth
+      onClose={onClose}
+      onOpen={onOpen}
+      open={modalOpen}
+      inputProps={{
+        id: "reason",
+        name: "reason",
+        required: true
+      }}
+      onChange={handleChange}
+      value={currentReason}
+    >
+      {options.map(option => (
+        <MenuItem
+          style={{ fontFamily: "Source Sans Pro" }}
+          key={shortid.generate()}
+          disabled={option.disabled}
+          value={option.value}
         >
-          {options.map(option => (
-            <MenuItem
-              style={{ fontFamily: "Source Sans Pro" }}
-              key={shortid.generate()}
-              disabled={option.disabled}
-              value={option.value}
-            >
-              {option.label}
-            </MenuItem>
-          ))}
-        </CustomSelect>
-      </FormControl>
-    );
-  }
-}
+          {option.label}
+        </MenuItem>
+      ))}
+    </CustomSelect>
+  );
+};
 
 export default SelectComponent;
 const CustomSelect = styled(Select)`

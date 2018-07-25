@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import TextField from "@material-ui/core/TextField";
+import shortid from "shortid";
+
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import SelectComponent from "../common/selectDropDown/SelectComponent";
@@ -10,34 +11,33 @@ import {
   findParent,
   validateOnBlur
 } from "../../common/utils/utils";
+import FormTextField from "../common/forms/FormTextField";
 import theme from "../../common/styled/theme";
 
 // TODO: Move logic and state into a container function
 
 class ContactFormComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstname: {
-        value: "",
-        type: "text"
-      },
-      lastname: {
-        value: "",
-        type: "text"
-      },
-      email: {
-        value: "",
-        type: "email"
-      },
-      reason: {
-        value: "",
-        type: "text"
-      },
-      formIsValid: true,
-      modalOpen: false
-    };
-  }
+  state = {
+    firstname: {
+      value: "",
+      type: "text"
+    },
+    lastname: {
+      value: "",
+      type: "text"
+    },
+    email: {
+      value: "",
+      type: "email"
+    },
+    reason: {
+      value: "",
+      type: "text"
+    },
+    formIsValid: false,
+    modalOpen: false
+  };
+
   componentDidMount() {
     this.addFormListeners();
   }
@@ -49,12 +49,12 @@ class ContactFormComponent extends Component {
 
   onFormFocusIn = ev => {
     this.setRowFocus();
+    validateOnBlur(ev);
   };
 
-  // * Validate takes a type and value and returns a boolean
   onFormFocusOut = ev => {
-    validateOnBlur(ev);
     this.setRowFocus();
+    validateOnBlur(ev);
   };
 
   // findParent takes a callback to verify the type of parent, in this case it has to have the "form-item" class
@@ -76,9 +76,8 @@ class ContactFormComponent extends Component {
     return el.classList.contains("form-item");
   };
 
-  handleChange = name => ev => {
-    validateOnBlur(ev);
-
+  handleChange = ev => {
+    console.log(`${ev.target.name} : ${ev.target.value}`);
     this.setState({
       [ev.target.name]: {
         value: ev.target.value
@@ -100,29 +99,28 @@ class ContactFormComponent extends Component {
 
   handleSubmit = ev => {
     ev.preventDefault();
-    validateForm;
   };
   handleOpen = ev => {
+    console.log(ev.target);
     this.setState({
       modalOpen: true
     });
   };
-
   handleClose = ev => {
-    var formIsValid = validateForm();
-
     this.setState({
-      modalOpen: false,
-      formIsValid: formIsValid
+      modalOpen: false
     });
-
-    validateOnBlur(ev);
   };
 
   render() {
-    const { formIsValid, modalOpen } = this.state;
-
-    const reason = this.state.reason.value;
+    const {
+      formIsValid,
+      firstname,
+      lastname,
+      email,
+      reason,
+      modalOpen
+    } = this.state;
     const { classes } = this.props;
 
     const contactReasons = [
@@ -163,83 +161,80 @@ class ContactFormComponent extends Component {
         selected: false
       }
     ];
-
+    const formItems = [
+      {
+        id: "firstname",
+        label: "Your First Name",
+        type: "text",
+        placeHolder: "Nikola",
+        isRequired: true,
+        handleChange: this.handleChange
+      },
+      {
+        id: "lastname",
+        label: "Your Last Name",
+        type: "text",
+        placeHolder: "Tesla",
+        isRequired: true,
+        handleChange: this.handleChange
+      },
+      {
+        id: "email",
+        label: "Your Email",
+        type: "text",
+        placeHolder: "nikola.tesla@example.com",
+        isRequired: true,
+        handleChange: this.handleChange
+      }
+    ];
     return (
       <Form onsSubmit={this.handleSubmit} method="post" noValidate>
         <fieldset style={{ border: "none", margin: 0, paddingBottom: 0 }}>
-          {/** FIRST NAME */}
-          <FormRow className="text form-item">
-            <Label htmlFor="firstname">Your First Name</Label>
-
-            <TextField
-              fullWidth
-              id="firstname"
-              name="firstname"
-              type="text"
-              placeholder="Nikola"
-              required
-              style={{ flex: "68%" }}
-              onChange={this.handleChange("firstname")}
+          {/** FORM ITEMS */}
+          {formItems.map(item => (
+            <FormTextField
+              key={shortid.generate()}
+              id={item.id}
+              label={item.label}
+              type={item.type}
+              placeHolder={item.placeHolder}
+              isRequired={item.isRequired}
+              handleChange={item.handleChange}
             />
-          </FormRow>
-
-          {/** LAST NAME */}
-          <FormRow className="text form-item">
-            <Label htmlFor="lastname"> Your Last Name </Label>
-            <TextField
-              fullWidth
-              id="lastname"
-              type="text"
-              name="lastname"
-              placeholder="Tesla"
-              required
-              style={{ flex: "68%" }}
-              onChange={this.handleChange("lastname")}
-            />
-          </FormRow>
-
-          {/** EMAIL */}
-          <FormRow className="text form-item">
-            <Label htmlFor="email"> Your Email </Label>
-            <TextField
-              fullWidth
-              id="email"
-              type="email"
-              name="email"
-              placeholder="nikola.tesla@example.com"
-              required
-              style={{
-                flex: "68%"
-              }}
-              onChange={this.handleChange("email")}
-            />
-          </FormRow>
+          ))}
 
           {/** REASON */}
           <FormRow className="select form-item">
-            <Label htmlFor="reason">Contact Reason</Label>
+            <Label for="reason">Contact Reason</Label>
             <SelectWrapper>
               <SelectComponent
-                handleChange={this.handleChange("reason")}
+                modalOpen={modalOpen}
+                onClose={this.handleClose}
+                onOpen={this.handleOpen}
+                handleChange={this.handleChange}
+                validate={validateField}
                 options={contactReasons}
-                currentReason={reason}
+                currentReason={reason.value}
                 name="reason"
                 type="text"
-                onOpen={this.handleOpen}
-                onClose={this.handleClose}
-                modalOpen={modalOpen}
               />
             </SelectWrapper>
           </FormRow>
-          <Button
-            disabled={!formIsValid}
-            onClick={this.handleSubmit}
-            variant="contained"
-            classes={{ contained: classes.homeButton }}
-          >
-            Submit
-          </Button>
         </fieldset>
+        <Button
+          disabled={!formIsValid}
+          onClick={this.handleSubmit}
+          variant="contained"
+          classes={{
+            disabled: classes.buttonDisabled,
+            contained: classes.homeButton
+          }}
+          style={{
+            backgroundColor: theme.colors.yellowGray + "!important"
+          }}
+        >
+          Submit
+        </Button>
       </Form>
     );
   }
@@ -266,8 +261,8 @@ const FormRow = styled.div`
   `};
   &.has-focus {
     box-shadow: none;
-    background-color: transparent;
-
+    background-color: ${props => props.theme.colors.whiteTheme};
+    color: ${props => props.theme.colors.yellowGray + "!important"};
     ${props => props.theme.media.tablet_portrait_up`
       box-shadow: 0 0 0 1px ${props => props.theme.colors.whiteTheme};
     `};
@@ -313,5 +308,3 @@ const Label = styled.label`
     padding-top: 7px;
   }
 `;
-
-const SubmitRow = styled.div``;
