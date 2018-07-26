@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import ContactDetailComponent from "./ContactDetailComponent";
 import ContactFormComponent from "./ContactFormComponent";
 import {
   validateField,
@@ -31,7 +30,7 @@ class ContactComponent extends Component {
       value: "",
       type: "text"
     },
-    formIsValid: false,
+    formIsValid: true,
     modalOpen: false
   };
 

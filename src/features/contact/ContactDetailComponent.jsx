@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const ContactDetailComponent = props => {
   const { formData } = props;
@@ -12,4 +12,3 @@ const ContactDetailComponent = props => {
 };
 
 export default ContactDetailComponent;
-const ContactDetails
