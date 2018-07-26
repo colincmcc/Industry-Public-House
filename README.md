@@ -16,10 +16,6 @@ After the main features are finished. This will be integrated with a customizabl
 
   ![Dynamic Frontpagey](https://i.imgur.com/gTSgdlz.gif)
 
-- **Navigation**
-
-  ![Navigation](https://i.imgur.com/IZ1ZqNG.gif)
-
 ## Running the tests
 
 Comming Soon!
