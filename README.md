@@ -14,15 +14,15 @@ After the main features are finished. This will be integrated with a customizabl
 
 - **Responsive Mobile Nav**
 
-  [Mobile Navigation](https://i.imgur.com/CzQ49c4.gifv)
+  [Mobile Navigation](https://i.imgur.com/CzQ49c4.gif)
 
 - **Dynamic Frontpage / Caching / Multiple API's**
 
-  [Dynamic Frontpagey](https://i.imgur.com/gTSgdlz.gifv)
+  [Dynamic Frontpagey](https://i.imgur.com/gTSgdlz.gif)
 
 - **Navigation**
 
-  [Navigation](https://i.imgur.com/IZ1ZqNG.gifv)
+  [Navigation](https://i.imgur.com/IZ1ZqNG.gif)
 
 ## Running the tests
 
