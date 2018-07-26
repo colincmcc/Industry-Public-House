@@ -12,9 +12,9 @@ After the main features are finished. This will be integrated with a customizabl
 
 ## Screenshots
 
-- **Responsive Mobile Nav**
+- **Responsive Nav Bar**
 
-  ![Mobile Navigation](https://i.imgur.com/CzQ49c4.gif)
+  ![Mobile Navigation](https://i.imgur.com/WPEUPKMb.gif)
 
 - **Dynamic Frontpage / Caching / Multiple API's**
 
@@ -22,7 +22,7 @@ After the main features are finished. This will be integrated with a customizabl
 
 - **Navigation**
 
-  ![Navigation](https://i.imgur.com/IZ1ZqNG.gif)
+  ![Navigation](https://i.imgur.com/vNkVaTNb.gif)
 
 ## Running the tests
 
