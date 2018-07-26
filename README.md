@@ -18,11 +18,11 @@ After the main features are finished. This will be integrated with a customizabl
 
 ## Running the tests
 
-Comming Soon!
+Coming Soon!
 
 ## Deployment
 
-Comming Soon!
+Coming Soon!
 
 ## Built With
 
