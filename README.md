@@ -12,17 +12,13 @@ After the main features are finished. This will be integrated with a customizabl
 
 ## Screenshots
 
-- **Responsive Nav Bar**
-
-  ![Mobile Navigation](https://i.imgur.com/WPEUPKMb.gif)
-
-- **Dynamic Frontpage / Caching / Multiple API's**
+- **Dynamic Frontpage / Caching / Multiple API's / Responsive**
 
   ![Dynamic Frontpagey](https://i.imgur.com/gTSgdlz.gif)
 
 - **Navigation**
 
-  ![Navigation](https://i.imgur.com/vNkVaTNb.gif)
+  ![Navigation](https://i.imgur.com/IZ1ZqNG.gif)
 
 ## Running the tests
 
