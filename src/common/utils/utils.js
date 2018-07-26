@@ -8,6 +8,28 @@ export const findParent = (el, matchParentCB) => {
   return findParent(el.parentElement, matchParentCB);
 };
 
+// Set Row focus onClick
+// ----------------------------------
+
+export const setRowFocus = () => {
+  var activeEl = document.activeElement;
+  var activeElRow = findParent(activeEl, isFormRow);
+  var rows = [].slice.call(document.querySelectorAll(".form-item"));
+
+  rows.forEach(function(row) {
+    if (row === activeElRow) {
+      row.classList.add("has-focus");
+    } else {
+      row.classList.remove("has-focus");
+    }
+  });
+};
+const isFormRow = el => {
+  return el.classList.contains("form-item");
+};
+
+// ----------------------------------
+
 
 // * FORMS
 // ----------------------------------
@@ -19,7 +41,6 @@ export const validateField = (field) => {
     field.setAttribute("aria-invalid", false)
   } else {
     field.setAttribute("aria-invalid", true)
-    console.log(field)
   }
 
   if (field.getAttribute('type') === 'email'){
@@ -69,7 +90,6 @@ export const validateForm = (formValues) => {
 }
 
 export const validateOnBlur = (ev) => {
-  console.log("validate on blur")
   if (['SELECT', 'INPUT', 'TEXTAREA'].indexOf(ev.target.tagName) === -1) {
     return;
   }

@@ -1,129 +1,56 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
+
 import SelectComponent from "../common/selectDropDown/SelectComponent";
-import {
-  validateField,
-  validateForm,
-  findParent,
-  validateOnBlur
-} from "../../common/utils/utils";
-import theme from "../../common/styled/theme";
+import { validateOnBlur, setRowFocus } from "../../common/utils/utils";
+import FormTextField from "../common/forms/FormTextField";
+import MobileStepper from "@material-ui/core/MobileStepper";
+import Button from "@material-ui/core/Button";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
 // TODO: Move logic and state into a container function
 
 class ContactFormComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstname: {
-        value: "",
-        type: "text"
-      },
-      lastname: {
-        value: "",
-        type: "text"
-      },
-      email: {
-        value: "",
-        type: "email"
-      },
-      reason: {
-        value: "",
-        type: "text"
-      },
-      formIsValid: true,
-      modalOpen: false
-    };
-  }
-  componentDidMount() {
-    this.addFormListeners();
-  }
-  addFormListeners = () => {
-    var form = document.querySelector("form");
-    form.addEventListener("focusin", this.onFormFocusIn);
-    form.addEventListener("focusout", this.onFormFocusOut);
+  state = {
+    firstname: {
+      value: "",
+      type: "text"
+    },
+    lastname: {
+      value: "",
+      type: "text"
+    },
+    email: {
+      value: "",
+      type: "email"
+    },
+    reason: {
+      value: "",
+      type: "text"
+    },
+    formIsValid: true,
+    modalOpen: false
   };
 
   onFormFocusIn = ev => {
-    this.setRowFocus();
+    setRowFocus();
   };
 
-  // * Validate takes a type and value and returns a boolean
   onFormFocusOut = ev => {
     validateOnBlur(ev);
-    this.setRowFocus();
-  };
-
-  // findParent takes a callback to verify the type of parent, in this case it has to have the "form-item" class
-  setRowFocus = () => {
-    var activeEl = document.activeElement;
-    var activeElRow = findParent(activeEl, this.isFormRow);
-    var rows = [].slice.call(document.querySelectorAll(".form-item"));
-
-    rows.forEach(function(row) {
-      if (row === activeElRow) {
-        row.classList.add("has-focus");
-      } else {
-        row.classList.remove("has-focus");
-      }
-    });
-  };
-
-  isFormRow = el => {
-    return el.classList.contains("form-item");
-  };
-
-  handleChange = name => ev => {
-    validateOnBlur(ev);
-
-    this.setState({
-      [ev.target.name]: {
-        value: ev.target.value
-      }
-    });
-  };
-
-  handleNext = () => {
-    this.setState({
-      activeStep: this.state.activeStep + 1
-    });
-  };
-
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1
-    }));
-  };
-
-  handleSubmit = ev => {
-    ev.preventDefault();
-    validateForm;
-  };
-  handleOpen = ev => {
-    this.setState({
-      modalOpen: true
-    });
-  };
-
-  handleClose = ev => {
-    var formIsValid = validateForm();
-
-    this.setState({
-      modalOpen: false,
-      formIsValid: formIsValid
-    });
-
-    validateOnBlur(ev);
+    setRowFocus();
   };
 
   render() {
-    const { formIsValid, modalOpen } = this.state;
-
-    const reason = this.state.reason.value;
-    const { classes } = this.props;
+    const {
+      reason,
+      modalOpen,
+      handleOpen,
+      handleClose,
+      handleChange,
+      handleSubmit
+    } = this.props;
 
     const contactReasons = [
       {
@@ -165,87 +92,57 @@ class ContactFormComponent extends Component {
     ];
 
     return (
-      <Form onsSubmit={this.handleSubmit} method="post" noValidate>
-        <fieldset style={{ border: "none", margin: 0, paddingBottom: 0 }}>
-          {/** FIRST NAME */}
-          <FormRow className="text form-item">
-            <Label htmlFor="firstname">Your First Name</Label>
-
-            <TextField
-              fullWidth
-              id="firstname"
-              name="firstname"
+      <Form onsSubmit={handleSubmit} method="post" noValidate>
+        <FormRow className="select form-item">
+          <Label htmlFor="reason">Contact Reason</Label>
+          <SelectWrapper>
+            <SelectComponent
+              handleChange={handleChange("reason")}
+              options={contactReasons}
+              currentReason={reason.value}
+              name="reason"
               type="text"
-              placeholder="Nikola"
-              required
-              style={{ flex: "68%" }}
-              onChange={this.handleChange("firstname")}
+              onOpen={handleOpen}
+              onClose={handleClose}
+              modalOpen={modalOpen}
             />
-          </FormRow>
+          </SelectWrapper>
+        </FormRow>
 
-          {/** LAST NAME */}
-          <FormRow className="text form-item">
-            <Label htmlFor="lastname"> Your Last Name </Label>
-            <TextField
-              fullWidth
-              id="lastname"
-              type="text"
-              name="lastname"
-              placeholder="Tesla"
-              required
-              style={{ flex: "68%" }}
-              onChange={this.handleChange("lastname")}
-            />
-          </FormRow>
+        <FormSection className={reason.value !== "" ? "show-section" : ""}>
+          <FormTextField
+            type="text"
+            id="firstname"
+            placeHolder="Nikola"
+            isRequired={true}
+            handleChange={handleChange("firstname")}
+            label="Your First Name"
+          />
 
-          {/** EMAIL */}
-          <FormRow className="text form-item">
-            <Label htmlFor="email"> Your Email </Label>
-            <TextField
-              fullWidth
-              id="email"
-              type="email"
-              name="email"
-              placeholder="nikola.tesla@example.com"
-              required
-              style={{
-                flex: "68%"
-              }}
-              onChange={this.handleChange("email")}
-            />
-          </FormRow>
+          <FormTextField
+            type="text"
+            id="lastname"
+            placeHolder="Tesla"
+            isRequired={true}
+            handleChange={handleChange("lastname")}
+            label="Your Last Name"
+          />
 
-          {/** REASON */}
-          <FormRow className="select form-item">
-            <Label htmlFor="reason">Contact Reason</Label>
-            <SelectWrapper>
-              <SelectComponent
-                handleChange={this.handleChange("reason")}
-                options={contactReasons}
-                currentReason={reason}
-                name="reason"
-                type="text"
-                onOpen={this.handleOpen}
-                onClose={this.handleClose}
-                modalOpen={modalOpen}
-              />
-            </SelectWrapper>
-          </FormRow>
-          <Button
-            disabled={!formIsValid}
-            onClick={this.handleSubmit}
-            variant="contained"
-            classes={{ contained: classes.homeButton }}
-          >
-            Submit
-          </Button>
-        </fieldset>
+          <FormTextField
+            type="email"
+            id="email"
+            placeHolder="nikola.tesla@example.com"
+            isRequired={true}
+            handleChange={handleChange("email")}
+            label="Your Email"
+          />
+        </FormSection>
       </Form>
     );
   }
 }
 
-export default withStyles(theme.materialUI)(ContactFormComponent);
+export default ContactFormComponent;
 
 const Form = styled.form`
   padding: 10px 10px 13px 15px;
@@ -314,4 +211,9 @@ const Label = styled.label`
   }
 `;
 
-const SubmitRow = styled.div``;
+const FormSection = styled.div`
+  display: none;
+  &.show-section {
+    display: block;
+  }
+`;

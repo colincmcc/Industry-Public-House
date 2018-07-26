@@ -8,7 +8,15 @@ import alertIcon from "../../../common/assets/icons/alert-circle-outline.svg";
 import theme from "../../../common/styled/theme";
 
 const FormTextField = props => {
-  const { id, name, placeHolder, isRequired, handleChange, label } = props;
+  const {
+    id,
+    name,
+    placeHolder,
+    isRequired,
+    handleChange,
+    label,
+    type
+  } = props;
 
   return (
     <FormRow className="text form-item">
@@ -17,7 +25,7 @@ const FormTextField = props => {
         fullWidth
         id={id}
         name={id}
-        type="text"
+        type={type}
         placeholder={placeHolder}
         required={isRequired}
         style={{ flex: "68%" }}
