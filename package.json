@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.3.1",
-    "animate.css": "^3.6.1",
     "apollo-boost": "^0.1.9",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-cache-persist": "^0.1.1",
@@ -37,40 +36,26 @@
     "mdi-material-ui": "^5.1.1",
     "node-fetch": "^2.1.2",
     "prop-types": "^15.6.2",
-    "pure-react-carousel": "^1.13.2",
     "react": "^16.4.1",
     "react-apollo": "^2.1.5",
     "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "react-responsive-carousel": "^3.1.41",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-router-hash-link": "^1.2.0",
     "react-scripts": "1.1.4",
-    "react-scroll-parallax": "^1.3.5",
-    "react-slick": "^0.23.1",
-    "react-svg": "^4.1.1",
-    "react-swipeable-views": "^0.12.14",
     "react-transition-group": "^2.4.0",
-    "react-waypoint": "^8.0.3",
-    "recompose": "^0.27.1",
-    "redux": "^4.0.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
     "shortid": "^2.2.8",
-    "slick-carousel": "^1.8.1",
     "styled-components": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-graphql": "babel-node ./src/graphql/index.js",
+    "start": "concurrently npm:graphql npm:client",
+    "graphql": "babel-node ./src/graphql/index.js",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "wordexpress-schema": "^4.3.0"
+    "babel-cli": "^6.26.0"
   }
 }
