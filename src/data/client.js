@@ -10,6 +10,7 @@ import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
 import { ApolloLink, Observable } from 'apollo-link';
 import merge from 'lodash.merge'
+import { dev, prod } from "./config";
 
 import homeResolvers from './resolvers/homeResolvers'
 import appResolvers from './resolvers/appResolvers'
@@ -80,7 +81,7 @@ export const cacheStorage = window.localStorage
         cache
       }),
       new HttpLink({
-        uri: 'http://localhost:4000/',
+        uri: prod.graphQLEndpoint,
       })
     ]),
     cache

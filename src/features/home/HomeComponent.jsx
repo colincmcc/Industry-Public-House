@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import AboutContainer from "./about/AboutContainer";
 import PageHeaderContainer from "../common/page/PageHeaderContainer";
 import EventContainer from "../events/EventContainer";
-import SocialContainer from "../social/SocialContainer";
 import theme from "../../common/styled/theme";
-import homeBg from "../../common/assets/img/concrete-faded.jpg";
 import mainBg from "../../common/assets/img/zig-zag.png";
 
 const HomeComponent = props => {
@@ -80,9 +78,7 @@ export default withStyles(theme.materialUI)(HomeComponent);
 const HomeWrapper = styled.section``;
 const HomePageOverlay = styled.div`
   position: relative;
-  background-image: url(${homeBg});
-  background-position: center;
-  background-size: contain;
+
   background-color: ${props => props.theme.colors.whiteTheme};
   box-shadow: 0 0 29px 0px ${props => props.theme.colors.blackTheme};
   max-width: 1160px;
