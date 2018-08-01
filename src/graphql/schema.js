@@ -10,10 +10,12 @@ import { getCanResolvers } from './types/Can'
 import { getEventResolvers } from './types/Event'
 import { getPremiumResolvers } from './types/Premium'
 import { PageTC } from './types/Page'
+import {dev, prod} from '../data/config'
 
 
 // BaseUrl is also used in ./utils
-const baseUrl = 'http://localhost:8080/wp-json'
+// ! This schema expects relative URL's to be returned
+const baseUrl = prod.wpEndpoint
 const digitalPourUrl = 'https://server.digitalpour.com/DashboardServer/api/v3/MenuItems/54640e97b3b6f60d0887afaa'
 const digitalPourKey = '54948fb0b3b6f60a54b37b16'
 
@@ -43,17 +45,17 @@ GQC.rootQuery().addFields({
     },
     resolve: (_, args) => {
       if(args.id != null){
-        return fetch(`${baseUrl}/wp/v2/pages/${args.id}`).then(r => [r.json()])
+        return fetch(`${baseUrl}/pages/${args.id}`).then(r => [r.json()])
       }
       if(args.slug != null){
-        return fetch(`${baseUrl}/wp/v2/pages?slug=${args.slug}`).then(r => r.json())
+        return fetch(`${baseUrl}/pages?slug=${args.slug}`).then(r => r.json())
       }
     }
   },
   allPages: {
     type: [PageTC],
     resolve: () =>
-      fetch(`${baseUrl}/wp/v2/pages/`).then(r => r.json()),
+      fetch(`${baseUrl}/pages/`).then(r => r.json()),
   },
   allTaps: {
     type: [TapListTC],

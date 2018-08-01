@@ -8,7 +8,7 @@ import { toIdValue } from 'apollo-utilities';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
-import { ApolloLink, Observable } from 'apollo-link';
+import { ApolloLink } from 'apollo-link';
 import merge from 'lodash.merge'
 import { dev, prod } from "./config";
 

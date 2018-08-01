@@ -15,7 +15,9 @@ Component {
       {
         ({ loading, error, data }) => {
           if(loading) return <LoadingComponent />
-          if(error) return <p>Error</p>
+          if(error) {
+            console.log(error)
+            return <div> Error... </div> }
           return <HomeComponent {...data} />
 
         }

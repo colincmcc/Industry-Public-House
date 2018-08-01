@@ -1,8 +1,8 @@
 import { TypeComposer } from 'graphql-compose';
 import fetch from 'node-fetch';
+import {dev, prod} from '../data/config'
 
-const baseUrl = 'http://localhost:8080/wp-json/wp/v2'
-
+const baseUrl = prod.wpEndpoint
 
 // * Find one by ID
 export function createFindByIdResolver(tc, urlAddr) {
