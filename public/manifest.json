@@ -1,6 +1,6 @@
 {
-  "short_name": "IPH",
-  "name": "Industry Public House Gastropub",
+  "short_name": "Industry",
+  "name": "Industry Public House",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#F6C120",
+  "background_color": "#110C02"
 }
