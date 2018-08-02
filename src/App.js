@@ -8,14 +8,17 @@ import gql from 'graphql-tag'
 import theme from './common/styled/theme'
 import {persistor, apolloClient, cacheStorage} from './data/client'
 
+import asyncComponent from './features/common/AsyncComponent'
 import LoadingComponent from './features/common/loading/LoadingComponent'
-import HomeContainer from './features/home/HomeContainer'
 import NavContainer from './features/nav/NavContainer'
 import FooterContainer from './features/footer/FooterContainer'
-import FoodContainer from './features/food/FoodContainer'
-import DrinkContainer from './features/drinks/DrinkContainer'
-import ContactContainer from './features/contact/ContactContainer'
-import MobileMenuContainer from './features/nav/mobileNav/MobileMenuContainer'
+
+const AsyncHome = asyncComponent(() => import("./features/home/HomeContainer"))
+const AsyncFood = asyncComponent(() => import("./features/food/FoodContainer"))
+const AsyncDrink = asyncComponent(() => import("./features/drinks/DrinkContainer"))
+const AsyncContact = asyncComponent(() => import("./features/contact/ContactContainer"))
+const AsyncMobileMenu = asyncComponent(() => import("./features/nav/mobileNav/MobileMenuContainer"))
+
 
 
 const SCHEMA_VERSION = '2';
@@ -35,7 +38,7 @@ class App extends Component {
     if (currentVersion === SCHEMA_VERSION) {
       // If the current version matches the latest version,
       // we're good to go and can restore the cache.
-      await persistor.purge();
+      await persistor.restore();
     } else {
       // Otherwise, we'll want to purge the outdated persisted cache
       // and mark ourselves as having updated to the latest version.
@@ -88,25 +91,25 @@ class App extends Component {
                 <div>
                   <Switch location={isModal ? this.previousLocation : location}>
 
-                      <Route exact path="/" component={HomeContainer} />
+                      <Route exact path="/" component={AsyncHome} />
 
-                      <Route path="/Home" component={HomeContainer} />
+                      <Route path="/Home" component={AsyncHome} />
 
-                      <Route  path="/Food" render={() => <FoodContainer selectedFoodType={data.selectedFoodType} />} />
+                      <Route  path="/Food" component={AsyncFood} render={() => <AsyncFood selectedFoodType={data.selectedFoodType} />} />
 
-                      <Route path="/Drink"  render={() => < DrinkContainer selectedDrinkType={data.selectedDrinkType}  currentLocation={data.currentLocation} />} />
+                      <Route path="/Drink"  render={() => < AsyncDrink selectedDrinkType={data.selectedDrinkType}  currentLocation={data.currentLocation} />} />
 
-                      <Route path="/Contact"  render={() => < ContactContainer currentLocation={data.currentLocation} />} />
+                      <Route path="/Contact"  render={() => < AsyncContact currentLocation={data.currentLocation} />} />
 
-                      <Route path="/Apply" component={HomeContainer} />
+                      <Route path="/Apply" component={AsyncHome} />
 
-                      <Route path="/Shop" component={HomeContainer} />
+                      <Route path="/Shop" component={AsyncHome} />
 
-                      <Route path="/Gallery" component={HomeContainer} />
+                      <Route path="/Gallery" component={AsyncHome} />
 
                   </Switch>
 
-                  {(isModal) ? <Route component={MobileMenuContainer} path="/#Menu" /> : null}
+                  {(isModal) ? <Route component={AsyncMobileMenu} path="/#Menu" /> : null}
 
                 </div>
                 )
