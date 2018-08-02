@@ -29,7 +29,7 @@ ReactDOM.render(
       </div>
   </BrowserRouter>
 , document.getElementById('root'));
-// registerServiceWorker();
+registerServiceWorker();
 
 /**
   * * PWA CHECKLIST --> https://developers.google.com/web/progressive-web-apps/checklist
