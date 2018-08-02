@@ -6,8 +6,6 @@ import TextButton from "../TextButton";
 import { CSSTransition } from "react-transition-group";
 
 const ReviewHeaderComponent = props => {
-  const { classes } = props;
-
   return (
     <PageHeaderWrapper>
       <CSSTransition
@@ -104,4 +102,3 @@ const Review = styled.p`
 const Author = styled.div`
   ${props => props.theme.fontStyles.small};
 `;
-const ReviewLink = styled.div``;

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 
 const sizes = {
   large_up: 1800,
@@ -88,7 +88,7 @@ const fontStyles = {
 }
 
  const media = Object.keys(sizes).reduce((acc, label) => {
-   if(acc[label] != "phone_only"){
+   if(acc[label] !== "phone_only"){
   acc[label] = (...args) => css`
     @media (min-width: ${sizes[label] / 16}em) {
       ${css(...args)}
@@ -170,7 +170,6 @@ const material = {
   listRoot: {
     width: "100%",
     minWidth: "50%",
-    width: "100%",
     color: colors.blackTheme,
     ...fontStyles.text,
 
@@ -236,7 +235,6 @@ const material = {
     color: colors.blackTheme,
     minHeight: "100px",
     maxWidth: "1280px",
-    margin: "auto",
     backgroundColor: "#F4EDDC",
     padding: "2rem",
     margin: "0 2rem",

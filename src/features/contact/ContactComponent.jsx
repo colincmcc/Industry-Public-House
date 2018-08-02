@@ -4,12 +4,7 @@ import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import ContactFormComponent from "./ContactFormComponent";
-import {
-  validateField,
-  validateForm,
-  validateOnBlur,
-  setRowFocus
-} from "../../common/utils/utils";
+import { validateForm, validateOnBlur } from "../../common/utils/utils";
 import theme from "../../common/styled/theme";
 
 class ContactComponent extends Component {
@@ -77,7 +72,7 @@ class ContactComponent extends Component {
   };
 
   render() {
-    const { reason, formIsValid } = this.state;
+    const { formIsValid } = this.state;
     const { classes } = this.props;
 
     return (

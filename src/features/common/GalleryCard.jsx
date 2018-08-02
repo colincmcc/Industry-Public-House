@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import shortid from "shortid";
+
 import GrungeBorder from "../../common/assets/img/grunge_border_white.svg";
 
 const GalleryCard = props => {
@@ -28,6 +29,20 @@ const GalleryCard = props => {
 };
 
 export default GalleryCard;
+
+const cardEntrance = keyframes`
+
+    from {
+        opacity: 0;
+        transform: translate3d(0,100%,0)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+
+`;
 const CardWrapper = styled.div`
   display: block;
   box-shadow: 0 15px 35px #ededed05, 0 5px 15px rgba(0, 0, 0, 0.07);
@@ -36,6 +51,11 @@ const CardWrapper = styled.div`
   position: relative;
   margin: 1rem;
   background-color: #ededed;
+  animation: ${cardEntrance};
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+
   ${props => props.theme.media.tablet_portrait_up`
     justify-content: flex-start;
     display: flex;

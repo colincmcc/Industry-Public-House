@@ -10,23 +10,10 @@ import Paper from '@material-ui/core/Paper';
 
 import PageHeaderContainer from '../common/page/PageHeaderContainer'
 import DrinkNavComponent from './DrinkNavComponent'
-import TapLIstComponent from '../common//digitalPour/TapLIstComponent';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
 import DrinkMenuComponent from './DrinkMenuComponent'
 import theme from "../../common/styled/theme";
 
-
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    margin: "2em",
-    backgroundColor: "#F4EDDC",
-    color: "#110C02"
-
-  },
-});
 // TODO: get drinkNavItems and locations from Wordpress
 
 const DrinkContainer = (props) => {

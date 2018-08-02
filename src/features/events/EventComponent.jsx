@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import shortid from "shortid";
-import { Link } from "react-router-dom";
-
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-
-import theme from "../../common/styled/theme";
-import GalleryCard from "../common/GalleryCard";
+import LoadableVisibility from "react-loadable-visibility/react-loadable";
 import Heading from "../common/Heading";
+import LoadingComponent from "../common/loading/LoadingComponent";
 
+const LoadableGalleryCard = LoadableVisibility({
+  loader: () => import("../common/GalleryCard"),
+  render(loaded, props) {
+    let Component = loaded.default;
+    return <Component {...props} />;
+  },
+  loading: LoadingComponent
+});
 const EventComponent = props => {
-  const { eventList, bgImg, heroImg, classes, pageTitle } = props;
-  const hasBg = bgImg !== "false";
-  const hasHero = heroImg !== "false";
-  const eventBg = hasBg ? bgImg : null;
-  const eventHero = hasHero ? heroImg : null;
+  const { eventList, pageTitle } = props;
+
   const reducedList = eventList.slice(0, 2);
 
   return (
@@ -23,14 +23,14 @@ const EventComponent = props => {
       <Heading center text={pageTitle} />
       <EventListWrapper>
         {reducedList.map(event => (
-          <GalleryCard key={shortid.generate()} event={event} />
+          <LoadableGalleryCard key={shortid.generate()} event={event} />
         ))}
       </EventListWrapper>
     </EventWrapper>
   );
 };
 
-export default withStyles(theme.materialUI)(EventComponent);
+export default EventComponent;
 
 const EventWrapper = styled.section`
   display: flex;
@@ -51,5 +51,3 @@ const EventWrapper = styled.section`
 const EventListWrapper = styled.div`
   padding: 2rem;
 `;
-
-const EventHeader = styled.div``;

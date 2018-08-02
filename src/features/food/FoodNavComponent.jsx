@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import { WP_FOODS } from "./FoodMenuComponent";
 
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -53,22 +52,4 @@ const MenuNavWrapper = styled.div`
   text-align: center;
   padding: 2em 2em;
   padding-top: 56px;
-`;
-
-const FoodHeader = styled.div`
-  ${props => props.theme.components.heading};
-  width: 100%;
-  padding-top: 2em;
-`;
-const MenuNavItem = styled.div`
-  display: flex;
-  font-size: ${props => props.theme.fontSizes.medium.size};
-  padding: 1em;
-  margin: auto;
-  text-transform: uppercase;
-  color: ${props => props.theme.colors.whiteTheme};
-  cursor: pointer;
-  &:hover {
-    color: ${props => props.theme.colors.lightTheme};
-  }
 `;

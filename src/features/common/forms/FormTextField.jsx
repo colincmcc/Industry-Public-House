@@ -5,15 +5,7 @@ import { FormRow, FormLabel } from "../components";
 import alertIcon from "../../../common/assets/icons/alert-circle-outline.svg";
 
 const FormTextField = props => {
-  const {
-    id,
-    name,
-    placeHolder,
-    isRequired,
-    handleChange,
-    label,
-    type
-  } = props;
+  const { id, placeHolder, isRequired, handleChange, label, type } = props;
 
   return (
     <FormRow>

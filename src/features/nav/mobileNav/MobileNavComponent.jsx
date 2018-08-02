@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import shortid from "shortid";
@@ -13,7 +13,7 @@ import BeerGlass from "../../common/svgIcons/beerglass";
 import theme from "../../../common/styled/theme";
 
 const MobileNavComponent = props => {
-  const { classes, menuIsShown, navIsShown } = props;
+  const { classes, navIsShown } = props;
   const currentPath = props.location.pathname;
 
   const bottomNavItems = [
@@ -60,7 +60,7 @@ const MobileNavComponent = props => {
           <BottomNavigationAction
             key={shortid.generate()}
             value={
-              navItem.slug != "menu" ? navItem.link.substr(0, 4) : navItem.slug
+              navItem.slug !== "menu" ? navItem.link.substr(0, 4) : navItem.slug
             }
             label={navItem.text}
             icon={navItem.icon}

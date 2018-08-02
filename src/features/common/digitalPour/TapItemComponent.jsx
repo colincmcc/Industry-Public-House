@@ -15,7 +15,6 @@ const styles = theme => ({
 });
 
 const TapItemComponent = props => {
-  const firstLine = <div />;
   return (
     <ListItem divider={true}>
       <Avatar>

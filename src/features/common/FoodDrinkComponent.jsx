@@ -14,7 +14,6 @@ const FoodDrinkComponent = props => {
   const { classes } = props;
   if (props.loading) return <LoadingComponent />;
   if (props.error) return <LoadingComponent />;
-  const moreColumns = window.innerWidth > 700;
   return (
     <FoodMenuWrapper>
       <List className={classes.listRoot}>

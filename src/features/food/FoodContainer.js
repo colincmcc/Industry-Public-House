@@ -17,16 +17,6 @@ import theme from '../../common/styled/theme'
 // ! Currently usine a Query in HomeContainer local state as a variable here.  Eventually will move to @export to contain queries.
 // See here https://github.com/apollographql/apollo-link-state/issues/168
 
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    backgroundColor: "#F4EDDC",
-    backgroundImage: `url(${foodBG})`,
-  },
-});
-
 const FoodContainer = (props) => {
   const { classes } = props;
   const navItems = [

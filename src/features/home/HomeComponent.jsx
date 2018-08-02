@@ -1,77 +1,88 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import AboutContainer from "./about/AboutContainer";
+import Loadable from "react-loadable";
 import PageHeaderContainer from "../common/page/PageHeaderContainer";
 import EventContainer from "../events/EventContainer";
 import theme from "../../common/styled/theme";
 import mainBg from "../../common/assets/img/zig-zag.png";
+import LoadingComponent from "../common/loading/LoadingComponent";
 
-const HomeComponent = props => {
-  const { allHeaders, classes } = props;
+const LoadableAbout = Loadable({
+  loader: () => import("./about/AboutContainer"),
+  loading: LoadingComponent
+});
 
-  function chooseHeader() {
-    if (allHeaders.some(h => h.acf.isFeatured === true)) {
-      return allHeaders.find(h => h.acf.isFeatured === true);
-    }
-    const randomHeader =
-      allHeaders.length > 1
-        ? allHeaders[Math.floor(Math.random() * allHeaders.length)]
-        : allHeaders;
-
-    return randomHeader;
+class HomeComponent extends Component {
+  componentDidMount() {
+    LoadableAbout.preload();
   }
-  // * Return an external link button if the Wordpress link is a custom button, else return an react-router link button. Probably should make a component
+  render() {
+    const { allHeaders, classes } = this.props;
 
-  const choosenHeader = chooseHeader();
+    function chooseHeader() {
+      if (allHeaders.some(h => h.acf.isFeatured === true)) {
+        return allHeaders.find(h => h.acf.isFeatured === true);
+      }
+      const randomHeader =
+        allHeaders.length > 1
+          ? allHeaders[Math.floor(Math.random() * allHeaders.length)]
+          : allHeaders;
 
-  let isCustomLink = choosenHeader.acf.headerLink === "custom";
-  const actionButton = isCustomLink ? (
-    <Button
-      variant="contained"
-      classes={{ root: classes.homeButton }}
-      href={choosenHeader.acf.customLink}
-    >
-      {choosenHeader.acf.buttonText}
-    </Button>
-  ) : (
-    <Button
-      variant="contained"
-      classes={{ root: classes.homeButton }}
-      component={Link}
-      to={choosenHeader.acf.headerLink}
-    >
-      {choosenHeader.acf.buttonText}
-    </Button>
-  );
+      return randomHeader;
+    }
+    // * Return an external link button if the Wordpress link is a custom button, else return an react-router link button. Probably should make a component
 
-  const subHeading = (
-    <HomeSubHeading>
-      <Description>{choosenHeader.acf.subHeading}</Description>
-    </HomeSubHeading>
-  );
+    const choosenHeader = chooseHeader();
 
-  const header = {
-    bgImg: choosenHeader.acf.background_image,
-    heroImg: choosenHeader.acf.hero_image,
-    heading: choosenHeader.title.rendered,
-    subHeading: subHeading,
-    actionButton: actionButton
-  };
+    let isCustomLink = choosenHeader.acf.headerLink === "custom";
+    const actionButton = isCustomLink ? (
+      <Button
+        variant="contained"
+        classes={{ root: classes.homeButton }}
+        href={choosenHeader.acf.customLink}
+      >
+        {choosenHeader.acf.buttonText}
+      </Button>
+    ) : (
+      <Button
+        variant="contained"
+        classes={{ root: classes.homeButton }}
+        component={Link}
+        to={choosenHeader.acf.headerLink}
+      >
+        {choosenHeader.acf.buttonText}
+      </Button>
+    );
 
-  return (
-    <HomeWrapper id="homePage">
-      <PageHeaderContainer {...header} />
-      <HomePageOverlay id="main">
-        <MainBg />
-        <AboutContainer />
-        <EventContainer />
-      </HomePageOverlay>
-    </HomeWrapper>
-  );
-};
+    const subHeading = (
+      <HomeSubHeading>
+        <Description>{choosenHeader.acf.subHeading}</Description>
+      </HomeSubHeading>
+    );
+
+    const header = {
+      bgImg: choosenHeader.acf.background_image,
+      heroImg: choosenHeader.acf.hero_image,
+      heading: choosenHeader.title.rendered,
+      subHeading: subHeading,
+      actionButton: actionButton
+    };
+
+    return (
+      <HomeWrapper id="homePage">
+        <PageHeaderContainer {...header} />
+        <HomePageOverlay id="main">
+          <MainBg />
+          <LoadableAbout />
+          <EventContainer />
+        </HomePageOverlay>
+      </HomeWrapper>
+    );
+  }
+}
 
 export default withStyles(theme.materialUI)(HomeComponent);
 
