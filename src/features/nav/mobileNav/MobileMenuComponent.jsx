@@ -9,7 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
-import phone from "../../../common/assets/icons/phone.svg";
+import Phone from "../../../common/assets/icons/phone.svg";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -90,10 +90,7 @@ class MobileMenuComponent extends Component {
               {mobileNavItems.map(navItem => (
                 <ListItem button component={Link} to={navItem.link}>
                   <ListItemIcon>
-                    <img
-                      src={phone}
-                      style={{ color: theme.colors.lightAccent }}
-                    />
+                    <Phone style={{ fill: theme.colors.lightAccent }} />
                   </ListItemIcon>
                   <ListItemText> {navItem.label} </ListItemText>
                 </ListItem>

@@ -3,14 +3,13 @@ import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import shortid from "shortid";
 import Menu from "../../../common/assets/icons/menu.svg";
-import food from "../../../common/assets/icons/menu.svg";
-import email from "../../../common/assets/icons/menu.svg";
+import Food from "../../../common/assets/icons/food.svg";
+import Email from "../../../common/assets/icons/email.svg";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { withStyles } from "@material-ui/core/styles";
 import LightbulbLogo from "../../common/svgIcons/lightbulb";
 import BeerGlass from "../../common/svgIcons/beerglass";
-import SvgIcon from "../../common/SvgIcon";
 import theme from "../../../common/styled/theme";
 
 const MobileNavComponent = props => {
@@ -34,14 +33,14 @@ const MobileNavComponent = props => {
       link: "/Food",
       text: "Food",
       slug: "food",
-      icon: <SvgIcon child={food} fill={theme.colors.lightAccent} />,
+      icon: <Food width={24} height={24} />,
       onClick: {}
     },
     {
       link: "/Contact",
       text: "Contact",
       slug: "contact",
-      icon: <img src={email} />
+      icon: <Email />
     },
     {
       link: { pathname: "#Menu", state: { modal: true } },

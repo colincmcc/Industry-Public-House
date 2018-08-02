@@ -2,7 +2,7 @@ import React from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
-import placeholder from "../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
+import Placeholder from "../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -19,7 +19,7 @@ const TapItemComponent = props => {
   return (
     <ListItem divider={true}>
       <Avatar>
-        <img src={placeholder} />
+        <Placeholder />
       </Avatar>
       <ListItemText
         primary={props.tap.breweryName + " - " + props.tap.bevName}

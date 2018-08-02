@@ -24,9 +24,7 @@ import './index.css';
 
 ReactDOM.render(
   <BrowserRouter>
-      <div>
         <App />
-      </div>
   </BrowserRouter>
 , document.getElementById('root'));
 registerServiceWorker();

@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import shortid from "shortid";
-import grungeBorder from "../../common/assets/img/grunge_border_white.svg";
+import GrungeBorder from "../../common/assets/img/grunge_border_white.svg";
 
 const GalleryCard = props => {
-  const { event, classes } = props;
+  const { event } = props;
 
   return (
     <CardWrapper>
       <CardImage eventImage={event.eventBackground} />
-      <CardContent>
+      <CardContent bgImg={<GrungeBorder />}>
         <CardHeading>{event.title}</CardHeading>
         <EventTime>
           {`${event.eventStartDay} at ${event.eventStartTime}`}
@@ -47,8 +47,7 @@ const CardImage = styled.div`
   background-size: cover;
   background-position: 50% 50%;
   background-color: #ededed;
-  background-image: url(${props => props.eventImage});
-  calc()
+  background: url(${props => props.eventImage});
   ${props => props.theme.media.tablet_portrait_up`
     position: absolute;
     top:0;
@@ -70,7 +69,6 @@ const CardContent = styled.div`
     display: block;
     width: 100%;
     height: 50px;
-    background-image: url(${grungeBorder});
     background-size: cover;
     position: absolute;
     top: -50px;

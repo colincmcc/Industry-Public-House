@@ -8,7 +8,7 @@ import BodyText from "../../common/BodyText";
 // Images
 import mainBg from "../../../common/assets/img/zig-zag.png";
 import nfPatio from "../../../common/assets/img/nf_patio.jpg";
-import lightbulb from "../../../common/assets/img/gear.svg";
+import Lightbulb from "../../../common/assets/img/gear.svg";
 
 // ! Wordpress reverts to "false" for null
 
@@ -21,7 +21,7 @@ const AboutComponent = props => {
   const aboutPage = (
     <AboutWrapper hasBg={hasBg} bgImg={aboutBg} id="About">
       <AboutBg hasBg={hasBg} bgImg={aboutBg} />
-      <Lightbulb src={lightbulb} />
+      <LightbulbBackground />
 
       <Heading text={title} />
       <BodyText>
@@ -79,13 +79,14 @@ const ImageList = styled.div`
     padding-top: 0px;
   `};
 `;
-const Lightbulb = styled.img`
+const LightbulbBackground = styled(Lightbulb)`
   display: block;
   position: absolute;
   bottom: 0;
   width: 200%;
   height: 100%;
   opacity: 0.2;
+  color: ${props => props.theme.colors.theme};
 
   ${props => props.theme.media.tablet_landscape_up`
   width: 100%;
