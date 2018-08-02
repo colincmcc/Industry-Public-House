@@ -51,11 +51,12 @@
     "start": "concurrently npm:graphql npm:client",
     "graphql": "babel-node ./src/graphql/index.js",
     "client": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cd build && sw-precache --config ../sw-config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "sw-precache": "^5.2.1"
   }
 }
