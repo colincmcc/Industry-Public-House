@@ -58,3 +58,6 @@ body {
 .fa {
   vertical-align: middle !important;
 }
+svg {
+  fill: currentColor;
+}

@@ -38,5 +38,7 @@
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer build/static/js/main.*"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react-svg-loader": "^2.1.0"
+  }
 }

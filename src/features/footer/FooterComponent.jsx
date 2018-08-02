@@ -5,7 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import { Facebook, Twitter, Instagram } from "mdi-material-ui";
+import facebook from "../../common/assets/icons/facebook.svg";
+import twitter from "../../common/assets/icons/twitter.svg";
+import instagram from "../../common/assets/icons/instagram.svg";
 
 import TripAdvisor from "../common/svgIcons/tripadvisor";
 import theme from "../../common/styled/theme";
@@ -43,14 +45,20 @@ const FooterComponent = props => {
                   href={location.acf.facebook}
                   classes={{ root: classes.buttonRoot }}
                 >
-                  <Facebook />
+                  <img
+                    style={{ color: theme.colors.lightAccent }}
+                    src={facebook}
+                  />
                 </IconButton>
 
                 <IconButton
                   href={location.acf.twitter}
                   classes={{ root: classes.buttonRoot }}
                 >
-                  <Twitter />
+                  <img
+                    style={{ color: theme.colors.lightAccent }}
+                    src={twitter}
+                  />
                 </IconButton>
 
                 <IconButton

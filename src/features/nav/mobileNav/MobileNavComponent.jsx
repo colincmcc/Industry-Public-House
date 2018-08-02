@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import shortid from "shortid";
-import { Menu, Food, Email } from "mdi-material-ui";
+import Menu from "../../../common/assets/icons/menu.svg";
+import food from "../../../common/assets/icons/menu.svg";
+import email from "../../../common/assets/icons/menu.svg";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { withStyles } from "@material-ui/core/styles";
 import LightbulbLogo from "../../common/svgIcons/lightbulb";
 import BeerGlass from "../../common/svgIcons/beerglass";
-
+import SvgIcon from "../../common/SvgIcon";
 import theme from "../../../common/styled/theme";
 
 const MobileNavComponent = props => {
@@ -28,18 +30,24 @@ const MobileNavComponent = props => {
       slug: "drinks",
       icon: <BeerGlass />
     },
-    { link: "/Food", text: "Food", slug: "food", icon: <Food />, onClick: {} },
+    {
+      link: "/Food",
+      text: "Food",
+      slug: "food",
+      icon: <SvgIcon child={food} fill={theme.colors.lightAccent} />,
+      onClick: {}
+    },
     {
       link: "/Contact",
       text: "Contact",
       slug: "contact",
-      icon: <Email />
+      icon: <img src={email} />
     },
     {
       link: { pathname: "#Menu", state: { modal: true } },
       text: "Menu",
       slug: "menu",
-      icon: <Menu />
+      icon: <Menu width={24} height={24} />
     }
   ];
 

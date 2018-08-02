@@ -7,7 +7,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 import IconButton from "@material-ui/core/IconButton";
-import { Phone, Facebook, Twitter, Instagram } from "mdi-material-ui";
+import phone from "../../../common/assets/icons/phone.svg";
 import theme from "../../../common/styled/theme";
 import { mobileNavItems } from "../NavContainer";
 
@@ -46,7 +46,7 @@ const WideNavComponent = props => {
         </TopNav>
         <TopMobileButtons>
           <IconButton style={{ color: theme.colors.lightAccent }}>
-            <Phone />
+            <img src={phone} />
           </IconButton>
         </TopMobileButtons>
       </NavContents>
