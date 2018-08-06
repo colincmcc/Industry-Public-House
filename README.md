@@ -1,7 +1,5 @@
 # Restaurant Progressive Web App - In Development
 
----
-
 Check out a demo here:
 
 - site: https://iph.colinmac.me
@@ -19,15 +17,11 @@ After the main features are finished. This will be integrated with a customizabl
 
 ## Screenshots
 
----
-
 - **Dynamic Frontpage / Caching / Multiple API's / Responsive**
 
   ![Dynamic Frontpagey](https://i.imgur.com/gTSgdlz.gif)
 
 ## Running the tests
-
----
 
 Coming Soon!
 
@@ -45,7 +39,7 @@ NGINX is used as a reverse proxy for Apache and WordPress CLI server (which uses
 
 #### NGINX
 
-`
+```
 upstream wp_api {
 server 127.0.0.1:8081;
 keepalive 64;
@@ -142,11 +136,11 @@ server {
 
 }
 
-`
+```
 
 ### APACHE
 
-`
+```
 <VirtualHost \*:8080>
 ServerName iph.colinmac.me
 ServerAlias www.iph.colinmac.me
@@ -160,7 +154,7 @@ AllowOverride All
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
 </VirtualHost>
-`
+```
 ## Built With
 
 - [React.js](https://reactjs.org/) - The web framework used
