@@ -4,16 +4,12 @@ import gql from 'graphql-tag'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 import shortid from 'shortid'
-import { withStyles } from '@material-ui/core/styles';
-
-import Paper from '@material-ui/core/Paper';
-
+import MenuWrapper from '../common/MenuWrapper'
 import PageHeaderContainer from '../common/page/PageHeaderContainer'
 import DrinkNavComponent from './DrinkNavComponent'
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
 import DrinkMenuComponent from './DrinkMenuComponent'
-import theme from "../../common/styled/theme";
-
+import LoadingComponent from '../common/loading/LoadingComponent'
 // TODO: get drinkNavItems and locations from Wordpress
 
 const DrinkContainer = (props) => {
@@ -26,21 +22,19 @@ const DrinkContainer = (props) => {
       {id: 1, label: "Lawrenceville", location: "lv"},
       {id: 2, label: "North Fayette", location: "nf"}
     ]
-    const { classes } = props;
-
+    const drinkNavItems = [
+      {label: "Cocktails", slug: "Cocktails", component: <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />, showLocation: false},
+      {label: "Taps", slug: "Taps", component: <DrinkMenuComponent query={DP_TAPS} queryVariables={{location: currentLocation}} drinkType="taps" />, showLocation: true, props: ""},
+      {label: "Cans", slug: "Cans", component: <DrinkMenuComponent query={WP_CANS} drinkType="cans" />, showLocation: true},
+      {label: "Wine", slug: "Wine", component: <DrinkMenuComponent query={WP_WINE} drinkType="wine" />, showLocation: false},
+      {label: "Premium", slug: "Premium", component: <DrinkMenuComponent query={WP_PREMIUM} drinkType="premium" />, showLocation: true},
+    ]
     return(
       <Query query={ WP_COCKTAILS }>
       {
         ({loading, error, data, client}) =>{
-
-          const drinkNavItems = [
-            {label: "Cocktails", slug: "Cocktails", component: <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />, showLocation: false},
-            {label: "Taps", slug: "Taps", component: <DrinkMenuComponent query={DP_TAPS} queryVariables={{location: currentLocation}} drinkType="taps" />, showLocation: true, props: ""},
-            {label: "Cans", slug: "Cans", component: <DrinkMenuComponent query={WP_CANS} drinkType="cans" />, showLocation: true},
-            {label: "Wine", slug: "Wine", component: <DrinkMenuComponent query={WP_WINE} drinkType="wine" />, showLocation: false},
-            {label: "Premium", slug: "Premium", component: <DrinkMenuComponent query={WP_PREMIUM} drinkType="premium" />, showLocation: true},
-          ]
-
+          if(loading) return <LoadingComponent large />
+          if(error) return <LoadingComponent />
           return(
 
           <div>
@@ -48,19 +42,19 @@ const DrinkContainer = (props) => {
 
             <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
 
-            <Paper className={classes.paperRoot}  elevation={2}>
-            <Switch>
-            <Route
-            exact
-            path="/Drink"
-            render={() => <DrinkMenuComponent query={WP_COCKTAILS} drinkType="wine"/>}
-          />
-              {drinkNavItems.map((navItem) => (
-                <Route key={shortid.generate()} exact path={'/Drink/' + navItem.slug} render={() => navItem.component} />
-              ))}
+            <MenuWrapper>
+              <Switch>
+                <Route
+                exact
+                path="/Drink"
+                render={() => <DrinkMenuComponent query={WP_COCKTAILS} drinkType="wine"/>}
+              />
+                  {drinkNavItems.map((navItem) => (
+                    <Route key={shortid.generate()} exact path={'/Drink/' + navItem.slug} render={() => navItem.component} />
+                  ))}
 
-            </Switch>
-            </Paper>
+              </Switch>
+            </MenuWrapper>
           </div>
         )
         }
@@ -69,7 +63,7 @@ const DrinkContainer = (props) => {
     )
 }
 
-export default withStyles(theme.materialUI)(withRouter(DrinkContainer))
+export default withRouter(DrinkContainer);
 const WP_COCKTAILS = gql`
   {
     menuItems: allCocktails {

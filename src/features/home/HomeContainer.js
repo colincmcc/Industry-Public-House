@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Query } from "react-apollo";
 import gql from 'graphql-tag'
-import LoadingComponent from '../common/loading/LoadingComponent'
 import HomeComponent from './HomeComponent'
 
 export default class HomeContainer extends
@@ -14,11 +13,7 @@ Component {
       <Query query={HOME_PAGE}>
       {
         ({ loading, error, data }) => {
-          if(loading) return <LoadingComponent />
-          if(error) {
-            console.log(error)
-            return <div> Error... </div> }
-          return <HomeComponent {...data} />
+          return <HomeComponent loading={loading} error={error} {...data} />
 
         }
       }

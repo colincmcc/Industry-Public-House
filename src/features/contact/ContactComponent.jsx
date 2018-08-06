@@ -33,15 +33,15 @@ class ContactComponent extends Component {
     this.addFormListeners();
   }
 
-  handleChange = name => ev => {
+  handleChange = ev => {
+    console.log(ev.target.value);
     validateOnBlur(ev);
-    console.log(`${ev.target.name} : ${ev.target.value} : ${ev.target.type}`);
+    var formIsValid = validateForm();
     this.setState({
       [ev.target.name]: {
         value: ev.target.value
       }
     });
-    console.log(this.state);
   };
 
   handleSubmit = ev => {
@@ -67,8 +67,6 @@ class ContactComponent extends Component {
       modalOpen: false,
       formIsValid: formIsValid
     });
-
-    validateOnBlur(ev);
   };
 
   render() {
@@ -79,7 +77,7 @@ class ContactComponent extends Component {
       <ContactWrapper>
         <FormContainer>
           <ContactFormComponent
-            handleChange={this.handleChange}
+            handleChange={ev => this.handleChange}
             handleOpen={this.handleOpen}
             handleClose={this.handleClose}
             handleSubmit={this.handleSubmit}

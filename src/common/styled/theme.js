@@ -17,7 +17,8 @@ const colors = {
   whiteTheme: "#F4EDDC",
   darkGray: "#1d1e22",
   yellowGray: "#d7d5cd",
-  darkBlue: "#051b3e"
+  darkBlue: "#051b3e",
+  warning: "#F66020"
 }
 
 const fontSizes = {
@@ -51,14 +52,14 @@ const fontStyles = {
   font-size: 40px;
   line-height: 50px;
   font-weight: 800;
-  font-family: 'Gin-Rough';
+  font-family: 'Gin Rough';
   `,
   subHeading: css`
   font-size: 22px;
   line-height: 33px;
   font-weight: 00;
   letter-spacing: .025em;
-  font-family: 'Gin-Rough';
+  font-family: 'Gin Rough';
 
   `,
   medium: css`
@@ -234,10 +235,9 @@ const material = {
   paperRoot: {
     color: colors.blackTheme,
     minHeight: "100px",
-    maxWidth: "1280px",
+    maxWidth: "1060px",
     backgroundColor: "#F4EDDC",
-    padding: "2rem",
-    margin: "0 2rem",
+    margin: "auto",
     boxShadow: "0 50px 100px #5b470c1A, 0 15px 35px #5b470c26, 0 5px 15px rgba(0,0,0,0.1)"
 
   },

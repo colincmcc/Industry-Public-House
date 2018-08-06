@@ -74,7 +74,7 @@ class ContactFormComponent extends Component {
           <FormLabel htmlFor="reason">Contact Reason</FormLabel>
           <SelectWrapper>
             <SelectComponent
-              handleChange={handleChange("reason")}
+              handleChange={handleChange()}
               options={contactReasons}
               currentReason={reason.value}
               name="reason"
@@ -91,7 +91,7 @@ class ContactFormComponent extends Component {
           id="firstname"
           placeHolder="Nikola"
           isRequired={true}
-          handleChange={handleChange("firstname")}
+          handleChange={handleChange()}
           label="Your First Name"
         />
 
@@ -100,7 +100,7 @@ class ContactFormComponent extends Component {
           id="lastname"
           placeHolder="Tesla"
           isRequired={true}
-          handleChange={handleChange("lastname")}
+          handleChange={handleChange()}
           label="Your Last Name"
         />
 
@@ -109,7 +109,7 @@ class ContactFormComponent extends Component {
           id="email"
           placeHolder="nikola.tesla@example.com"
           isRequired={true}
-          handleChange={handleChange("email")}
+          handleChange={handleChange()}
           label="Your Email"
         />
       </Form>

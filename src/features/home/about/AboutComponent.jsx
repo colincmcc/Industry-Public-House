@@ -18,6 +18,7 @@ const AboutComponent = props => {
   const hasHero = heroImg !== "false";
   const aboutBg = hasBg ? bgImg : mainBg;
   const aboutHero = hasHero ? heroImg : nfPatio;
+
   const aboutPage = (
     <AboutWrapper hasBg={hasBg} bgImg={aboutBg} id="About">
       <AboutBg hasBg={hasBg} bgImg={aboutBg} />
@@ -32,6 +33,7 @@ const AboutComponent = props => {
       </ImageList>
     </AboutWrapper>
   );
+
   return aboutPage;
 };
 

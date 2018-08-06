@@ -9,15 +9,18 @@ import List from "@material-ui/core/List";
 import theme from "../../common/styled/theme";
 import { withStyles } from "@material-ui/core";
 import LoadingComponent from "./loading/LoadingComponent";
+import ErrorComponent from "./loading/ErrorComponent";
 
 const FoodDrinkComponent = props => {
-  const { classes } = props;
-  if (props.loading) return <LoadingComponent />;
-  if (props.error) return <LoadingComponent />;
+  const { classes, loading, error, data } = props;
+  if (loading) return <LoadingComponent />;
+  if (error || !data.menuItems) return <ErrorComponent />;
+  const menuItems = data.menuItems;
+
   return (
     <FoodMenuWrapper>
       <List className={classes.listRoot}>
-        {props.menuItems.map(menuItem => {
+        {menuItems.map(menuItem => {
           // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
           const primary = <FoodHeader>{menuItem.acf.name}</FoodHeader>;
           const secondary = (

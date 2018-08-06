@@ -19,8 +19,11 @@ class HomeComponent extends Component {
   componentDidMount() {
     LoadableAbout.preload();
   }
+
   render() {
-    const { allHeaders, classes } = this.props;
+    const { error, loading, allHeaders, classes } = this.props;
+    if (error) return <LoadingComponent />;
+    if (loading) return <LoadingComponent large />;
 
     function chooseHeader() {
       if (allHeaders.some(h => h.acf.isFeatured === true)) {
@@ -63,7 +66,7 @@ class HomeComponent extends Component {
       </HomeSubHeading>
     );
 
-    const header = {
+    const headerData = {
       bgImg: choosenHeader.acf.background_image,
       heroImg: choosenHeader.acf.hero_image,
       heading: choosenHeader.title.rendered,
@@ -73,7 +76,7 @@ class HomeComponent extends Component {
 
     return (
       <HomeWrapper id="homePage">
-        <PageHeaderContainer {...header} />
+        <PageHeaderContainer {...headerData} />
         <HomePageOverlay id="main">
           <MainBg />
           <LoadableAbout />

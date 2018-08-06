@@ -8,13 +8,9 @@ const FoodMenuComponent = props => {
 
   return (
     <Query query={WP_FOODS} variables={{ selectedFoodType }}>
-      {({ loading, error, data, client }) => {
+      {({ loading, error, data }) => {
         return (
-          <FoodDrinkComponent
-            menuItems={data.foodsByMeta}
-            loading={loading}
-            error={error}
-          />
+          <FoodDrinkComponent data={data} loading={loading} error={error} />
         );
       }}
     </Query>
@@ -25,16 +21,7 @@ export default FoodMenuComponent;
 
 export const WP_FOODS = gql`
   query Foods($selectedFoodType: String!) {
-    allFoods {
-      id
-      acf {
-        price
-        food_type
-        name
-        description
-      }
-    }
-    foodsByMeta(food_type: $selectedFoodType) {
+    menuItems: foodsByMeta(food_type: $selectedFoodType) {
       id
       acf {
         price

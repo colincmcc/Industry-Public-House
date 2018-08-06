@@ -4,6 +4,7 @@ import shortid from "shortid";
 import { withStyles } from "@material-ui/core/styles";
 import TapItemComponent from "./TapItemComponent";
 import theme from "../../../common/styled/theme";
+import LoadingComponent from "../loading/LoadingComponent";
 // TODO : must be a better way to handle the json response based on type of product (mead, beer, cider)
 
 /**
@@ -37,11 +38,14 @@ import theme from "../../../common/styled/theme";
  */
 
 const TapLIstComponent = props => {
-  const classes = props;
+  const { classes, loading, error, data } = props;
+  if (error || !data.allTaps) return <LoadingComponent />;
+  if (loading) return <LoadingComponent />;
+
   return (
     <div className={classes.root}>
       <List className={classes.listRoot}>
-        {props.taps.map(tap => {
+        {data.allTaps.map(tap => {
           const bevType = tap.MenuItemProductDetail.BeverageType;
           switch (bevType) {
             case "Beer": {

@@ -134,7 +134,7 @@ background-color: ${props => props.theme.colors.darkGray};
 min-width: 350px;
 `
 const MainContent = styled.div`
-
+min-height: 100vh;
 `
 
 const CACHED_STATE = gql`

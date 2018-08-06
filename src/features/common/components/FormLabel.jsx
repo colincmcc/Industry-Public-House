@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const FormLabel = props => {
-  const { htmlFor, label } = props;
-  return <Label htmlFor={htmlFor}>{label}</Label>;
+  const { htmlFor, children } = props;
+  return <Label htmlFor={htmlFor}>{children}</Label>;
 };
 
 export default FormLabel;

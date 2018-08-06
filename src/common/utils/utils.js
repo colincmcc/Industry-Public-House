@@ -39,8 +39,11 @@ const isFormRow = el => {
 export const validateField = (field) => {
   if(field.value){
     field.setAttribute("aria-invalid", false)
+    console.log(field.value)
   } else {
     field.setAttribute("aria-invalid", true)
+    console.log("true")
+    console.log(field.value)
   }
 
   if (field.getAttribute('type') === 'email'){
@@ -51,6 +54,7 @@ export const validateField = (field) => {
 const validateEmailField = (emailField) => {
   if(!validateEmailValue(emailField.value)){
     emailField.setAttribute("aria-invalid", false)
+
   } else {
     emailField.setAttribute("aria-invalid", true)
   }
@@ -79,7 +83,6 @@ export const validateForm = (formValues) => {
   var hiddenFields = [].slice.call(form.querySelectorAll('input[type="hidden"]'))
 
   var fieldsToValidate = [...requiredFields, ...hiddenFields]
-
   fieldsToValidate.forEach( (field) => {
     validateField(field)
   })
