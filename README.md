@@ -78,7 +78,7 @@ server {
     server_name iph.colinmac.me www.iph.colinmac.me;
 
         server_name_in_redirect off;
-        root /usr/share/nginx/iph.colinmac.me/client/build;
+        root /path/to/app;
 
         location / {
          try_files $uri /index.html;
@@ -145,8 +145,8 @@ server {
 ServerName iph.colinmac.me
 ServerAlias www.iph.colinmac.me
 ServerAdmin email@colinmac.me
-DocumentRoot /usr/share/nginx/iph.colinmac.me/wordpress
-<Directory /usr/share/nginx/iph.colinmac.me/wordpress>
+DocumentRoot /path/to/wordpress/install
+<Directory /path/to/wordpress/install>
 AllowOverride All
 </Directory>
 
