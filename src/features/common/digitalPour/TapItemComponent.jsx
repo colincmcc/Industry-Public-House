@@ -6,16 +6,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Placeholder from '../../../common/assets/img/Industry_fullLogo_sm_wht.svg';
 
 
-const styles = theme => ({
+const styles = {
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    breakInside: 'avoid-column',
   },
-});
+};
 
 const TapItemComponent = props => (
-  <ListItem divider>
+  <ListItem classes={{ root: props.classes.root }} divider>
     <Avatar>
       <Placeholder />
     </Avatar>

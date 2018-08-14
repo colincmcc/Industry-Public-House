@@ -10,7 +10,7 @@ const GalleryCard = (props) => {
   return (
     <CardWrapper>
       <CardImage eventImage={event.eventBackground} />
-      <CardContent bgImg={<GrungeBorder />}>
+      <CardContent bgImg={GrungeBorder}>
         <CardHeading>{event.title}</CardHeading>
         <EventTime>
           {`${event.eventStartDay} at ${event.eventStartTime}`}
@@ -93,6 +93,7 @@ const CardContent = styled.div`
     display: block;
     width: 100%;
     height: 50px;
+    background: url(${props => props.bgImg});
     background-size: cover;
     position: absolute;
     top: -50px;
