@@ -1,19 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import shortid from "shortid";
-import LoadableVisibility from "react-loadable-visibility/react-loadable";
-import Heading from "../common/Heading";
-import LoadingComponent from "../common/loading/LoadingComponent";
+import React from 'react';
+import styled from 'styled-components';
+import shortid from 'shortid';
+import LoadableVisibility from 'react-loadable-visibility/react-loadable';
+import Heading from '../common/Heading';
+import LoadingComponent from '../common/loading/LoadingComponent';
 
 const LoadableGalleryCard = LoadableVisibility({
-  loader: () => import("../common/GalleryCard"),
+  loader: () => import('../common/GalleryCard'),
   render(loaded, props) {
-    let Component = loaded.default;
+    const Component = loaded.default;
     return <Component {...props} />;
   },
-  loading: LoadingComponent
+  loading: LoadingComponent,
 });
-const EventComponent = props => {
+const EventComponent = (props) => {
   const { eventList, pageTitle } = props;
 
   const reducedList = eventList.slice(0, 2);
@@ -42,8 +42,8 @@ const EventWrapper = styled.section`
 
   background-color: ${props => props.theme.colors.blackTheme};
   background: url(${props => props.bgImg});
-  background-size: ${props => (props.hasBg ? "cover" : null)};
-  background-repeat: ${props => (props.hasBg ? "no-repeat" : "repeat")};
+  background-size: ${props => (props.hasBg ? 'cover' : null)};
+  background-repeat: ${props => (props.hasBg ? 'no-repeat' : 'repeat')};
   max-width: 1040px;
   margin: auto;
 `;

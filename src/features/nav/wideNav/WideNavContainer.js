@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 import WideNavComponent from './WideNavComponent';
 
 
-const WideNavContainer = (props) => {
-  return (
-    <div>
-      <WideNavComponent {...props} />
-    </div>
-  )
-}
+const WideNavContainer = props => (
+  <div>
+    <WideNavComponent {...props} />
+  </div>
+);
 
-export default WideNavContainer
+export default WideNavContainer;

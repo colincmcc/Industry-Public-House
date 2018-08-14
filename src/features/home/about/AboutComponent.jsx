@@ -1,21 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 // Custom Components
-import Heading from "../../common/Heading";
-import BodyText from "../../common/BodyText";
+import Heading from '../../common/Heading';
+import BodyText from '../../common/BodyText';
 
 // Images
-import mainBg from "../../../common/assets/img/zig-zag.png";
-import nfPatio from "../../../common/assets/img/nf_patio.jpg";
-import Lightbulb from "../../../common/assets/img/gear.svg";
+import mainBg from '../../../common/assets/img/zig-zag.png';
+import nfPatio from '../../../common/assets/img/nf_patio.jpg';
+import Lightbulb from '../../../common/assets/img/gear.svg';
 
 // ! Wordpress reverts to "false" for null
 
-const AboutComponent = props => {
-  const { bgImg, title, content, heroImg } = props;
-  const hasBg = bgImg !== "false";
-  const hasHero = heroImg !== "false";
+const AboutComponent = (props) => {
+  const {
+    bgImg, title, content, heroImg,
+  } = props;
+  const hasBg = bgImg !== 'false';
+  const hasHero = heroImg !== 'false';
   const aboutBg = hasBg ? bgImg : mainBg;
   const aboutHero = hasHero ? heroImg : nfPatio;
 
@@ -59,8 +61,8 @@ const AboutBg = styled.div`
   left: 0;
   background-color: ${props => props.theme.colors.blackTheme};
   background: url(${props => props.bgImg});
-  background-size: ${props => (props.hasBg ? "cover" : null)};
-  background-repeat: ${props => (props.hasBg ? "no-repeat" : "repeat")};
+  background-size: ${props => (props.hasBg ? 'cover' : null)};
+  background-repeat: ${props => (props.hasBg ? 'no-repeat' : 'repeat')};
   max-width: 1060px;
   overflow: hidden;
 `;

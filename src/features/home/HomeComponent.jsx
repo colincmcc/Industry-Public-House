@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import Loadable from "react-loadable";
-import PageHeaderContainer from "../common/page/PageHeaderContainer";
-import EventContainer from "../events/EventContainer";
-import theme from "../../common/styled/theme";
-import mainBg from "../../common/assets/img/zig-zag.png";
-import LoadingComponent from "../common/loading/LoadingComponent";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import Loadable from 'react-loadable';
+import PageHeaderContainer from '../common/page/PageHeaderContainer';
+import EventContainer from '../events/EventContainer';
+import theme from '../../common/styled/theme';
+import mainBg from '../../common/assets/img/zig-zag.png';
+import LoadingComponent from '../common/loading/LoadingComponent';
 
 const LoadableAbout = Loadable({
-  loader: () => import("./about/AboutContainer"),
-  loading: LoadingComponent
+  loader: () => import('./about/AboutContainer'),
+  loading: LoadingComponent,
 });
 
 class HomeComponent extends Component {
@@ -21,7 +21,9 @@ class HomeComponent extends Component {
   }
 
   render() {
-    const { error, loading, allHeaders, classes } = this.props;
+    const {
+      error, loading, allHeaders, classes,
+    } = this.props;
     if (error) return <LoadingComponent />;
     if (loading) return <LoadingComponent large />;
 
@@ -29,18 +31,18 @@ class HomeComponent extends Component {
       if (allHeaders.some(h => h.acf.isFeatured === true)) {
         return allHeaders.find(h => h.acf.isFeatured === true);
       }
-      const randomHeader =
-        allHeaders.length > 1
-          ? allHeaders[Math.floor(Math.random() * allHeaders.length)]
-          : allHeaders;
+      const randomHeader = allHeaders.length > 1
+        ? allHeaders[Math.floor(Math.random() * allHeaders.length)]
+        : allHeaders;
 
       return randomHeader;
     }
-    // * Return an external link button if the Wordpress link is a custom button, else return an react-router link button. Probably should make a component
+    // * Return an external link button if the Wordpress link is a custom button,
+    // * else return an react-router link button. Probably should make a component
 
     const choosenHeader = chooseHeader();
 
-    let isCustomLink = choosenHeader.acf.headerLink === "custom";
+    const isCustomLink = choosenHeader.acf.headerLink === 'custom';
     const actionButton = isCustomLink ? (
       <Button
         variant="contained"
@@ -70,8 +72,8 @@ class HomeComponent extends Component {
       bgImg: choosenHeader.acf.background_image,
       heroImg: choosenHeader.acf.hero_image,
       heading: choosenHeader.title.rendered,
-      subHeading: subHeading,
-      actionButton: actionButton
+      subHeading,
+      actionButton,
     };
 
     return (

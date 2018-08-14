@@ -1,25 +1,25 @@
 const homeResolvers = {
   defaults: {
-    selectedFoodType: "brunch",
-    selectedDrinkType: "cocktails",
+    selectedFoodType: 'brunch',
+    selectedDrinkType: 'cocktails',
     lvTaps: [],
     nfTaps: [],
     foodItems: [],
-    drinkItems: []
+    drinkItems: [],
   },
   resolvers: {
     Mutation: {
       selectFoodType: (_, { selectedFoodType }, { cache }) => {
-        cache.writeData({ data: { selectedFoodType: selectedFoodType } });
+        cache.writeData({ data: { selectedFoodType } });
         return null;
       },
       selectDrinkType: (_, { selectedDrinkType }, { cache }) => {
-        cache.writeData({ data: { selectedDrinkType: selectedDrinkType } });
+        cache.writeData({ data: { selectedDrinkType } });
         return null;
       },
 
-    }
-  }
-}
+    },
+  },
+};
 
 export default homeResolvers;

@@ -1,11 +1,10 @@
-import React from 'react'
+import React from 'react';
 import MobileChooserComponent from './MobileChooserComponent';
 
 const LocationNavContainer = (props) => {
-  const {isMobile} = props
+  const { isMobile } = props;
 
-  if(isMobile) return <MobileChooserComponent />
+  if (isMobile) return <MobileChooserComponent />;
+};
 
-}
-
-export default LocationNavContainer
+export default LocationNavContainer;

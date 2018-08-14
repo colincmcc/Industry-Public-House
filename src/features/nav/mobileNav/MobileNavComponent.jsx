@@ -1,57 +1,57 @@
-import React from "react";
-import styled from "styled-components";
-import { withRouter, Link } from "react-router-dom";
-import shortid from "shortid";
-import Menu from "../../../common/assets/icons/menu.svg";
-import Food from "../../../common/assets/icons/food.svg";
-import Email from "../../../common/assets/icons/email.svg";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import { withStyles } from "@material-ui/core/styles";
-import LightbulbLogo from "../../common/svgIcons/lightbulb";
-import BeerGlass from "../../common/svgIcons/beerglass";
-import theme from "../../../common/styled/theme";
+import React from 'react';
+import styled from 'styled-components';
+import { withRouter, Link } from 'react-router-dom';
+import shortid from 'shortid';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '../../../common/assets/icons/menu.svg';
+import Food from '../../../common/assets/icons/food.svg';
+import Email from '../../../common/assets/icons/email.svg';
+import LightbulbLogo from '../../common/svgIcons/lightbulb';
+import BeerGlass from '../../common/svgIcons/beerglass';
+import theme from '../../../common/styled/theme';
 
-const MobileNavComponent = props => {
+const MobileNavComponent = (props) => {
   const { classes, navIsShown } = props;
   const currentPath = props.location.pathname;
 
   const bottomNavItems = [
     {
-      link: "/",
-      text: "Home",
-      slug: "home",
-      icon: <LightbulbLogo />
+      link: '/',
+      text: 'Home',
+      slug: 'home',
+      icon: <LightbulbLogo />,
     },
     {
-      link: "/Drink",
-      text: "Drinks",
-      slug: "drinks",
-      icon: <BeerGlass />
+      link: '/Drink',
+      text: 'Drinks',
+      slug: 'drinks',
+      icon: <BeerGlass />,
     },
     {
-      link: "/Food",
-      text: "Food",
-      slug: "food",
+      link: '/Food',
+      text: 'Food',
+      slug: 'food',
       icon: <Food width={24} height={24} />,
-      onClick: {}
+      onClick: {},
     },
     {
-      link: "/Contact",
-      text: "Contact",
-      slug: "contact",
-      icon: <Email />
+      link: '/Contact',
+      text: 'Contact',
+      slug: 'contact',
+      icon: <Email />,
     },
     {
-      link: { pathname: "#Menu", state: { modal: true } },
-      text: "Menu",
-      slug: "menu",
-      icon: <Menu width={24} height={24} />
-    }
+      link: { pathname: '#Menu', state: { modal: true } },
+      text: 'Menu',
+      slug: 'menu',
+      icon: <Menu width={24} height={24} />,
+    },
   ];
 
   return (
-    <NavWrapper className={navIsShown ? " " : "hide "}>
+    <NavWrapper className={navIsShown ? ' ' : 'hide '}>
       <BottomNavigation
         value={currentPath.substr(0, 4)}
         classes={{ root: classes.bottomNavRoot }}
@@ -60,7 +60,7 @@ const MobileNavComponent = props => {
           <BottomNavigationAction
             key={shortid.generate()}
             value={
-              navItem.slug !== "menu" ? navItem.link.substr(0, 4) : navItem.slug
+              navItem.slug !== 'menu' ? navItem.link.substr(0, 4) : navItem.slug
             }
             label={navItem.text}
             icon={navItem.icon}
@@ -68,7 +68,7 @@ const MobileNavComponent = props => {
             to={navItem.link}
             classes={{
               root: classes.bottomActionRoot,
-              selected: classes.bottomActionSelected
+              selected: classes.bottomActionSelected,
             }}
           />
         ))}

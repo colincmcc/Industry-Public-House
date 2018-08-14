@@ -1,19 +1,17 @@
-import React from "react";
-import Gear from "../../../common/assets/img/gear.svg";
-import styled, { keyframes } from "styled-components";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import Gear from '../../../common/assets/img/gear.svg';
 
-export default props => {
-  return (
-    <LoadingWrapper {...props}>
-      <Loader {...props}>
-        <SpinningGear />
-      </Loader>
-    </LoadingWrapper>
-  );
-};
+export default props => (
+  <LoadingWrapper {...props}>
+    <Loader {...props}>
+      <SpinningGear />
+    </Loader>
+  </LoadingWrapper>
+);
 
 const LoadingWrapper = styled.div`
-  height: ${props => (props.large ? "100vh" : "100%")};
+  height: ${props => (props.large ? '100vh' : '100%')};
   width: 100%;
   background-color: transparent;
   margin: auto;
@@ -32,8 +30,8 @@ const outerAnim = keyframes`
 
 const Loader = styled.div`
   display: inline-block;
-  width: ${props => (props.large ? "80px" : "40px")};
-  height: ${props => (props.large ? "80px" : "40px")};
+  width: ${props => (props.large ? '80px' : '40px')};
+  height: ${props => (props.large ? '80px' : '40px')};
   margin: auto;
 `;
 

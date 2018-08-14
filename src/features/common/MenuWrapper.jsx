@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
 
-import Paper from "@material-ui/core/Paper";
-import theme from "../../common/styled/theme";
+import Paper from '@material-ui/core/Paper';
+import theme from '../../common/styled/theme';
 
-const MenuWrapper = props => {
+const MenuWrapper = (props) => {
   const { classes, children } = props;
   return (
     <MenuPaper>

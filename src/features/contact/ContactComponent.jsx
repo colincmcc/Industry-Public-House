@@ -1,71 +1,71 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import ContactFormComponent from "./ContactFormComponent";
-import { validateForm, validateOnBlur } from "../../common/utils/utils";
-import theme from "../../common/styled/theme";
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import ContactFormComponent from './ContactFormComponent';
+import { validateForm, validateOnBlur } from '../../common/utils/utils';
+import theme from '../../common/styled/theme';
 
 class ContactComponent extends Component {
   state = {
     firstname: {
-      value: "",
-      type: "text"
+      value: '',
+      type: 'text',
     },
     lastname: {
-      value: "",
-      type: "text"
+      value: '',
+      type: 'text',
     },
     email: {
-      value: "",
-      type: "email"
+      value: '',
+      type: 'email',
     },
     reason: {
-      value: "",
-      type: "text"
+      value: '',
+      type: 'text',
     },
     formIsValid: true,
-    modalOpen: false
+    modalOpen: false,
   };
 
   componentDidMount() {
     this.addFormListeners();
   }
 
-  handleChange = ev => {
+  handleChange = (ev) => {
     console.log(ev.target.value);
     validateOnBlur(ev);
-    var formIsValid = validateForm();
+    const formIsValid = validateForm();
     this.setState({
       [ev.target.name]: {
-        value: ev.target.value
-      }
+        value: ev.target.value,
+      },
     });
   };
 
-  handleSubmit = ev => {
+  handleSubmit = (ev) => {
     ev.preventDefault();
     validateForm();
   };
 
   addFormListeners = () => {
-    var form = document.querySelector("form");
-    form.addEventListener("focusin", this.onFormFocusIn);
-    form.addEventListener("focusout", this.onFormFocusOut);
+    const form = document.querySelector('form');
+    form.addEventListener('focusin', this.onFormFocusIn);
+    form.addEventListener('focusout', this.onFormFocusOut);
   };
 
-  handleOpen = ev => {
+  handleOpen = () => {
     this.setState({
-      modalOpen: true
+      modalOpen: true,
     });
   };
 
-  handleClose = ev => {
-    var formIsValid = validateForm();
+  handleClose = () => {
+    const formIsValid = validateForm();
     this.setState({
       modalOpen: false,
-      formIsValid: formIsValid
+      formIsValid,
     });
   };
 
@@ -77,7 +77,7 @@ class ContactComponent extends Component {
       <ContactWrapper>
         <FormContainer>
           <ContactFormComponent
-            handleChange={ev => this.handleChange}
+            handleChange={() => this.handleChange}
             handleOpen={this.handleOpen}
             handleClose={this.handleClose}
             handleSubmit={this.handleSubmit}
@@ -120,8 +120,8 @@ const FormContainer = styled.section`
   width: 100%;
   background: ${props => props.theme.colors.whiteTheme};
   margin: auto;
-  box-shadow: 0 50px 100px ${props => props.theme.colors.darkTheme + "1A"},
-    0 15px 35px ${props => props.theme.colors.darkTheme + "26"},
+  box-shadow: 0 50px 100px ${props => `${props.theme.colors.darkTheme}1A`},
+    0 15px 35px ${props => `${props.theme.colors.darkTheme}26`},
     0 5px 15px rgba(0, 0, 0, 0.1);
 
   ${props => props.theme.media.tablet_landscape_up`

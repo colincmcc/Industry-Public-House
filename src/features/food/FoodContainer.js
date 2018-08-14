@@ -1,47 +1,55 @@
-import React from 'react'
+import React from 'react';
 
-import Paper from '@material-ui/core/Paper';
-import { Switch, Route } from 'react-router-dom'
-import shortid from 'shortid'
+import { Switch, Route } from 'react-router-dom';
+import shortid from 'shortid';
 
-import MenuWrapper from '../common/MenuWrapper'
-import FoodNavComponent from "./FoodNavComponent";
+import MenuWrapper from '../common/MenuWrapper';
+import FoodNavComponent from './FoodNavComponent';
 
-import bgImg from '../../common/assets/img/burgher.jpg'
+import bgImg from '../../common/assets/img/burgher.jpg';
 
-import foodBG from '../../common/assets/img/menu_background.jpg'
-import PageHeaderContainer from '../common/page/PageHeaderContainer'
+
+import PageHeaderContainer from '../common/page/PageHeaderContainer';
 import FoodMenuComponent from './FoodMenuComponent';
 
 
-// ! Currently usine a Query in HomeContainer local state as a variable here.  Eventually will move to @export to contain queries.
+// ! Currently usine a Query in HomeContainer local state as a variable here.
+// Eventually will move to @export to contain queries.
 // See here https://github.com/apollographql/apollo-link-state/issues/168
 
 const FoodContainer = (props) => {
   const navItems = [
-    { id: 0, label: "Brunch", link: "/Food/Brunch", slug: "brunch" },
-    { id: 1, label: "Starters", link: "/Food/Starters", slug: "starters" },
-    { id: 2, label: "Greens", link: "/Food/Greens", slug: "greens" },
+    {
+      id: 0, label: 'Brunch', link: '/Food/Brunch', slug: 'brunch',
+    },
+    {
+      id: 1, label: 'Starters', link: '/Food/Starters', slug: 'starters',
+    },
+    {
+      id: 2, label: 'Greens', link: '/Food/Greens', slug: 'greens',
+    },
     {
       id: 3,
-      label: "Handhelds",
-      link: "/Food/Handhelds",
-      slug: "handhelds"
+      label: 'Handhelds',
+      link: '/Food/Handhelds',
+      slug: 'handhelds',
     },
-    { id: 4, label: "Burghers", link: "/Food/Burghers", slug: "burghers" },
+    {
+      id: 4, label: 'Burghers', link: '/Food/Burghers', slug: 'burghers',
+    },
     {
       id: 5,
-      label: "Sustenance",
-      link: "/Food/Sustenance",
-      slug: "sustenance"
-    }
+      label: 'Sustenance',
+      link: '/Food/Sustenance',
+      slug: 'sustenance',
+    },
   ];
   return (
 
-    <div >
-      <PageHeaderContainer heading="Food" bgImg={bgImg} review={true} />
+    <div>
+      <PageHeaderContainer heading="Food" bgImg={bgImg} review />
       <FoodNavComponent
-      navItems={navItems}
+        navItems={navItems}
       />
       <MenuWrapper>
         <Switch>
@@ -50,17 +58,16 @@ const FoodContainer = (props) => {
             path="/Food"
             render={() => <FoodMenuComponent selectedFoodType="brunch" />}
           />
-            {navItems.map(navItem => (
-              <Route key={shortid.generate()} exact path={navItem.link} render={() => <FoodMenuComponent selectedFoodType={navItem.slug} /> } />
-            ))}
+          {navItems.map(navItem => (
+            <Route key={shortid.generate()} exact path={navItem.link} render={() => <FoodMenuComponent selectedFoodType={navItem.slug} />} />
+          ))}
 
 
         </Switch>
       </MenuWrapper>
 
-        </div>
+    </div>
 
-  )
-
-}
-export default FoodContainer
+  );
+};
+export default FoodContainer;

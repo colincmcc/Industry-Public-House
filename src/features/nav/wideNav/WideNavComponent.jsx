@@ -1,18 +1,27 @@
-import React from "react";
-import shortid from "shortid";
-import { withRouter, Link } from "react-router-dom";
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import React from 'react';
+import shortid from 'shortid';
+import { withRouter, Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
-import IconButton from "@material-ui/core/IconButton";
-import Phone from "../../../common/assets/icons/phone.svg";
-import theme from "../../../common/styled/theme";
-import { mobileNavItems } from "../NavContainer";
+import IconButton from '@material-ui/core/IconButton';
+import Phone from '../../../common/assets/icons/phone.svg';
+import theme from '../../../common/styled/theme';
 
-const WideNavComponent = props => {
+const WideNavComponent = (props) => {
   const { classes, headerLogo, location } = props;
+  const mobileNavItems = [
+    { label: 'Home', link: '/' },
+    { label: 'Food', link: '/Food' },
+    { label: 'Drinks', link: '/Drink' },
+    { label: 'Connect', link: '/Contact' },
+    { label: 'Apply', link: '/Apply' },
+    { label: 'Events', link: '/Calendar' },
+    { label: 'Shop', link: '/Shop' },
+  ];
+
   return (
     <TopWrapper>
       <NavContents>
@@ -23,7 +32,7 @@ const WideNavComponent = props => {
               value={location.pathname}
               classes={{
                 indicator: classes.indicator,
-                root: classes.navTabsRoot
+                root: classes.navTabsRoot,
               }}
             >
               {mobileNavItems.map(navItem => (
@@ -37,7 +46,7 @@ const WideNavComponent = props => {
                   label={navItem.label}
                   classes={{
                     root: classes.navTabRoot,
-                    selected: classes.tabSelected
+                    selected: classes.tabSelected,
                   }}
                 />
               ))}

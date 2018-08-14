@@ -1,10 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-const FormRow = props => {
-  // form-item classname is used in form validation functions
-  return <Row className="form-item">{props.children}</Row>;
-};
+import React from 'react';
+import styled from 'styled-components';
 
+const FormRow = props => <Row className="form-item">{props.children}</Row>;
 export default FormRow;
 const Row = styled.div`
   padding: 8px 13px 2px 17px;

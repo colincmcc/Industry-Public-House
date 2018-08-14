@@ -1,47 +1,45 @@
-import React, { Component } from 'react'
+import React from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo'
+import { Query } from 'react-apollo';
 import AboutComponent from './AboutComponent';
-import LoadingComponent from '../../common/loading/LoadingComponent'
-export default class AboutContainer extends Component {
-  render() {
-    return (
-      <Query query={ABOUT_PAGE}>
-        {
+import LoadingComponent from '../../common/loading/LoadingComponent';
+
+
+const ABOUT_PAGE = gql`
+  {
+    pageBy(slug: "about") {
+      title {
+        rendered
+      }
+      content {
+        rendered
+      }
+      acf {
+        background_image
+        hero_image
+      }
+    }
+  }
+`;
+
+const AboutContainer = props => (
+  <Query query={ABOUT_PAGE}>
+    {
           ({ loading, error, data }) => {
-            if(loading) return <LoadingComponent />
-            if(error) return <p>Error</p>
+            if (loading) return <LoadingComponent />;
+            if (error) return <p>Error</p>;
             const aboutData = {
               title: data.pageBy[0].title.rendered,
               content: data.pageBy[0].content.rendered,
               bgImg: data.pageBy[0].acf.background_image,
-              heroImg: data.pageBy[0].acf.hero_image
-            }
+              heroImg: data.pageBy[0].acf.hero_image,
+            };
             return (
-            <AboutComponent {...aboutData} />
-          )
-
-
+              <AboutComponent {...aboutData} />
+            );
           }
         }
-      </Query>
-    )
-  }
-}
+  </Query>
+);
 
-const ABOUT_PAGE = gql`
-{
-  pageBy(slug: "about"){
-    title{
-      rendered
-    }
-    content{
-      rendered
-    }
-    acf{
-      background_image
-      hero_image
-    }
-  }
-}
-`
+export default AboutContainer;

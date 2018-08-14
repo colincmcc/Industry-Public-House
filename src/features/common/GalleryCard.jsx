@@ -1,10 +1,10 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import shortid from "shortid";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import shortid from 'shortid';
 
-import GrungeBorder from "../../common/assets/img/grunge_border_white.svg";
+import GrungeBorder from '../../common/assets/img/grunge_border_white.svg';
 
-const GalleryCard = props => {
+const GalleryCard = (props) => {
   const { event } = props;
 
   return (
@@ -15,7 +15,11 @@ const GalleryCard = props => {
         <EventTime>
           {`${event.eventStartDay} at ${event.eventStartTime}`}
         </EventTime>
-        <EventDescription> {event.eventDescription} </EventDescription>
+        <EventDescription>
+          {' '}
+          {event.eventDescription}
+          {' '}
+        </EventDescription>
         <LocationGrid>
           {event.locations.map(location => (
             <SingleLocation key={shortid.generate()}>

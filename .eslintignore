@@ -1,0 +1,6 @@
+.*/build/.*
+.*/node_modules/.*
+.*/__tests__/.*
+.*/config/.*
+.*/scripts/.*
+.*/src/features/common/svgIcons/.*

@@ -1,4 +1,4 @@
-const appResolvers =  {
+const appResolvers = {
   defaults: {
     networkStatus: {
       __typename: 'NetworkStatus',
@@ -15,22 +15,23 @@ const appResolvers =  {
         const data = {
           networkStatus: {
             __typename: 'NetworkStatus',
-            isConnected
+            isConnected,
           },
         };
         cache.writeData({ data });
         return null;
       },
       updateMobileMenuStatus: (_, { mobileMenuOpen }, { cache }) => {
-        cache.writeData({ data: { mobileMenuOpen: mobileMenuOpen } });
+        cache.writeData({ data: { mobileMenuOpen } });
         return null;
       },
       selectLocation: (_, { currentLocation }, { cache }) => {
-        cache.writeData({ data: { currentLocation: currentLocation } });
+        cache.writeData({ data: { currentLocation } });
         return null;
       },
-    }
-  }
-}
+    },
+  },
+};
 
 export default appResolvers
+;

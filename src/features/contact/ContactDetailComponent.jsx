@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const ContactDetailComponent = props => {
+const ContactDetailComponent = (props) => {
   const { formData } = props;
   console.log(formData);
   return (

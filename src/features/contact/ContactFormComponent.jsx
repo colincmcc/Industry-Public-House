@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import SelectComponent from "../common/forms/SelectComponent";
-import { validateOnBlur, setRowFocus } from "../../common/utils/utils";
-import FormTextField from "../common/forms/FormTextField";
+import SelectComponent from '../common/forms/SelectComponent';
+import { validateOnBlur, setRowFocus } from '../../common/utils/utils';
+import FormTextField from '../common/forms/FormTextField';
 
-import { FormRow, FormLabel } from "../common/components";
+import { FormRow, FormLabel } from '../common/components';
 
 // TODO: Move logic and state into a container function
 
 class ContactFormComponent extends Component {
-  onFormFocusIn = ev => {
+  onFormFocusIn = () => {
     setRowFocus();
   };
 
-  onFormFocusOut = ev => {
+  onFormFocusOut = (ev) => {
     validateOnBlur(ev);
     setRowFocus();
   };
@@ -26,46 +26,46 @@ class ContactFormComponent extends Component {
       handleOpen,
       handleClose,
       handleChange,
-      handleSubmit
+      handleSubmit,
     } = this.props;
 
     const contactReasons = [
       {
-        label: "Why are you reaching out?",
+        label: 'Why are you reaching out?',
         disabled: true,
-        value: "",
-        selected: true
+        value: '',
+        selected: true,
       },
       {
-        label: "I have reservation for over 15 people",
+        label: 'I have reservation for over 15 people',
         disabled: false,
-        value: "reservation",
-        selected: false
+        value: 'reservation',
+        selected: false,
       },
       {
         label: "I'm representing a charity",
         disabled: false,
-        value: "charity",
-        selected: false
+        value: 'charity',
+        selected: false,
       },
       {
         label: "I'd like to hold an event at an Industry",
         disabled: false,
-        value: "event",
-        selected: false
+        value: 'event',
+        selected: false,
       },
       {
         label: "I'd like to make food selections for my party",
         disabled: false,
-        value: "food",
-        selected: false
+        value: 'food',
+        selected: false,
       },
       {
-        label: "I have another reason...",
+        label: 'I have another reason...',
         disabled: false,
-        value: "other",
-        selected: false
-      }
+        value: 'other',
+        selected: false,
+      },
     ];
 
     return (
@@ -90,7 +90,7 @@ class ContactFormComponent extends Component {
           type="text"
           id="firstname"
           placeHolder="Nikola"
-          isRequired={true}
+          isRequired
           handleChange={handleChange()}
           label="Your First Name"
         />
@@ -99,7 +99,7 @@ class ContactFormComponent extends Component {
           type="text"
           id="lastname"
           placeHolder="Tesla"
-          isRequired={true}
+          isRequired
           handleChange={handleChange()}
           label="Your Last Name"
         />
@@ -108,7 +108,7 @@ class ContactFormComponent extends Component {
           type="email"
           id="email"
           placeHolder="nikola.tesla@example.com"
-          isRequired={true}
+          isRequired
           handleChange={handleChange()}
           label="Your Email"
         />

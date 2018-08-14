@@ -1,19 +1,19 @@
-import React from "react";
-import shortid from "shortid";
-import { withStyles } from "@material-ui/core/styles";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
+import React from 'react';
+import shortid from 'shortid';
+import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
-import theme from "../../common/styled/theme";
+import theme from '../../common/styled/theme';
 
 // * Prefetches food items on mouse hover for faster loading
 
-const FoodNavComponent = props => {
+const FoodNavComponent = (props) => {
   const { classes } = props;
   const currentPath = props.location.pathname;
   let scrollMenu = true;
@@ -21,8 +21,8 @@ const FoodNavComponent = props => {
   return (
     <MenuNavWrapper>
       <Tabs
-        centered={scrollMenu ? false : true}
-        scrollable={scrollMenu ? true : false}
+        centered={!scrollMenu}
+        scrollable={!!scrollMenu}
         scrollButtons="auto"
         value={currentPath}
         classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
@@ -34,7 +34,7 @@ const FoodNavComponent = props => {
             value={navItem.link}
             classes={{
               root: classes.tabRoot,
-              selected: classes.tabSelected
+              selected: classes.tabSelected,
             }}
             component={Link}
             to={navItem.link}

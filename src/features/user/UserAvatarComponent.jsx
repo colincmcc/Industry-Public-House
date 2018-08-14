@@ -1,20 +1,20 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 // Material-UI
-import Avatar from "@material-ui/core/Avatar";
-import { withStyles } from "@material-ui/core/styles";
+import Avatar from '@material-ui/core/Avatar';
+import { withStyles } from '@material-ui/core/styles';
 
 // Misc
-import placeHolderAvatar from "../../../common/assets/img/lightbulb_solo.png";
-import theme from "../../common/styled/theme";
+import placeHolderAvatar from '../../../common/assets/img/lightbulb_solo.png';
+import theme from '../../common/styled/theme';
 
-const UserAvatarComponent = props => {
+const UserAvatarComponent = (props) => {
   const currentUser = {
     avatar: placeHolderAvatar,
-    userName: "Colin McCullough",
+    userName: 'Colin McCullough',
     userPoints: 0,
     userLevel: 0,
-    currentBonus: 0
+    currentBonus: 0,
   };
   return (
     <UserAvatarWrapper>
@@ -27,7 +27,11 @@ const UserAvatarComponent = props => {
       </UserMeta>
       <PointsMeta>
         <UserPoints>{currentUser.userPoints}</UserPoints>
-        <UserLevel> {currentUser.userLevel} </UserLevel>
+        <UserLevel>
+          {' '}
+          {currentUser.userLevel}
+          {' '}
+        </UserLevel>
       </PointsMeta>
     </UserAvatarWrapper>
   );

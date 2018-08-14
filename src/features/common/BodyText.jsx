@@ -1,8 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-const BodyText = props => {
-  return <BodyTextWrapper>{props.children}</BodyTextWrapper>;
-};
+import React from 'react';
+import styled from 'styled-components';
+
+const BodyText = props => <BodyTextWrapper>{props.children}</BodyTextWrapper>;
 
 export default BodyText;
 

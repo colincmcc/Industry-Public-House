@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import { Query } from 'react-apollo'
-import gql from "graphql-tag";
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import ContactComponent from './ContactComponent'
-import PageHeaderContainer from '../common/page/PageHeaderContainer'
-import bgImg from '../../common/assets/img/header_bg_clean.jpg'
+import ContactComponent from './ContactComponent';
+import PageHeaderContainer from '../common/page/PageHeaderContainer';
+import bgImg from '../../common/assets/img/header_bg_clean.jpg';
 
 const WP_CONTACT = gql`
 {
@@ -23,33 +23,32 @@ const WP_CONTACT = gql`
   }
 
 }
-`
+`;
 
-const ContactContainer = () => {
-  return (
-    <Query query={WP_CONTACT}>
+const ContactContainer = () => (
+  <Query query={WP_CONTACT}>
     {
-      ({loading, error, data, client}) => {
-        if(loading) return <div> Loading ... </div>
-        if(error) return <div> Error ... </div>
+      ({
+        loading, error, data, client,
+      }) => {
+        if (loading) return <div> Loading ... </div>;
+        if (error) return <div> Error ... </div>;
 
         const contactPageData = {
           title: data.pageBy[0].title.rendered,
           content: data.pageBy[0].content.rendered,
-          bgImg: data.pageBy[0].acf.background_image
-        }
-        return(
+          bgImg: data.pageBy[0].acf.background_image,
+        };
+        return (
           <div>
             <PageHeaderContainer heading="Connect" subHeading="" bgImg={bgImg} />
             <ContactComponent />
           </div>
-        )
+        );
       }
     }
 
-    </Query>
-  )
-}
+  </Query>
+);
 
-export default ContactContainer
-
+export default ContactContainer;

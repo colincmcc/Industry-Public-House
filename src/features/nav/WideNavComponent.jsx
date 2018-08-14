@@ -1,27 +1,26 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const WideNavComponent = () => {
-  return (
-    <div>
-      <WideNav id="WideNav">
-        <NavLink>
-          <Link smooth to="/Home#Header">
+const WideNavComponent = () => (
+  <div>
+    <WideNav id="WideNav">
+      <NavLink>
+        <Link smooth to="/Home#Header">
             Home
-          </Link>
-        </NavLink>
-        <NavLink>
-          <Link smooth to="/Home#About">
+        </Link>
+      </NavLink>
+      <NavLink>
+        <Link smooth to="/Home#About">
             About
-          </Link>
-        </NavLink>
-        <NavLink>
-          <Link to="/Menu">Menu</Link>
-        </NavLink>
-      </WideNav>
-    </div>
-  );
-};
+        </Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/Menu">Menu</Link>
+      </NavLink>
+    </WideNav>
+  </div>
+);
 
 export default WideNavComponent;
 

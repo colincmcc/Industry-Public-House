@@ -1,12 +1,10 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
-const UserComponent = props => {
-  return (
-    <div>
-      <Avatar />
-    </div>
-  );
-};
+const UserComponent = props => (
+  <div>
+    <Avatar />
+  </div>
+);
 
 export default UserComponent;

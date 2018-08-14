@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const PageWrapper = props => {
+const PageWrapper = (props) => {
   const { children } = props;
   return <SectionWrapper>{children}</SectionWrapper>;
 };

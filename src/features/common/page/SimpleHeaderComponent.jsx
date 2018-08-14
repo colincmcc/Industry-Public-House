@@ -1,22 +1,27 @@
-import React from "react";
-import styled from "styled-components";
-import shortid from "shortid";
-import { CSSTransition } from "react-transition-group";
+import React from 'react';
+import styled from 'styled-components';
+import shortid from 'shortid';
+import { CSSTransition } from 'react-transition-group';
 
-const SimpleHeaderComponent = props => {
-  const { heading, subHeading, bgImg, heroImg, actionButton } = props;
+const SimpleHeaderComponent = (props) => {
+  const {
+    heading, subHeading, bgImg, heroImg, actionButton,
+  } = props;
   return (
     <PageHeaderWrapper key={shortid.generate()}>
-      <CSSTransition in={true} classNames="fade" appear={true} timeout={300}>
+      <CSSTransition in classNames="fade" appear timeout={300}>
         <BGOverlay className="fade-appear" bgImg={bgImg} />
       </CSSTransition>
       <PageHeadContent>
-        {heroImg !== "false" ? (
+        {heroImg !== 'false' ? (
           <HeadingHero id="headingHero" src={heroImg} />
         ) : null}
 
         <HeadingText>
-          <PageHeading>{heading} </PageHeading>
+          <PageHeading>
+            {heading}
+            {' '}
+          </PageHeading>
 
           <PageSubHeading>{subHeading}</PageSubHeading>
         </HeadingText>

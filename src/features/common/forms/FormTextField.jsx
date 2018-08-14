@@ -1,11 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import TextField from "@material-ui/core/TextField";
-import { FormRow, FormLabel } from "../components";
-import alertIcon from "../../../common/assets/icons/alert-circle-outline.svg";
+import TextField from '@material-ui/core/TextField';
+import { FormRow, FormLabel } from '../components';
+import alertIcon from '../../../common/assets/icons/alert-circle-outline.svg';
 
-const FormTextField = props => {
-  const { id, placeHolder, isRequired, handleChange, label, type } = props;
+const FormTextField = (props) => {
+  const {
+    id, placeHolder, isRequired, handleChange, label, type,
+  } = props;
 
   return (
     <FormRow>
@@ -17,7 +19,7 @@ const FormTextField = props => {
         type={type}
         placeholder={placeHolder}
         required={isRequired}
-        style={{ flex: "68%" }}
+        style={{ flex: '68%' }}
         onChange={handleChange}
       />
     </FormRow>

@@ -1,6 +1,6 @@
 
 export const findParent = (el, matchParentCB) => {
-  var parent = el.parentElement;
+  const parent = el.parentElement;
   if (document.body === el || el.parentElement === null) return null;
 
   if (matchParentCB(el)) return el;
@@ -12,21 +12,19 @@ export const findParent = (el, matchParentCB) => {
 // ----------------------------------
 
 export const setRowFocus = () => {
-  var activeEl = document.activeElement;
-  var activeElRow = findParent(activeEl, isFormRow);
-  var rows = [].slice.call(document.querySelectorAll(".form-item"));
+  const activeEl = document.activeElement;
+  const activeElRow = findParent(activeEl, isFormRow);
+  const rows = [].slice.call(document.querySelectorAll('.form-item'));
 
-  rows.forEach(function(row) {
+  rows.forEach((row) => {
     if (row === activeElRow) {
-      row.classList.add("has-focus");
+      row.classList.add('has-focus');
     } else {
-      row.classList.remove("has-focus");
+      row.classList.remove('has-focus');
     }
   });
 };
-const isFormRow = el => {
-  return el.classList.contains("form-item");
-};
+const isFormRow = el => el.classList.contains('form-item');
 
 // ----------------------------------
 
@@ -35,72 +33,67 @@ const isFormRow = el => {
 // ----------------------------------
 
 
-
 export const validateField = (field) => {
-  if(field.value){
-    field.setAttribute("aria-invalid", false)
-    console.log(field.value)
+  if (field.value) {
+    field.setAttribute('aria-invalid', false);
+    console.log(field.value);
   } else {
-    field.setAttribute("aria-invalid", true)
-    console.log("true")
-    console.log(field.value)
+    field.setAttribute('aria-invalid', true);
+    console.log('true');
+    console.log(field.value);
   }
 
-  if (field.getAttribute('type') === 'email'){
-    validateEmailField(field)
+  if (field.getAttribute('type') === 'email') {
+    validateEmailField(field);
   }
-}
+};
 
 const validateEmailField = (emailField) => {
-  if(!validateEmailValue(emailField.value)){
-    emailField.setAttribute("aria-invalid", false)
-
+  if (!validateEmailValue(emailField.value)) {
+    emailField.setAttribute('aria-invalid', false);
   } else {
-    emailField.setAttribute("aria-invalid", true)
+    emailField.setAttribute('aria-invalid', true);
   }
-}
+};
 const validateEmailValue = (emailValue) => {
-emailValue = emailValue.trim();
-var match = emailValue.match(/@/g)
+  emailValue = emailValue.trim();
+  const match = emailValue.match(/@/g);
 
-if(!match || match.length !== 1){
-  return false;
-}
+  if (!match || match.length !== 1) {
+    return false;
+  }
 
-if(emailValue[0] === '@' || emailValue[emailValue.length - 1] === '@') {
-  return false;
-}
-return true
-
-}
+  if (emailValue[0] === '@' || emailValue[emailValue.length - 1] === '@') {
+    return false;
+  }
+  return true;
+};
 
 
 export const validateForm = (formValues) => {
-  var form = document.querySelector('form')
-  var requiredFields = [].slice.call(form.querySelectorAll('[required]'))
+  const form = document.querySelector('form');
+  const requiredFields = [].slice.call(form.querySelectorAll('[required]'));
 
   // * Material-UI will not let me pass the "required" prop to the input on a selector.  Here's a quick hack
-  var hiddenFields = [].slice.call(form.querySelectorAll('input[type="hidden"]'))
+  const hiddenFields = [].slice.call(form.querySelectorAll('input[type="hidden"]'));
 
-  var fieldsToValidate = [...requiredFields, ...hiddenFields]
-  fieldsToValidate.forEach( (field) => {
-    validateField(field)
-  })
+  const fieldsToValidate = [...requiredFields, ...hiddenFields];
+  fieldsToValidate.forEach((field) => {
+    validateField(field);
+  });
 
-  return fieldsToValidate.every((field) => {
-    return field.getAttribute('aria-invalid') === "false";
-  })
-}
+  return fieldsToValidate.every(field => field.getAttribute('aria-invalid') === 'false');
+};
 
 export const validateOnBlur = (ev) => {
   if (['SELECT', 'INPUT', 'TEXTAREA'].indexOf(ev.target.tagName) === -1) {
     return;
   }
 
-  if (ev.target.hasAttribute('required') || ev.target.getAttribute('type') === "hidden") {
+  if (ev.target.hasAttribute('required') || ev.target.getAttribute('type') === 'hidden') {
     validateField(ev.target);
   }
-}
+};
 
 
 // * Util function to increase opacity on downwards scroll

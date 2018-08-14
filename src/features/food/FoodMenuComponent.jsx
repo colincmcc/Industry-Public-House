@@ -1,23 +1,7 @@
-import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import FoodDrinkComponent from "../common/FoodDrinkComponent";
-
-const FoodMenuComponent = props => {
-  const { selectedFoodType } = props;
-
-  return (
-    <Query query={WP_FOODS} variables={{ selectedFoodType }}>
-      {({ loading, error, data }) => {
-        return (
-          <FoodDrinkComponent data={data} loading={loading} error={error} />
-        );
-      }}
-    </Query>
-  );
-};
-
-export default FoodMenuComponent;
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import FoodDrinkComponent from '../common/FoodDrinkComponent';
 
 export const WP_FOODS = gql`
   query Foods($selectedFoodType: String!) {
@@ -32,3 +16,16 @@ export const WP_FOODS = gql`
     }
   }
 `;
+const FoodMenuComponent = (props) => {
+  const { selectedFoodType } = props;
+
+  return (
+    <Query query={WP_FOODS} variables={{ selectedFoodType }}>
+      {({ loading, error, data }) => (
+        <FoodDrinkComponent data={data} loading={loading} error={error} />
+      )}
+    </Query>
+  );
+};
+
+export default FoodMenuComponent;

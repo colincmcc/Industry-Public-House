@@ -1,18 +1,20 @@
-import React from "react";
-import shortid from "shortid";
-import styled from "styled-components";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import React from 'react';
+import shortid from 'shortid';
+import styled from 'styled-components';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-import List from "@material-ui/core/List";
-import theme from "../../common/styled/theme";
-import { withStyles } from "@material-ui/core";
-import LoadingComponent from "./loading/LoadingComponent";
-import ErrorComponent from "./loading/ErrorComponent";
+import List from '@material-ui/core/List';
+import { withStyles } from '@material-ui/core';
+import theme from '../../common/styled/theme';
+import LoadingComponent from './loading/LoadingComponent';
+import ErrorComponent from './loading/ErrorComponent';
 
-const FoodDrinkComponent = props => {
-  const { classes, loading, error, data } = props;
+const FoodDrinkComponent = (props) => {
+  const {
+    classes, loading, error, data,
+  } = props;
   if (loading) return <LoadingComponent />;
   if (error || !data.menuItems) return <ErrorComponent />;
   const menuItems = data.menuItems;
@@ -20,7 +22,7 @@ const FoodDrinkComponent = props => {
   return (
     <FoodMenuWrapper>
       <List className={classes.listRoot}>
-        {menuItems.map(menuItem => {
+        {menuItems.map((menuItem) => {
           // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
           const primary = <FoodHeader>{menuItem.acf.name}</FoodHeader>;
           const secondary = (
@@ -33,7 +35,7 @@ const FoodDrinkComponent = props => {
               divider
               classes={{
                 root: classes.listItemRoot,
-                container: classes.listItemContainer
+                container: classes.listItemContainer,
               }}
               key={shortid.generate()}
             >
@@ -41,7 +43,7 @@ const FoodDrinkComponent = props => {
               <ListItemSecondaryAction
                 classes={{ root: classes.listSecondaryRoot }}
               >
-                {menuItem.acf.price ? "$" + menuItem.acf.price : null}
+                {menuItem.acf.price ? `$${menuItem.acf.price}` : null}
               </ListItemSecondaryAction>
             </ListItem>
           );

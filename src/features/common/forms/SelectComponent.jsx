@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import shortid from "shortid";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
+import React from 'react';
+import styled from 'styled-components';
+import shortid from 'shortid';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const SelectComponent = props => {
+const SelectComponent = (props) => {
   const {
     options,
     handleChange,
     currentReason,
     onOpen,
     onClose,
-    modalOpen
+    modalOpen,
   } = props;
   return (
     <CustomSelect
@@ -21,16 +21,16 @@ const SelectComponent = props => {
       onOpen={onOpen}
       open={modalOpen}
       inputProps={{
-        id: "reason",
-        name: "reason",
-        required: true
+        id: 'reason',
+        name: 'reason',
+        required: true,
       }}
       onChange={handleChange}
       value={currentReason}
     >
       {options.map(option => (
         <MenuItem
-          style={{ fontFamily: "Source Sans Pro" }}
+          style={{ fontFamily: 'Source Sans Pro' }}
           key={shortid.generate()}
           disabled={option.disabled}
           value={option.value}

@@ -1,14 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import grungeBorder from "../../common/assets/img/grunge_border_v3.svg";
+import React from 'react';
+import styled from 'styled-components';
+import grungeBorder from '../../common/assets/img/grunge_border_v3.svg';
 
-const SocialBarComponent = props => {
-  return (
-    <SocialBarWrapper>
-      <div />
-    </SocialBarWrapper>
-  );
-};
+const SocialBarComponent = props => (
+  <SocialBarWrapper>
+    <div />
+  </SocialBarWrapper>
+);
 
 export default SocialBarComponent;
 

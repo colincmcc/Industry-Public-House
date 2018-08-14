@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const FormLabel = props => {
+const FormLabel = (props) => {
   const { htmlFor, children } = props;
   return <Label htmlFor={htmlFor}>{children}</Label>;
 };

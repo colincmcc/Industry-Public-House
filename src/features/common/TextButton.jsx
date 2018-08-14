@@ -1,9 +1,9 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import theme from "../../common/styled/theme";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import theme from '../../common/styled/theme';
 
-const TextButton = props => {
+const TextButton = (props) => {
   const { clickFunction, text, classes } = props;
 
   return (

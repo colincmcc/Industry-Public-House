@@ -1,25 +1,24 @@
-import React from "react";
-import Gear from "../../../common/assets/img/gear.svg";
-import styled from "styled-components";
-import Heading from "../Heading";
-const ErrorComponent = props => {
-  return (
-    <ErrorWrapper {...props}>
-      <Error {...props}>
-        <StuckGear />
-        <Heading
-          style={{ color: "#110C02" }}
-          center
-          text="An error has occured"
-        />
-      </Error>
-    </ErrorWrapper>
-  );
-};
+import React from 'react';
+import styled from 'styled-components';
+import Gear from '../../../common/assets/img/gear.svg';
+import Heading from '../Heading';
+
+const ErrorComponent = props => (
+  <ErrorWrapper {...props}>
+    <Error {...props}>
+      <StuckGear />
+      <Heading
+        style={{ color: '#110C02' }}
+        center
+        text="An error has occured"
+      />
+    </Error>
+  </ErrorWrapper>
+);
 
 export default ErrorComponent;
 const ErrorWrapper = styled.div`
-  height: ${props => (props.large ? "100vh" : "100%")};
+  height: ${props => (props.large ? '100vh' : '100%')};
   width: 100%;
   background-color: transparent;
   margin: auto;

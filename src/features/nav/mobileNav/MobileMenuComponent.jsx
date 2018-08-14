@@ -1,23 +1,23 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import gql from "graphql-tag";
-import styled from "styled-components";
-import { withRouter, Link } from "react-router-dom";
+import gql from 'graphql-tag';
+import styled from 'styled-components';
+import { withRouter, Link } from 'react-router-dom';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import IconButton from "@material-ui/core/IconButton";
-import Phone from "../../../common/assets/icons/phone.svg";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import IconButton from '@material-ui/core/IconButton';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Phone from '../../../common/assets/icons/phone.svg';
 
 // MISC
-import { mobileNavItems } from "../NavContainer";
-import theme from "../../../common/styled/theme";
-import headerBG from "../../../common/assets/img/dark-triangles.png";
+import { mobileNavItems } from '../NavContainer';
+import theme from '../../../common/styled/theme';
+import headerBG from '../../../common/assets/img/dark-triangles.png';
 
 const TOGGLE_MENU = gql`
   mutation toggleMenu($mobileMenuOpen: Boolean!) {
@@ -27,30 +27,32 @@ const TOGGLE_MENU = gql`
 // ! Using link-state to update menu status to transition both the bottom nav and side drawer
 class MobileMenuComponent extends Component {
   state = {
-    isOpen: true
+    isOpen: true,
   };
-  onOpen = event => {
-    this.setState({
-      isOpen: true
-    });
 
-    this.props.client.mutate({
-      mutation: TOGGLE_MENU,
-      variables: { mobileMenuOpen: true }
-    });
-  };
 
   componentDidMount() {
     this.onOpen();
   }
 
+  onOpen = (event) => {
+    this.setState({
+      isOpen: true,
+    });
+
+    this.props.client.mutate({
+      mutation: TOGGLE_MENU,
+      variables: { mobileMenuOpen: true },
+    });
+  };
+
   onClose = () => {
     this.setState({
-      isOpen: false
+      isOpen: false,
     });
     this.props.client.mutate({
       mutation: TOGGLE_MENU,
-      variables: { mobileMenuOpen: false }
+      variables: { mobileMenuOpen: false },
     });
   };
 
@@ -59,8 +61,10 @@ class MobileMenuComponent extends Component {
     history.goBack();
   };
 
-  // * By using react router, we have to mount the component then manually set the Material-UI Slide prop to trigger the animation.
-  // * Material-UI uses CSS Transition Group under the hood. onExited is a Transition prop.  This ensures the animation is complete before unmounting
+  // * By using react router, we have to mount the component then manually
+  // * set the Material-UI Slide prop to trigger the animation.
+  // * Material-UI uses CSS Transition Group under the hood. onExited is a Transition prop.
+  // * This ensures the animation is complete before unmounting
   // ? Possibley move to CSS Transition Group directly instead for in & out animation
 
   render() {
@@ -73,14 +77,14 @@ class MobileMenuComponent extends Component {
           open={isOpen}
           onOpen={this.onOpen}
           onClose={this.onClose}
-          anchor={isWide ? "left" : "bottom"}
+          anchor={isWide ? 'left' : 'bottom'}
           SlideProps={{
-            onExited: this.goBack
+            onExited: this.goBack,
           }}
           classes={{
             paper: isWide
               ? classes.swipeableSideMenuRoot
-              : classes.swipeableBottomMenuRoot
+              : classes.swipeableBottomMenuRoot,
           }}
         >
           <MobileMenuInner>
@@ -92,7 +96,11 @@ class MobileMenuComponent extends Component {
                   <ListItemIcon>
                     <Phone style={{ fill: theme.colors.lightAccent }} />
                   </ListItemIcon>
-                  <ListItemText> {navItem.label} </ListItemText>
+                  <ListItemText>
+                    {' '}
+                    {navItem.label}
+                    {' '}
+                  </ListItemText>
                 </ListItem>
               ))}
             </List>
@@ -119,7 +127,7 @@ const MobileMenuInner = styled.div`
 const MobileMenuHeader = styled.header`
   padding: 16px;
   display: flex;
-  height: ${props => props.calcWidth + "px"};
+  height: ${props => `${props.calcWidth}px`};
   background-color: ${props => props.theme.colors.whiteTheme};
   align-items: flex-end;
   color: ${props => props.theme.colors.whiteTheme};
@@ -132,7 +140,7 @@ const MobileMenuHeader = styled.header`
   &:before {
     content: "";
     width: 100%;
-    height: ${props => props.calcWidth + "px"};
+    height: ${props => `${props.calcWidth}px`};
     position: absolute;
     background: url(${headerBG}) repeat;
     opacity: 0.8;

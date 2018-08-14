@@ -1,40 +1,40 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import styled from "styled-components";
-import theme from "../../../common/styled/theme";
-import TextButton from "../TextButton";
-import { CSSTransition } from "react-transition-group";
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+import { CSSTransition } from 'react-transition-group';
+import theme from '../../../common/styled/theme';
+import TextButton from '../TextButton';
 
-const ReviewHeaderComponent = props => {
-  return (
-    <PageHeaderWrapper>
-      <CSSTransition
-        in={true}
-        classNames="header-fade"
-        appear={true}
-        timeout={300}
-      >
-        <BGOverlay className="header-fade-appear" bgImg={props.bgImg} />
-      </CSSTransition>
-      <PageHeadContent>
-        <PageHeading>{props.heading} </PageHeading>
+const ReviewHeaderComponent = props => (
+  <PageHeaderWrapper>
+    <CSSTransition
+      in
+      classNames="header-fade"
+      appear
+      timeout={300}
+    >
+      <BGOverlay className="header-fade-appear" bgImg={props.bgImg} />
+    </CSSTransition>
+    <PageHeadContent>
+      <PageHeading>
+        {props.heading}
+        {' '}
+      </PageHeading>
 
-        <PageSubHeading>
-          <Review>{`"${props.review.acf.review_snippet}"`}</Review>
+      <PageSubHeading>
+        <Review>{`"${props.review.acf.review_snippet}"`}</Review>
 
-          <Author>{`- ${props.review.acf.review_author}`}</Author>
+        <Author>{`- ${props.review.acf.review_author}`}</Author>
 
-          <TextButton
-            clickFunction={() =>
-              window.open(props.review.acf.source_link, "_blank")
+        <TextButton
+          clickFunction={() => window.open(props.review.acf.source_link, '_blank')
             }
-            text="Read Review"
-          />
-        </PageSubHeading>
-      </PageHeadContent>
-    </PageHeaderWrapper>
-  );
-};
+          text="Read Review"
+        />
+      </PageSubHeading>
+    </PageHeadContent>
+  </PageHeaderWrapper>
+);
 
 export default withStyles(theme.materialUI)(ReviewHeaderComponent);
 

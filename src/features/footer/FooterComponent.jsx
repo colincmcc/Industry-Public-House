@@ -1,19 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import shortid from "shortid";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+import styled from 'styled-components';
+import shortid from 'shortid';
+import { withStyles } from '@material-ui/core/styles';
 
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Facebook from "../../common/assets/icons/facebook.svg";
-import Twitter from "../../common/assets/icons/twitter.svg";
-import Instagram from "../../common/assets/icons/instagram.svg";
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Facebook from '../../common/assets/icons/facebook.svg';
+import Twitter from '../../common/assets/icons/twitter.svg';
 
-import TripAdvisor from "../common/svgIcons/tripadvisor";
-import theme from "../../common/styled/theme";
 
-const FooterComponent = props => {
-  const { data, error, loading, classes } = props;
+import TripAdvisor from '../common/svgIcons/tripadvisor';
+import theme from '../../common/styled/theme';
+
+const FooterComponent = (props) => {
+  const {
+    data, error, loading, classes,
+  } = props;
 
   if (loading) return <div> Loading... </div>;
   if (error) return <div> Error... </div>;
@@ -108,13 +110,7 @@ const LocationContent = styled.p`
   ${props => props.theme.fontStyles.text};
   margin-bottom: 0;
 `;
-const MiscInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  float: right;
-  ${props => props.theme.components.small};
-`;
+
 
 const SocialButtons = styled.div`
   flex-direction: row;

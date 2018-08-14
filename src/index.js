@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
-;
+
 
 /*
 * PWA List at bottom of page
-* GraphQL server is in the src/graphql folder.  Uses express-graphql and graphql-compose to construct server/schema
-* Redux still will control state.  Using graphql to control data fetching. Need to query redux state with graphql as well.
 */
 // TODO: PWA list
 // * Move scroll logic higher up from Food & Drink Navs
@@ -21,12 +19,12 @@ import './index.css';
 //
 
 
-
 ReactDOM.render(
   <BrowserRouter>
-        <App />
-  </BrowserRouter>
-, document.getElementById('root'));
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root'),
+);
 registerServiceWorker();
 
 /**
@@ -53,4 +51,4 @@ registerServiceWorker();
   * ! Any app install prompts are not used excessively
   * ! The Add to Home Screen prompt is intercepted
   * ! Push Notifications, Offline Notifications, Caching
- **/
+ * */
