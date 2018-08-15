@@ -7,12 +7,9 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Facebook from "../../../common/assets/icons/facebook.svg";
 import Twitter from "../../../common/assets/icons/twitter.svg";
-
-import TripAdvisor from "../svgIcons/tripadvisor";
 import theme from "../../../common/styled/theme";
 
-import TripAdvisor from '../common/svgIcons/tripadvisor';
-import theme from '../../common/styled/theme';
+import TripAdvisor from '../svgIcons/tripadvisor';
 
 const FooterComponent = (props) => {
   const {

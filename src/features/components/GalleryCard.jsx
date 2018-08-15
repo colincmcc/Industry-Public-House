@@ -10,7 +10,8 @@ const GalleryCard = (props) => {
   return (
     <CardWrapper>
       <CardImage eventImage={event.eventBackground} />
-      <CardContent bgImg={GrungeBorder}>
+      <CardContent >
+        <Border />
         <CardHeading>{event.title}</CardHeading>
         <EventTime>
           {`${event.eventStartDay} at ${event.eventStartTime}`}
@@ -49,12 +50,16 @@ const cardEntrance = keyframes`
 `;
 const CardWrapper = styled.div`
   display: block;
-  box-shadow: 0 15px 35px #ededed05, 0 5px 15px rgba(0, 0, 0, 0.07);
+  position: relative;
+  box-shadow: 0 15px 35px ${props => props.theme.colors.whiteTheme +
+'08'};
+  , 0 5px 15px rgba(0, 0, 0, 0.07);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
   margin: 1rem;
-  background-color: #ededed;
+  background-color: ${props => props.theme.colors.whiteTheme};
+  ;
   animation: ${cardEntrance};
   animation-duration: 0.5s;
   animation-fill-mode: both;
@@ -70,7 +75,7 @@ const CardImage = styled.div`
   min-height: 370px;
   background-size: cover;
   background-position: 50% 50%;
-  background-color: #ededed;
+  background-color: ${props => props.theme.colors.whiteTheme + "08"};
   background: url(${props => props.eventImage});
   ${props => props.theme.media.tablet_portrait_up`
     position: absolute;
@@ -82,6 +87,23 @@ const CardImage = styled.div`
     padding-right: 50px;
   `};
 `;
+const Border = styled(GrungeBorder)`
+  position: absolute;
+  fill: ${props => props.theme.colors.whiteTheme};
+
+    display: block;
+    height: 50px;
+    top: -47px;
+    left: 0;
+    ${props => props.theme.media.tablet_portrait_up`
+      transform: rotate(90deg);
+      top: 0;
+      left: -75px;
+      width: 275%;
+      height: 100%;
+
+    `};
+`
 const CardContent = styled.div`
   ${props => props.theme.fontStyles.text};
   position: relative;
@@ -90,21 +112,7 @@ const CardContent = styled.div`
 
   &:before {
     content: "";
-    display: block;
-    width: 100%;
-    height: 50px;
-    background: url(${props => props.bgImg});
-    background-size: cover;
-    position: absolute;
-    top: -50px;
-    left: 0;
-    ${props => props.theme.media.tablet_portrait_up`
-      transform: rotate(-90deg);
-      top: 47%;
-      left: -118%;
-      width: 225%;
 
-    `};
   }
   ${props => props.theme.media.tablet_portrait_up`
    flex-basis: 50%;

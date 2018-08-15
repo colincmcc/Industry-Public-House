@@ -2,7 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import AboutComponent from './AboutComponent';
-import LoadingComponent from '../../common/loading/LoadingComponent';
+import LoadingComponent from '../../components/loading/LoadingComponent';
 
 
 const ABOUT_PAGE = gql`
