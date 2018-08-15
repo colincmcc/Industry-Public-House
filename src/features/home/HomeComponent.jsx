@@ -4,11 +4,11 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Loadable from "react-loadable";
-import PageHeaderContainer from "../common/page/PageHeaderContainer";
+import PageHeaderContainer from "../components/page/PageHeaderContainer";
 import EventContainer from "../events/EventContainer";
 import theme from "../../common/styled/theme";
 import mainBg from "../../common/assets/img/zig-zag.png";
-import LoadingComponent from "../common/loading/LoadingComponent";
+import LoadingComponent from "../components/loading/LoadingComponent";
 
 const LoadableAbout = Loadable({
   loader: () => import("./about/AboutContainer"),

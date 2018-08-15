@@ -4,12 +4,12 @@ import gql from 'graphql-tag'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from "react-router-dom";
 import shortid from 'shortid'
-import MenuWrapper from '../common/MenuWrapper'
-import PageHeaderContainer from '../common/page/PageHeaderContainer'
+import MenuWrapper from '../components/MenuWrapper'
+import PageHeaderContainer from '../components/page/PageHeaderContainer'
 import DrinkNavComponent from './DrinkNavComponent'
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
 import DrinkMenuComponent from './DrinkMenuComponent'
-import LoadingComponent from '../common/loading/LoadingComponent'
+import LoadingComponent from '../components/loading/LoadingComponent'
 // TODO: get drinkNavItems and locations from Wordpress
 
 const DrinkContainer = (props) => {

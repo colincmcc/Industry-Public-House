@@ -2,7 +2,7 @@ import React from 'react'
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import MobileMenuComponent from './MobileMenuComponent';
-import fullLogo from "../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
+import fullLogo from "../../../../common/assets/img/Industry_fullLogo_sm_wht.svg";
 
 const MobileMenuContainer = () => {
   return (

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {ApolloProvider} from 'react-apollo'
-import { CachePersistor } from 'apollo-cache-persist';
 import { Switch, Route, withRouter } from 'react-router-dom'
 import styled, {ThemeProvider} from 'styled-components'
 import { Query } from "react-apollo";
@@ -8,16 +7,16 @@ import gql from 'graphql-tag'
 import theme from './common/styled/theme'
 import {persistor, apolloClient, cacheStorage} from './data/client'
 
-import asyncComponent from './features/common/AsyncComponent'
-import LoadingComponent from './features/common/loading/LoadingComponent'
-import NavContainer from './features/nav/NavContainer'
-import FooterContainer from './features/footer/FooterContainer'
+import asyncComponent from './features/components/AsyncComponent'
+import LoadingComponent from './features/components/loading/LoadingComponent'
+import NavContainer from './features/components/nav/NavContainer'
+import FooterContainer from './features/components/footer/FooterContainer'
 
 const AsyncHome = asyncComponent(() => import("./features/home/HomeContainer"))
 const AsyncFood = asyncComponent(() => import("./features/food/FoodContainer"))
 const AsyncDrink = asyncComponent(() => import("./features/drinks/DrinkContainer"))
 const AsyncContact = asyncComponent(() => import("./features/contact/ContactContainer"))
-const AsyncMobileMenu = asyncComponent(() => import("./features/nav/mobileNav/MobileMenuContainer"))
+const AsyncMobileMenu = asyncComponent(() => import("./features/components/nav/mobileNav/MobileMenuContainer"))
 
 
 

@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import shortid from "shortid";
-import Menu from "../../../common/assets/icons/menu.svg";
-import Food from "../../../common/assets/icons/food.svg";
-import Email from "../../../common/assets/icons/email.svg";
+import Menu from "../../../../common/assets/icons/menu.svg";
+import Food from "../../../../common/assets/icons/food.svg";
+import Email from "../../../../common/assets/icons/email.svg";
+import theme from "../../../../common/styled/theme";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import { withStyles } from "@material-ui/core/styles";
-import LightbulbLogo from "../../common/svgIcons/lightbulb";
-import BeerGlass from "../../common/svgIcons/beerglass";
-import theme from "../../../common/styled/theme";
+import LightbulbLogo from "../../svgIcons/lightbulb";
+import BeerGlass from "../../svgIcons/beerglass";
 
 const MobileNavComponent = props => {
   const { classes, navIsShown } = props;

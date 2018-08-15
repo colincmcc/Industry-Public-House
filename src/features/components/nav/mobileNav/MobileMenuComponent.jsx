@@ -9,15 +9,15 @@ import { withStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
-import Phone from "../../../common/assets/icons/phone.svg";
+import Phone from "../../../../common/assets/icons/phone.svg";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 // MISC
 import { mobileNavItems } from "../NavContainer";
-import theme from "../../../common/styled/theme";
-import headerBG from "../../../common/assets/img/dark-triangles.png";
+import theme from "../../../../common/styled/theme";
+import headerBG from "../../../../common/assets/img/dark-triangles.png";
 
 const TOGGLE_MENU = gql`
   mutation toggleMenu($mobileMenuOpen: Boolean!) {

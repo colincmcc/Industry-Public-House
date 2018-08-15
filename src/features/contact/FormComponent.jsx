@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from 'react'
 import styled from "styled-components";
+import { Formik } from "formik";
 
 import SelectComponent from "../components/forms/SelectComponent";
 import { validateOnBlur, setRowFocus } from "../../common/utils/utils";
@@ -8,69 +9,28 @@ import FormTextField from "../components/forms/FormTextField";
 import FormLabel from "../components/forms/FormLabel";
 import FormRow from "../components/forms/FormRow";
 
-// TODO: Move logic and state into a container function
+const FormComponent = (props) => {
+  const {
+     values,
+    touched,
+    errors,
+    dirty,
+    isSubmitting,
+    handleChange,
+    setFieldValue,
+    handleBlur,
+    handleSubmit,
+    handleReset,
+  } = props
 
-class ContactFormComponent extends Component {
-  onFormFocusIn = ev => {
-    setRowFocus();
+  const _handleSelect = selectChoice => {
+    setFieldValue("imaginaryThingId", selectChoice.value);
   };
 
-  onFormFocusOut = ev => {
-    validateOnBlur(ev);
-    setRowFocus();
-  };
+  const contactReasons = [{ label: "Why are you reaching out?", disabled: true, value: "", selected: true }, { label: "I have reservation for over 15 people", disabled: false, value: "reservation", selected: false }, { label: "I'm representing a charity", disabled: false, value: "charity", selected: false }, { label: "I'd like to hold an event at an Industry", disabled: false, value: "event", selected: false }, { label: "I'd like to make food selections for my party", disabled: false, value: "food", selected: false }, { label: "I have another reason...", disabled: false, value: "other", selected: false }];
 
-  render() {
-    const {
-      reason,
-      modalOpen,
-      handleOpen,
-      handleClose,
-      handleChange,
-      handleSubmit
-    } = this.props;
-
-    const contactReasons = [
-      {
-        label: "Why are you reaching out?",
-        disabled: true,
-        value: "",
-        selected: true
-      },
-      {
-        label: "I have reservation for over 15 people",
-        disabled: false,
-        value: "reservation",
-        selected: false
-      },
-      {
-        label: "I'm representing a charity",
-        disabled: false,
-        value: "charity",
-        selected: false
-      },
-      {
-        label: "I'd like to hold an event at an Industry",
-        disabled: false,
-        value: "event",
-        selected: false
-      },
-      {
-        label: "I'd like to make food selections for my party",
-        disabled: false,
-        value: "food",
-        selected: false
-      },
-      {
-        label: "I have another reason...",
-        disabled: false,
-        value: "other",
-        selected: false
-      }
-    ];
-
-    return (
-      <Form onsSubmit={handleSubmit} method="post" noValidate>
+  return (
+   <Form onsSubmit={handleSubmit} method="post" noValidate>
         <FormRow>
           <FormLabel htmlFor="reason">Contact Reason</FormLabel>
           <SelectWrapper>
@@ -115,10 +75,9 @@ class ContactFormComponent extends Component {
         />
       </Form>
     );
-  }
 }
 
-export default ContactFormComponent;
+export default FormComponent;
 
 const Form = styled.form`
   padding: 10px 10px 13px 15px;

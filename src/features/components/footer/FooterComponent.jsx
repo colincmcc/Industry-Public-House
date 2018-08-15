@@ -5,12 +5,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import Facebook from "../../common/assets/icons/facebook.svg";
-import Twitter from "../../common/assets/icons/twitter.svg";
-import Instagram from "../../common/assets/icons/instagram.svg";
+import Facebook from "../../../common/assets/icons/facebook.svg";
+import Twitter from "../../../common/assets/icons/twitter.svg";
 
-import TripAdvisor from "../common/svgIcons/tripadvisor";
-import theme from "../../common/styled/theme";
+import TripAdvisor from "../svgIcons/tripadvisor";
+import theme from "../../../common/styled/theme";
 
 const FooterComponent = props => {
   const { data, error, loading, classes } = props;
