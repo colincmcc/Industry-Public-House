@@ -1,8 +1,9 @@
 import React from 'react';
 
-import TextField from '@material-ui/core/TextField';
-import { FormRow, FormLabel } from '../components';
-import alertIcon from '../../../common/assets/icons/alert-circle-outline.svg';
+import TextField from "@material-ui/core/TextField";
+import FormLabel from "./FormLabel";
+import FormRow from "./FormRow";
+import alertIcon from "../../../common/assets/icons/alert-circle-outline.svg";
 
 const FormTextField = (props) => {
   const {

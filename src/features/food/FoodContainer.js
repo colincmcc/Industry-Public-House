@@ -3,13 +3,13 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import shortid from 'shortid';
 
-import MenuWrapper from '../common/MenuWrapper';
-import FoodNavComponent from './FoodNavComponent';
+import MenuWrapper from '../components/MenuWrapper'
+import FoodNavComponent from "./FoodNavComponent";
 
 import bgImg from '../../common/assets/img/burgher.jpg';
 
-
-import PageHeaderContainer from '../common/page/PageHeaderContainer';
+import foodBG from '../../common/assets/img/menu_background.jpg'
+import PageHeaderContainer from '../components/page/PageHeaderContainer'
 import FoodMenuComponent from './FoodMenuComponent';
 
 

@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import shortid from 'shortid';
-import LoadableVisibility from 'react-loadable-visibility/react-loadable';
-import Heading from '../common/Heading';
-import LoadingComponent from '../common/loading/LoadingComponent';
+import React from "react";
+import styled from "styled-components";
+import shortid from "shortid";
+import LoadableVisibility from "react-loadable-visibility/react-loadable";
+import Heading from "../components/Heading";
+import LoadingComponent from "../components/loading/LoadingComponent";
 
 const LoadableGalleryCard = LoadableVisibility({
-  loader: () => import('../common/GalleryCard'),
+  loader: () => import("../components/GalleryCard"),
   render(loaded, props) {
     const Component = loaded.default;
     return <Component {...props} />;

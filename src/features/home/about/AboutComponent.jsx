@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Custom Components
-import Heading from '../../common/Heading';
-import BodyText from '../../common/BodyText';
+import Heading from "../../components/Heading";
+import BodyText from "../../components/BodyText";
 
 // Images
 import mainBg from '../../../common/assets/img/zig-zag.png';

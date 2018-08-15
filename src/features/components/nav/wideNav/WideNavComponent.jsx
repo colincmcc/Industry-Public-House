@@ -6,9 +6,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import IconButton from '@material-ui/core/IconButton';
-import Phone from '../../../common/assets/icons/phone.svg';
-import theme from '../../../common/styled/theme';
+import IconButton from "@material-ui/core/IconButton";
+import Phone from "../../../../common/assets/icons/phone.svg";
+import theme from "../../../../common/styled/theme";
 
 const WideNavComponent = (props) => {
   const { classes, headerLogo, location } = props;
