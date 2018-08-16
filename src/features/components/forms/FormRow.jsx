@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FormRow = props => <Row className="form-item">{props.children}</Row>;
+const FormRow = ({ children }) => <Row className="form-item">{children}</Row>;
 export default FormRow;
+
 const Row = styled.div`
   padding: 8px 13px 2px 17px;
   transition: opacity 0.2s ease-in, height 0.2s ease-out;
-
+  position: relative;
   ${props => props.theme.media.tablet_portrait_up`
     display: flex;
     border-bottom: none;

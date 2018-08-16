@@ -21,7 +21,15 @@ const WP_CONTACT = gql`
       hero_image
     }
   }
-
+    allLocations{
+    id
+    title{
+      rendered
+    }
+    acf{
+      email
+    }
+  }
 }
 `;
 
@@ -42,7 +50,7 @@ const ContactContainer = () => (
         return (
           <div>
             <PageHeaderContainer heading="Connect" subHeading="" bgImg={bgImg} />
-            <ContactComponent />
+            <ContactComponent locations={data.allLocations} client={client} />
           </div>
         );
       }

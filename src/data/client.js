@@ -2,7 +2,6 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { CachePersistor } from 'apollo-cache-persist';
 
-
 import { toIdValue } from 'apollo-utilities';
 
 import { HttpLink } from 'apollo-link-http';
@@ -80,7 +79,7 @@ export const apolloClient = new ApolloClient({
       cache,
     }),
     new HttpLink({
-      uri: prod.graphQLEndpoint,
+      uri: dev.graphQLEndpoint,
     }),
   ]),
   cache,

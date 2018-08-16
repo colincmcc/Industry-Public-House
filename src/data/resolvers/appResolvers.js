@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const appResolvers = {
   defaults: {
     networkStatus: {
@@ -6,9 +8,8 @@ const appResolvers = {
     },
     isLoggedIn: false,
     mobileMenuOpen: false,
-    currentLocation: 1,
-
-  },
+    currentLocation: 1
+    },
   resolvers: {
     Mutation: {
       updateNetworkStatus: (_, { isConnected }, { cache }) => {
