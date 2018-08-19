@@ -79,7 +79,7 @@ export const apolloClient = new ApolloClient({
       cache,
     }),
     new HttpLink({
-      uri: prod.graphQLEndpoint,
+      uri: dev.graphQLEndpoint,
     }),
   ]),
   cache,

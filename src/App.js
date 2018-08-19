@@ -1,38 +1,48 @@
 import React, { Component } from 'react';
-import {ApolloProvider} from 'react-apollo'
-import { Switch, Route, withRouter } from 'react-router-dom'
-import styled, {ThemeProvider} from 'styled-components'
-import { Query } from "react-apollo";
-import gql from 'graphql-tag'
-import theme from './common/styled/theme'
-import {persistor, apolloClient, cacheStorage} from './data/client'
+import { ApolloProvider, Query } from 'react-apollo';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+import gql from 'graphql-tag';
+import theme from './common/styled/theme';
+import { persistor, apolloClient, cacheStorage } from './data/client';
 
-import asyncComponent from './features/components/AsyncComponent'
-import LoadingComponent from './features/components/loading/LoadingComponent'
-import NavContainer from './features/components/nav/NavContainer'
-import FooterContainer from './features/components/footer/FooterContainer'
+import asyncComponent from './features/components/AsyncComponent';
+import LoadingComponent from './features/components/loading/LoadingComponent';
+import NavContainer from './features/components/nav/NavContainer';
+import FooterContainer from './features/components/footer/FooterContainer';
 
-const AsyncHome = asyncComponent(() => import("./features/home/HomeContainer"))
-const AsyncFood = asyncComponent(() => import("./features/food/FoodContainer"))
-const AsyncDrink = asyncComponent(() => import("./features/drinks/DrinkContainer"))
-const AsyncContact = asyncComponent(() => import("./features/contact/ContactContainer"))
-const AsyncMobileMenu = asyncComponent(() => import("./features/components/nav/mobileNav/MobileMenuContainer"))
-
+const AsyncHome = asyncComponent(() => import('./features/home/HomeContainer'));
+const AsyncFood = asyncComponent(() => import('./features/food/FoodContainer'));
+const AsyncDrink = asyncComponent(() => import('./features/drinks/DrinkContainer'));
+const AsyncContact = asyncComponent(() => import('./features/contact/ContactContainer'));
+const AsyncPay = asyncComponent(() => import('./features/pay/PayContainer'));
+const AsyncMobileMenu = asyncComponent(() => import('./features/components/nav/mobileNav/MobileMenuContainer'));
 
 
 const SCHEMA_VERSION = '2';
-const SCHEMA_VERSION_KEY = 'apollo-schema-version'
+const SCHEMA_VERSION_KEY = 'apollo-schema-version';
+
+const CACHED_STATE = gql`
+  {
+    selectedFoodType @client
+    selectedDrinkType @client
+    currentLocation @client
+  }
+`;
+
 
 class App extends Component {
+  previousLocation = this.props.location;
 
   constructor(props) {
     super(props);
     this.state = {
       client: null,
-      loaded: false
+      loaded: false,
     };
   }
-  async componentDidMount(){
+
+  async componentDidMount() {
     const currentVersion = await cacheStorage.getItem(SCHEMA_VERSION_KEY);
     if (currentVersion === SCHEMA_VERSION) {
       // If the current version matches the latest version,
@@ -51,71 +61,68 @@ class App extends Component {
     });
   }
 
-  previousLocation = this.props.location;
+
   componentWillUpdate(nextProps) {
     const { location } = this.props;
     // set previousLocation if props.location is not modal
     if (
-      nextProps.history.action !== "POP" &&
-      (!location.state || !location.state.modal)
+      nextProps.history.action !== 'POP'
+      && (!location.state || !location.state.modal)
     ) {
       this.previousLocation = this.props.location;
     }
   }
 
   render() {
-    const {client, loaded} = this.state
+    const { client, loaded } = this.state;
 
-    if(!loaded) return <div>Loading...</div>
+    if (!loaded) return <div>Loading...</div>;
 
     const { location } = this.props;
     const isModal = !!(
-      location.state &&
-      location.state.modal &&
-      this.previousLocation !== location
+      location.state
+      && location.state.modal
+      && this.previousLocation !== location
     );
 
     return (
       <ApolloProvider client={client}>
-        <ThemeProvider theme={theme} >
+        <ThemeProvider theme={theme}>
           <AppWrapper>
             <NavContainer />
             <MainContent>
-            <Query query={CACHED_STATE}>
-            {
+              <Query query={CACHED_STATE}>
+                {
             ({ loading, error, data }) => {
-              if(loading) return <LoadingComponent />
-              if(error) return <p>Error</p>
+              if (loading) return <LoadingComponent />;
+              if (error) return <p>Error</p>;
               return (
                 <div>
                   <Switch location={isModal ? this.previousLocation : location}>
+                    <Route exact path="/" component={AsyncHome} />
 
-                      <Route exact path="/" component={AsyncHome} />
+                    <Route path="/Home" component={AsyncHome} />
 
-                      <Route path="/Home" component={AsyncHome} />
+                    <Route path="/Food" component={AsyncFood} render={() => <AsyncFood selectedFoodType={data.selectedFoodType} />} />
 
-                      <Route  path="/Food" component={AsyncFood} render={() => <AsyncFood selectedFoodType={data.selectedFoodType} />} />
+                    <Route path="/Drink" render={() => <AsyncDrink selectedDrinkType={data.selectedDrinkType} currentLocation={data.currentLocation} />} />
 
-                      <Route path="/Drink"  render={() => < AsyncDrink selectedDrinkType={data.selectedDrinkType}  currentLocation={data.currentLocation} />} />
+                    <Route path="/Contact" render={() => <AsyncContact currentLocation={data.currentLocation} />} />
 
-                      <Route path="/Contact"  render={() => < AsyncContact currentLocation={data.currentLocation} />} />
+                    <Route path="/Apply" component={AsyncHome} />
 
-                      <Route path="/Apply" component={AsyncHome} />
-
-                      <Route path="/Shop" component={AsyncHome} />
-
-                      <Route path="/Gallery" component={AsyncHome} />
-
+                    <Route path="/Shop" component={AsyncHome} />
+                    <Route path="/Pay" component={AsyncPay} />
+                    <Route path="/Gallery" component={AsyncHome} />
                   </Switch>
 
-                  {(isModal) ? <Route component={AsyncMobileMenu} path="/#Menu" /> : null}
-
+                  {isModal ? <Route component={AsyncMobileMenu} path="/#Menu" /> : null}
                 </div>
-                )
-              }
+              );
+            }
             }
 
-            </Query>
+              </Query>
             </MainContent>
             <FooterContainer />
           </AppWrapper>
@@ -131,15 +138,7 @@ const AppWrapper = styled.div`
 overflow: hidden;
 background-color: ${props => props.theme.colors.darkGray};
 min-width: 350px;
-`
+`;
 const MainContent = styled.div`
 min-height: 100vh;
-`
-
-const CACHED_STATE = gql`
-{
-  selectedFoodType @client
-  selectedDrinkType @client
-  currentLocation @client
-}
-`
+`;

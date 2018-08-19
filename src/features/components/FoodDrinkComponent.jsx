@@ -17,7 +17,7 @@ const FoodDrinkComponent = (props) => {
   } = props;
   if (loading) return <LoadingComponent />;
   if (error || !data.menuItems) return <ErrorComponent />;
-  const menuItems = data.menuItems;
+  const { menuItems } = data;
 
   return (
     <FoodMenuWrapper>
@@ -73,13 +73,6 @@ const FoodHeader = styled.div`
   ${props => props.theme.media.tablet_portrait_up`
    ${theme.fontStyles.text}
   `};
-`;
-const FoodTitle = styled.div`
-  display: flex;
-`;
-const FoodPrice = styled.div`
-  display: flex;
-  padding: 0 1em;
 `;
 const FoodDescription = styled.span`
   opacity: 0.83;

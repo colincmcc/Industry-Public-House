@@ -3,9 +3,9 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import ContactComponent from './ContactComponent'
-import PageHeaderContainer from '../components/page/PageHeaderContainer'
-import bgImg from '../../common/assets/img/header_bg_clean.jpg'
+import ContactComponent from './ContactComponent';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import bgImg from '../../common/assets/img/header_bg_clean.jpg';
 
 const WP_CONTACT = gql`
 {

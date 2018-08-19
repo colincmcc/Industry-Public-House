@@ -2,13 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import Select from 'react-select';
-import { validateOnBlur, setRowFocus } from '../../common/utils/utils';
 import FormTextField from '../components/forms/FormTextField';
 import FormSelectField from '../components/forms/FormSelectField';
-import LoadingComponent from '../components/loading/LoadingComponent'
+import LoadingComponent from '../components/loading/LoadingComponent';
 import theme from '../../common/styled/theme';
-
 
 
 const ContactFormInitial = (props) => {
@@ -25,33 +22,35 @@ const ContactFormInitial = (props) => {
     isSubmitting,
     errors,
     touched,
-    setTouched
+    setTouched,
   } = props;
 
   const tabOptions = [
-  {value: 'together', label: '1-2 Tabs'},
-  {value: 'individual', label: 'Individual Tabs'},
-  ]
+    { value: 'together', label: '1-2 Tabs' },
+    { value: 'individual', label: 'Individual Tabs' },
+  ];
 
-    const locationOptions = [
-  {value: 'LV', label: 'Lawrenceville'},
-  {value: 'NF', label: 'North Fayette'},
-  ]
+  const locationOptions = [
+    { value: 'LV', label: 'Lawrenceville' },
+    { value: 'NF', label: 'North Fayette' },
+  ];
 
-    const typeOptions = [
-  {value: 'sitdown', label: 'Sitdown with server'},
-  {value: 'bar', label: 'Happy Hour/Bar'},
-  {value: 'both', label: 'Bar & Sitdown meal'}
-  ]
-const SubmitButton = !isValidating || !isSubmitting ?    <Button
-          disabled={!dirty || isSubmitting}
-          type="submit"
-          variant="contained"
-          classes={{ contained: classes.homeButton }}
-        >
+  const typeOptions = [
+    { value: 'sitdown', label: 'Sitdown with server' },
+    { value: 'bar', label: 'Happy Hour/Bar' },
+    { value: 'both', label: 'Bar & Sitdown meal' },
+  ];
+  const SubmitButton = !isValidating || !isSubmitting ? (
+    <Button
+      disabled={!dirty || isSubmitting}
+      type="submit"
+      variant="contained"
+      classes={{ contained: classes.homeButton }}
+    >
         Submit
-        </Button> :
-        <LoadingComponent />
+    </Button>
+  )
+    : <LoadingComponent />;
   return (
     <Form onSubmit={handleSubmit}>
 
@@ -91,8 +90,8 @@ const SubmitButton = !isValidating || !isSubmitting ?    <Button
         errors={errors.resoTabPay}
         touched={touched.resoTabPay}
         setTouched={setTouched}
-        />
-         <FormSelectField
+      />
+      <FormSelectField
         name="resoLocation"
         isRequired
         label="Which location are you looking at?"
@@ -104,8 +103,8 @@ const SubmitButton = !isValidating || !isSubmitting ?    <Button
         touched={touched.resoLocation}
         setTouched={setTouched}
         isMulti="true"
-        />
-        <FormSelectField
+      />
+      <FormSelectField
         name="resoType"
         isRequired
         label="What type of event is it?"
@@ -116,7 +115,7 @@ const SubmitButton = !isValidating || !isSubmitting ?    <Button
         errors={errors.resoType}
         touched={touched.resoType}
         setTouched={setTouched}
-        />
+      />
       <FormTextField
         type="text"
         name="resoDescription"
@@ -130,7 +129,7 @@ const SubmitButton = !isValidating || !isSubmitting ?    <Button
         touched={touched.resoDescription}
       />
       <SubmitRow>
-      {SubmitButton}
+        {SubmitButton}
       </SubmitRow>
     </Form>
   );

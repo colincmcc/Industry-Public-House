@@ -2,14 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { validateOnBlur, setRowFocus } from '../../common/utils/utils';
 import FormTextField from '../components/forms/FormTextField';
 import FormSelectField from '../components/forms/FormSelectField';
 import LoadingComponent from '../components/loading/LoadingComponent';
 import theme from '../../common/styled/theme';
 
-
-const ContactFormInitial = (props) => {
+const PayFormComponent = (props) => {
   const {
     classes,
     handleChange,
@@ -26,110 +24,91 @@ const ContactFormInitial = (props) => {
     setTouched,
   } = props;
 
-  const contactReasons = [
-    {
-      label: 'I have reservation for over 15 people',
-      value: 'reservation',
-    },
+  const paymentReasons = [
+    { label: 'Dining', value: 'dining' },
+    { label: 'Deposit', value: 'deposit' },
   ];
-  /**
-const contactReasons = [
-{
-    label: 'I have reservation for over 15 people',
-    value: 'reservation',
-  },
-  {
-    label: "I'm representing a charity",
-    value: 'charity',
-  },
-  {
-    label: "I'd like to hold an event at an Industry",
-    value: 'event',
-  },
-  {
-    label: "I'd like to make food selections for my party",
-    value: 'food',
-  },
-  {
-    label: 'I have another reason...',
-    value: 'other',
-  },
-];
 
- */
   const SubmitButton = !isValidating || !isSubmitting ? (
-<Button
-          disabled={!dirty || isSubmitting}
-          type="submit"
-          variant="contained"
-          classes={{ contained: classes.homeButton }}
-        >
-        Next
-        </Button>
-)
-        : <LoadingComponent />;
+    <Button
+      disabled={!dirty || isSubmitting}
+      type="submit"
+      variant="contained"
+      classes={{ contained: classes.homeButton }}
+    >
+      Next
+    </Button>
+  )
+    : <LoadingComponent />;
   return (
     <Form onSubmit={handleSubmit}>
       <FormSelectField
-        name="reason"
+        name="chargeReason"
         isRequired
-        label="Why are you reaching out?"
-        options={contactReasons}
-        value={values.reason}
+        label="What is the reason for the transaction?"
+        options={paymentReasons}
+        value={values.chargeReason}
         onChange={setFieldValue}
         onBlur={setFieldTouched}
-        errors={errors.reason}
-        touched={touched.reason}
+        errors={errors.chargeReason}
+        touched={touched.chargeReason}
         setTouched={setTouched}
       />
-
       <FormTextField
         type="text"
-        name="firstname"
-        placeHolder="Nikola"
+        name="checkId"
+        placeHolder="6 digit Check number"
         isRequired
-        label="Your First Name"
+        label="Check ID"
         values={values}
         handleChange={handleChange}
         handleBlur={handleBlur}
-        errors={errors.firstname}
-        touched={touched.firstname}
+        errors={errors.checkId}
+        touched={touched.checkId}
       />
-
       <FormTextField
         type="text"
-        name="lastname"
-        placeHolder="Tesla"
+        name="paymentAmount"
+        placeHolder=""
         isRequired
-        label="Your Last Name"
+        label="Amount"
         values={values}
         handleChange={handleChange}
         handleBlur={handleBlur}
-        errors={errors.lastname}
-        touched={touched.lastname}
+        errors={errors.paymentAmount}
+        touched={touched.paymentAmount}
       />
-
       <FormTextField
-        type="email"
-        name="email"
-        placeHolder="nikola.tesla@example.com"
+        type="text"
+        name="custId"
+        placeHolder=""
         isRequired
-        label="Your Email"
+        label="Customer ID Number"
         values={values}
         handleChange={handleChange}
         handleBlur={handleBlur}
-        errors={errors.email}
-        touched={touched.email}
+        errors={errors.custId}
+        touched={touched.custId}
       />
-      <SubmitRow>
-        {SubmitButton}
-      </SubmitRow>
+      <FormTextField
+        type="text"
+        name="custName"
+        placeHolder="Nikola Tesla"
+        isRequired
+        label="Customer Name"
+        values={values}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        errors={errors.custName}
+        touched={touched.custName}
+      />
+      <SubmitRow>{SubmitButton}</SubmitRow>
     </Form>
   );
 };
 
+export default withStyles(theme.materialUI)(PayFormComponent);
 
-export default withStyles(theme.materialUI)(ContactFormInitial);
 
 const Form = styled.form`
   padding: 10px 10px 13px 15px;

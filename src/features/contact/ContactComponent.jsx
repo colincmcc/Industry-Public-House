@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 // eslint-disable-next-line
 import * as Yup from 'yup'
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
+import FormikWrapperComponent from '../components/forms/FormikWrapperComponent';
 
-//Contact Forms
+// Contact Forms
 import ContactFormInitial from './ContactFormInitial';
 import ContactFormReservation from './ContactFormReservation';
 import ContactFormCharity from './ContactFormCharity';
@@ -23,93 +23,87 @@ const SEND_FORM = gql`
   	status
   }
 }
-`
+`;
 
 const initialSchema = Yup.object().shape({
-    reason: Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required()
-          }),
-      firstname: Yup.string().required(),
-      lastname: Yup.string().required(),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('We need an email to contact you.')
-  })
+  reason: Yup.object().shape({
+    label: Yup.string().required(),
+    value: Yup.string().required(),
+  }),
+  firstname: Yup.string().required(),
+  lastname: Yup.string().required(),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('We need an email to contact you.'),
+});
 
-   const resoSchema = Yup.object().shape({
-      resoName: Yup.string().required(),
-      resoPartySize: Yup.string().required(),
-      resoDate: Yup.string(),
-      resoTabPay: Yup.object().shape({
-          label: Yup.string().required(),
-          value: Yup.string().required()
-        }),
-      resoLocation: Yup.object().shape({
+const resoSchema = Yup.object().shape({
+  resoName: Yup.string().required(),
+  resoPartySize: Yup.string().required(),
+  resoDate: Yup.string(),
+  resoTabPay: Yup.object().shape({
+    label: Yup.string().required(),
+    value: Yup.string().required(),
+  }),
+  resoLocation: Yup.array()
+    .min(1, 'Pick at least 1 location')
+    .of(
+      Yup.object().shape({
         label: Yup.string().required(),
-        value: Yup.string().required()
+        value: Yup.string().required(),
       }),
-     resoType: Yup.object().shape({
-        label: Yup.string().required(),
-        value: Yup.string().required()
-      }),
-      resoDescription: Yup.string().required()
-  })
+    ),
+  resoType: Yup.object().shape({
+    label: Yup.string().required(),
+    value: Yup.string().required(),
+  }),
+  resoDescription: Yup.string().required(),
+});
 
-   const charitySchema = Yup.object().shape({
-     charityOrg: Yup.string().required(),
-     charityGiftType: Yup.string().required()
-  })
+const charitySchema = Yup.object().shape({
+  charityOrg: Yup.string().required(),
+  charityGiftType: Yup.string().required(),
+});
 
-   const foodSchema = Yup.object().shape({
-    reason: Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required()
-          }),
-      firstname: Yup.string().required(),
-      lastname: Yup.string().required(),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('We need an email to contact you.')
-  })
-   const eventSchema = Yup.object().shape({
-    reason: Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required()
-          }),
-      firstname: Yup.string().required(),
-      lastname: Yup.string().required(),
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('We need an email to contact you.')
-  })
+const foodSchema = Yup.object().shape({
+  reason: Yup.object().shape({
+    label: Yup.string().required(),
+    value: Yup.string().required(),
+  }),
+  firstname: Yup.string().required(),
+  lastname: Yup.string().required(),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('We need an email to contact you.'),
+});
+const eventSchema = Yup.object().shape({
+  reason: Yup.object().shape({
+    label: Yup.string().required(),
+    value: Yup.string().required(),
+  }),
+  firstname: Yup.string().required(),
+  lastname: Yup.string().required(),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('We need an email to contact you.'),
+});
 
 // Migrated to Formik & Yup
-const FormComponent = ({handleSubmit, currentForm}) => {
-
-  // Validation Schemas
-  // TODO: find way to create conditional schema's with Yup
-
-
-
-  return (
-    <Formik
-      initialValues={{
-      }}
-      onSubmit={(values, actions) => handleSubmit(values, actions)}
-      component={currentForm.component}
-      validationSchema={currentForm.schema}
-    />
-  );
-};
+const FormComponent = ({ handleSubmit, currentForm }) => (
+  <FormikWrapperComponent
+    onSubmit={handleSubmit}
+    currentForm={currentForm}
+  />
+);
 // END FORMIK
 
 
 class ContactComponent extends Component {
-  state={
-    form: "initial",
-    formData: {}
-  }
+  state = {
+    form: 'initial',
+    formData: {},
+  };
+
   componentDidMount() {
     this.addFormListeners();
   }
@@ -118,47 +112,48 @@ class ContactComponent extends Component {
     this.removeFormListeners();
   }
 
+  handleSubmit = (values, actions) => {
+    const { form, formData } = this.state;
+    const { client } = this.props;
+    const { value: reason } = values.reason;
+
+    // TODO update email to production
+    if (form === 'initial') {
+      this.setState({
+        form: reason,
+        formData: { ...values },
+      });
+    } else {
+      const payload = JSON.stringify({ ...formData, ...values }, null, 2);
+      this.setState({
+        formData: payload,
+      });
+      client.mutate({
+        mutation: SEND_FORM,
+        variables: {
+          to: ['colincmcc@gmail.com'],
+          from: 'colin@iph.colinmac.me',
+          subject: reason,
+          html: payload,
+        },
+      });
+    }
+    actions.setSubmitting(false);
+
+    /*
+    setTimeout(() => {
+      alert(JSON.stringify(this.state, null, 2));
+      actions.setSubmitting(false);
+    }, 1000);
+    */
+  };
+
   onFormFocusIn = () => {
     setRowFocus();
   };
 
   onFormFocusOut = (ev) => {
     setRowFocus();
-  };
-
-
- handleSubmit = (values, actions) => {
-  const { form, formData } = this.state
-  const { client, locations } = this.props
-  const {value: reason} = values.reason
-
-  // TODO update email to production
-   if(form === "initial"){
-     this.setState({
-       form: reason,
-       formData: {...values}
-     })
-   } else {
-     const locEmails = locations.map(l => l.acf.email)
-     console.log(locEmails)
-     const payload = JSON.stringify({...formData, ...values}, null, 2)
-     this.setState({
-       formData: payload
-     })
-     client.mutate({
-       mutation: SEND_FORM,
-       variables: {
-         to: ['colincmcc@gmail.com'],
-         from: 'colin@iph.colinmac.me',
-         subject: reason,
-         html: payload
-       }
-     })
-   }
-    setTimeout(() => {
-      alert(JSON.stringify(this.state, null, 2));
-      actions.setSubmitting(false);
-    }, 1000);
   };
 
   removeFormListeners = () => {
@@ -174,36 +169,23 @@ class ContactComponent extends Component {
   };
 
   render() {
-    const { form } = this.state
+    const { form } = this.state;
 
-    const currentForm = form => ( {
-      initial: {
-        component: ContactFormInitial,
-        schema: initialSchema
-      },
-      charity: {
-        component: ContactFormCharity,
-        schema: charitySchema
-      },
-      reservation: {
-        component: ContactFormReservation,
-        schema: resoSchema
-      },
-      food: {
-        component: ContactFormFood,
-        schema: foodSchema
-      },
-      event:{
-        component: ContactFormEvent,
-        schema: eventSchema
-      }
-    })[form]
+    const currentForm = selectedForm => ({
+      initial: { component: ContactFormInitial, schema: initialSchema },
+      charity: { component: ContactFormCharity, schema: charitySchema },
+      reservation: { component: ContactFormReservation, schema: resoSchema },
+      food: { component: ContactFormFood, schema: foodSchema },
+      event: { component: ContactFormEvent, schema: eventSchema },
+    }[selectedForm]);
 
     return (
       <ContactWrapper>
         <FormContainer>
-          <FormComponent
-          currentForm={currentForm(form)} handleSubmit={this.handleSubmit}/>
+          <FormikWrapperComponent
+            currentForm={currentForm(form)}
+            handleSubmit={this.handleSubmit}
+          />
         </FormContainer>
       </ContactWrapper>
     );

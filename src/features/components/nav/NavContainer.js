@@ -29,18 +29,15 @@ export const mobileNavItems = [
   { label: 'Apply', link: '/Apply' },
   { label: 'Events', link: '/Calendar' },
   { label: 'Shop', link: '/Shop' },
-
 ];
 
 class NavContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuIsShown: false,
       navIsShown: true,
-      scrollDirection: '',
       lastScrollPos: 0,
-
+      scrollDirection: '',
     };
   }
 
@@ -51,14 +48,13 @@ class NavContainer extends Component {
   // Else, or if navbar is not visible, check to see if current scroll position is less than the last scroll position.  If true, set state of scrollDirection to "UP".
 
   handleScroll = () => {
-    let last_known_scroll_position = 0;
+    let lastKnownScrollPosition = 0;
     let ticking = false;
 
     const toggleBottomBar = (scrollPos) => {
-      const prevScrollPos = this.state.lastScrollPos;
-      const navIsShown = this.state.navIsShown;
+      const { lastScrollPos: prevScrollPos, navIsShown } = this.state;
 
-      this.setState({ lastScrollPos: last_known_scroll_position });
+      this.setState({ lastScrollPos: lastKnownScrollPosition });
       if (navIsShown) {
         if (scrollPos > prevScrollPos) {
           this.setState({
@@ -74,10 +70,10 @@ class NavContainer extends Component {
       }
     };
     window.addEventListener('scroll', (e) => {
-      last_known_scroll_position = window.scrollY;
+      lastKnownScrollPosition = window.scrollY;
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          toggleBottomBar(last_known_scroll_position);
+          toggleBottomBar(lastKnownScrollPosition);
           ticking = false;
         });
 
