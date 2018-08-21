@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
+import gql from 'graphql-tag';
 import styled from 'styled-components';
 import PayFormComponent from './PayFormComponent';
 import FormikWrapperComponent from '../components/forms/FormikWrapperComponent';
 import PayCodes from './PayCodes';
+import ChargeSubscription from './ChargeSubscription';
 
 class PayComponent extends Component {
   state = {
     submitted: false,
     chargeResponse: {},
+    payed: false,
+    eventId: '',
   }
 
   handleSubmit = async (values, actions) => {
     const { client, data, createCharge } = this.props;
+
     const chargePayload = {
       name: values.checkId,
       description: values.chargeReason.value,
@@ -20,10 +25,14 @@ class PayComponent extends Component {
       custId: values.custId,
       custName: values.custName,
     };
-    createCharge({ variables: chargePayload }).then(response => this.setState({
-      chargeResponse: response.data.createCbCharge,
-      submitted: true,
-    })).then(() => actions.setSubmitting(false));
+    createCharge({ variables: chargePayload }).then((response) => {
+      actions.setSubmitting(false);
+      this.setState({
+        chargeResponse: response.data.createCbCharge,
+        submitted: true,
+        eventId: response.data.createCbCharge.id,
+      });
+    });
 
     /*
       setTimeout(() => {
@@ -35,9 +44,12 @@ class PayComponent extends Component {
 
   render() {
     const currentForm = { component: PayFormComponent, schema: null };
-    const { submitted, chargeResponse } = this.state;
+    const {
+      submitted, chargeResponse, eventId, payed,
+    } = this.state;
     return (
       <PayWrapper>
+        <ChargeSubscription eventId={eventId} />
         <FormContainer>
           {!submitted
             ? (
@@ -45,7 +57,7 @@ class PayComponent extends Component {
                 currentForm={currentForm}
                 handleSubmit={this.handleSubmit}
               />
-            ) : <PayCodes addresses={chargeResponse.addresses} />
+            ) : <PayCodes eventId={chargeResponse.Id} addresses={chargeResponse.addresses} />
           }
 
         </FormContainer>
