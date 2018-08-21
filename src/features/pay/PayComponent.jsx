@@ -10,7 +10,7 @@ class PayComponent extends Component {
     chargeResponse: {},
   }
 
-  handleSubmit = (values, actions) => {
+  handleSubmit = async (values, actions) => {
     const { client, data, createCharge } = this.props;
     const chargePayload = {
       name: values.checkId,
@@ -23,8 +23,7 @@ class PayComponent extends Component {
     createCharge({ variables: chargePayload }).then(response => this.setState({
       chargeResponse: response.data.createCbCharge,
       submitted: true,
-    }));
-    actions.setSubmitting(false);
+    })).then(() => actions.setSubmitting(false));
 
     /*
       setTimeout(() => {
@@ -37,7 +36,6 @@ class PayComponent extends Component {
   render() {
     const currentForm = { component: PayFormComponent, schema: null };
     const { submitted, chargeResponse } = this.state;
-    console.log(chargeResponse);
     return (
       <PayWrapper>
         <FormContainer>

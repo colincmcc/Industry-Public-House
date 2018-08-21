@@ -1,5 +1,5 @@
 export const dev = {
-  graphQLEndpoint: 'http://localhost:4000/',
+  graphQLEndpoint: 'http://localhost:4000/graphql',
   wpEndpoint: 'http://localhost:8081/wp-json/wp/v2',
   websiteHome:
   'http://localhost:3000',

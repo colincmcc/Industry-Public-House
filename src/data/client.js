@@ -53,12 +53,14 @@ const typeDefs = `
       isConnected: Boolean!
     }
 
-
     type Mutation {
     }
 
     type Query {
 
+    }
+    type Subscription {
+      coinbaseChargeUpdate()
     }
 
   `;
