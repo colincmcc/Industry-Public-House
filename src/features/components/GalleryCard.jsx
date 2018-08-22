@@ -10,7 +10,7 @@ const GalleryCard = (props) => {
   return (
     <CardWrapper>
       <CardImage eventImage={event.eventBackground} />
-      <CardContent >
+      <CardContent>
         <Border />
         <CardHeading>{event.title}</CardHeading>
         <EventTime>
@@ -51,8 +51,8 @@ const cardEntrance = keyframes`
 const CardWrapper = styled.div`
   display: block;
   position: relative;
-  box-shadow: 0 15px 35px ${props => props.theme.colors.whiteTheme +
-'08'};
+  box-shadow: 0 15px 35px ${props => `${props.theme.colors.whiteTheme
+  }08`};
   , 0 5px 15px rgba(0, 0, 0, 0.07);
   border-radius: 4px;
   overflow: hidden;
@@ -75,7 +75,7 @@ const CardImage = styled.div`
   min-height: 370px;
   background-size: cover;
   background-position: 50% 50%;
-  background-color: ${props => props.theme.colors.whiteTheme + "08"};
+  background-color: ${props => `${props.theme.colors.whiteTheme}08`};
   background: url(${props => props.eventImage});
   ${props => props.theme.media.tablet_portrait_up`
     position: absolute;
@@ -103,7 +103,7 @@ const Border = styled(GrungeBorder)`
       height: 100%;
 
     `};
-`
+`;
 const CardContent = styled.div`
   ${props => props.theme.fontStyles.text};
   position: relative;

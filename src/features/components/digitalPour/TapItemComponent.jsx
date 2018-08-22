@@ -13,22 +13,26 @@ const styles = {
   },
 };
 
-const TapItemComponent = props => (
-  <ListItem classes={{ root: props.classes.root }} divider>
-    <Avatar>
-      <Placeholder />
-    </Avatar>
-    <ListItemText
-      primary={`${props.tap.breweryName} - ${props.tap.bevName}`}
-      secondary={
-          `${props.tap.bevAbv
+const TapItemComponent = (props) => {
+  const { classes, tap } = props;
+
+  return (
+    <ListItem classes={{ root: classes.root }} divider>
+      <Avatar>
+        <Placeholder />
+      </Avatar>
+      <ListItemText
+        primary={`${tap.breweryName} - ${tap.bevName}`}
+        secondary={
+          `${tap.bevAbv
           }% - ${
-            props.tap.bevStyle
+            tap.bevStyle
           } - ${
-            props.tap.breweryLocation}`
+            tap.breweryLocation}`
         }
-    />
-  </ListItem>
-);
+      />
+    </ListItem>
+  );
+};
 
 export default withStyles(styles)(TapItemComponent);

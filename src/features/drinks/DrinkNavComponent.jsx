@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Link } from 'react-router-dom';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { DP_TAPS } from './graphql';
 import theme from '../../common/styled/theme';
-import { DP_TAPS } from './DrinkContainer';
 
 // * Prefetches drink items on mouse hover for faster loading. Desktop only
 
-// Note: you cannot pass a Styled Component theme prop as the MaterialUI's classes object (e.g. classes:{{root: props.theme.materialUI.root}}), when using the withTheme higher component
+// Note: you cannot pass a Styled Component theme prop as the MaterialUI's classes object
+// (e.g. classes:{{root: props.theme.materialUI.root}}), when using the withTheme higher component
 
 // TODO: work out how the withStyles higher component uses the object passed to it and write a function to use the Styled Component theme instead
 
@@ -35,7 +35,8 @@ class DrinkNavComponent extends Component {
   // Couldn't get Material-UI to use something outside of the index to update active tab
   // had to manually assign active tab here in case there is a direct link to one of the routes
   componentDidMount() {
-    const currentPath = this.props.location.pathname;
+    const { location } = this.props;
+    const currentPath = location.pathname;
     let currentTypeValue;
     switch (currentPath) {
       case '/Drink/Taps':
@@ -66,25 +67,26 @@ class DrinkNavComponent extends Component {
   };
 
   fetchTreeData() {
-    this.props.client.query({
-      query: DP_TAPS,
-      variables: { location: 2 },
-    });
+    const { client } = this.props;
+    client.query({ query: DP_TAPS, variables: { location: 2 } });
   }
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes, location, navItems, locations, currentLocation, client,
+    } = this.props;
+    const { typeValue } = this.state;
     let showNav = false;
     let scrollMenu = true;
 
     // If at one of these locations, show location nav
     const locationNav = ['/Drink/Taps', '/Drink/Premium', '/Drink/Cans'];
-    if (locationNav.includes(this.props.location.pathname)) {
+    if (locationNav.includes(location.pathname)) {
       showNav = true;
     }
 
     // If screen is smaller than this, start scrolling nav
-    window.innerwidth < 500 ? (scrollMenu = true) : (scrollMenu = false);
+    if (window.innerwidth < 500) { scrollMenu = true; }
 
     return (
       <DrinkNavWrapper>
@@ -95,11 +97,13 @@ class DrinkNavComponent extends Component {
             scrollable={!!scrollMenu}
             scrollButtons="auto"
             onChange={this.handleTypeChange}
-            value={this.state.typeValue}
-            classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+            value={typeValue}
+            classes={{
+              indicator: classes.indicator,
+              root: classes.tabsRoot,
+            }}
           >
-            >
-            {this.props.navItems.map((navItem, index) => (
+            {navItems.map((navItem, index) => (
               <Tab
                 key={shortid.generate()}
                 value={index}
@@ -122,24 +126,32 @@ class DrinkNavComponent extends Component {
         <LocationsNav className={showNav ? 'showNav' : null}>
           <Tabs
             fullWidth
-            value={this.props.currentLocation - 1}
-            classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+            value={currentLocation - 1}
+            classes={{
+              indicator: classes.indicator,
+              root: classes.tabsRoot,
+            }}
           >
-            {this.props.locations.map(location => (
+            {locations.map(l => (
               <Mutation key={shortid.generate()} mutation={TOGGLE_LOCATION}>
                 {selectLocation => (
                   <Tab
-                    value={location.id - 1}
-                    label={location.label}
+                    value={l.id - 1}
+                    label={l.label}
                     onClick={() => selectLocation({
-                      variables: { currentLocation: location.id },
+                      variables: { currentLocation: l.id },
                     })
                     }
                     classes={{
                       root: classes.tabRoot,
                       selected: classes.tabSelected,
                     }}
-                    onMouseOver={() => this.props.client.query({
+                    onMouseOver={() => client.query({
+                      query: DP_TAPS,
+                      variables: { location: location.id },
+                    })
+                    }
+                    onFocus={() => client.query({
                       query: DP_TAPS,
                       variables: { location: location.id },
                     })

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Gear from '../../../common/assets/img/gear.svg';
-
+import theme from '../../../common/styled/theme'
+;
 export default props => (
   <LoadingWrapper {...props}>
     <Loader {...props}>
@@ -36,6 +37,6 @@ const Loader = styled.div`
 `;
 
 const SpinningGear = styled(Gear)`
-  color: ${props => props.theme.colors.lightAccent};
+  color: ${theme.colors.lightAccent};
   animation: ${outerAnim} 3s infinite linear;
 `;

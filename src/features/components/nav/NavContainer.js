@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
 import gql from 'graphql-tag';
 import MobileNavComponent from './mobileNav/MobileNavComponent';
 import WideNavContainer from './wideNav/WideNavContainer';
+import ErrorComponent from '../loading/ErrorComponent';
+import LoadingComponent from '../loading/LoadingComponent';
 
 const NAV_QUERY = gql`
   {
@@ -37,15 +38,12 @@ class NavContainer extends Component {
     this.state = {
       navIsShown: true,
       lastScrollPos: 0,
-      scrollDirection: '',
     };
   }
 
   componentDidMount() {
     this.handleScroll();
   }
-  // If navbar is visible (navIsShown is true), then check to see if current scroll position is greater than the last scroll position.  If true, then set state of scrollDirection to "DOWN".
-  // Else, or if navbar is not visible, check to see if current scroll position is less than the last scroll position.  If true, set state of scrollDirection to "UP".
 
   handleScroll = () => {
     let lastKnownScrollPosition = 0;
@@ -54,17 +52,17 @@ class NavContainer extends Component {
     const toggleBottomBar = (scrollPos) => {
       const { lastScrollPos: prevScrollPos, navIsShown } = this.state;
 
-      this.setState({ lastScrollPos: lastKnownScrollPosition });
+      this.setState({
+        lastScrollPos: lastKnownScrollPosition,
+      });
       if (navIsShown) {
         if (scrollPos > prevScrollPos) {
           this.setState({
-            scrollDirection: 'DOWN',
             navIsShown: false,
           });
         }
       } else if (scrollPos < prevScrollPos) {
         this.setState({
-          scrollDirection: 'UP',
           navIsShown: true,
         });
       }
@@ -92,13 +90,16 @@ class NavContainer extends Component {
       <Query query={NAV_QUERY}>
         {
           ({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error</p>;
+            if (loading) return <LoadingComponent />;
+            if (error) return <ErrorComponent />;
 
             return (
               <div>
                 <WideNavContainer headerLogo={data.pageBy[0].acf.hero_image} />
-                <MobileNavComponent navIsShown={navIsShown} menuIsShown={data.mobileMenuOpen} />
+                <MobileNavComponent
+                  navIsShown={navIsShown}
+                  menuIsShown={data.mobileMenuOpen}
+                />
               </div>
             );
           }
@@ -108,4 +109,4 @@ class NavContainer extends Component {
   }
 }
 
-export default withRouter(NavContainer);
+export default NavContainer;

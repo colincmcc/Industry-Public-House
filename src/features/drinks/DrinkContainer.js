@@ -1,124 +1,23 @@
-import React from 'react'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
-import { Switch, Route } from 'react-router-dom'
-import { withRouter } from "react-router-dom";
-import shortid from 'shortid'
-import MenuWrapper from '../components/MenuWrapper'
-import PageHeaderContainer from '../components/page/PageHeaderContainer'
-import DrinkNavComponent from './DrinkNavComponent'
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import shortid from 'shortid';
+import MenuWrapper from '../components/MenuWrapper';
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import DrinkNavComponent from './DrinkNavComponent';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
-import DrinkMenuComponent from './DrinkMenuComponent'
-import LoadingComponent from '../components/loading/LoadingComponent'
+import DrinkMenuComponent from './DrinkMenuComponent';
+import LoadingComponent from '../components/loading/LoadingComponent';
+import ErrorComponent from '../components/loading/ErrorComponent';
+import {
+  DP_TAPS, WP_CANS, WP_WINE, WP_PREMIUM, WP_COCKTAILS,
+} from './graphql';
 // TODO: get drinkNavItems and locations from Wordpress
 
-const WP_COCKTAILS = gql`
-  {
-    menuItems: allCocktails {
-      id
-      acf {
-        price
-        name
-        description
-      }
-    }
-  }
-`;
-
-const WP_CANS = gql`
-  {
-    menuItems: allCans {
-      id
-      locations {
-        id
-      }
-      acf {
-        name
-        price
-        description
-      }
-    }
-  }
-`;
-
-const WP_WINE = gql`
-  {
-    menuItems: allWine {
-      id
-      acf {
-        name
-        price
-        description
-      }
-    }
-  }
-`;
-
-const WP_PREMIUM = gql`
-  {
-    menuItems: allPremium {
-      id
-      locations {
-        id
-      }
-      acf {
-        tasting_notes
-        proof
-        aged
-        background_picture
-        distillery
-        product_name
-      }
-    }
-  }
-`;
-
-export const DP_TAPS = gql`
-  query Taps($location: Int!) {
-    allTaps(location: $location) {
-      Id
-      MenuItemProductDetail {
-        BeverageType
-        PosReportedPercentFull
-        BeverageNameWithVintage
-        Beverage {
-          Brewery {
-            BreweryName
-            Location
-          }
-          Cidery {
-            CideryName
-            Location
-          }
-          Meadery {
-            MeaderyName
-            Location
-          }
-          CoffeeProducer {
-            CoffeeProducerName
-            Location
-          }
-          Abv
-          Ibu
-          HasAward
-          StyleColor
-          RateBeerUrl
-          BeerAdvocateUrl
-          UntappdUrl
-          HopsUsed
-          BarrelAging
-          BeerStyle {
-            StyleName
-          }
-        }
-      }
-    }
-  }
-`;
 
 const DrinkContainer = (props) => {
-  const selectedDrinkType = props.selectedDrinkType;
-  const currentLocation = props.currentLocation;
+  const { selectedDrinkType, currentLocation } = props;
 
 
   // ! Location id's are set through Digital Pour. Not a good index reference, since they don't start with 0
@@ -128,35 +27,43 @@ const DrinkContainer = (props) => {
   ];
   const drinkNavItems = [
     {
-      label: 'Cocktails', slug: 'Cocktails', component: <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />, showLocation: false,
+      label: 'Cocktails', slug: 'Cocktails', component: <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />,
     },
     {
-      label: 'Taps', slug: 'Taps', component: <DrinkMenuComponent query={DP_TAPS} queryVariables={{ location: currentLocation }} drinkType="taps" />, showLocation: true, props: '',
+      label: 'Taps', slug: 'Taps', component: <DrinkMenuComponent query={DP_TAPS} queryVariables={{ location: currentLocation }} drinkType="taps" />,
     },
     {
-      label: 'Cans', slug: 'Cans', component: <DrinkMenuComponent query={WP_CANS} drinkType="cans" />, showLocation: true,
+      label: 'Cans', slug: 'Cans', component: <DrinkMenuComponent query={WP_CANS} drinkType="cans" />,
     },
     {
-      label: 'Wine', slug: 'Wine', component: <DrinkMenuComponent query={WP_WINE} drinkType="wine" />, showLocation: false,
+      label: 'Wine', slug: 'Wine', component: <DrinkMenuComponent query={WP_WINE} drinkType="wine" />,
     },
     {
-      label: 'Premium', slug: 'Premium', component: <DrinkMenuComponent query={WP_PREMIUM} drinkType="premium" />, showLocation: true,
+      label: 'Premium', slug: 'Premium', component: <DrinkMenuComponent query={WP_PREMIUM} drinkType="premium" />,
     },
   ];
+
+  // TODO: remove query and use ApolloProvider
   return (
     <Query query={WP_COCKTAILS}>
       {
         ({
-          loading, error, data, client,
+          loading, error, client,
         }) => {
           if (loading) return <LoadingComponent large />;
-          if (error) return <LoadingComponent />;
+          if (error) return <ErrorComponent />;
           return (
 
             <div>
               <PageHeaderContainer bgImg={bgImg} heading="Drinks" review />
 
-              <DrinkNavComponent client={client} locations={locations} navItems={drinkNavItems} currentLocation={currentLocation} selectedDrinkType={selectedDrinkType} />
+              <DrinkNavComponent
+                client={client}
+                locations={locations}
+                navItems={drinkNavItems}
+                currentLocation={currentLocation}
+                selectedDrinkType={selectedDrinkType}
+              />
 
               <MenuWrapper>
                 <Switch>
@@ -166,7 +73,12 @@ const DrinkContainer = (props) => {
                     render={() => <DrinkMenuComponent query={WP_COCKTAILS} drinkType="wine" />}
                   />
                   {drinkNavItems.map(navItem => (
-                    <Route key={shortid.generate()} exact path={`/Drink/${navItem.slug}`} render={() => navItem.component} />
+                    <Route
+                      key={shortid.generate()}
+                      exact
+                      path={`/Drink/${navItem.slug}`}
+                      render={() => navItem.component}
+                    />
                   ))}
 
                 </Switch>

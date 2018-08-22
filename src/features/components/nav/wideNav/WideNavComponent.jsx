@@ -6,9 +6,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import IconButton from "@material-ui/core/IconButton";
-import Phone from "../../../../common/assets/icons/phone.svg";
-import theme from "../../../../common/styled/theme";
+import IconButton from '@material-ui/core/IconButton';
+import Phone from '../../../../common/assets/icons/phone.svg';
+import theme from '../../../../common/styled/theme';
 
 const WideNavComponent = (props) => {
   const { classes, headerLogo, location } = props;
@@ -27,31 +27,29 @@ const WideNavComponent = (props) => {
       <NavContents>
         <LogoImg src={headerLogo} />
         <TopNav>
-          <TopNav>
-            <Tabs
-              value={location.pathname}
-              classes={{
-                indicator: classes.indicator,
-                root: classes.navTabsRoot,
-              }}
-            >
-              {mobileNavItems.map(navItem => (
-                <Tab
-                  key={shortid.generate()}
-                  centered="true"
-                  fullWidth="true"
-                  component={Link}
-                  to={navItem.link}
-                  value={navItem.link}
-                  label={navItem.label}
-                  classes={{
-                    root: classes.navTabRoot,
-                    selected: classes.tabSelected,
-                  }}
-                />
-              ))}
-            </Tabs>
-          </TopNav>
+          <Tabs
+            value={location.pathname.substr(0, 4)}
+            classes={{
+              indicator: classes.indicator,
+              root: classes.navTabsRoot,
+            }}
+          >
+            {mobileNavItems.map(navItem => (
+              <Tab
+                key={shortid.generate()}
+                centered="true"
+                fullWidth="true"
+                component={Link}
+                to={navItem.link}
+                value={navItem.link.substr(0, 4)}
+                label={navItem.label}
+                classes={{
+                  root: classes.navTabRoot,
+                  selected: classes.tabSelected,
+                }}
+              />
+            ))}
+          </Tabs>
         </TopNav>
         <TopMobileButtons>
           <IconButton style={{ color: theme.colors.lightAccent }}>

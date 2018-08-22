@@ -1,7 +1,7 @@
-import React from "react";
-import { Query } from "react-apollo";
-import FoodDrinkComponent from "../components/FoodDrinkComponent";
-import TapLIstComponent from "../components/digitalPour/TapLIstComponent";
+import React from 'react';
+import { Query } from 'react-apollo';
+import FoodDrinkComponent from '../components/FoodDrinkComponent';
+import TapLIstComponent from '../components/digitalPour/TapLIstComponent';
 
 const DrinkMenuComponent = (props) => {
   const { drinkType, query, queryVariables } = props;

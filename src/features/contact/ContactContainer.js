@@ -5,6 +5,8 @@ import gql from 'graphql-tag';
 
 import ContactComponent from './ContactComponent';
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
+import LoadingComponent from '../components/loading/LoadingComponent';
+import ErrorComponent from '../components/loading/ErrorComponent';
 import bgImg from '../../common/assets/img/header_bg_clean.jpg';
 
 const WP_CONTACT = gql`
@@ -39,14 +41,10 @@ const ContactContainer = () => (
       ({
         loading, error, data, client,
       }) => {
-        if (loading) return <div> Loading ... </div>;
-        if (error) return <div> Error ... </div>;
+        if (loading) return <LoadingComponent />;
+        if (error) return <ErrorComponent />;
 
-        const contactPageData = {
-          title: data.pageBy[0].title.rendered,
-          content: data.pageBy[0].content.rendered,
-          bgImg: data.pageBy[0].acf.background_image,
-        };
+
         return (
           <div>
             <PageHeaderContainer heading="Connect" subHeading="" bgImg={bgImg} />

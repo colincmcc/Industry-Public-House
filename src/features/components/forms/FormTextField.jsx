@@ -1,13 +1,13 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import FormLabel from './FormLabel';
 import FormRow from './FormRow';
-import AlertSVG from '../../../common/assets/icons/alert-circle-outline.svg'
+import AlertSVG from '../../../common/assets/icons/alert-circle-outline.svg';
 
 const FormTextField = (props) => {
   const {
-    values, name, placeHolder, isRequired, handleBlur, handleChange, label, type, errors, touched
+    values, name, placeHolder, isRequired, handleBlur, handleChange, label, type, errors, touched,
   } = props;
   return (
     <FormRow>
@@ -34,4 +34,4 @@ const Alert = styled(AlertSVG)`
 fill: red;
 position: absolute;
 right: 10px;
-`
+`;

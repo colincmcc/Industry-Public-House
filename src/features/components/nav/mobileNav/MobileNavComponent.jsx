@@ -1,21 +1,22 @@
-import React from "react";
-import styled from "styled-components";
-import { withRouter, Link } from "react-router-dom";
-import shortid from "shortid";
-import Menu from "../../../../common/assets/icons/menu.svg";
-import Food from "../../../../common/assets/icons/food.svg";
-import Email from "../../../../common/assets/icons/email.svg";
-import theme from "../../../../common/styled/theme";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import { withStyles } from "@material-ui/core/styles";
-import LightbulbLogo from "../../svgIcons/lightbulb";
-import BeerGlass from "../../svgIcons/beerglass";
+import React from 'react';
+import styled from 'styled-components';
+import { withRouter, Link } from 'react-router-dom';
+import shortid from 'shortid';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '../../../../common/assets/icons/menu.svg';
+import Food from '../../../../common/assets/icons/food.svg';
+import Email from '../../../../common/assets/icons/email.svg';
+import theme from '../../../../common/styled/theme';
+import LightbulbLogo from '../../svgIcons/lightbulb';
+import BeerGlass from '../../svgIcons/beerglass';
 
 const MobileNavComponent = (props) => {
-  const { classes, navIsShown } = props;
-  const currentPath = props.location.pathname;
+  const { classes, navIsShown, location } = props;
+  const currentPath = location.pathname;
 
+  // TODO: clean up svg declarations
   const bottomNavItems = [
     {
       link: '/',
@@ -49,7 +50,6 @@ const MobileNavComponent = (props) => {
       icon: <Menu width={24} height={24} />,
     },
   ];
-
   return (
     <NavWrapper className={navIsShown ? ' ' : 'hide '}>
       <BottomNavigation

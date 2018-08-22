@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { validateOnBlur, setRowFocus } from '../../common/utils/utils';
+
 import FormTextField from '../components/forms/FormTextField';
 import FormSelectField from '../components/forms/FormSelectField';
 import LoadingComponent from '../components/loading/LoadingComponent';
@@ -58,16 +58,16 @@ const contactReasons = [
 
  */
   const SubmitButton = !isValidating || !isSubmitting ? (
-<Button
-          disabled={!dirty || isSubmitting}
-          type="submit"
-          variant="contained"
-          classes={{ contained: classes.homeButton }}
-        >
+    <Button
+      disabled={!dirty || isSubmitting}
+      type="submit"
+      variant="contained"
+      classes={{ contained: classes.homeButton }}
+    >
         Next
-        </Button>
-)
-        : <LoadingComponent />;
+    </Button>
+  )
+    : <LoadingComponent />;
   return (
     <Form onSubmit={handleSubmit}>
       <FormSelectField

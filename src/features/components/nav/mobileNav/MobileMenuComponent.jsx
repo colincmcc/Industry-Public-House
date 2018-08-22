@@ -5,19 +5,19 @@ import styled from 'styled-components';
 import { withRouter, Link } from 'react-router-dom';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import IconButton from "@material-ui/core/IconButton";
-import Phone from "../../../../common/assets/icons/phone.svg";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import IconButton from '@material-ui/core/IconButton';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Phone from '../../../../common/assets/icons/phone.svg';
 
 // MISC
-import { mobileNavItems } from "../NavContainer";
-import theme from "../../../../common/styled/theme";
-import headerBG from "../../../../common/assets/img/dark-triangles.png";
+import { mobileNavItems } from '../NavContainer';
+import theme from '../../../../common/styled/theme';
+import headerBG from '../../../../common/assets/img/dark-triangles.png';
 
 const TOGGLE_MENU = gql`
   mutation toggleMenu($mobileMenuOpen: Boolean!) {
@@ -35,22 +35,25 @@ class MobileMenuComponent extends Component {
     this.onOpen();
   }
 
-  onOpen = (event) => {
+  onOpen = () => {
+    const { client } = this.props;
     this.setState({
       isOpen: true,
     });
 
-    this.props.client.mutate({
+    client.mutate({
       mutation: TOGGLE_MENU,
       variables: { mobileMenuOpen: true },
     });
   };
 
   onClose = () => {
+    const { client } = this.props;
+
     this.setState({
       isOpen: false,
     });
-    this.props.client.mutate({
+    client.mutate({
       mutation: TOGGLE_MENU,
       variables: { mobileMenuOpen: false },
     });
@@ -65,12 +68,13 @@ class MobileMenuComponent extends Component {
   // * set the Material-UI Slide prop to trigger the animation.
   // * Material-UI uses CSS Transition Group under the hood. onExited is a Transition prop.
   // * This ensures the animation is complete before unmounting
-  // ? Possibley move to CSS Transition Group directly instead for in & out animation
+  // ? Possibley move to CSS Transition Group directly for in & out animation
 
   render() {
     const { classes } = this.props;
     const { isOpen } = this.state;
     const isWide = window.innerWidth > 600;
+
     return (
       <MobileMenuWrapper>
         <SwipeableDrawer
@@ -97,9 +101,7 @@ class MobileMenuComponent extends Component {
                     <Phone style={{ fill: theme.colors.lightAccent }} />
                   </ListItemIcon>
                   <ListItemText>
-                    {' '}
                     {navItem.label}
-                    {' '}
                   </ListItemText>
                 </ListItem>
               ))}
@@ -115,6 +117,7 @@ class MobileMenuComponent extends Component {
 }
 
 export default withStyles(theme.materialUI)(withRouter(MobileMenuComponent));
+
 const MobileMenuWrapper = styled.div``;
 const MobileMenuInner = styled.div`
   display: flex;

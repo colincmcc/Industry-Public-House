@@ -27,7 +27,7 @@ const HOME_PAGE = gql`
     }
   }
 `;
-const HomeContainer = props => (
+const HomeContainer = () => (
 
   <Query query={HOME_PAGE}>
     {

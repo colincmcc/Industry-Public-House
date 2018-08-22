@@ -1,7 +1,7 @@
-import React from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import FoodDrinkComponent from "../components/FoodDrinkComponent";
+import React from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import FoodDrinkComponent from '../components/FoodDrinkComponent';
 
 export const WP_FOODS = gql`
   query Foods($selectedFoodType: String!) {

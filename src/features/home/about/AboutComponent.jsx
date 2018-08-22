@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 // Custom Components
-import Heading from "../../components/Heading";
-import BodyText from "../../components/BodyText";
+import Heading from '../../components/Heading';
+import BodyText from '../../components/BodyText';
 
 // Images
 import mainBg from '../../../common/assets/img/zig-zag.png';
@@ -11,7 +11,7 @@ import nfPatio from '../../../common/assets/img/nf_patio.jpg';
 import Lightbulb from '../../../common/assets/img/gear.svg';
 
 // ! Wordpress reverts to "false" for null
-
+// TODO: sanitize wordpress payload to remove html
 const AboutComponent = (props) => {
   const {
     bgImg, title, content, heroImg,

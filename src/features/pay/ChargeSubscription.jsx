@@ -6,6 +6,7 @@ import Heading from '../components/Heading';
 
 // !!! Update ChargeById type to String
 // !!! Update eventId to props
+// !!! settings are in development
 const CHARGE_UPDATE_SUBSCRIPTION = gql`
   subscription ChargeById($id: Int!) {
     chargeUpdatedById(id: $id) {
@@ -28,16 +29,23 @@ const ChargeSubscription = (props) => {
   return (
     <Subscription
       subscription={CHARGE_UPDATE_SUBSCRIPTION}
-      variables={{ id: 1 }}
+      variables={{ id: eventId }}
     >
       {({ data, loading, error }) => {
         console.log(data);
-        return (
-          <Heading
-            centered="true"
-            text="Enter Payment Info"
-          />
-        );
+
+        // Change message based on Coinbase Webhooks
+        const getTitle = paymentStatus => ({
+          initial: 'Enter Payment Info',
+          'charge:created': 'Ready for Payment',
+          'charge:confirmed': 'Payment Processed',
+          'charge:failed': 'Payment Failed',
+        }[paymentStatus]);
+
+
+        const currentStatus = !loading ? data.chargeUpdatedById.event.type : 'initial';
+        console.log(getTitle(currentStatus));
+        return <Heading centered="true" text={getTitle(currentStatus)} />;
       }}
 
     </Subscription>

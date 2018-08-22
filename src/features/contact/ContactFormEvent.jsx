@@ -2,13 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import Select from 'react-select';
-import { validateOnBlur, setRowFocus } from '../../common/utils/utils';
 import FormTextField from '../components/forms/FormTextField';
 import FormSelectField from '../components/forms/FormSelectField';
-import LoadingComponent from '../components/loading/LoadingComponent'
+import LoadingComponent from '../components/loading/LoadingComponent';
 import theme from '../../common/styled/theme';
-
 
 
 const ContactFormInitial = (props) => {
@@ -25,39 +22,41 @@ const ContactFormInitial = (props) => {
     isSubmitting,
     errors,
     touched,
-    setTouched
+    setTouched,
   } = props;
-const contactReasons = [
-{
-    label: 'I have reservation for over 15 people',
-    value: 'reservation',
-  },
-  {
-    label: "I'm representing a charity",
-    value: 'charity',
-  },
-  {
-    label: "I'd like to hold an event at an Industry",
-    value: 'event',
-  },
-  {
-    label: "I'd like to make food selections for my party",
-    value: 'food',
-  },
-  {
-    label: 'I have another reason...',
-    value: 'other',
-  },
-];
-const SubmitButton = !isValidating || !isSubmitting ?    <Button
-          disabled={!dirty || isSubmitting}
-          type="submit"
-          variant="contained"
-          classes={{ contained: classes.homeButton }}
-        >
+  const contactReasons = [
+    {
+      label: 'I have reservation for over 15 people',
+      value: 'reservation',
+    },
+    {
+      label: "I'm representing a charity",
+      value: 'charity',
+    },
+    {
+      label: "I'd like to hold an event at an Industry",
+      value: 'event',
+    },
+    {
+      label: "I'd like to make food selections for my party",
+      value: 'food',
+    },
+    {
+      label: 'I have another reason...',
+      value: 'other',
+    },
+  ];
+  const SubmitButton = !isValidating || !isSubmitting ? (
+    <Button
+      disabled={!dirty || isSubmitting}
+      type="submit"
+      variant="contained"
+      classes={{ contained: classes.homeButton }}
+    >
         Next
-        </Button> :
-        <LoadingComponent />
+    </Button>
+  )
+    : <LoadingComponent />;
   return (
     <Form onSubmit={handleSubmit}>
       <FormSelectField
@@ -71,7 +70,7 @@ const SubmitButton = !isValidating || !isSubmitting ?    <Button
         errors={errors.reason}
         touched={touched.reason}
         setTouched={setTouched}
-        />
+      />
 
       <FormTextField
         type="text"
@@ -112,7 +111,7 @@ const SubmitButton = !isValidating || !isSubmitting ?    <Button
         touched={touched.email}
       />
       <SubmitRow>
-      {SubmitButton}
+        {SubmitButton}
       </SubmitRow>
     </Form>
   );

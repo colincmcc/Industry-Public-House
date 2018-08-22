@@ -3,13 +3,12 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import shortid from 'shortid';
 
-import MenuWrapper from '../components/MenuWrapper'
-import FoodNavComponent from "./FoodNavComponent";
+import MenuWrapper from '../components/MenuWrapper';
+import FoodNavComponent from './FoodNavComponent';
 
 import bgImg from '../../common/assets/img/burgher.jpg';
 
-import foodBG from '../../common/assets/img/menu_background.jpg'
-import PageHeaderContainer from '../components/page/PageHeaderContainer'
+import PageHeaderContainer from '../components/page/PageHeaderContainer';
 import FoodMenuComponent from './FoodMenuComponent';
 
 
@@ -17,7 +16,7 @@ import FoodMenuComponent from './FoodMenuComponent';
 // Eventually will move to @export to contain queries.
 // See here https://github.com/apollographql/apollo-link-state/issues/168
 
-const FoodContainer = (props) => {
+const FoodContainer = () => {
   const navItems = [
     {
       id: 0, label: 'Brunch', link: '/Food/Brunch', slug: 'brunch',
@@ -59,7 +58,12 @@ const FoodContainer = (props) => {
             render={() => <FoodMenuComponent selectedFoodType="brunch" />}
           />
           {navItems.map(navItem => (
-            <Route key={shortid.generate()} exact path={navItem.link} render={() => <FoodMenuComponent selectedFoodType={navItem.slug} />} />
+            <Route
+              key={shortid.generate()}
+              exact
+              path={navItem.link}
+              render={() => <FoodMenuComponent selectedFoodType={navItem.slug} />}
+            />
           ))}
 
 

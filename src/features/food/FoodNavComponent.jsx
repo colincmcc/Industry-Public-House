@@ -1,8 +1,7 @@
 import React from 'react';
 import shortid from 'shortid';
 import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -14,10 +13,11 @@ import theme from '../../common/styled/theme';
 // * Prefetches food items on mouse hover for faster loading
 
 const FoodNavComponent = (props) => {
-  const { classes } = props;
-  const currentPath = props.location.pathname;
+  const { classes, location, navItems } = props;
+  const currentPath = location.pathname;
   let scrollMenu = true;
-  window.innerWidth < 760 ? (scrollMenu = true) : (scrollMenu = false);
+  if (window.innerWidth > 760) { scrollMenu = false; }
+
   return (
     <MenuNavWrapper>
       <Tabs
@@ -25,9 +25,12 @@ const FoodNavComponent = (props) => {
         scrollable={!!scrollMenu}
         scrollButtons="auto"
         value={currentPath}
-        classes={{ indicator: classes.indicator, root: classes.tabsRoot }}
+        classes={{
+          indicator: classes.indicator,
+          root: classes.tabsRoot,
+        }}
       >
-        {props.navItems.map((navItem, index) => (
+        {navItems.map(navItem => (
           <Tab
             key={shortid.generate()}
             label={navItem.label}

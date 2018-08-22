@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TapItemComponent from './TapItemComponent';
 import theme from '../../../common/styled/theme';
 import LoadingComponent from '../loading/LoadingComponent';
+import ErrorComponent from '../loading/ErrorComponent';
 // TODO : must be a better way to handle the json response based on type of product (mead, beer, cider)
 
 /**
@@ -41,7 +42,7 @@ const TapLIstComponent = (props) => {
   const {
     classes, loading, error, data,
   } = props;
-  if (error || !data.allTaps) return <LoadingComponent />;
+  if (error || !data.allTaps) return <ErrorComponent />;
   if (loading) return <LoadingComponent />;
 
   return (
@@ -108,7 +109,6 @@ const TapLIstComponent = (props) => {
             }
           }
         })}
-        {' '}
       </List>
     </div>
   );

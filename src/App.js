@@ -103,7 +103,7 @@ class App extends Component {
 
                     <Route path="/Home" component={AsyncHome} />
 
-                    <Route path="/Food" component={AsyncFood} render={() => <AsyncFood selectedFoodType={data.selectedFoodType} />} />
+                    <Route path="/Food" render={() => <AsyncFood selectedFoodType={data.selectedFoodType} />} />
 
                     <Route path="/Drink" render={() => <AsyncDrink selectedDrinkType={data.selectedDrinkType} currentLocation={data.currentLocation} />} />
 

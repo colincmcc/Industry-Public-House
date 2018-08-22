@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Formik } from 'formik';
 // eslint-disable-next-line
 import * as Yup from 'yup'
 import gql from 'graphql-tag';
@@ -15,7 +14,7 @@ import ContactFormFood from './ContactFormFood';
 
 
 // Form Utilities
-import { validateOnBlur, setRowFocus } from '../../common/utils/utils';
+import { setRowFocus } from '../../common/utils/utils';
 
 const SEND_FORM = gql`
  mutation mailFormData($to: [String!], $from: String!, $subject: String!, $html: String!) {
@@ -87,15 +86,6 @@ const eventSchema = Yup.object().shape({
     .email('Invalid email address')
     .required('We need an email to contact you.'),
 });
-
-// Migrated to Formik & Yup
-const FormComponent = ({ handleSubmit, currentForm }) => (
-  <FormikWrapperComponent
-    onSubmit={handleSubmit}
-    currentForm={currentForm}
-  />
-);
-// END FORMIK
 
 
 class ContactComponent extends Component {
