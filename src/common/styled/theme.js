@@ -55,17 +55,26 @@ const fontStyles = {
   font-family: 'Gin Rough';
   `,
   subHeading: css`
-  font-size: 22px;
+  font-size: 24px;
   line-height: 33px;
-  font-weight: 00;
+  font-weight: 500;
   letter-spacing: .025em;
   font-family: 'Gin Rough';
 
+  `,
+  large: css`
+    font-size: 24px;
+  line-height: 33px;
+  font-weight: 500;
+  letter-spacing: .025em;
+  font-family: "Source Sans Pro";
   `,
   medium: css`
   font-size: 19px;
   line-height: 28px;
   font-weight: 500;
+  line-height: 25px;
+  font-family: "Source Sans Pro";
   `,
   text: css`
   font-size: 17px;
@@ -144,6 +153,7 @@ const material = {
   tabRoot: {
     color: '#F4EDDC',
     ...fontStyles.text,
+
   },
   navTabRoot: {
     color: '#F4EDDC',
@@ -164,6 +174,7 @@ const material = {
   tabsRoot: {
     flexGrow: 1,
     margin: 'auto',
+    maxWidth: '100%',
   },
   indicator: {
     backgroundColor: colors.lightAccent,

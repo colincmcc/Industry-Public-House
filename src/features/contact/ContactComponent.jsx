@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as Yup from 'yup'
 import gql from 'graphql-tag';
 import FormikWrapperComponent from '../components/forms/FormikWrapperComponent';
-
+import Heading from '../components/Heading';
 // Contact Forms
 import ContactFormInitial from './ContactFormInitial';
 import ContactFormReservation from './ContactFormReservation';
@@ -171,12 +171,23 @@ class ContactComponent extends Component {
 
     return (
       <ContactWrapper>
-        <FormContainer>
-          <FormikWrapperComponent
-            currentForm={currentForm(form)}
-            handleSubmit={this.handleSubmit}
-          />
-        </FormContainer>
+        <Heading text="Contact our team" />
+        <Form>
+          <FormContainer>
+            <FormikWrapperComponent
+              currentForm={currentForm(form)}
+              handleSubmit={this.handleSubmit}
+            />
+          </FormContainer>
+          <Intro>
+            We can help with:
+            <ul>
+              <BulletPoint>Organizing your party or event</BulletPoint>
+              <BulletPoint>Catering your offsite event</BulletPoint>
+              <BulletPoint>Questions about one of our restaurants</BulletPoint>
+            </ul>
+          </Intro>
+        </Form>
       </ContactWrapper>
     );
   }
@@ -196,7 +207,20 @@ const ContactWrapper = styled.div`
   margin: auto;
   min-height: 100vh;
 `;
-const FormContainer = styled.section`
+const Form = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+
+  ${props => props.theme.media.tablet_landscape_up`
+  flex-direction: row;
+  `};
+
+`;
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   border-radius: 4px;
   max-width: 645px;
   width: 100%;
@@ -207,6 +231,30 @@ const FormContainer = styled.section`
     0 5px 15px rgba(0, 0, 0, 0.1);
 
   ${props => props.theme.media.tablet_landscape_up`
-    margin: 0
+    margin: 2rem 0;
   `};
+`;
+
+const Intro = styled.p`
+  display: flex;
+  flex-direction: column;
+  ${props => props.theme.fontStyles.large};
+  color: ${props => props.theme.colors.whiteTheme};
+  text-align: left;
+  padding-left: 24px;
+  margin: 2rem 0;
+  ${props => props.theme.media.tablet_landscape_up`
+    padding-left: 50px;
+    margin: 4rem auto;
+  `};
+
+`;
+const BulletPoint = styled.li`
+  ${props => props.theme.fontStyles.medium};
+  margin-bottom: 20px;
+  ${props => props.theme.media.tablet_landscape_up`
+    max-width:300px;
+
+  `};
+
 `;

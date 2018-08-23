@@ -22,7 +22,7 @@ const HeaderText = styled.div`
   z-index: 1;
 
   ${props => props.theme.media.tablet_portrait_up`
-    margin: ${(props = props.center ? '30px auto' : '0 25%')};
+    margin: ${(props => (props.center ? '30px auto' : '0 25%'))};
   `};
 
   ${props => props.theme.media.tablet_landscape_up`

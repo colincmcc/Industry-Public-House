@@ -3,7 +3,8 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ReviewHeaderComponent from './ReviewHeaderComponent';
 import SimpleHeaderComponent from './SimpleHeaderComponent';
-
+import LoadingComponent from '../loading/LoadingComponent';
+import ErrorComponent from '../loading/ErrorComponent';
 
 const REVIEWS = gql`
   {
@@ -21,16 +22,17 @@ const REVIEWS = gql`
   }
 `;
 const PageHeaderContainer = (props) => {
-  if (props.review) {
+  const { review } = props;
+  if (review) {
     return (
       <Query query={REVIEWS}>
         {({ data, loading, error }) => {
-          if (loading) return <p>Loading...</p>;
-          if (error) return <p>Error</p>;
+          if (loading) return <LoadingComponent />;
+          if (error) return <ErrorComponent />;
 
           // *Filter reviews based on the relevance to the page and then get one random review from that array
           let relevantReviews;
-          const getReviews = type => (element, index, array) => element.acf.review_topic.includes(type);
+          const getReviews = type => element => element.acf.review_topic.includes(type);
 
           if (props.heading === 'Drinks') {
             relevantReviews = data.allReviews.filter(getReviews('Drink'));

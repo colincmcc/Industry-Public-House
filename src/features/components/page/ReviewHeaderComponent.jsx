@@ -5,36 +5,38 @@ import { CSSTransition } from 'react-transition-group';
 import theme from '../../../common/styled/theme';
 import TextButton from '../TextButton';
 
-const ReviewHeaderComponent = props => (
-  <PageHeaderWrapper>
-    <CSSTransition
-      in
-      classNames="header-fade"
-      appear
-      timeout={300}
-    >
-      <BGOverlay className="header-fade-appear" bgImg={props.bgImg} />
-    </CSSTransition>
-    <PageHeadContent>
-      <PageHeading>
-        {props.heading}
-        {' '}
-      </PageHeading>
+const ReviewHeaderComponent = (props) => {
+  const { bgImg, heading, review } = props;
+  return (
+    <PageHeaderWrapper>
+      <CSSTransition
+        in
+        classNames="header-fade"
+        appear
+        timeout={300}
+      >
+        <BGOverlay className="header-fade-appear" bgImg={bgImg} />
+      </CSSTransition>
+      <PageHeadContent>
+        <PageHeading>
+          {heading}
+        </PageHeading>
 
-      <PageSubHeading>
-        <Review>{`"${props.review.acf.review_snippet}"`}</Review>
+        <PageSubHeading>
+          <Review>{`"${review.acf.review_snippet}"`}</Review>
 
-        <Author>{`- ${props.review.acf.review_author}`}</Author>
+          <Author>{`- ${review.acf.review_author}`}</Author>
 
-        <TextButton
-          clickFunction={() => window.open(props.review.acf.source_link, '_blank')
+          <TextButton
+            clickFunction={() => window.open(review.acf.source_link, '_blank')
             }
-          text="Read Review"
-        />
-      </PageSubHeading>
-    </PageHeadContent>
-  </PageHeaderWrapper>
-);
+            text="Read Review"
+          />
+        </PageSubHeading>
+      </PageHeadContent>
+    </PageHeaderWrapper>
+  );
+};
 
 export default withStyles(theme.materialUI)(ReviewHeaderComponent);
 

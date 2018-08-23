@@ -40,7 +40,7 @@ const FoodDrinkNav = (props) => {
       <Tabs
         centered={!scrollMenu}
         scrollable={!!scrollMenu}
-        scrollButtons="auto"
+        scrollButtons={!!scrollMenu}
         value={currentPath}
         classes={{
           indicator: classes.indicator,
@@ -61,10 +61,7 @@ const FoodDrinkNav = (props) => {
           />
         ))}
       </Tabs>
-      {/** Restaurant Location Nav - Shown based on above logic for showNav boolean
-         * * value is -1 because Digital Pour starts indexing at 1 instead of 0
-         * * and MaterialUI wasn't handling it well
-         * */}
+
       <LocationsNav className={showNav ? 'showNav' : null}>
         <Tabs
           fullWidth
@@ -115,7 +112,6 @@ const LocationsNav = styled.div`
 
   opacity: 0;
   transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  padding-bottom: 20px;
   &.showNav {
     display: flex;
     opacity: 1;

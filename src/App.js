@@ -10,6 +10,7 @@ import asyncComponent from './features/components/AsyncComponent';
 import LoadingComponent from './features/components/loading/LoadingComponent';
 import NavContainer from './features/components/nav/NavContainer';
 import FooterContainer from './features/components/footer/FooterContainer';
+import ErrorComponent from './features/components/loading/ErrorComponent';
 
 const AsyncHome = asyncComponent(() => import('./features/home/HomeContainer'));
 const AsyncFood = asyncComponent(() => import('./features/food/FoodContainer'));
@@ -17,6 +18,7 @@ const AsyncDrink = asyncComponent(() => import('./features/drinks/DrinkContainer
 const AsyncContact = asyncComponent(() => import('./features/contact/ContactContainer'));
 const AsyncPay = asyncComponent(() => import('./features/pay/PayContainer'));
 const AsyncMobileMenu = asyncComponent(() => import('./features/components/nav/mobileNav/MobileMenuContainer'));
+const AsyncShop = asyncComponent(() => import('./features/shop/ShopContainer'));
 
 
 const SCHEMA_VERSION = '2';
@@ -76,7 +78,7 @@ class App extends Component {
       nextProps.history.action !== 'POP'
       && (!location.state || !location.state.modal)
     ) {
-      this.previousLocation = this.props.location;
+      this.previousLocation = location;
     }
   }
 
@@ -91,7 +93,7 @@ class App extends Component {
       && location.state.modal
       && this.previousLocation !== location
     );
-
+    console.log(isModal);
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
@@ -102,7 +104,7 @@ class App extends Component {
                 {
             ({ loading, error, data }) => {
               if (loading) return <LoadingComponent />;
-              if (error) return <p>Error</p>;
+              if (error) return <ErrorComponent />;
               return (
                 <div>
                   <Switch location={isModal ? this.previousLocation : location}>
@@ -118,12 +120,13 @@ class App extends Component {
 
                     <Route path="/Apply" component={AsyncHome} />
 
-                    <Route path="/Shop" component={AsyncHome} />
+                    <Route path="/Shop" component={AsyncShop} />
                     <Route path="/Pay" component={AsyncPay} />
+
                     <Route path="/Gallery" component={AsyncHome} />
                   </Switch>
 
-                  {isModal ? <Route component={AsyncMobileMenu} path="/#Menu" /> : null}
+                  {isModal ? <Route component={AsyncMobileMenu} path="/:section*/#Menu" /> : null}
                 </div>
               );
             }
