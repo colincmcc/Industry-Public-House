@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import FoodDrinkComponent from './FoodDrinkListComponent';
-import TapLIstComponent from '../digitalPour/TapLIstComponent';
+import TapListComponent from '../digitalPour/TapListComponent';
 
 const FoodDrinkMenuContainer = (props) => {
   const { type, query, variables } = props;
@@ -10,7 +10,7 @@ const FoodDrinkMenuContainer = (props) => {
       {({ loading, error, data }) => {
         if (type === 'taps') {
           return (
-            <TapLIstComponent data={data} loading={loading} error={error} />
+            <TapListComponent data={data} loading={loading} error={error} />
           );
         }
         return (

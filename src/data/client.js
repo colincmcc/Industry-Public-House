@@ -67,13 +67,13 @@ const typeDefs = `
   `;
 // * GRAPHQL LINK SETUP
 const wsLink = new WebSocketLink({
-  uri: dev.websocketEndpoint,
+  uri: prod.websocketEndpoint,
   options: {
     reconnect: true,
   },
 });
 const httpLink = new HttpLink({
-  uri: dev.graphQLEndpoint,
+  uri: prod.graphQLEndpoint,
 });
 
 // Send queries to http server and subscriptions to websocket

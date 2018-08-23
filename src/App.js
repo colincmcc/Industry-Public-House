@@ -56,7 +56,7 @@ class App extends Component {
     if (currentVersion === SCHEMA_VERSION) {
       // If the current version matches the latest version,
       // we're good to go and can restore the cache.
-      await persistor.purge();
+      await persistor.restore();
     } else {
       // Otherwise, we'll want to purge the outdated persisted cache
       // and mark ourselves as having updated to the latest version.
@@ -93,7 +93,6 @@ class App extends Component {
       && location.state.modal
       && this.previousLocation !== location
     );
-    console.log(isModal);
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>

@@ -7,7 +7,8 @@ import theme from '../../../common/styled/theme';
 import LoadingComponent from '../loading/LoadingComponent';
 import ErrorComponent from '../loading/ErrorComponent';
 
-// TODO : must be a better way to handle the json response based on type of product (mead, beer, cider)
+// TODO : must be a better way to handle the json
+// response based on type of product (mead, beer, cider)
 
 /**
  * * Example GraphQL JSON response
