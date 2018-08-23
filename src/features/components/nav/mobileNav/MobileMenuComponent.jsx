@@ -12,10 +12,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Phone from '../../../../common/assets/icons/phone.svg';
 
 // MISC
-import { mobileNavItems } from '../NavContainer';
 import theme from '../../../../common/styled/theme';
 import headerBG from '../../../../common/assets/img/dark-triangles.png';
 
@@ -71,7 +69,7 @@ class MobileMenuComponent extends Component {
   // ? Possibley move to CSS Transition Group directly for in & out animation
 
   render() {
-    const { classes } = this.props;
+    const { classes, navItems } = this.props;
     const { isOpen } = this.state;
     const isWide = window.innerWidth > 600;
 
@@ -95,10 +93,10 @@ class MobileMenuComponent extends Component {
             <MobileMenuHeader calcWidth={window.innerWidth * 0.5625} />
 
             <List classes={{ root: classes.swipeableMenuList }}>
-              {mobileNavItems.map(navItem => (
+              {navItems.map(navItem => (
                 <ListItem button component={Link} to={navItem.link}>
                   <ListItemIcon>
-                    <Phone style={{ fill: theme.colors.lightAccent }} />
+                    {navItem.icon}
                   </ListItemIcon>
                   <ListItemText>
                     {navItem.label}

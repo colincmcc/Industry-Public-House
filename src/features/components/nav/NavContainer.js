@@ -22,15 +22,6 @@ const NAV_QUERY = gql`
 // Todo: load menu items from Wordpress gql
 // TODO: move scroll logic higher up
 
-export const mobileNavItems = [
-  { label: 'Home', link: '/' },
-  { label: 'Food', link: '/Food' },
-  { label: 'Drinks', link: '/Drink' },
-  { label: 'Connect', link: '/Contact' },
-  { label: 'Apply', link: '/Apply' },
-  { label: 'Events', link: '/Calendar' },
-  { label: 'Shop', link: '/Shop' },
-];
 
 class NavContainer extends Component {
   constructor(props) {
