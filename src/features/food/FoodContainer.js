@@ -5,11 +5,11 @@ import shortid from 'shortid';
 import gql from 'graphql-tag';
 
 import MenuWrapper from '../components/MenuWrapper';
-import FoodDrinkNav from '../components/nav/foodDrinkNav/FoodDrinkNav'
+import FoodDrinkNav from '../components/foodDrink/FoodDrinkNav';
 import bgImg from '../../common/assets/img/burgher.jpg';
 
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
-import FoodMenuComponent from './FoodMenuComponent';
+import FoodDrinkMenuContainer from '../components/foodDrink/FoodDrinkMenuContainer';
 
 // Eventually will move to @export to provide queries with cached variables
 // See here https://github.com/apollographql/apollo-link-state/issues/168
@@ -75,7 +75,7 @@ const FoodContainer = (props) => {
             exact
             path="/Food"
             render={() => (
-              <FoodMenuComponent
+              <FoodDrinkMenuContainer
                 query={WP_FOODS}
                 variables={{ selectedFoodType: 'brunch' }}
               />
@@ -87,7 +87,7 @@ const FoodContainer = (props) => {
               exact
               path={navItem.link}
               render={() => (
-                <FoodMenuComponent
+                <FoodDrinkMenuContainer
                   query={WP_FOODS}
                   variables={{ selectedFoodType: navItem.slug }}
                 />

@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import theme from '../../../../common/styled/theme';
+import theme from '../../../common/styled/theme';
 
 
 const TOGGLE_LOCATION = gql`

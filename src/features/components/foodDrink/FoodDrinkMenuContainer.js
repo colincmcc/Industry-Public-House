@@ -1,14 +1,14 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import FoodDrinkComponent from '../components/FoodDrinkComponent';
-import TapLIstComponent from '../components/digitalPour/TapLIstComponent';
+import FoodDrinkComponent from './FoodDrinkListComponent';
+import TapLIstComponent from '../digitalPour/TapLIstComponent';
 
-const DrinkMenuComponent = (props) => {
-  const { drinkType, query, variables } = props;
+const FoodDrinkMenuContainer = (props) => {
+  const { type, query, variables } = props;
   return (
     <Query query={query} variables={variables}>
       {({ loading, error, data }) => {
-        if (drinkType === 'taps') {
+        if (type === 'taps') {
           return (
             <TapLIstComponent data={data} loading={loading} error={error} />
           );
@@ -21,4 +21,4 @@ const DrinkMenuComponent = (props) => {
   );
 };
 
-export default DrinkMenuComponent;
+export default FoodDrinkMenuContainer;

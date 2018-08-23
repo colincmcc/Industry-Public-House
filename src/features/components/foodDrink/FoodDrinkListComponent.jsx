@@ -7,11 +7,11 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import List from '@material-ui/core/List';
 import { withStyles } from '@material-ui/core';
-import theme from '../../common/styled/theme';
-import LoadingComponent from './loading/LoadingComponent';
-import ErrorComponent from './loading/ErrorComponent';
+import theme from '../../../common/styled/theme';
+import LoadingComponent from '../loading/LoadingComponent';
+import ErrorComponent from '../loading/ErrorComponent';
 
-const FoodDrinkComponent = (props) => {
+const FoodDrinkListComponent = (props) => {
   const {
     classes, loading, error, data,
   } = props;
@@ -23,7 +23,8 @@ const FoodDrinkComponent = (props) => {
     <FoodMenuWrapper>
       <List className={classes.listRoot}>
         {menuItems.map((menuItem) => {
-          // * The description field is a Advanced Custom Fields (ACF) wysiwyg editor and needs dangerously set html
+          // * The description field is a Advanced Custom Fields (ACF)
+          //*  wysiwyg editor and needs dangerously set html
           const primary = <FoodHeader>{menuItem.acf.name}</FoodHeader>;
           const secondary = (
             <FoodDescription
@@ -53,7 +54,7 @@ const FoodDrinkComponent = (props) => {
   );
 };
 
-export default withStyles(theme.materialUI)(FoodDrinkComponent);
+export default withStyles(theme.materialUI)(FoodDrinkListComponent);
 
 const FoodMenuWrapper = styled.div`
   display: flex;

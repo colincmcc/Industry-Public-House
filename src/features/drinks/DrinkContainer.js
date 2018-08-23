@@ -3,11 +3,9 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import shortid from 'shortid';
 import MenuWrapper from '../components/MenuWrapper';
 import PageHeaderContainer from '../components/page/PageHeaderContainer';
-import DrinkMenuComponent from './DrinkMenuComponent';
-import FoodDrinkNav from '../components/nav/foodDrinkNav/FoodDrinkNav'
+import FoodDrinkMenuContainer from '../components/foodDrink/FoodDrinkMenuContainer';
+import FoodDrinkNav from '../components/foodDrink/FoodDrinkNav';
 import bgImg from '../../common/assets/img/drinks_banner.jpg';
-
-
 import {
   DP_TAPS, WP_CANS, WP_WINE, WP_PREMIUM, WP_COCKTAILS,
 } from './graphql';
@@ -26,31 +24,31 @@ const DrinkContainer = (props) => {
       label: 'Cocktails',
       slug: 'Cocktails',
       link: '/Drink/Cocktails',
-      component: <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />,
+      component: <FoodDrinkMenuContainer query={WP_COCKTAILS} type="cocktails" />,
     },
     {
       label: 'Taps',
       slug: 'Taps',
       link: '/Drink/Taps',
-      component: <DrinkMenuComponent query={DP_TAPS} variables={{ location: locationData.currentLocation }} drinkType="taps" />,
+      component: <FoodDrinkMenuContainer query={DP_TAPS} variables={{ location: locationData.currentLocation }} type="taps" />,
     },
     {
       label: 'Cans',
       slug: 'Cans',
       link: '/Drink/Cans',
-      component: <DrinkMenuComponent query={WP_CANS} drinkType="cans" />,
+      component: <FoodDrinkMenuContainer query={WP_CANS} type="cans" />,
     },
     {
       label: 'Wine',
       slug: 'Wine',
       link: '/Drink/Wine',
-      component: <DrinkMenuComponent query={WP_WINE} drinkType="wine" />,
+      component: <FoodDrinkMenuContainer query={WP_WINE} type="wine" />,
     },
     {
       label: 'Premium',
       slug: 'Premium',
       link: '/Drink/Premium',
-      component: <DrinkMenuComponent query={WP_PREMIUM} drinkType="premium" />,
+      component: <FoodDrinkMenuContainer query={WP_PREMIUM} type="premium" />,
     },
   ];
   const wpLocations = allLocations.map(loc => ({
@@ -73,7 +71,7 @@ const DrinkContainer = (props) => {
           <Route
             exact
             path="/Drink"
-            render={() => <DrinkMenuComponent query={WP_COCKTAILS} drinkType="cocktails" />}
+            render={() => <FoodDrinkMenuContainer query={WP_COCKTAILS} drinkType="cocktails" />}
           />
           {drinkNavItems.map(navItem => (
             <Route
