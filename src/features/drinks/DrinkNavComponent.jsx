@@ -93,7 +93,7 @@ class DrinkNavComponent extends Component {
         {/** Drink Type Nav * */}
         <DrinkTypesNav>
           <Tabs
-            centered
+            centered={!scrollMenu}
             scrollable={!!scrollMenu}
             scrollButtons="auto"
             onChange={this.handleTypeChange}
@@ -148,12 +148,12 @@ class DrinkNavComponent extends Component {
                     }}
                     onMouseOver={() => client.query({
                       query: DP_TAPS,
-                      variables: { location: location.id },
+                      variables: { location: l.id },
                     })
                     }
                     onFocus={() => client.query({
                       query: DP_TAPS,
-                      variables: { location: location.id },
+                      variables: { location: l.id },
                     })
                     }
                   />
@@ -179,6 +179,7 @@ const DrinkNavWrapper = styled.div`
 const DrinkTypesNav = styled.div`
   display: flex;
   ${props => props.theme.fontStyles.subheading};
+  padding: 2rem;
 `;
 const LocationsNav = styled.div`
   display: flex;

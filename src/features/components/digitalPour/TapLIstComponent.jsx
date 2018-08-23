@@ -42,8 +42,8 @@ const TapLIstComponent = (props) => {
   const {
     classes, loading, error, data,
   } = props;
-  if (error || !data.allTaps) return <ErrorComponent />;
-  if (loading) return <LoadingComponent />;
+  if (error) return <ErrorComponent />;
+  if (loading || !data.allTaps) return <LoadingComponent />;
 
   return (
     <div className={classes.root}>
