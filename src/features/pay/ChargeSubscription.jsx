@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import Heading from '../components/Heading';
 
 
-// !!! Update ChargeById type to String
+// !!! Update ChargeById prop to String
 // !!! Update eventId to props
 // !!! settings are in development
 const CHARGE_UPDATE_SUBSCRIPTION = gql`
