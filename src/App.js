@@ -24,9 +24,16 @@ const SCHEMA_VERSION_KEY = 'apollo-schema-version';
 
 const CACHED_STATE = gql`
   {
-    selectedFoodType @client
-    selectedDrinkType @client
     currentLocation @client
+    allLocations {
+    title {
+      rendered
+    }
+    acf {
+      loc_num
+      loc_symbol
+    }
+  }
   }
 `;
 
@@ -47,7 +54,7 @@ class App extends Component {
     if (currentVersion === SCHEMA_VERSION) {
       // If the current version matches the latest version,
       // we're good to go and can restore the cache.
-      await persistor.restore();
+      await persistor.purge();
     } else {
       // Otherwise, we'll want to purge the outdated persisted cache
       // and mark ourselves as having updated to the latest version.
@@ -103,11 +110,11 @@ class App extends Component {
 
                     <Route path="/Home" component={AsyncHome} />
 
-                    <Route path="/Food" render={() => <AsyncFood selectedFoodType={data.selectedFoodType} />} />
+                    <Route path="/Food" render={() => <AsyncFood locationData={data} />} />
 
-                    <Route path="/Drink" render={() => <AsyncDrink selectedDrinkType={data.selectedDrinkType} currentLocation={data.currentLocation} />} />
+                    <Route path="/Drink" render={() => <AsyncDrink locationData={data} />} />
 
-                    <Route path="/Contact" render={() => <AsyncContact currentLocation={data.currentLocation} />} />
+                    <Route path="/Contact" render={() => <AsyncContact locationData={data} />} />
 
                     <Route path="/Apply" component={AsyncHome} />
 

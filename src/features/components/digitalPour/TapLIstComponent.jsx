@@ -43,14 +43,18 @@ const TapLIstComponent = (props) => {
   const {
     classes, loading, error, data,
   } = props;
+
   if (error) return <ErrorComponent />;
   if (loading || !data.allTaps) return <LoadingComponent />;
+
+  // TODO: switch bevType mapping to object literal
 
   return (
     <div className={classes.root}>
       <List className={classes.listRoot}>
         {data.allTaps.map((tap) => {
           const bevType = tap.MenuItemProductDetail.BeverageType;
+
           switch (bevType) {
             case 'Beer': {
               const bevListing = {

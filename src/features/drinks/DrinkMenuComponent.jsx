@@ -4,9 +4,9 @@ import FoodDrinkComponent from '../components/FoodDrinkComponent';
 import TapLIstComponent from '../components/digitalPour/TapLIstComponent';
 
 const DrinkMenuComponent = (props) => {
-  const { drinkType, query, queryVariables } = props;
+  const { drinkType, query, variables } = props;
   return (
-    <Query query={query} variables={queryVariables}>
+    <Query query={query} variables={variables}>
       {({ loading, error, data }) => {
         if (drinkType === 'taps') {
           return (
