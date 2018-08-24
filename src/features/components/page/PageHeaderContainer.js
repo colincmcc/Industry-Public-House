@@ -27,7 +27,7 @@ const PageHeaderContainer = (props) => {
     return (
       <Query query={REVIEWS}>
         {({ data, loading, error }) => {
-          if (loading) return <LoadingComponent />;
+          if (loading) return <LoadingComponent large />;
           if (error) return <ErrorComponent />;
 
           // *Filter reviews based on the relevance to the page and then get one random review from that array
