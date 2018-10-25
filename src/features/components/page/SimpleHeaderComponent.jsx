@@ -13,14 +13,13 @@ const SimpleHeaderComponent = (props) => {
         <BGOverlay className="fade-appear" bgImg={bgImg} />
       </CSSTransition>
       <PageHeadContent>
-        {heroImg !== 'false' ? (
+        {heroImg ? (
           <HeadingHero id="headingHero" src={heroImg} />
         ) : null}
 
         <HeadingText>
           <PageHeading>
             {heading}
-            {' '}
           </PageHeading>
 
           <PageSubHeading>{subHeading}</PageSubHeading>
