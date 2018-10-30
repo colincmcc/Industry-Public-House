@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 
 import FormTextField from '../components/forms/FormTextField';
 import FormSelectField from '../components/forms/FormSelectField';
-import LoadingComponent from '../components/loading/LoadingComponent';
-import theme from '../../common/styled/theme';
+import SubmitButton from '../components/buttons/SubmitButton';
 
 
 const ContactFormInitial = (props) => {
   const {
-    classes,
     handleChange,
     handleBlur,
     handleSubmit,
@@ -56,18 +52,7 @@ const contactReasons = [
   },
 ];
 
- */
-  const SubmitButton = !isValidating || !isSubmitting ? (
-    <Button
-      disabled={!dirty || isSubmitting}
-      type="submit"
-      variant="contained"
-      classes={{ contained: classes.homeButton }}
-    >
-        Next
-    </Button>
-  )
-    : <LoadingComponent />;
+     */
   return (
     <Form onSubmit={handleSubmit}>
       <FormSelectField
@@ -122,14 +107,19 @@ const contactReasons = [
         touched={touched.email}
       />
       <SubmitRow>
-        {SubmitButton}
+        <SubmitButton
+          buttonText="Next"
+          isValidating={isValidating}
+          isSubmitting={isSubmitting}
+          dirty={dirty}
+        />
       </SubmitRow>
     </Form>
   );
 };
 
 
-export default withStyles(theme.materialUI)(ContactFormInitial);
+export default ContactFormInitial;
 
 const Form = styled.form`
   padding: 10px 10px 13px 15px;
