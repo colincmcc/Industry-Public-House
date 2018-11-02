@@ -30,7 +30,6 @@ const ApplyFormSectionZero = (props) => {
       <FormSection>
         <Heading
           text="How can we reach you?"
-          centered
           style={{
             color: '#110C02',
             fontSize: '1.25em',

@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 // Form Components
 import FormTextField from '../components/forms/FormTextField';
+import FormMultiLine from '../components/forms/FormMultiLine';
 import FormSelectField from '../components/forms/FormSelectField';
 import FormCheckbox from '../components/forms/FormCheckbox';
 
@@ -31,8 +32,13 @@ const ApplyFormSectionOne = (props) => {
     setTouched,
   } = props;
   const positionOptions = [
-    { value: 'BOH', label: 'BOH' },
-    { value: 'FOH', label: 'FOH' },
+    { value: 'Server', label: 'Server' },
+    { value: 'Bartender', label: 'Bartender' },
+    { value: 'Host', label: 'Host' },
+    { value: 'Linecook', label: 'Linecook' },
+    { value: 'Dishwasher', label: 'Dishwasher' },
+    { value: 'FOH Manager', label: 'FOH Manager' },
+    { value: 'Chef', label: 'BOH Manager / Chef' },
   ];
   return (
     <div>
@@ -48,7 +54,7 @@ const ApplyFormSectionOne = (props) => {
         <FormItem>
           <FormCheckbox
             name="positions"
-            label="Which positions?"
+            label="Positions?"
             value={values.positions}
             options={positionOptions}
             onChange={setFieldValue}
@@ -64,13 +70,27 @@ const ApplyFormSectionOne = (props) => {
             isRequired
             label="Which locations are you interested in?"
             options={locationOptions}
-            value={values.jobLocations}
+            values={values.jobLocations}
             onChange={setFieldValue}
             onBlur={setFieldTouched}
             errors={errors.jobLocations}
             touched={touched.jobLocations}
             setTouched={setTouched}
             isMulti="true"
+          />
+        </FormItem>
+        <FormItem>
+          <FormMultiLine
+            type="text"
+            name="about"
+            placeHolder="Tell us a bit about yourself..."
+            isRequired
+            label="About You"
+            values={values}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            errors={errors.about}
+            touched={touched.about}
           />
         </FormItem>
       </FormSection>

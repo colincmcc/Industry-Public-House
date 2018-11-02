@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import shortid from 'shortid';
-import { FieldArray } from 'formik'
+import { FieldArray } from 'formik';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
@@ -12,29 +12,15 @@ import FormRow from './FormRow';
 import AlertSVG from '../../../common/assets/icons/alert-circle-outline.svg';
 
 class FormCheckbox extends Component {
+   handleChange = async (ev, arrayHelpers) => {
+     const { values } = this.props;
+     const { target } = ev;
 
-
-   handleChange = arrayHelpers => (ev) => {
-    const { onChange, value, name} = this.props
-    const target = ev.target;
-
-    if (target.checked) {
-      arrayHelpers.push(target.value);
-    } else {
-      const idx = value[name].indexOf(target.value);
-      arrayHelpers.remove(idx);
-    }
-
-    this.props.onChange(this.props.id, valueArray);
-     this.setState({
-       [selectedValue]: ev.target.checked,
-     });
-
-     console.log(value);
-     console.log(ev.target);
-     console.log(ev.target.checked);
-     console.log(selectedValue);
-     console.log(this.state);
+     if (target.checked) arrayHelpers.push(target.value);
+     else {
+       const idx = values.indexOf(target.value);
+       arrayHelpers.remove(idx);
+     }
    }
 
   handleBlur = () => {
@@ -45,28 +31,36 @@ class FormCheckbox extends Component {
 
   render() {
     const {
-      value, name, label, options, errors, touched,
+      values, name, label, options, errors, touched,
     } = this.props;
-    console.log(value);
+
     return (
       <FormRow>
-        <FormControl component="fieldset">
-          <FieldArray
-            name={name}
-            render={arrayHelpers => (
+        <FieldArray
+          name={name}
+          render={arrayHelpers => (
+            <div>
               <FormLabel isFor={name}>{label}</FormLabel>
-                {options.map(option => (
-                      <Checkbox
-                      key={shortid.generate()}
-                      checked={value[name].includes(option.value)}
-                      onChange={this.handleChange(arrayHelpers)}
+              {options.map(option => (
+                <FormControlLabel
+                  control={(
+                    <Checkbox
+                      checked={values ? values.includes(option.value) : false}
+                      onChange={ev => this.handleChange(ev, arrayHelpers)}
                       value={option.value}
                       name={name}
-                      />
-                ))}
-            )}
-          />
-        </FormControl>
+                      onBlur={this.handleBlur}
+                    />
+              )}
+                  label={option.label}
+                  key={shortid.generate()}
+                />
+
+              ))}
+            </div>
+          )}
+        />
+        {touched && errors ? <Alert /> : null}
       </FormRow>
     );
   }

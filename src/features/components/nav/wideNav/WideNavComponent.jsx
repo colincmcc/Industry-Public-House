@@ -18,7 +18,7 @@ const WideNavComponent = (props) => {
     { label: 'Drinks', link: '/Drink' },
     { label: 'Connect', link: '/Contact' },
     { label: 'Apply', link: '/Apply' },
-    { label: 'Events', link: '/Calendar' },
+    { label: 'Events', link: '/Events' },
     { label: 'Shop', link: '/Shop' },
   ];
 

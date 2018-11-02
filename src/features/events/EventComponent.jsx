@@ -14,15 +14,15 @@ const LoadableGalleryCard = LoadableVisibility({
   loading: LoadingComponent,
 });
 const EventComponent = (props) => {
-  const { eventList, pageTitle } = props;
+  const { eventList, pageTitle, condensed } = props;
 
   const reducedList = eventList.slice(0, 2);
-
+  const displayedEvents = condensed ? reducedList : eventList;
   return (
     <EventWrapper id="events">
       <Heading center text={pageTitle} />
       <EventListWrapper>
-        {reducedList.map(event => (
+        {displayedEvents.map(event => (
           <LoadableGalleryCard key={shortid.generate()} event={event} />
         ))}
       </EventListWrapper>

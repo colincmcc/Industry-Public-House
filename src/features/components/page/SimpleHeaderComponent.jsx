@@ -7,13 +7,14 @@ const SimpleHeaderComponent = (props) => {
   const {
     heading, subHeading, bgImg, heroImg, actionButton,
   } = props;
+  console.log(heroImg);
   return (
     <PageHeaderWrapper key={shortid.generate()}>
       <CSSTransition in classNames="fade" appear timeout={300}>
         <BGOverlay className="fade-appear" bgImg={bgImg} />
       </CSSTransition>
       <PageHeadContent>
-        {heroImg ? (
+        {heroImg && heroImg !== 'false' ? (
           <HeadingHero id="headingHero" src={heroImg} />
         ) : null}
 

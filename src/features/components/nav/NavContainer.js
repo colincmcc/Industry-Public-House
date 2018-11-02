@@ -58,6 +58,8 @@ class NavContainer extends Component {
         });
       }
     };
+
+    // register scroll events
     window.addEventListener('scroll', (e) => {
       lastKnownScrollPosition = window.scrollY;
       if (!ticking) {

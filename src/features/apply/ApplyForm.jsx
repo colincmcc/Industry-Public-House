@@ -123,27 +123,3 @@ const Form = styled.form`
           padding:10px 18px 20px 24px;
   `};
 `;
-
-const FormSection = styled.div`
-padding-top: 2rem;
-
-`;
-
-
-const FormRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  ${props => props.theme.media.tablet_portrait_up`
-  flex-direction: row;
-    `};
-`;
-const FormItem = styled.div`
-  padding: 1rem;
-`;
-
-const SubmitRow = styled.div`
-  padding: 12px 10px 13px 0
-    ${props => props.theme.media.tablet_portrait_up`
-    padding: 12px 0 0;
-    `};
-`;
