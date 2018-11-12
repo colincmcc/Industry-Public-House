@@ -17,8 +17,10 @@ const AsyncFood = asyncComponent(() => import('./features/food/FoodContainer'));
 const AsyncDrink = asyncComponent(() => import('./features/drinks/DrinkContainer'));
 const AsyncContact = asyncComponent(() => import('./features/contact/ContactContainer'));
 const AsyncPay = asyncComponent(() => import('./features/pay/PayContainer'));
+const AsyncApply = asyncComponent(() => import('./features/apply/ApplyContainer'));
 const AsyncMobileMenu = asyncComponent(() => import('./features/components/nav/mobileNav/MobileMenuContainer'));
 const AsyncShop = asyncComponent(() => import('./features/shop/ShopContainer'));
+const AsyncEvent = asyncComponent(() => import('./features/events/EventContainer'));
 
 
 const SCHEMA_VERSION = '2';
@@ -56,7 +58,7 @@ class App extends Component {
     if (currentVersion === SCHEMA_VERSION) {
       // If the current version matches the latest version,
       // we're good to go and can restore the cache.
-      await persistor.restore();
+      await persistor.purge();
     } else {
       // Otherwise, we'll want to purge the outdated persisted cache
       // and mark ourselves as having updated to the latest version.
@@ -117,12 +119,11 @@ class App extends Component {
 
                     <Route path="/Contact" render={() => <AsyncContact locationData={data} />} />
 
-                    <Route path="/Apply" component={AsyncHome} />
+                    <Route path="/Apply" component={AsyncApply} />
+                    <Route path="/Events" component={AsyncEvent} />
 
                     <Route path="/Shop" component={AsyncShop} />
                     <Route path="/Pay" component={AsyncPay} />
-
-                    <Route path="/Gallery" component={AsyncHome} />
                   </Switch>
 
                   {isModal ? <Route component={AsyncMobileMenu} path="/:section*/#Menu" /> : null}

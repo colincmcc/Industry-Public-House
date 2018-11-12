@@ -22,7 +22,6 @@ class FormSelectField extends Component {
     const {
       value, name, isRequired, label, options, errors, touched, isMulti,
     } = this.props;
-
     return (
       <FormRow>
         <FormLabel isFor={name}>{label}</FormLabel>

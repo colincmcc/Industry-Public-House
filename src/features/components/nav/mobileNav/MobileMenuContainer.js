@@ -32,7 +32,7 @@ const MobileMenuContainer = () => {
     { label: 'Drinks', link: '/Drink', icon: <BeerGlass /> },
     { label: 'Connect', link: '/Contact', icon: <Email /> },
     { label: 'Apply', link: '/Apply', icon: <Clipboard /> },
-    { label: 'Events', link: '/Calendar', icon: <Calendar /> },
+    { label: 'Events', link: '/Events', icon: <Calendar /> },
     { label: 'Shop', link: '/Shop', icon: <Cart /> },
   ];
   return (

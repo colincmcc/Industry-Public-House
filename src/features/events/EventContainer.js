@@ -2,7 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import EventComponent from './EventComponent';
-
+import EventPageComponent from './EventPageComponent';
 
 const WP_EVENTS = gql`
   {
@@ -45,7 +45,7 @@ const WP_EVENTS = gql`
     }
   }
 `;
-const EventContainer = () => (
+const EventContainer = props => (
   <Query query={WP_EVENTS}>
     {
         ({ data, loading, error }) => {
@@ -70,7 +70,8 @@ const EventContainer = () => (
             bgImg: data.pageBy[0].acf.background_image,
             heroImg: data.pageBy[0].acf.hero_image,
           };
-          return <EventComponent {...eventData} eventList={eventList} />;
+          const { condensed } = props;
+          return <EventComponent {...eventData} eventList={eventList} condensed={condensed} />;
         }
       }
   </Query>

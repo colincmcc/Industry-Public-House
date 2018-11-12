@@ -82,7 +82,7 @@ class HomeComponent extends Component {
         <HomePageOverlay id="main">
           <MainBg />
           <LoadableAbout />
-          <EventContainer />
+          <EventContainer condensed />
         </HomePageOverlay>
       </HomeWrapper>
     );
