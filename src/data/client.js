@@ -66,6 +66,7 @@ const typeDefs = `
 
   `;
 // * GRAPHQL LINK SETUP
+
 const wsLink = new WebSocketLink({
   uri: prod.websocketEndpoint,
   options: {
